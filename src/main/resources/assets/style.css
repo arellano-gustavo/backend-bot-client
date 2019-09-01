@@ -1,0 +1,20 @@
+    #draggable {
+      height: 100px;
+      width: 300px;
+      background: #ccc;
+    }
+    .scrollable_uno {
+      background-color:red;
+      height: 100px;
+      width: 300px;
+      overflow-y: scroll;
+    }
+    .scrollable_dos {
+      background-color:yellow;
+      height: 100px;
+      width: 300px;
+      overflow-y: scroll;
+    }
+    .scrollarea-content-2 {
+      min-height:101%;
+    }
