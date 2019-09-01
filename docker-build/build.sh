@@ -3,7 +3,7 @@ echo $UPDATE
 
 cd ..
 
-docker build /home/ubuntu/pba/ -t nexus.ci.gustavo-arellano.com:5005/pba-service
-docker push nexus.ci.gustavo-arellano.com:5005/pba-service
+docker build @7 -t @5
+docker push @5
 pba/refresh.sh $UPDATE
 
