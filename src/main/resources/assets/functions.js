@@ -14,7 +14,7 @@
       $.ajax({
           dataType: 'json',
           crossDomain: true,
-          url: url2 + "api/chatbot",
+          url: url1 + "api/chatbot",
           header: {
               'Content-Type': 'application/json',
               "cache-control": "no-cache"
