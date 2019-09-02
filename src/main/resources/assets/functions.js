@@ -6,7 +6,7 @@
   }
   function call(challenge, area, uid) {
       var url1="http://api.kebblar.capital:9999/";
-      var url2="http://localhost:8080/;
+      var url2="http://localhost:8080/";
 	  
       var datos1 = {"challenge":challenge, "area":area, "uid":uid};
       var datos = JSON.stringify(datos1);
@@ -14,7 +14,7 @@
       $.ajax({
           dataType: 'json',
           crossDomain: true,
-          url: url1 + "api/chatbot",
+          url: url2 + "api/chatbot",
           header: {
               'Content-Type': 'application/json',
               "cache-control": "no-cache"

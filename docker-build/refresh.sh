@@ -1,8 +1,8 @@
 echo "Se invoca refresh para Rancher"
 curl -X PUT \
-   https://rancher.ci.gustavo-arellano.com/v3/project/@1/workloads/deployment:@2:@3 \
+   https://rancher.ci.gustavo-arellano.com/v3/project/c-v2vwp:p-rw8nc/workloads/deployment:default:pba-service \
   -k \
-  -H 'Authorization: Bearer @4' \
+  -H 'Authorization: Bearer token-xg65g:84wwxszfpjp75fpld2nv4rqmk7cg5c856pztdwvzq5bznbcw4xz655' \
   -H 'Content-Type: application/json' \
    -d@- <<DATA
    {  
@@ -11,8 +11,8 @@ curl -X PUT \
    },
    "containers":[  
       {  
-         "name":"@3",
-         "image":"@5"
+         "name":"pba-service",
+         "image":"nexus.ci.gustavo-arellano.com:5005/pba-service"
       }
    ]
    }
