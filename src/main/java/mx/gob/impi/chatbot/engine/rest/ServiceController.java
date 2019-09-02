@@ -29,22 +29,9 @@ public class ServiceController extends AbstractVerticle {
     public void start(Future<Void> fut) {
         logger.info("Iniciando vertical");
         
-        /*
-        // Cargamos la pantalla de instrucciones
-        InputStream inputStream = ServiceController.class.getClassLoader().getResourceAsStream("welcome2.html");
-        @SuppressWarnings("resource")
-        Scanner s = new Scanner(inputStream).useDelimiter("\\A");
-        String welcome = s.hasNext() ? s.next() : "";
-*/
         Router router = Router.router(vertx);
         router.route("/*").handler(StaticHandler.create("assets")); 
-        /*
-        router.route("/").handler(routingContext -> {
-            HttpServerResponse response = routingContext.response();
-            response.
-                putHeader("content-type", "text/html").
-                end(welcome);
-        });*/
+        
         router.route().handler(BodyHandler.create());
         router.post("/api/challenge").handler(this::processChallengeByArea);
         router.post("/api/chatbot").handler(this::chatbot);
