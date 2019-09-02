@@ -1,16 +1,22 @@
+    body {
+      background-color:#1f5c4d;
+    }
+    h1 {
+      color:#ffffff;
+    }
     #draggable {
       height: 100px;
       width: 300px;
       background: #ccc;
     }
     .scrollable_uno {
-      background-color:red;
+      background-color:#b9a8a8;
       height: 100px;
       width: 300px;
       overflow-y: scroll;
     }
     .scrollable_dos {
-      background-color:yellow;
+      background-color:#117924;
       height: 100px;
       width: 300px;
       overflow-y: scroll;
