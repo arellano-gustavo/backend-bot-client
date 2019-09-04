@@ -11,6 +11,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import mx.gob.impi.chatbot.engine.model.ChatbotRequest;
+import mx.gob.impi.chatbot.engine.model.login.LogInRequest;
 import mx.gob.impi.chatbot.engine.service.*;
 import mx.gob.impi.chatbot.engine.utils.Support;
 
@@ -35,6 +36,7 @@ public class ServiceController extends AbstractVerticle {
         router.route().handler(BodyHandler.create());
         router.post("/api/challenge").handler(this::processChallengeByArea);
         router.post("/api/chatbot").handler(this::chatbot);
+        router.post("/api/login").handler(this::login);
 
         // Create the HTTP server and pass the "accept" method to the request handler.
         vertx.createHttpServer().requestHandler(router::accept).listen(
@@ -84,5 +86,16 @@ public class ServiceController extends AbstractVerticle {
             putHeader("content-type", "application/json; charset=utf-8").
             end(Json.encodePrettily(resp));
     }
-
+    private void login(RoutingContext routingContext) {
+        String body = routingContext.getBodyAsString();
+        logger.info(body);
+        LogInRequest challenge = Json.decodeValue(body, LogInRequest.class);
+        String resp = textClientSrv.response(challenge);
+        // route response
+        routingContext.
+            response().
+            setStatusCode(200).
+            putHeader("content-type", "application/json; charset=utf-8").
+            end(resp);
+    }
 }
