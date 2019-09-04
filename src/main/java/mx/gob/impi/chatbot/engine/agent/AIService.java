@@ -24,8 +24,16 @@ public class AIService {
        
     public String getWorker(String contra) {
         LogInResponse respuesta = new LogInResponse();
-        respuesta.setIdsuario("1");
-        respuesta.setUsuario("Demo");
+            if (contra.equals("Demo")) 
+            {
+                respuesta.setIdsuario("1");
+                respuesta.setUsuario("Demo");
+            }
+            else
+            {
+                 respuesta.setIdsuario("-1");
+                respuesta.setUsuario("No Autorizado");
+            }           
         Gson gson = new Gson();
        String result = gson.toJson(respuesta);
         return result;
