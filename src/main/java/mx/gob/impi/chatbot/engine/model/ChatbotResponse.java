@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ * @author Administrador
+ */
 public class ChatbotResponse {
     private String calculado;
     private String conteo;
@@ -54,6 +58,11 @@ public class ChatbotResponse {
         return true;
     }
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public Map<String, Object> build() throws Exception {
         Map<String, String> info = new HashMap<String, String>();
         //info.put("RemoteAddress", request.remoteAddress().host()+":"+request.remoteAddress().port());

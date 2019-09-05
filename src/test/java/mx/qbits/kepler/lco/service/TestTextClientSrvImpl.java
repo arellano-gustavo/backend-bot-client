@@ -10,18 +10,33 @@ import mx.gob.impi.chatbot.engine.utils.Support;
 import static org.junit.Assert.*;
 import java.util.Properties;
 import java.util.Set;
+import mx.gob.impi.chatbot.engine.model.ChatbotRequest;
 
+/**
+ *
+ * @author Administrador
+ */
 public class TestTextClientSrvImpl {
     private final static Logger logger = Logger.getLogger(TestTextClientSrvImpl.class);
     
+    /**
+     *
+     */
     @Test
     public void pba1() {
         TextClientSrv tcs = new TextClientSrvImpl();
-        String response = tcs.response("0", "Hola", "1748");
+        ChatbotRequest objReq = new ChatbotRequest();
+        objReq.setArea("1");
+        objReq.setChallenge("Hola");
+        objReq.setUid("1");
+        String response = tcs.response(objReq);
         logger.info(response);
         assertTrue(true); 
     }
     
+    /**
+     *
+     */
     @Test
     public void pba2() {
         String ch = Support.getChallenge("{'abc':'def'}");
@@ -30,6 +45,9 @@ public class TestTextClientSrvImpl {
         assertTrue(exp);
     }
     
+    /**
+     *
+     */
     @Test
     public void pba3() {
         Properties mapa = Support.loadProps();

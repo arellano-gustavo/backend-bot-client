@@ -16,16 +16,18 @@ import mx.gob.impi.chatbot.engine.service.*;
 import mx.gob.impi.chatbot.engine.utils.Support;
 
 /**
- * Clase controlador que contiene el flujo de negocio para exponer la búsqueda de RFC en LCO
+ * Clase controlador que contiene la implementación para exponer el chatbot y la admistración de preguntas.
  * @author gustavo
  *
  */
 public class ServiceController extends AbstractVerticle {
     private final static Logger logger = Logger.getLogger(ServiceController.class);
     private TextClientSrv textClientSrv = new TextClientSrvImpl();
+    private TextClientSrvAdminImpl TextClientSrvAdminImpl = new TextClientSrvAdminImpl();
     
     /**
      * Inicializa el servicio de búsqueda
+     * @param fut
      */
     public void start(Future<Void> fut) {
         logger.info("Iniciando vertical");
@@ -53,6 +55,7 @@ public class ServiceController extends AbstractVerticle {
     /**
      * Se dispara cuando ocurre una excepcion
      * throws Exception
+     * @throws java.lang.Exception
      */
     @Override
     public void stop() throws Exception {
@@ -90,7 +93,7 @@ public class ServiceController extends AbstractVerticle {
         String body = routingContext.getBodyAsString();
         logger.info(body);
         LogInRequest challenge = Json.decodeValue(body, LogInRequest.class);
-        String resp = textClientSrv.response(challenge);
+        String resp = TextClientSrvAdminImpl.response(challenge);
         // route response
         routingContext.
             response().
