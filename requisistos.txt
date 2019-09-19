@@ -1,0 +1,3 @@
+npm install vue bootstrap-vue bootstrap --save
+npm install --save axios vue-axios
+npm install 
