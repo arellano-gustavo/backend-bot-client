@@ -1,11 +1,14 @@
 <template>
     <div>
+      <b-modal id="modal-1" title="CAMBIAR CONTRASEÑA" hide-footer>
+        <cambioMiPass></cambioMiPass>
+      </b-modal>      
       <b-container class="bv-example-row">
         <b-row>
           <b-col></b-col>
           <b-col></b-col>
           <b-col>
-            <b-table Borderless small Fixed  :items="items" :fields="fields" thead-class="hidden_header"></b-table>
+            <b-table small Fixed  :items="items" :fields="fields" thead-class="hidden_header"></b-table>
           </b-col>
         </b-row>   
       </b-container>    
@@ -15,8 +18,7 @@
         <b-card-text>       
         </b-card-text>
       </b-tab>
-      <b-tab title="Cambiar Mi Contraseña">
-        <b-card-text>Contenido</b-card-text>
+      <b-tab title="Cambiar Mi Contraseña" @click="$bvModal.show('modal-1')">        
       </b-tab>
       <b-tab title="Salir del Sistema">
         <b-card-text>Salir del Sistema</b-card-text>
@@ -26,10 +28,10 @@
 </div>
 </template>
 <script>
-
+import cambioMiPass from "./03-Generico/cambioContrasena.vue"
 export default {
     components:{
-   
+        cambioMiPass
     },
      data() {
       return {
@@ -40,6 +42,7 @@ export default {
           { campo: 'ID:', valor: '12345' },
           { campo: 'Rol:', valor: 'Entrenador' }          
         ]
+       
       }
     }
 }
