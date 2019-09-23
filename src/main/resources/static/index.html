@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+        <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+        <script>
+		var sock = new SockJS('http://localhost:8080/greeting');
+		
+		sock.onmessage = function(e) {
+		    //console.log('message', e.data);
+		    alert(e.data);
+		}
+		</script>
+	</head>
+    <body>
+		<label>Hola</label>
+	</body>
+</html>
