@@ -16,5 +16,9 @@ public class CalculatorTest {
         
         int result2 = calc.divide(2, 2);
         assertTrue("Este es un mensaje de error 2", result2==1);
+        
+        int result3 = calc.divide(1, 2);
+        assertTrue("Este es un mensaje de error 2", result3==0);
+
     }
 }
