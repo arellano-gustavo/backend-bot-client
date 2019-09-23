@@ -12,7 +12,7 @@ public class CalculatorTest {
         Calculator calc = new Calculator();
         logger.info("Probando el método estático 'suma' de FileUtils");
         int result1 = calc.divide(2, 0);
-        assertTrue("Este es un mensaje de error 1", result1==2);
+        assertTrue("Este es un mensaje de error 1", result1==0);
         
         int result2 = calc.divide(2, 2);
         assertTrue("Este es un mensaje de error 2", result2==1);
