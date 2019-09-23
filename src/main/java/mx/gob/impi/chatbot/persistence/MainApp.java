@@ -8,9 +8,9 @@
  *              permiso explícito y por escrito del cliente.
  *
  * Proyecto:    Chatbot IMPI
- * Paquete:     com.sc.support.mail
- * Modulo:      sc
- * Tipo:        AppSC
+ * Paquete:     mx.gob.impi.chatbot.persistence
+ * Modulo:      Main Module
+ * Tipo:        MainApp
  * Autor:       Gustavo Adolfo Arellano Sandoval (GAA)
  * Fecha:       Miercoles 01 de Junio de 2016 (21_24)
  * Version:     0.0.1
@@ -29,15 +29,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * <p>AppSC class.</p>
+ * <p>MainApp class.</p>
  *
  * @author garellano
  * @version $Id: $Id
  */
 @SpringBootApplication
 @ComponentScan("mx.gob.impi.chatbot.persistence")
-public class AppSC {
-    private final static Logger logger = Logger.getLogger(AppSC.class);
+public class MainApp {
+    private final static Logger logger = Logger.getLogger(MainApp.class);
 
   /**
    * <p>main.</p>
@@ -46,7 +46,7 @@ public class AppSC {
    */
   public static void main(String[] args) {
     logger.info("Inicializando applicacion Spring Boot ********************************************");
-    SpringApplication.run(AppSC.class, args);
+    SpringApplication.run(MainApp.class, args);
     logger.info("Concluye Inicialización de applicacion Spring Boot *******************************");
     logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json ***************");
     logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ****************************");
