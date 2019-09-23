@@ -16,7 +16,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 public class TrainerController {
     @ApiOperation(
         value = "TrainerController::create-intent",
-        notes = "Crea un intent")
+        notes = "Crea un intent y lo almacena en la base de Conocimientos :=D ")
     @RequestMapping(
         value = "/create-intent.json",
         method = POST,
