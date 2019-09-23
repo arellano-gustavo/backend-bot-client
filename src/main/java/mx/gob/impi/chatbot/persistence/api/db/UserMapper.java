@@ -79,7 +79,7 @@ public interface UserMapper {
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Select("SELECT * FROM user WHERE usr = #{usr}")
-    User getUserByName(String usr);
+    User getUserByName(String user);
 
     /**
      * Obtiene un usuario realizando la búsqueda con el correo electrónico.

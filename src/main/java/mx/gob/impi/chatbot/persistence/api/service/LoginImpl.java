@@ -2,10 +2,18 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 
+@Service
 public class LoginImpl {
+    @Autowired
+    private UserMapper userMapper;
+    
     private int intentos = 4;
     
     public LoginResponse login(String user, String password) {
@@ -15,7 +23,7 @@ public class LoginImpl {
             evalErrorCondition(user==null || user.trim().length()<1,         "User vacío");
             evalErrorCondition(password==null || password.trim().length()<1, "Password vacío");
             
-            usuario = findUser(user);
+            usuario = userMapper.getUserByName(user);
             evalErrorCondition(usuario==null, "User no existe");
             
             evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
@@ -56,15 +64,8 @@ public class LoginImpl {
     private void evalErrorCondition(boolean condition, String msg) throws Exception {
         if(condition) throw new Exception(msg);
     }
-    
-    private User findUser(String user) {
-        return new User();
-    }
 
     private String sha256(String password) {
         return "";
     }
-
-
-
 }
