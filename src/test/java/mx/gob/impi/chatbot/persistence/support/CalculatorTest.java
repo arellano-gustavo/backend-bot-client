@@ -11,7 +11,7 @@ public class CalculatorTest {
     public void testSuma() {
         Calculator calc = new Calculator();
         logger.info("Probando el método estático 'suma' de FileUtils");
-        int result = calc.divide(2, 2);
+        int result = calc.divide(2, 0);
         assertTrue("Este es un mensaje", result==1);
     }
 }
