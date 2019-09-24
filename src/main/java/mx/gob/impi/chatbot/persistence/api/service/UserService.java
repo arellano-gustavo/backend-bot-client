@@ -91,21 +91,5 @@ public interface UserService {
      */
     MainControllerResponse update(User user);
     
-    /**
-     * Guarda en la base de datos el objeto de tipo 'UserArea' proporcionado.
-     * 
-     * @param idUsuario Entero con el id de un Usuario.
-     * @param idArea Entero con el id de un Area.
-     * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de guardado.
-     */
-    MainControllerResponse registerUsuarioArea(Integer idUsuario, Integer idArea);
     
-    /**
-     * Guarda en la base de datos el objeto de tipo 'UserRol' proporcionado.
-     * 
-     * @param idUsuario Entero con el id de un Usuario.
-     * @param idRol Entero con el id de un Rol.
-     * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de guardado.
-     */
-    MainControllerResponse registerUsuarioRol(Integer idUsuario, Integer idRol);
 }
