@@ -15,7 +15,7 @@
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Servicio de persona
+ * Servicio de UserRol
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -37,10 +37,46 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.UserRol;
  * @version 1.0-SNAPSHOT
  */
 public interface UserRolService {
+	/**
+	 * Proporciona la lista de las relaciones UserRol registradas.
+	 * 
+	 * @return Objeto de tipo 'List' con la totalidad de UserRol registrados.
+	 */
     List<UserRol> getAll();
+    
+    /**
+     * Guarda en la base de datos el objeto de tipo 'UserRol' proporcionado.
+     * 
+     * @param idUser Entero con el id de un Usuario.
+     * @param idRol Entero con el id de un Rol.
+     * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de guardado.
+     */
     MainControllerResponse save(Integer idUser, Integer idRol);
+    
+    /**
+     * Borra de la base de datos el objeto de tipo 'UserRol' proporcionado, si es que existe.
+     * 
+     * @param idUser Entero con el id de un Usuario.
+     * @param idRol Entero con el id de un Rol.
+     * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de borrado.
+     */
     MainControllerResponse delete(Integer idUser, Integer idRol);
     
+    /**
+     * Proporciona objetos de tipo 'UserRol' cuyo idUser es proporcionado.
+     * 
+     * @param idUser Entero con el id (llave foranea) de un Usuario.
+     * @return Objeto de tipo 'List' con la totalidad de UserRol registradas
+     * con el idUser proporcionado.
+     */
     List<UserRol> getUserRolByIdUser(Integer idUser);
+    
+    /**
+     * Proporciona objetos de tipo 'UserRol' cuyo idRol es proporcionado.
+     * 
+     * @param idRol Entero con el id (llave foranea) de un Rol.
+     * @return Objeto de tipo 'List' con la totalidad de UserRol registradas
+     * con el idRol proporcionado.
+     */
     List<UserRol> getUserRolByIdArea(Integer idRol);
 }

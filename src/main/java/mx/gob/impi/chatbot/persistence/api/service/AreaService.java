@@ -15,7 +15,7 @@
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Servicio de persona
+ * Servicio de area
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
