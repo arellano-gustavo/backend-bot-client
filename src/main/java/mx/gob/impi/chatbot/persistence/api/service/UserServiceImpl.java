@@ -82,16 +82,4 @@ public class UserServiceImpl implements UserService {
         return new MainControllerResponse("message", "longMessage", true);
     }
 
-    @Override
-    public MainControllerResponse registerUsuarioArea(Integer idUsuario, Integer idArea) {
-        // TODO Auto-generated method stub
-        return new MainControllerResponse("message", "longMessage", true);
-    }
-
-    @Override
-    public MainControllerResponse registerUsuarioRol(Integer idUsuario, Integer idRol) {
-        // TODO Auto-generated method stub
-        return new MainControllerResponse("message", "longMessage", true);
-    }
-
 }
