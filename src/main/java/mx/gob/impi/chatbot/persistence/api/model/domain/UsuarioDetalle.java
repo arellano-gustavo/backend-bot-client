@@ -28,7 +28,7 @@ import java.io.Serializable;
 
 /**
  * <p>Descripción:</p>
- * POJO asociado a la entidad usuario_detalle
+ * POJO asociado a la entidad "UsuarioDetalle"
  *
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
