@@ -42,13 +42,13 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.Area;
 public interface AreaMapper {
 
     @Insert("INSERT INTO area(name, description, active) VALUES(#{name}, #{description}, #{active});")
-    void insert(Area rol);
+    void insert(Area area);
     
     @Update("UPDATE area SET name=#{name}, description=#{description}, active=#{active} WHERE id=#{id};")
     void update(Area area);
     
     @Select("SELECT * FROM area WHERE id = #{id}")
-    Area getRolById(Integer id);
+    Area getAreaById(Integer id);
     
     @Select("SELECT * FROM area")
     List<Area> getAll();

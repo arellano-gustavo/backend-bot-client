@@ -48,6 +48,11 @@ import mx.gob.impi.chatbot.persistence.api.service.*;
 public class AdminController {
     @Autowired
     private UserService usuarioService;
+    @Autowired
+    private RolService rolService;
+    @Autowired
+    private AreaService areaService;
+
     
     // PONGAN ATENCIÓN !!!!
     /*
@@ -77,7 +82,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public List<Rol> getAllRoles() {
-        return null;
+        return rolService.getAll();
     }
     
     @ApiOperation(
@@ -88,7 +93,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public List<Area> getAllAreas() {
-        return null;
+        return areaService.getAll();
     }
     
 //selectById
@@ -111,7 +116,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public Rol getRolById(Integer id) {
-        return null;
+        return rolService.getRolById(id);
     }
     
     @ApiOperation(
@@ -122,7 +127,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public Area getAreaById(Integer id) {
-        return null;
+        return areaService.getAreaById(id);
     }
     
 // getUserByMail, getUserByToken getUserByName
@@ -179,7 +184,7 @@ public class AdminController {
         method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse insertRol(Rol rol) {
-        return null;
+        return rolService.save(rol);
     }
     
     @ApiOperation(
@@ -190,7 +195,7 @@ public class AdminController {
         method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse insertArea(Area area) {
-        return null;
+        return areaService.save(area);
     }
     
 //update
@@ -202,7 +207,7 @@ public class AdminController {
         method = PUT,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateArea(Area area) {
-        return null;
+        return areaService.update(area);
     }
     
     @ApiOperation(
@@ -213,7 +218,7 @@ public class AdminController {
         method = PUT,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateRol(Rol rol) {
-        return null;
+        return rolService.update(rol);
     }
     
     @ApiOperation(

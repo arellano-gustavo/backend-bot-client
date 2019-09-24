@@ -41,12 +41,13 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.User;
  * @version 1.0-SNAPSHOT
  */
 @Service
-public class LoginImpl {
+public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserMapper userMapper;
     
     private int intentos = 4;
     
+    @Override
     public LoginResponse login(String user, String password) {
         User usuario = null;
         // Primero revisamos si no existe una razón evidente por la cual no autenticar:
