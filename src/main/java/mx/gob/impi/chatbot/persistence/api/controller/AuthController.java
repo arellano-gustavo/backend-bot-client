@@ -1,3 +1,28 @@
+/*
+ * Licencia:    Este código se encuentra bajo la protección
+ *              que otorga el contrato establecido entre
+ *              Ultrasist SA de CV y su cliente, IMPI, por lo
+ *              que queda estrictamente prohibido copiar, donar
+ *              vender y/o distribuir el presente código por
+ *              cualquier medio electrónico o impreso sin el
+ *              permiso explícito y por escrito del cliente.
+ *
+ * Proyecto:    Chatbot IMPI
+ * Paquete:     mx.gob.impi.chatbot.persistence.api.controller
+ * Modulo:      Autorizacion
+ * Tipo:        Controller
+ * Autor:       Gustavo Adolfo Arellano Sandoval (GAA)
+ * Fecha:       Lunes 23 de Septiembre de 2019
+ * Version:     0.0.1
+ * .
+ * Clase controller de los servicios rest 
+ * para la autenticacion y autorizacion
+ * de los usuarios
+ *
+ * Historia:    .
+ *
+ *
+ */
 package mx.gob.impi.chatbot.persistence.api.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

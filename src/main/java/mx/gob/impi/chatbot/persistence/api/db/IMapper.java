@@ -1,3 +1,27 @@
+/*
+ * Licencia:    Este código se encuentra bajo la protección
+ *              que otorga el contrato establecido entre
+ *              Ultrasist SA de CV y su cliente, IMPI, por lo
+ *              que queda estrictamente prohibido copiar, donar
+ *              vender y/o distribuir el presente código por
+ *              cualquier medio electrónico o impreso sin el
+ *              permiso explícito y por escrito del cliente.
+ *
+ * Proyecto:    Chatbot IMPI persistence
+ * Paquete:     mx.gob.impi.chatbot.persistence.api.db
+ * Modulo:      Mapper
+ * Tipo:        interface 
+ * Autor:       Gustavo A. Arellano (GAA)
+ * Fecha:       viernes 20 de septiembre de 2019 (17_20)
+ * Version:     1.0-SNAPSHOT
+ * .
+ * Interface    'Mapper' MyBatis asociado a los metos que deben
+ *              implementar todos los mapper de la entidades 
+ *
+ * Historia:    .
+ *              20190920_1720 Generado GOOSE
+ *
+ */
 package mx.gob.impi.chatbot.persistence.api.db;
 
 import java.io.Serializable;
