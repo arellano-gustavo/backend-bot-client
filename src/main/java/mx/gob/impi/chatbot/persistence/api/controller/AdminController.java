@@ -52,7 +52,10 @@ public class AdminController {
     private RolService rolService;
     @Autowired
     private AreaService areaService;
-
+    @Autowired
+    private UserAreaService userAreaService;
+    @Autowired
+    private UserRolService userRolService;
     
     // PONGAN ATENCIÓN !!!!
     /*
@@ -240,8 +243,8 @@ public class AdminController {
         value = "/register-user-area.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse insertUsuarioArea(Integer idUsuario, Integer idArea) {
-        return null;
+    public MainControllerResponse insertUsuarioArea(Integer idUser, Integer idArea) {
+        return userAreaService.save(idUser, idArea);
     }
     
     @ApiOperation(
@@ -251,8 +254,8 @@ public class AdminController {
         value = "/register-user-rol.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse insertUsuarioRol(Integer idUsuario, Integer idRol) {
-        return null;
+    public MainControllerResponse insertUsuarioRol(Integer idUser, Integer idRol) {
+        return userRolService.save(idUser, idRol);
     }
     
 // elimina relacion
@@ -264,7 +267,7 @@ public class AdminController {
         method = DELETE,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse removeUsuarioArea(Integer idUser, Integer idArea) {
-        return null;
+        return userAreaService.delete(idUser, idArea);
     }
     
     @ApiOperation(
@@ -275,7 +278,7 @@ public class AdminController {
         method = DELETE,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse removeUsuarioRol(Integer idUser, Integer idRol) {
-        return null;
+        return userRolService.delete(idUser, idRol);
     }
-    
+
 }
