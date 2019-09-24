@@ -27,6 +27,7 @@ package mx.gob.impi.chatbot.persistence.api.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import mx.gob.impi.chatbot.persistence.api.db.UserRolMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.UserRol;
@@ -39,6 +40,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
+@Service
 public class UserRolServiceImpl implements UserRolService {
     @Autowired
     private UserRolMapper userRolMapper;

@@ -27,6 +27,7 @@ package mx.gob.impi.chatbot.persistence.api.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import mx.gob.impi.chatbot.persistence.api.db.AreaMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.Area;
@@ -39,6 +40,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
+@Service
 public class AreaServiceImpl implements AreaService {
     @Autowired
     private AreaMapper areaMapper;
