@@ -1,9 +1,11 @@
 /*
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
+ * Licencia:    Este código se encuentra bajo la protección
+ *              que otorga el contrato establecido entre
+ *              Ultrasist SA de CV y su cliente, IMPI, por lo
+ *              que queda estrictamente prohibido copiar, donar
+ *              vender y/o distribuir el presente código por
+ *              cualquier medio electrónico o impreso sin el
+ *              permiso explícito y por escrito del cliente.
  *
  * Proyecto:    Chatbot AETI
  * Paquete:     mx.gob.impi.chatbot.persistence.support
@@ -13,7 +15,7 @@
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad usuario 
+ * Clase para el envio de mails 
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo

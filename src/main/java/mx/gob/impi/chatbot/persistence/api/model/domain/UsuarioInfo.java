@@ -1,13 +1,14 @@
 /*
+ * Licencia:    Este código se encuentra bajo la protección
+ *              que otorga el contrato establecido entre
+ *              Ultrasist SA de CV y su cliente, IMPI, por lo
+ *              que queda estrictamente prohibido copiar, donar
+ *              vender y/o distribuir el presente código por
+ *              cualquier medio electrónico o impreso sin el
+ *              permiso explícito y por escrito del cliente.
  *
- * Licencia:    Usted puede utilizar libremente este código
- *              para copiarlo, distribuirlo o modificarlo total
- *              o parcialmente siempre y cuando mantenga este
- *              aviso y reconozca la autoría del código al no
- *              modificar los datos establecidos en la mención de "AUTOR".
- *
- * Proyecto:    skeleton
- * Paquete:     mx.com.infotec.dadt.arq.core.model
+ * Proyecto:    Chatbot IMPI
+ * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Módulo:      UsuarioInfo
  * Tipo:        Clase
  * Autor:       Gustavo A. Arellano (GAA)
@@ -21,10 +22,11 @@ package mx.gob.impi.chatbot.persistence.api.model.domain;
 import java.io.Serializable;
 
 /**
+ * <p>Descripción:</p>
  * La clase UsuarioInfo.
  *
  * @author Gustavo A. Arellano (GAA)
- * @version 1.5.9
+ * @version 1.0-SNAPSHOT
  */
 public class UsuarioInfo implements Serializable {
 

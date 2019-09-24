@@ -12,7 +12,7 @@
  * Modulo:      Main Module
  * Tipo:        MainApp
  * Autor:       Gustavo Adolfo Arellano Sandoval (GAA)
- * Fecha:       Miercoles 01 de Junio de 2016 (21_24)
+ * Fecha:       Lunes 23 de Septiembre de 2019
  * Version:     0.0.1
  * .
  * Clase que arranca la aplicación
