@@ -26,6 +26,7 @@ package mx.gob.impi.chatbot.persistence.api.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,7 +46,7 @@ public class TrainerController {
         value = "/create-intent.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse createIntent(String intent) {
+    public MainControllerResponse createIntent(@RequestBody String intent) {
         return null;
     }
 }
