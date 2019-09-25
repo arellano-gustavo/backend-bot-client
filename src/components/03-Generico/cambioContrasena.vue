@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" v-if="show">
       <b-form-group
         id="input-group-1"
         label="Nueva Contraseña:"
@@ -30,7 +30,7 @@
         <b-row>
             <b-col cols="6"></b-col>
             <b-col cols="2">
-                <b-button type="submit" variant="success">Guardar</b-button>                
+                <b-button type="submit" variant="success">Actualizar</b-button>                
             </b-col>
             <b-col cols="1">
             </b-col>

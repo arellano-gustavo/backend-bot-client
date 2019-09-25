@@ -34,7 +34,7 @@
             <b-col cols="1">
             </b-col>
             <b-col cols="2">
-                <b-button @click="$bvModal.hide('modal-3')">Cancelar</b-button>
+                <b-button @click="$bvModal.hide('info-modal2')">Cancelar</b-button>
             </b-col>
         </b-row>        
       </b-container>

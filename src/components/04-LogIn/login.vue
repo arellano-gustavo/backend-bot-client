@@ -5,7 +5,7 @@
         <b-col cols="4"></b-col>
         <b-col cols="4">   
             <b-card
-             title="Administración"
+             title=""
             :img-src='logo()'
             img-alt="Image"
             img-top
@@ -14,17 +14,17 @@
             class="mb-2"
             >
                 <b-card-text>                   
-            <b-form @submit="onSubmit" @reset="onReset"  v-if="show">
+            <b-form @submit="onSubmit"  v-if="show">
               <b-form-group
                 id="input-group-1"
-                label="Correo Electrónico:"
+                label="ID:"
                 label-for="input-1"
                 description=""
               >
                 <b-form-input
                   id="input-1"
                   v-model="form.email"
-                  type="email"
+                  type="number"
                   required
                   placeholder=""
                 ></b-form-input>
@@ -61,9 +61,11 @@
             <b-col cols="4"></b-col>
             </b-row>   
             </b-container>
+            
 </div>
 </template>
 <script>
+
   export default {
     data() {
       return {
@@ -94,7 +96,7 @@
         })
       },
       logo(){
-        return require("../assets/impi_logo.png")
+        return require("../../assets/impi_logo.png")
       },          
       countDownChanged(dismissCountDown) {
         this.dismissCountDown = dismissCountDown
@@ -107,15 +109,9 @@
       showAlert() {
         this.dismissCountDown = this.dismissSecs                
       },
-      validaUsr(formJsonData){           
-           this.axios.post('/api/login', formJsonData)
-                .then(function (response) {
-                   console.log(response.data);                   
-                })
-                .catch(function (error) {                    
-                    console.log(error);
-                });                
+      validaUsr(){
+          this.$router.push('/masterUsr')
       }
-  }
+    }
   }
 </script>

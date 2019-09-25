@@ -12,6 +12,7 @@ axios.defaults.baseURL = `http://localhost:9090`
 Vue.config.productionTip = false
 import EvaIcons from 'vue-eva-icons'
 import ParticleBtn from "vue-particle-effect-buttons"
+
 Vue.use(EvaIcons)
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)

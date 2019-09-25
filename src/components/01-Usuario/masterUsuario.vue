@@ -3,24 +3,16 @@
       <b-modal id="modal-1" title="CAMBIAR CONTRASEÑA" hide-footer>
         <cambioMiPass></cambioMiPass>
       </b-modal>      
-      <b-container class="bv-example-row">
-        <b-row>
-          <b-col></b-col>
-          <b-col></b-col>
-          <b-col>
-            <b-table small Fixed  :items="items" :fields="fields" thead-class="hidden_header"></b-table>
-          </b-col>
-        </b-row>          
-      </b-container>    
+        <header-page :items = "items"></header-page>
     <b-card no-body>
-    <b-tabs pills card vertical>
+    <b-tabs  card vertical>
       <b-tab title="Entrenar Bot" active :title-item-class="'tab-title-class-left'">
         <b-card-text>       
         </b-card-text>
       </b-tab>
       <b-tab title="Cambiar Mi Contraseña" @click="$bvModal.show('modal-1')" :title-item-class="'tab-title-class-left'">        
       </b-tab>
-      <b-tab title="Salir del Sistema" :title-item-class="'tab-title-class-left'">
+      <b-tab title="Salir del Sistema" :title-item-class="'tab-title-class-left'" @click="salir">
         <b-card-text>Salir del Sistema</b-card-text>
       </b-tab> 
     </b-tabs>
@@ -28,20 +20,26 @@
 </div>
 </template>
 <script>
+
 import cambioMiPass from "../03-Generico/cambioContrasena.vue"
+import headerPage from "../03-Generico/headerPage.vue"
+
 export default {
     components:{
-        cambioMiPass
+        cambioMiPass,
+        headerPage
     },
-     data() {
+    methods:{
+      salir(){
+          this.$router.push('/');
+      }
+    },
+    data() {
       return {
-        // Note `isActive` is left out and will not appear in the rendered table
-        fields: ['campo', 'valor'],
-        items: [
-          { campo: 'Usuario Firmado:', valor: 'Gustavo A. Arellano' },
-          { campo: 'ID:', valor: '12345' },
-          { campo: 'Rol:', valor: 'Entrenador' }          
-        ]       
+        items: {  Nombre: 'Gustavo A. Arellano',
+                      ID: '12345',
+                      Perfil: 'Entrenador' 
+              }
       }
     }
 }

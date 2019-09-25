@@ -5,9 +5,10 @@
       <pre>{{ infoModal.content }}</pre>
     </b-modal>
       <b-container fluid>
-        <b-table striped hover 
+        <b-table bordered
         show-empty
-        small        
+        small    
+        head-variant="light"    
         :items="items"
         :fields="fields"
          >

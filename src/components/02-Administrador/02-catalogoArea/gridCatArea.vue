@@ -1,12 +1,13 @@
 <template>
   <div>
-    <b-modal :id="infoModalarea.id" title="EDITAR ÁREA" ok-only @hide="resetInfoModal" hide-footer>
-           <modalarea></modalarea>           
-          <pre>{{ infoModalarea.content }}</pre>
-        </b-modal>
-        <b-table striped hover 
+    <b-modal :id="infoModalarea.id" title="EDITAR ÁREA" ok-only  hide-footer>
+      <modalareaEditar></modalareaEditar>           
+      <pre>{{ infoModalarea.content }}</pre>
+      </b-modal>
+      <b-table bordered
         show-empty
-        small      
+        small    
+        head-variant="light"      
         :items="items"
         :fields="fields">
         <template v-slot:cell(editar)="row">
@@ -18,10 +19,12 @@
     </div>
 </template>
 <script>
-import modalarea from './modalArea'
+import modalarea from './modalArea.vue'
+import modalareaEditar from './modalAreaEditar.vue'
 export default {
    components:{
-     modalarea
+     modalarea,
+     modalareaEditar
    },
     data() {
       return {
