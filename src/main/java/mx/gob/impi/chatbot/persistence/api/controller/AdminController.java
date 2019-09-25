@@ -32,6 +32,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -175,7 +176,7 @@ public class AdminController {
             value = "/insert-user.json",
             method = POST,
             produces = "application/json; charset=utf-8")
-        public MainControllerResponse insertUser(User user) {
+        public MainControllerResponse insertUser(@RequestBody User user) {
             return usuarioService.save(user);
         }
     
@@ -186,7 +187,7 @@ public class AdminController {
         value = "/insert-rol.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse insertRol(Rol rol) {
+    public MainControllerResponse insertRol(@RequestBody Rol rol) {
         return rolService.save(rol);
     }
     
@@ -197,7 +198,7 @@ public class AdminController {
         value = "/insert-area.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse insertArea(Area area) {
+    public MainControllerResponse insertArea(@RequestBody Area area) {
         return areaService.save(area);
     }
     
@@ -209,7 +210,7 @@ public class AdminController {
         value = "/update-area.json",
         method = PUT,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse updateArea(Area area) {
+    public MainControllerResponse updateArea(@RequestBody Area area) {
         return areaService.update(area);
     }
     
@@ -220,7 +221,7 @@ public class AdminController {
         value = "/update-rol.json",
         method = PUT,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse updateRol(Rol rol) {
+    public MainControllerResponse updateRol(@RequestBody  Rol rol) {
         return rolService.update(rol);
     }
     
@@ -231,7 +232,7 @@ public class AdminController {
         value = "/update-user.json",
         method = PUT,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse updateUser(User user) {
+    public MainControllerResponse updateUser(@RequestBody User user) {
         return usuarioService.update(user);
     }
     
@@ -243,8 +244,8 @@ public class AdminController {
         value = "/register-user-area.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse insertUsuarioArea(Integer idUser, Integer idArea) {
-        return userAreaService.save(idUser, idArea);
+    public MainControllerResponse insertUsuarioArea(@RequestBody UserArea userArea) {
+        return userAreaService.save(userArea.getIdUser(), userArea.getIdArea());
     }
     
     @ApiOperation(
@@ -254,8 +255,8 @@ public class AdminController {
         value = "/register-user-rol.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse insertUsuarioRol(Integer idUser, Integer idRol) {
-        return userRolService.save(idUser, idRol);
+    public MainControllerResponse insertUsuarioRol(@RequestBody UserRol userRol) {
+        return userRolService.save(userRol.getIdUser(), userRol.getIdRol());
     }
     
 // elimina relacion
@@ -266,7 +267,7 @@ public class AdminController {
         value = "/remove-user-area.json",
         method = DELETE,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse removeUsuarioArea(Integer idUser, Integer idArea) {
+    public MainControllerResponse removeUsuarioArea(@RequestBody Integer idUser, @RequestBody Integer idArea) {
         return userAreaService.delete(idUser, idArea);
     }
     
@@ -277,7 +278,7 @@ public class AdminController {
         value = "/remove-user-rol.json",
         method = DELETE,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse removeUsuarioRol(Integer idUser, Integer idRol) {
+    public MainControllerResponse removeUsuarioRol(@RequestBody Integer idUser, @RequestBody Integer idRol) {
         return userRolService.delete(idUser, idRol);
     }
 
