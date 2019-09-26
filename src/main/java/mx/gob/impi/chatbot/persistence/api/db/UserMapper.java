@@ -205,6 +205,25 @@ public interface UserMapper {
     /** Procedimiento de actualización con mapeo incluido */
     @Update(update_statement)
     void update(User user);
+
+    String updateFailure_statement = 
+            "UPDATE user SET "
+            +"failed_atempt_counter     = #{failedAtemptCounter} "
+            +"WHERE "
+            +"id = #{id}";
+    /** Procedimiento de actualización numero de intentos de login con mapeo incluido */
+    @Update(updateFailure_statement)
+    void updateFailure(User usuario);
+
+    String updateLocked_statement = 
+            "UPDATE user SET "
+            +"bloqued_account           = #{bloquedAccount}, "
+            +"bloqued_date              = #{bloquedDate} "
+            +"WHERE "
+            +"id = #{id}";
+    /** Procedimiento de actualización de bloqueo de usuario con mapeo incluido */
+    @Update(updateLocked_statement)
+	void updateLocked(User usuario);
 }
 
 

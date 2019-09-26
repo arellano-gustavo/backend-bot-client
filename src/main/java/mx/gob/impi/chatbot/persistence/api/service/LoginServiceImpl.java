@@ -45,6 +45,8 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserMapper userMapper;
     
+    
+    
     private int intentos = 4;
     
     @Override
@@ -80,16 +82,25 @@ public class LoginServiceImpl implements LoginService {
             } else {
                 int intentosActuales = usuario.getFailedAtemptCounter();
                 usuario.setFailedAtemptCounter(intentosActuales+1);
-                usuario.setBloquedDate(new Date());
+                
                 // HAY QUE GUARDAR AL USUARIO AQUI  <--
+                userMapper.updateFailure(usuario);
+                
                 if(intentosActuales<intentos) {
                     throw new Exception("Invalid Password");
                 } else {
+                	
+                	usuario.setBloquedDate(new Date());
+                	userMapper.updateLocked(usuario);
+                	
                     throw new Exception("Invalid Password. Cuenta bloqueada. Max alcanzado");
                 }
             }
         } catch(Exception e) {
-            return new LoginResponse(usuario.getUsr(), false, e.getMessage());
+        	if(user==null || user.trim().length()<1)
+        		return new LoginResponse("", false, e.getMessage());
+        	
+            return new LoginResponse(user, false, e.getMessage());
         }
     }
     
@@ -98,6 +109,6 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private String sha256(String password) {
-        return "";
+        return password;
     }
 }
