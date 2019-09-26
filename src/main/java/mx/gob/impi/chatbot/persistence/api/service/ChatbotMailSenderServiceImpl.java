@@ -39,26 +39,21 @@ import org.springframework.stereotype.Service;
  * @version 1.0-SNAPSHOT
  */
 @Service
-public class ChatbotMailSenderImpl implements ChatbotMailSender {
+public class ChatbotMailSenderServiceImpl implements ChatbotMailSenderService {
   
   @Autowired
-  JavaMailSender javaMailSender;
+  private JavaMailSender javaMailSender;
   
   Logger logger = LoggerFactory.getLogger(this.getClass());
   
-  
-  public void sendMail(String from, String to, String subject, String body) {
+  @Override
+  public void sendMail(String to, String subject, String body) {
     SimpleMailMessage mail = new SimpleMailMessage();
- 
-    mail.setFrom(from);
     mail.setTo(to);
     mail.setSubject(subject);
     mail.setText(body);
-    
     logger.info("Sending...");
-    
     javaMailSender.send(mail);
-    
     logger.info("Done!");
   }
 }

@@ -31,6 +31,6 @@ package mx.gob.impi.chatbot.persistence.api.service;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-public interface ChatbotMailSender {
-    void sendMail(String from, String to, String subject, String body);
+public interface ChatbotMailSenderService {
+    void sendMail(String to, String subject, String body);
 }
