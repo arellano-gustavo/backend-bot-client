@@ -20,14 +20,14 @@ public class MockitoTest {
     @Before
     public void setUp() {
         User gus = new User("goose", "xyz", "gus@hotmail.com");
-        Mockito.when(userService.getUserByName("goose"))
+        Mockito.when(userService.findUserByName("goose"))
           .thenReturn(gus);
     }
     
     @Test
     public void whenFindByName_thenReturnEmployee() {
         // given
-        User user = userService.getUserByName("goose");
+        User user = userService.findUserByName("goose");
         // and
         User tavo = new User("goose", "xyz", "gus@aol.com");
         // when
