@@ -47,59 +47,14 @@ import mx.gob.impi.chatbot.persistence.support.MailEngine;
 @Service
 public class PersonaServiceImpl implements PersonaService {
     @Autowired
-    private ChatbotMailSender mail;
-    
-    @Autowired
-    private UserMapper userMapper;
+    private ChatbotMailSenderService mail;
+
     
     @Override
     public PersonaPojo[] getAll() {
-        //List<EstadoPojo> estados = em.getAll();
-        //EstadoPojo estado = estados.get(0);
-        User user = new User();
-        user.setId(1);
-        user.setUsr("goose2");
-        user.setPassword("algo2");
-        user.setMail("gus2@aol.com");
-        user.setCreationDate(new Date());
-        user.setExpiredAccount(true);
-        user.setBloquedAccount(false);
-        user.setExpiredCredential(true);
-        user.setDisabled(false);
-        user.setFailedAtemptCounter(2);
-        user.setBloquedDate(new Date());
-        user.setSecretQuestion("secret qQQQQQQ");
-        user.setSecretAnswer("secret A");
-        user.setSecurityToken("vhjvhjvg");
-        user.setSecurityTokenWindow(34567);
-        user.setLastAccessDate(new Date());
-        user.setLastPasswordUpdateDate(new Date()); 
-        
-        try{
-            String from = "no-reply@kebblar.io";
-            String to = "arellano.gustavo@gmail.com";
-            String subject = "JavaMailSender";
-            String body = "Just-Testing!";
-            
-            mail.sendMail(from, to, subject, body);
-            //mail.addMessage("garellanos@ultrasist.com.nx", "ejemploito", "Hola mundo"); 
-            //mail.sendAllMessages();
-            // aqui conviene primero checar si no se está violando una regla de la base... p ej:
-            /*
-            User u1 = userMapper.getUserByName(user.getUsr());
-            User u2 = userMapper.getUserByMail(user.getMail());
-            User u3 = userMapper.getUserById(user.getId());
-
-            userMapper.update(user);
-            */
-            User u1 = userMapper.getUserByName("tavo");
-            u1.setMail("tavo7@aol.com");
-            userMapper.update(u1);
-        } catch(RuntimeException rte) {
-            //String msg = rte.getMessage();
-            String msg = rte.getCause().getLocalizedMessage();
-            System.out.println(msg.length()); 
-        }
+        System.out.println("pre");
+        mail.sendMail("arellano.gustavo@gmail.com", "Hola Goose", "Jojo");
+        System.out.println("post");
         
         PersonaPojo personas[] = new PersonaPojo[3];
         personas[0] = new PersonaPojo(71, "gus","are____");
