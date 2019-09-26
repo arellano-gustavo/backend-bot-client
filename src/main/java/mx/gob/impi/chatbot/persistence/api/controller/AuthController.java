@@ -33,6 +33,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,8 +48,8 @@ import mx.gob.impi.chatbot.persistence.api.service.*;
 @Api(value = "auth")
 @RequestMapping(value = "/api/chatbot/auth")
 public class AuthController {
-    //@Autowired
-    //private UserService usuarioService;
+	@Autowired
+    private LoginService loginService;
     
 //LOGIN
     @ApiOperation(
@@ -58,8 +59,8 @@ public class AuthController {
         value = "/login.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public LoginResponse login(String user, String password) {
-        return null;
+    public LoginResponse login(@RequestBody Login login) {
+        return loginService.login(login.getUser(), login.getPassword());
     }
 
 // Recupera clave (forgot)
@@ -70,7 +71,7 @@ public class AuthController {
         value = "/request-restore.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse requestRestore(String mail) {
+    public MainControllerResponse requestRestore(@RequestBody String mail) {
         return null;
     }
 
@@ -82,7 +83,7 @@ public class AuthController {
         value = "/change-password.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse changePassword(User usr) {
+    public MainControllerResponse changePassword(@RequestBody Login login) {
         return null;
     }
 // valida token de seguridad
@@ -93,7 +94,7 @@ public class AuthController {
         value = "/validate-token.json",
         method = GET,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse validateToken(String token) {
+    public MainControllerResponse validateToken(@RequestBody String token) {
         return null;
     }
 }
