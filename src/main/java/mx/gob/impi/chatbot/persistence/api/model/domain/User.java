@@ -88,7 +88,13 @@ public class User implements Serializable {
      */
     public User() {
     }
-
+    public User(String usr, String password, String mail) {
+        this.usr = usr;
+        this.password = password;
+        this.mail = mail;
+        this.creationDate = new Date();
+    }
+    
     public Integer getId() {
         return id;
     }
