@@ -19,11 +19,9 @@
     </div>
 </template>
 <script>
-import modalarea from './modalArea.vue'
 import modalareaEditar from './modalAreaEditar.vue'
 export default {
    components:{
-     modalarea,
      modalareaEditar
    },
     data() {
