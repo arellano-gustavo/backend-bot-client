@@ -223,7 +223,7 @@ public interface UserMapper {
             +"id = #{id}";
     /** Procedimiento de actualización de bloqueo de usuario con mapeo incluido */
     @Update(updateLocked_statement)
-	void updateLocked(User usuario);
+	void updateBlocked(User usuario);
 }
 
 

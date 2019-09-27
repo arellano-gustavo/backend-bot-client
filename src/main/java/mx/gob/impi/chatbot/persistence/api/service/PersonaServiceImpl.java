@@ -47,13 +47,13 @@ import mx.gob.impi.chatbot.persistence.support.MailEngine;
 @Service
 public class PersonaServiceImpl implements PersonaService {
     @Autowired
-    private ChatbotMailSenderService mail;
+    private LoginService loginService;
 
     
     @Override
     public PersonaPojo[] getAll() {
         System.out.println("pre");
-        mail.sendMail("arellano.gustavo@gmail.com", "Hola Goose", "Jojo");
+        loginService.login("root", "algo1");
         System.out.println("post");
         
         PersonaPojo personas[] = new PersonaPojo[3];
