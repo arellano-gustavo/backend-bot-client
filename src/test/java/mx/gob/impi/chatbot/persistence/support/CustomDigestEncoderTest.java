@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
-import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest 
