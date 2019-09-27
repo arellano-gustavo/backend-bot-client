@@ -9,7 +9,7 @@
  *
  * Proyecto:    Chatbot AETI
  * Paquete:     mx.gob.impi.chatbot.persistence.support
- * Módulo:      CustomDigestEncoder
+ * Módulo:      CustomDigestEncoderServiceImpl
  * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Jueves 26 de Septiembre de 2019 (14_16)
@@ -22,7 +22,7 @@
  *
  *
  */
-package mx.gob.impi.chatbot.persistence.support;
+package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -30,6 +30,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 /**
  * Clase de soporte para generar el hash (SHA-256) de otra cadena pero con un 'salt' dado.
@@ -37,18 +38,11 @@ import org.apache.log4j.Logger;
  * @author GAA (20190926_14_16)
  * @version 1.0
  */
-public class CustomDigestEncoder {
-    private final static Logger logger = Logger.getLogger(CustomDigestEncoder.class);
+@Service
+public class CustomDigestEncoderServiceImpl implements CustomDigestEncoderService {
+    private final static Logger logger = Logger.getLogger(CustomDigestEncoderServiceImpl.class);
     
-    /** 
-     * Retorna una cadena hexadecimal asociada a la cadena 'source', pero 
-     * con un 'salt' arbitrario.
-     * 
-     * @param source Cadena a hashear
-     * @param salt Salt a inyectar
-     * 
-     * @return Cadena satlteada y hasheada
-     */
+    @Override
     public String digest(String source, String salt) {
         try {
             return toHexString(getSHA256(source, salt));
@@ -87,7 +81,7 @@ public class CustomDigestEncoder {
      * @param hash Arreglo de bytes a ser convertido a cadena
      * @return Cadena asociada al arreglo dado
      */
-    public static String toHexString(byte[] hash) { 
+    private String toHexString(byte[] hash) { 
         // Convert byte array into signum representation  
         BigInteger number = new BigInteger(1, hash);  
   

@@ -27,6 +27,7 @@ package mx.gob.impi.chatbot.persistence.api.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
@@ -45,13 +46,20 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserMapper userMapper;
     
+    @Autowired
+    private CustomDigestEncoderService cde;
     
+    @Value("${login.blokedWindowTime}")
+    private long blokedWindowTime;
     
-    private int intentos = 4;
-    
+    @Value("${login.maxInvalidTries}")
+    private int maxInvalidTries;
+        
     @Override
     public LoginResponse login(String user, String password) {
+        // Preparando un objeto de tipo User
         User usuario = null;
+        
         // Primero revisamos si no existe una razón evidente por la cual no autenticar:
         try {
             evalErrorCondition(user==null || user.trim().length()<1,         "User vacío");
@@ -68,11 +76,22 @@ public class LoginServiceImpl implements LoginService {
             
             evalErrorCondition(usuario.isBloquedAccount(), "Cuenta bloqueada");
             
-            evalErrorCondition(usuario.getFailedAtemptCounter()>intentos, "Máximo numero de intentos alcanzado");
-            //evalErrorCondition(!usuario.getInstanteDeBloqueo()<(now + delta), "Aun no se puede desbloquear");
+            evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, "Máximo numero de intentos alcanzado");
+            
+            if(usuario.getBloquedDate()!=null) {
+                Date now = new Date();
+                long remanent = blokedWindowTime - now.getTime() + usuario.getBloquedDate().getTime();
+                evalErrorCondition(remanent>0, "Aun no se puede desbloquear. Faltan aun " + remanent + " segundos");
+            }
 
-            if(sha256(password).equals(usuario.getPassword())) {
+            String encodedPassword = cde.digest(password, user);
+            if(encodedPassword.equals(usuario.getPassword())) {
+                // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
+                usuario.setBloquedDate(null);
+                userMapper.update(usuario);
+
+                // Prepara y envía respuesta
                 LoginResponse loginResponse = new LoginResponse();
                 loginResponse.setSucceed(true);
                 loginResponse.setMessage("Bienvenido" + usuario.getUsr());
@@ -82,24 +101,17 @@ public class LoginServiceImpl implements LoginService {
             } else {
                 int intentosActuales = usuario.getFailedAtemptCounter();
                 usuario.setFailedAtemptCounter(intentosActuales+1);
-                
-                // HAY QUE GUARDAR AL USUARIO AQUI  <--
                 userMapper.updateFailure(usuario);
                 
-                if(intentosActuales<intentos) {
+                if(intentosActuales<maxInvalidTries) {
                     throw new Exception("Invalid Password");
                 } else {
-                	
-                	usuario.setBloquedDate(new Date());
-                	userMapper.updateLocked(usuario);
-                	
+                    usuario.setBloquedDate(new Date());
+                    userMapper.updateBlocked(usuario);
                     throw new Exception("Invalid Password. Cuenta bloqueada. Max alcanzado");
                 }
             }
         } catch(Exception e) {
-        	if(user==null || user.trim().length()<1)
-        		return new LoginResponse("", false, e.getMessage());
-        	
             return new LoginResponse(user, false, e.getMessage());
         }
     }
@@ -108,7 +120,18 @@ public class LoginServiceImpl implements LoginService {
         if(condition) throw new Exception(msg);
     }
 
-    private String sha256(String password) {
-        return password;
+    /**
+     * Informa si el diferencial en segundos entre dos fechas es menor o no que un delta dado.
+     * 
+     * @param inicial Fecha inicial
+     * @param terminal Fecha terminal
+     * @param delta diferencial contra el que se va a comparar
+     * 
+     * @param seconds true si y sólo si la diferencia es menor que el delta dato
+     * @return
+     */
+    public boolean diffDates(Date inicial, Date terminal, long delta) {
+        long diff = (terminal.getTime() -inicial.getTime())/1000;
+        return (diff<delta);
     }
 }
