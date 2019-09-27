@@ -24,18 +24,10 @@
  */
 package mx.gob.impi.chatbot.persistence.api.service;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.gob.impi.chatbot.persistence.api.db.EstadoMapper;
-import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
-import mx.gob.impi.chatbot.persistence.api.model.domain.User;
-import mx.gob.impi.chatbot.persistence.api.model.estado.EstadoPojo;
 import mx.gob.impi.chatbot.persistence.api.model.persona.PersonaPojo;
-import mx.gob.impi.chatbot.persistence.support.MailEngine;
 
 /**
  * <p>Descripción:</p>
