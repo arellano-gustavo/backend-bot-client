@@ -29,7 +29,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * <p>MainApp class.</p>
+ * <p>MainApp class...</p>
  *
  * @author garellano
  * @version $Id: $Id
