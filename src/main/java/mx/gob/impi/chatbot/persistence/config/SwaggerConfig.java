@@ -57,7 +57,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(
-                "Chatbot IMPI, REST API Documentation by Super Goose For Norteño",
+                "Chatbot IMPI, REST API Documentation by Super Goose",
                 "Servicios REST de backend para AUTH, ADMIN y TRAIN publicados !!!",
                 "0.0.7-SNAPSHOT",
                 "Terminos de servicio",
