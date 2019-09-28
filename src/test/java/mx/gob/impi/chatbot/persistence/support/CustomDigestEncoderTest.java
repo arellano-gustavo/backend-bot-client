@@ -2,7 +2,8 @@ package mx.gob.impi.chatbot.persistence.support;
 
 import static org.junit.Assert.*;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.slf4j.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,7 +16,7 @@ import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
 @RunWith(SpringRunner.class)
 @SpringBootTest 
 public class CustomDigestEncoderTest {
-    private static final Logger logger = Logger.getLogger(CustomDigestEncoderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomDigestEncoderTest.class);
     
     // Load the 'real' bean, instead a mock (we need to combine 2 annotations)
     @InjectMocks

@@ -26,7 +26,8 @@ package mx.gob.impi.chatbot.persistence.config;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.slf4j.*;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,7 +57,7 @@ public class DataConfig {
     @Value("${db.url}")
     private String url;
     
-    private final static Logger logger = Logger.getLogger(DataConfig.class);
+    private final static Logger logger = LoggerFactory.getLogger(DataConfig.class);
     
     @Bean
     public DataSource dataSource() {

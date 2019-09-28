@@ -23,7 +23,8 @@
  */
 package mx.gob.impi.chatbot.persistence;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.slf4j.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -37,7 +38,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan("mx.gob.impi.chatbot.persistence")
 public class MainApp {
-    private final static Logger logger = Logger.getLogger(MainApp.class);
+    private final static Logger logger = LoggerFactory.getLogger(MainApp.class);
 
   /**
    * <p>main.</p>

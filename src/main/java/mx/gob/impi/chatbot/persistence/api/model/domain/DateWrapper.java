@@ -23,8 +23,10 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.apache.log4j.Logger;
+
+import org.slf4j.*;
+//import org.slf4j.LoggerFactory;
 
 /**
  * La clase DateWrapper.
@@ -35,8 +37,9 @@ import org.slf4j.LoggerFactory;
 public class DateWrapper implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = 
-            LoggerFactory.getLogger(DateWrapper.class);
+    //private static final Logger LOGGER = Logger.getLogger(DateWrapper.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateWrapper.class);
+
     //public static Timestamp NOW = new Timestamp(System.currentTimeMillis());
     /**
      * Representa la fecha máxima (límite superior)
@@ -57,8 +60,7 @@ public class DateWrapper implements Serializable {
      */
     public DateWrapper(int days) {
         LOGGER.info("Se procede a eliminar los registros de la tabla "
-                + "'preregistro' que tengan mas de {} dias de antiguedad",
-                days);
+                + "'preregistro' que tengan mas de "+days+" dias de antiguedad");
         long now = System.currentTimeMillis();
         long when = now - oneHour * 24 * days;
         upperLimit = new Date(when);
