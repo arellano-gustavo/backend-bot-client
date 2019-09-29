@@ -23,11 +23,12 @@
  */
 package mx.gob.impi.chatbot.persistence;
 
-//import org.apache.log4j.Logger;
 import org.slf4j.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 /**
  * <p>MainApp class...</p>
@@ -35,6 +36,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author garellano
  * @version $Id: $Id
  */
+@EnableEncryptableProperties
 @SpringBootApplication
 @ComponentScan("mx.gob.impi.chatbot.persistence")
 public class MainApp {

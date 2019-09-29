@@ -2,7 +2,6 @@ package mx.gob.impi.chatbot.persistence.support;
 
 import static org.junit.Assert.*;
 
-//import org.apache.log4j.Logger;
 import org.slf4j.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
