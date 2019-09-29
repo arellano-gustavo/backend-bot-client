@@ -24,16 +24,25 @@
  */
 package mx.gob.impi.chatbot.persistence.config;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.slf4j.*;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * <p>Descripción:</p>
@@ -55,34 +64,47 @@ public class DataConfig {
     @Value("${db.url}")
     private String url;
     
+    @Value("${db.driver}")
+    private String driver;
+    
     private final static Logger logger = LoggerFactory.getLogger(DataConfig.class);
     
-    @Bean
-    public DataSource dataSource() {
-        /**/
-        if(username==null) username="sa";
-        if(password==null) password="gustavo";
-        if(url==null) url="jdbc:h2:tcp://api.kebblar.capital:1521/h2-data";
-        /**/
-        // Conectando con la base de datos:
-        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriverClass(org.h2.Driver.class);
-        dataSource.setUsername(username);
-        dataSource.setUrl(url);
-        dataSource.setPassword(password);
-        logger.info("Coneccion establecida con la base de datos");
-
-        /* * /
-        //create a table and populate some data
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        System.out.println("Creating tables");
-        jdbcTemplate.execute("drop table users if exists");
-        jdbcTemplate.execute("create table users(id serial, firstName varchar(255), lastName varchar(255), email varchar(255))");
-        jdbcTemplate.update("INSERT INTO users(firstName, lastName, email) values (?,?,?)", "Mikex", "Lanyon", "lanyonm@gmail.com");
-        /* */
-        return dataSource;
+    private Properties properties = new Properties();
+    
+    public DataConfig() {
+        super();
+        InputStream stream = 
+                DataConfig
+                .class
+                .getClassLoader()
+                .getResourceAsStream("c3p0.properties");
+        try {
+            properties.load(stream);
+            logger.info("Properties have been loaded"); 
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
-
+    
+    @Bean
+    public DataSource dataSource(){
+        String driver   = properties.get("driverClass").toString();
+        String user     = properties.get("user").toString();
+        String password = properties.get("password").toString();
+        String url      = properties.get("jdbcUrl").toString();
+        try {
+            ComboPooledDataSource cpds = new ComboPooledDataSource();
+            //cpds.setProperties(properties); // no sé porqué esto no sirve !!!!
+            cpds.setDriverClass(driver);
+            cpds.setJdbcUrl(url);
+            cpds.setUser(user);
+            cpds.setPassword(password);
+            return cpds;
+        } catch(Exception e) {
+            return null;
+        }
+    }
+    
     @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
