@@ -49,7 +49,7 @@ public interface UserService {
      * @param id Entero con el id (llave primaria) de un User.
      * @return Objeto de tipo 'User' asociado al id proporcionado.
      */
-    User getUserById(Integer id);
+    User findUserById(Integer id);
     
     /**
      * Proporciona un objeto de tipo 'User' cuyo mail es proporcionado.
@@ -57,7 +57,7 @@ public interface UserService {
      * @param mail Correo del User que se busca
      * @return Objeto de tipo 'User' asociado al mail proporcionado.
      */
-    User getUserByMail(String mail);
+    User findUserByMail(String mail);
     
     /**
      * Proporciona un objeto de tipo 'User' cuyo name es proporcionado.
@@ -65,7 +65,7 @@ public interface UserService {
      * @param name Nombre del User que se busca
      * @return Objeto de tipo 'User' asociado al name proporcionado.
      */
-    User getUserByName(String name);
+    User findUserByName(String name);
     
     /**
      * Proporciona un objeto de tipo 'User' cuyo token es proporcionado.
@@ -73,7 +73,7 @@ public interface UserService {
      * @param token Cadena que identifica aun usuario previamente autenticado
      * @return Objeto de tipo 'User' asociado al token proporcionado.
      */
-    User getUserByToken(String token);
+    User findUserByToken(String token);
     
     /**
      * Guarda en la base de datos el objeto de tipo 'User' proporcionado.

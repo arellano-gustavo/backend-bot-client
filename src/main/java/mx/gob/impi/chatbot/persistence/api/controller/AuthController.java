@@ -26,11 +26,7 @@
 package mx.gob.impi.chatbot.persistence.api.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,10 +35,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
-
-import mx.gob.impi.chatbot.persistence.api.model.domain.*;
-import mx.gob.impi.chatbot.persistence.api.service.*;
+import mx.gob.impi.chatbot.persistence.api.model.domain.Login;
+import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
+import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
+import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 
 @RestController
 @Api(value = "auth")

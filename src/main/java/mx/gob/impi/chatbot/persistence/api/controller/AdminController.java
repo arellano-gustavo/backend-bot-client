@@ -67,6 +67,10 @@ public class AdminController {
     */
 
 //selectAll
+    /**
+     * hola gus
+     * @return lista chida...
+     */
     @ApiOperation(
         value = "AdminController::getAllUsers",
         notes = "Regresa un arreglo de todas los usuarios en el sistema")
@@ -109,7 +113,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public User getUserById(Integer id) {
-        return usuarioService.getUserById(id);
+        return usuarioService.findUserById(id);
     }
     
     @ApiOperation(
@@ -143,7 +147,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public User getUserByMail(String mail) {
-        return usuarioService.getUserByMail(mail);
+        return usuarioService.findUserByMail(mail);
     }
     
     @ApiOperation(
@@ -154,7 +158,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public User getUserByName(String name) {
-        return usuarioService.getUserByName(name);
+        return usuarioService.findUserByName(name);
     }
     
     @ApiOperation(
@@ -165,7 +169,7 @@ public class AdminController {
         method = GET,
         produces = "application/json; charset=utf-8")
     public User getUserByToken(String token) {
-        return usuarioService.getUserByToken(token);
+        return usuarioService.findUserByToken(token);
     }
     
 //insert

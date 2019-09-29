@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Mail
- * Tipo:        interface 
+ * Tipo:        clase 
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Servicio del envio de mail
+ * Implementacion del Servicio del envio de mail
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -24,13 +24,36 @@
  */
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+import org.slf4j.*;
+
 /**
  * <p>Descripción:</p>
- * Interface asociado al servicio de envio de mail
+ * Implementacion del servicio de envio de mail
  *
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-public interface ChatbotMailSender {
-    void sendMail(String from, String to, String subject, String body);
+@Service
+public class ChatbotMailSenderServiceImpl implements ChatbotMailSenderService {
+  
+  @Autowired
+  private JavaMailSender javaMailSender;
+  
+  Logger logger = LoggerFactory.getLogger(this.getClass());
+  
+  @Override
+  public void sendMail(String to, String subject, String body) {
+    SimpleMailMessage mail = new SimpleMailMessage();
+    mail.setTo(to);
+    mail.setSubject(subject);
+    mail.setText(body);
+    logger.info("Sending...");
+    javaMailSender.send(mail);
+    logger.info("Done!");
+  }
 }

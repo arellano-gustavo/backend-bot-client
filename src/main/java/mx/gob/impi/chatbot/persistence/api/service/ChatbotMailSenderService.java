@@ -9,13 +9,13 @@
  *
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
- * Modulo:      Persona
- * Tipo:        clase 
+ * Modulo:      Mail
+ * Tipo:        interface 
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Implementacion del servicio de Persona
+ * Servicio del envio de mail
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -24,34 +24,13 @@
  */
 package mx.gob.impi.chatbot.persistence.api.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import mx.gob.impi.chatbot.persistence.api.model.persona.PersonaPojo;
-
 /**
  * <p>Descripción:</p>
- * Implementacion del servicio de Persona
+ * Interface asociado al servicio de envio de mail
  *
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-@Service
-public class PersonaServiceImpl implements PersonaService {
-    @Autowired
-    private LoginService loginService;
-
-    
-    @Override
-    public PersonaPojo[] getAll() {
-        System.out.println("pre");
-        loginService.login("root", "algo1");
-        System.out.println("post");
-        
-        PersonaPojo personas[] = new PersonaPojo[3];
-        personas[0] = new PersonaPojo(71, "gus","are____");
-        personas[1] = new PersonaPojo(72, "tavo","sabd");
-        personas[2] = new PersonaPojo(73, "luis","perez");
-        return personas;
-    }
+public interface ChatbotMailSenderService {
+    void sendMail(String to, String subject, String body);
 }

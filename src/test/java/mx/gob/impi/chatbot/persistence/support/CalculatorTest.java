@@ -2,11 +2,13 @@ package mx.gob.impi.chatbot.persistence.support;
 
 import static org.junit.Assert.*;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.*;
 import org.junit.Test;
 
 public class CalculatorTest {
-    private static final Logger logger = Logger.getLogger(CalculatorTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(CalculatorTest.class);
+    
     @Test
     public void testSuma() {
         Calculator calc = new Calculator();

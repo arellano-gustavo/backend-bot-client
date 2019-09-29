@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
 @RestController

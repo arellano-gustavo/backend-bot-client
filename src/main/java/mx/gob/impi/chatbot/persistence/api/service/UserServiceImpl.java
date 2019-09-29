@@ -51,28 +51,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer id) {
+    public User findUserById(Integer id) {
         return userMapper.getUserById(id);
     }
 
     @Override
-    public User getUserByMail(String mail) {
+    public User findUserByMail(String mail) {
         return userMapper.getUserByMail(mail);
     }
 
     @Override
-    public User getUserByName(String name) {
+    public User findUserByName(String name) {
         return userMapper.getUserByName(name);
     }
 
     @Override
-    public User getUserByToken(String token) {
+    public User findUserByToken(String token) {
         return userMapper.getUserBySecurityToken(token);
     }
 
     @Override
     public MainControllerResponse save(User user) {
-        userMapper.insert(user);
+        userMapper.shortInsert(user);
         return new MainControllerResponse("message", "longMessage", true);
     }
 
