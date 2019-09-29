@@ -67,6 +67,10 @@ public class AdminController {
     */
 
 //selectAll
+    /**
+     * hola gus
+     * @return lista chida...
+     */
     @ApiOperation(
         value = "AdminController::getAllUsers",
         notes = "Regresa un arreglo de todas los usuarios en el sistema")
