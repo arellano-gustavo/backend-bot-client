@@ -36,7 +36,7 @@ public class JasyptTest {
         logger.info("Cadena encriptada:"+myEncryptedText);
         
         String plainText = textEncryptor.decrypt(myEncryptedText);
-        logger.info("Cadena encriptada:"+plainText);
+        logger.info("Cadena des-encriptada:"+plainText);
         
         assertTrue("Las cadenas no fueros iguales", cadenaOculta.equals(plainText));
     }
