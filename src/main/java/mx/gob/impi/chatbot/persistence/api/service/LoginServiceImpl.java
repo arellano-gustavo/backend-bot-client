@@ -99,13 +99,14 @@ public class LoginServiceImpl implements LoginService {
                 loginResponse.setJwt("hdbYY54vghssshjhfdAWDF54");
                 return loginResponse;
             } else {
-                int intentosActuales = usuario.getFailedAtemptCounter();
-                usuario.setFailedAtemptCounter(intentosActuales+1);
+                int intentosActuales = usuario.getFailedAtemptCounter() + 1;
+                usuario.setFailedAtemptCounter(intentosActuales);
                 userMapper.updateFailure(usuario);
                 
                 if(intentosActuales<maxInvalidTries) {
                     throw new Exception("Invalid Password");
                 } else {
+                	usuario.setBloquedAccount(true);
                     usuario.setBloquedDate(new Date());
                     userMapper.updateBlocked(usuario);
                     throw new Exception("Invalid Password. Cuenta bloqueada. Max alcanzado");

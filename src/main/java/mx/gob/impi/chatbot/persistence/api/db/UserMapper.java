@@ -52,6 +52,21 @@ public interface UserMapper {
     @Select("SELECT * FROM user;")
     List<User> getAll();
     
+    /* Mapeo de campos objeto-entidad */
+    @Results(value = {
+            @Result(property = "creationDate",           column = "creation_date"),
+            @Result(property = "expiredAccount",         column = "expired_account"),
+            @Result(property = "bloquedAccount",         column = "bloqued_account"),
+            @Result(property = "expiredCredential",      column = "expired_credential"),
+            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
+            @Result(property = "bloquedDate",            column = "bloqued_date"),
+            @Result(property = "secretQuestion",         column = "secret_question"),
+            @Result(property = "secretAnswer",           column = "secret_answer"),
+            @Result(property = "securityToken",          column = "security_token"),
+            @Result(property = "securityTokenWindow",    column = "security_token_window"),
+            @Result(property = "lastAccessDate",         column = "last_access_date"),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date")
+          })
     /**
      * Obtiene un usuario realizando la búsqueda con el nombre de pila.
      *

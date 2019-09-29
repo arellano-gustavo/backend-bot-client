@@ -4,7 +4,7 @@ DROP TABLE user;
 CREATE TABLE user (
  id                         int NOT NULL auto_increment,
  usr                        varchar(50) NOT NULL,
- password                   varchar(50) NOT NULL,
+ password                   varchar(250) NOT NULL,
  mail                       varchar(50) NOT NULL,
  creation_date              date,
  expired_account            boolean default false,

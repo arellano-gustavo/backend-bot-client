@@ -3,7 +3,7 @@
 
 curl -X PUT --header "Content-Type: application/json" --header "Accept: application/json;charset=utf-8" -d "{
   \"active\": true,
-  \"description\": \"ROL USUARIO\",
+  \"description\": \"ADMINISTRADOR DEL SISTEMA.\",
   \"id\": 1,
-  \"name\": \"ROL USUARIO\"
+  \"name\": \"ADMINISTRADOR\"
 }" "http://localhost:8080/api/chatbot/admin/update-rol.json"
