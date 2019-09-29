@@ -50,7 +50,7 @@ public class PersonaController {
 
     @ApiOperation(
             value = "PersonaController::getAll",
-            notes = "Regresa un arreglo de todas las personas en el sistema")
+            notes = "Regresa un arreglo de todos los objetos de tipo 'Persona' en el sistema")
         @RequestMapping(
             value = "/all.json",
             method = GET,
