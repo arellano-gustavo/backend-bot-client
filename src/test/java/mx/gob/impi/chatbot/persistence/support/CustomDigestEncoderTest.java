@@ -18,7 +18,7 @@ public class CustomDigestEncoderTest {
     private static final Logger logger = LoggerFactory.getLogger(CustomDigestEncoderTest.class);
     
     // Load the 'real' bean, instead a mock (we need to combine 2 annotations)
-    @InjectMocks
+    //@InjectMocks
     @Autowired
     private CustomDigestEncoderService customDigestEncoderService;
     
