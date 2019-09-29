@@ -26,8 +26,8 @@ public class JasyptTest {
     
     @Test
     public void encript() {
-        String jasyptPassword = "jasypt-password";
-        String cadenaOculta ="Cadena a ocultar";
+        String jasyptPassword = "password";
+        String cadenaOculta ="UrbiEtOrbi1";
         
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
         textEncryptor.setPassword(jasyptPassword);

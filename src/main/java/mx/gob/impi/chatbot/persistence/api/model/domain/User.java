@@ -230,4 +230,15 @@ public class User implements Serializable {
     public void setLastPasswordUpdateDate(Date lastPasswordUpdateDate) {
         this.lastPasswordUpdateDate = lastPasswordUpdateDate;
     }
+    
+    public String toString() {
+        String separator = ", ";
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.id); sb.append(separator);
+        sb.append(this.usr); sb.append(separator);
+        sb.append(this.mail); sb.append(separator);
+        sb.append(this.password); sb.append(separator);
+        sb.append(this.securityToken); sb.append(separator);
+        return sb.toString();
+    }
 }

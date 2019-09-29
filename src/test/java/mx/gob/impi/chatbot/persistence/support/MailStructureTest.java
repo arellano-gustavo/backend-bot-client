@@ -4,15 +4,17 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-//import org.apache.log4j.Logger;
+
 import org.slf4j.*;
 import org.junit.Test;
 
 // Include my Ref, please:
 // https://howtodoinjava.com/regex/java-regex-validate-email-address/
-public class MailEngineTest {
-    private static final Logger logger = LoggerFactory.getLogger(MailEngineTest.class);
-    private MailEngine me = new MailEngine();
+public class MailStructureTest {
+    private static final Logger logger = LoggerFactory.getLogger(MailStructureTest.class);
+    
+    private MailValidator me = new MailValidator();
+    
     @Test
     public void pba(){
         logger.info("Running my test");

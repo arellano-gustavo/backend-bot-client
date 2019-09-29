@@ -42,27 +42,6 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.User;
  * @version 1.0-SNAPSHOT
  */
 public interface UserMapper {
-    
-    /* Mapeo de campos objeto-entidad */
-    @Results(value = {
-            @Result(property = "id",                     column = "id"),
-            @Result(property = "usr",                    column = "usr"),
-            @Result(property = "password",               column = "password"),
-            @Result(property = "mail",                   column = "mail"),
-            @Result(property = "creationDate",           column = "creation_date"),
-            @Result(property = "expiredAccount",         column = "expired_account"),
-            @Result(property = "bloquedAccount",         column = "bloqued_account"),
-            @Result(property = "expiredCredential",      column = "expired_credential"),
-            @Result(property = "disabled",               column = "disabled"),
-            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date"),
-            @Result(property = "secretQuestion",         column = "secret_question"),
-            @Result(property = "secretAnswer",           column = "secret_answer"),
-            @Result(property = "securityToken",          column = "security_token"),
-            @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date"),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date")
-          })
     /**
      * Obtiene un usuario realizando la búsqueda con el nombre de pila.
      *
@@ -160,7 +139,26 @@ public interface UserMapper {
             +"#{lastAccessDate}, "
             +"#{lastPasswordUpdateDate}"
             +");";
-    /** Procedimiento de inserción con mapeo incluido */
+    /** Procedimiento de inserción con mapeo FULL incluido */
+    @Results(value = {
+            @Result(property = "id",                     column = "id"),
+            @Result(property = "usr",                    column = "usr"),
+            @Result(property = "password",               column = "password"),
+            @Result(property = "mail",                   column = "mail"),
+            @Result(property = "creationDate",           column = "creation_date"),
+            @Result(property = "expiredAccount",         column = "expired_account"),
+            @Result(property = "bloquedAccount",         column = "bloqued_account"),
+            @Result(property = "expiredCredential",      column = "expired_credential"),
+            @Result(property = "disabled",               column = "disabled"),
+            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
+            @Result(property = "bloquedDate",            column = "bloqued_date"),
+            @Result(property = "secretQuestion",         column = "secret_question"),
+            @Result(property = "secretAnswer",           column = "secret_answer"),
+            @Result(property = "securityToken",          column = "security_token"),
+            @Result(property = "securityTokenWindow",    column = "security_token_window"),
+            @Result(property = "lastAccessDate",         column = "last_access_date"),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date")
+          })
     @Insert(full_insert_statement)
     void fullInsert(User user);
     
@@ -179,8 +177,11 @@ public interface UserMapper {
             +"#{creationDate}"
             +");";
     /** Procedimiento de inserción con mapeo incluido */
+    @Results(value = {
+            @Result(property = "creationDate",           column = "creation_date"),
+          })
     @Insert(short_insert_statement)
-    void insert(User user);
+    void shortInsert(User user);
 
     String update_statement = 
             "UPDATE user SET "

@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
-//import org.apache.log4j.Logger;
+
 
 import org.slf4j.*;
 //import org.slf4j.LoggerFactory;

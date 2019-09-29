@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MainControllerResponse save(User user) {
-        userMapper.insert(user);
+        userMapper.shortInsert(user);
         return new MainControllerResponse("message", "longMessage", true);
     }
 

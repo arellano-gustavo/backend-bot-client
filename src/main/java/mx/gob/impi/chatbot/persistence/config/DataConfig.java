@@ -26,14 +26,12 @@ package mx.gob.impi.chatbot.persistence.config;
 
 import javax.sql.DataSource;
 
-//import org.apache.log4j.Logger;
 import org.slf4j.*;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
@@ -61,6 +59,11 @@ public class DataConfig {
     
     @Bean
     public DataSource dataSource() {
+        /**/
+        if(username==null) username="sa";
+        if(password==null) password="gustavo";
+        if(url==null) url="jdbc:h2:tcp://api.kebblar.capital:1521/h2-data";
+        /**/
         // Conectando con la base de datos:
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource.setDriverClass(org.h2.Driver.class);

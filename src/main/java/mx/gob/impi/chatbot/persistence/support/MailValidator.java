@@ -9,7 +9,7 @@
  *
  * Proyecto:    Chatbot AETI
  * Paquete:     mx.gob.impi.chatbot.persistence.support
- * Módulo:      MailEngine
+ * Módulo:      MailValidator
  * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
@@ -27,8 +27,9 @@ package mx.gob.impi.chatbot.persistence.support;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class MailEngine {
-    //private final static Logger logger = Logger.getLogger(MailEngine.class);
+public final class MailValidator {
+    //private final static Logger logger = LoggerFactory.getLogger(MailValidator.class);
+    
     private static final String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final Pattern pattern = Pattern.compile(regex);
     
