@@ -39,6 +39,9 @@ public class UserArea implements Serializable {
     private int idUser;
     private int idArea;
     
+    /**
+     * Constructor default de la clase.
+     */
     public UserArea(){
     }
     

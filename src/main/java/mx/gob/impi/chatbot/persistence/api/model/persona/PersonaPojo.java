@@ -35,8 +35,16 @@ public class PersonaPojo {
     private int id;
     private String nombre;
     private String apellido;
+    
+    /**
+     * Constructor default de la clase.
+     */
     public PersonaPojo() {
     }
+    
+    /**
+     * Constructor con los atributos que conforman la clase.
+     */
     public PersonaPojo(int id, String nombre, String apellido) {
       this.id = id;
       this.nombre = nombre;

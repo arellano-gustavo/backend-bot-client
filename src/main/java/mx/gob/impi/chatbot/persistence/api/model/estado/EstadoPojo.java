@@ -46,6 +46,10 @@ public class EstadoPojo implements Serializable {
     public EstadoPojo() {
     }
     
+    /**
+     * Constructor con los atributos que conforman la llave de la clase
+     * y el nombre del Estado.
+     */
     public EstadoPojo(Integer estadoPk, String nombre) {
         this.estadoPk = estadoPk;
         this.nombre = nombre;
