@@ -42,7 +42,7 @@ public class MybatisTest {
             logger.info("User: "+u.toString());
         }
         
-        /** /
+        /**/
         u1.setUsr("sexto");
         String pass = customDigestEncoderService.digest("hola", u1.getUsr());
         u1.setPassword(pass);
@@ -50,7 +50,7 @@ public class MybatisTest {
         u1.setFailedAtemptCounter(2);
         /**/
 
-        u1.setFailedAtemptCounter(9);
+        //u1.setFailedAtemptCounter(2);
         //userMapper.fullInsert(u1);
         
         userMapper.updateFailure(u1);

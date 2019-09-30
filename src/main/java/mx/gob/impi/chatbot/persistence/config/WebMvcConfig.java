@@ -35,6 +35,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @author gustavo arellano
  * @version $Id: $Id
  */
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
