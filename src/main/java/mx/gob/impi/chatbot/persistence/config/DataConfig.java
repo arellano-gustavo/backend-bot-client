@@ -24,8 +24,6 @@
  */
 package mx.gob.impi.chatbot.persistence.config;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -33,14 +31,13 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.slf4j.*;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -54,6 +51,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @MapperScan("mx.gob.impi.chatbot.persistence.api.db")
 public class DataConfig {
+
     // https://www.baeldung.com/spring-value-annotation
     @Value("${db.username}")
     private String username;
@@ -86,21 +84,31 @@ public class DataConfig {
         }
     }
     
+    private String getProp(String name) {
+        String data = properties.get("c3p0."+name).toString();
+        if("password".equals(name) && data.startsWith("ENC(")) {
+            BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+            textEncryptor.setPassword(name);
+            //String encr = textEncryptor.encrypt("gustavo");
+            //System.out.println(encr); 
+            String pass = data.substring(4, data.length()-1);
+            String plainPassword = textEncryptor.decrypt(pass);
+            return plainPassword;
+        }
+        return data;
+    }
+    
     @Bean
     public DataSource dataSource(){
-        String driver   = properties.get("driverClass").toString();
-        String user     = properties.get("user").toString();
-        String password = properties.get("password").toString();
-        String url      = properties.get("jdbcUrl").toString();
         try {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
-            //cpds.setProperties(properties); // no sé porqué esto no sirve !!!!
-            cpds.setDriverClass(driver);
-            cpds.setJdbcUrl(url);
-            cpds.setUser(user);
-            cpds.setPassword(password);
+            cpds.setDriverClass( getProp("driverClass") );
+            cpds.setJdbcUrl    ( getProp("jdbcUrl") );
+            cpds.setUser       ( getProp("user") );
+            cpds.setPassword   ( getProp("password") );
             return cpds;
         } catch(Exception e) {
+            logger.info("No fué posible crear un datasource con C3P0: " + e.getMessage());
             return null;
         }
     }
