@@ -1,3 +1,27 @@
+/*
+ * Licencia:    Este código se encuentra bajo la protección
+ *              que otorga el contrato establecido entre
+ *              Ultrasist SA de CV y su cliente, IMPI, por lo
+ *              que queda estrictamente prohibido copiar, donar
+ *              vender y/o distribuir el presente código por
+ *              cualquier medio electrónico o impreso sin el
+ *              permiso explícito y por escrito del cliente.
+ *
+ * Proyecto:    Chatbot IMPI
+ * Paquete:     mx.gob.impi.chatbot.persistence.api.service
+ * Modulo:      MybatisTest
+ * Tipo:        CLASE 
+ * Autor:       Gustavo A. Arellano (GAA)
+ * Fecha:       Viernes 27 de Septiembre de 2019 (18_11)
+ * Version:     1.0-SNAPSHOT
+ * .
+ * Test de UserMapper
+ *
+ * Historia:    .
+ *              20190927_1811 Creación de la prueba unitaria
+ *
+ *
+ */
 package mx.gob.impi.chatbot.persistence.support;
 
 import java.util.List;
@@ -14,6 +38,13 @@ import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
 
+/**
+ * <p>Descripción:</p>
+ * Clase de pruebas unitarias para validar el mapper de 'UserMapper'
+ *
+ * @author Gustavo A. Arellano (GAA)
+ * @version 1.0-SNAPSHOT
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest 
 public class MybatisTest {
@@ -26,6 +57,9 @@ public class MybatisTest {
     @Autowired
     private CustomDigestEncoderService customDigestEncoderService;
 
+    /**
+     * Prueba los metodos de recuperacion de usuario
+     */
     @Test
     public void whenFindByName_thenReturnEmployee() {
         List<User> all = userMapper.getAll();
