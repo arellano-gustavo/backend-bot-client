@@ -40,6 +40,7 @@ public interface LoginService {
 	 * 
 	 * @param user Nombre del usuario que se quiere autenticar
 	 * @param password Contraseña con la que se autentica al usuario
+	 * 
 	 * @return Objeto de tipo 'LoginResponse' con la respuesta de la
 	 *  autenticacion de las credenciales y en caso de que las credenciales
 	 *  sean valiadas se envia el JWT para la autorizacion del usuario
