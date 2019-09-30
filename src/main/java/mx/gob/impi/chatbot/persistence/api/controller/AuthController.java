@@ -80,11 +80,11 @@ public class AuthController {
         value = "/change-password.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse changePassword(@RequestHeader("jwt") String jwt, @RequestBody Login login) {
-        System.out.println(jwt);
-        System.out.println(login.getUser());
-        System.out.println(login.getPassword());
-        return new MainControllerResponse();
+    public LoginResponse changePassword(@RequestHeader("jwt") String jwt, @RequestBody Login login) {
+        //System.out.println(jwt);
+        //System.out.println(login.getUser());
+        //System.out.println(login.getPassword());
+        return loginService.changePassword(login.getUser(), login.getPassword(), jwt);
     }
 // valida token de seguridad
     @ApiOperation(
