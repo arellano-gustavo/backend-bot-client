@@ -78,8 +78,10 @@ public class CustomDigestEncoderServiceImpl implements CustomDigestEncoderServic
     }
     
     /**
-     * Convierte un arreglo de bytes en una cadena hexadecimal
-     * @param hash Arreglo de bytes a ser convertido a cadena
+     * Convierte un arreglo de bytes en una cadena hexadecimal.
+     * 
+     * @param hash Arreglo de bytes a ser convertido a cadena.
+     * 
      * @return Cadena asociada al arreglo dado
      */
     private String toHexString(byte[] hash) { 
