@@ -45,4 +45,16 @@ public interface LoginService {
 	 *  sean valiadas se envia el JWT para la autorizacion del usuario
 	 */
     LoginResponse login(String user, String password);
+
+    /**
+     * Para el usuario dado, cambia el antiguo password por el password dado.
+     * 
+     * @param user String usuario existente
+     * @param password String, Nuevo Password
+     * 
+     * @param jwt String, jwt original
+     * 
+     * @return LoginResponse, con el dictamen del cambio
+     */
+    LoginResponse changePassword(String user, String password, String jwt);
 }
