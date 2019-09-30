@@ -47,6 +47,9 @@ public class LoginServiceImpl implements LoginService {
     private UserMapper userMapper;
     
     @Autowired
+    private JwtManagerService jwtManagerService;
+    
+    @Autowired
     private CustomDigestEncoderService cde;
     
     @Value("${login.blokedWindowTime}")
@@ -96,7 +99,7 @@ public class LoginServiceImpl implements LoginService {
                 loginResponse.setSucceed(true);
                 loginResponse.setMessage("Bienvenido" + usuario.getUsr());
                 loginResponse.setUser(usuario.getUsr());
-                loginResponse.setJwt("hdbYY54vghssshjhfdAWDF54");
+                loginResponse.setJwt(jwtManagerService.createToken(user));
                 return loginResponse;
             } else {
                 int intentosActuales = usuario.getFailedAtemptCounter() + 1;
