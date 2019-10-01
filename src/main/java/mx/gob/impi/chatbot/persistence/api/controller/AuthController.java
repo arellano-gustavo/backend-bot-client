@@ -40,6 +40,13 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.Login;
 import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
 import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 
+/**
+ * <p>Descripción:</p>
+ * Implementacion del controlador de autenticacion
+ *
+ * @author Gustavo A. Arellano (GAA)
+ * @version 1.0-SNAPSHOT
+ */
 @RestController
 @Api(value = "auth")
 @RequestMapping(value = "/api/chatbot/auth")
@@ -48,6 +55,11 @@ public class AuthController {
     private LoginService loginService;
     
 //LOGIN
+	/**
+	 * Firma al usuario en el sistema con las credenciales proporcionadas
+	 * @param login Objeto  de tipo 'Login' con las credenciales proporcionadas por el usuario
+	 * @return Objeto de tipo 'LoginResponse' con el resultado de la autencicacion
+	 */
     @ApiOperation(
         value = "AuthController::login",
         notes = "Firma a un usuario al sistema")
@@ -60,6 +72,12 @@ public class AuthController {
     }
 
 // Recupera clave (forgot)
+    /**
+     * Solictud del cambio de contraseña de un usuario por medio del mail dado 
+     * @param mail Cadena con el mail del usuario al que se solicita cambiar la contraseña
+     * @return Objeto de tipo 'LoginResponse' con el resultado de la solicitud 
+     *         del cambio de contraseña
+     */
     @ApiOperation(
         value = "AuthController::request-restore",
         notes = "Solicita la recuperación de la clave de un usuario")
@@ -71,6 +89,13 @@ public class AuthController {
         return loginService.requestRestore(mail);
     }
 
+    /**
+     * Cambio de contraseña de un usuario relaciona al token dado
+     * @param securityToken Cadena con el el token relacionado al usuario
+     * 						al que se quiere cambiar la contraseña
+     * @param password Cadena con la nueva contraseña de un usuario dado
+     * @return Objeto de tipo 'LoginResponse' con el resultado del cambio de contraseña
+     */
     @ApiOperation(
             value = "AuthController::restore",
             notes = "Restaura la clave de un usuario")
@@ -84,6 +109,13 @@ public class AuthController {
 
     
 // Cambia Clave (régular)
+    /**
+     * Cambio de contraseña requerido por el sistema al
+     * ingresar por primera vez en el sistema
+     * @param jwt Cadena con el token de autorizacion de un usuario previamente autenticado
+     * @param login Objeto de tipo 'Login' que contiene la nueva contraseña del usuario dado
+     * @return Objeto de tipo 'LoginResponse' con el resultado del cambio de contraseña
+     */
     @ApiOperation(
         value = "AuthController::change-password",
         notes = "Realiza el cambio de la clave de un usuario")

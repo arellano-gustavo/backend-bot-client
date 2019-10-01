@@ -58,8 +58,23 @@ public interface LoginService {
      * @return LoginResponse, con el dictamen del cambio
      */
     LoginResponse changePassword(String user, String password, String jwt);
-
+    
+    /**
+     * Restablece la contraseña de un usuario al que previanmente 
+     * se le habia asignado un token temporal
+     * @param securityToken Cadena con el token asignado al usuario 
+     *                      que se solicita cambiar la ccontraseña
+     * @param password Cadena con la nueva contraseña
+     * @return LoginResponse, con el dictamen del restablecimiento
+     */
     LoginResponse restorePassword(String securityToken, String password);
 
+    /**
+     * Genera un token que se envia a un mail dado relacionado
+     * a un usuario que solicita el cambio de contrasela
+     * @param mail Cadena con la direcion de mail del usuario 
+     *             que solicita cambiar su contrasela
+     * @return LoginResponse, con el dictamen de solicitud de restablecimiento
+     */
     LoginResponse requestRestore(String mail);
 }

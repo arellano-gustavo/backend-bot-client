@@ -38,6 +38,13 @@ import io.swagger.annotations.ApiOperation;
 import mx.gob.impi.chatbot.persistence.api.model.persona.PersonaPojo;
 import mx.gob.impi.chatbot.persistence.api.service.PersonaService;
 
+/**
+ * <p>Descripción:</p>
+ * Implementacion del controlador de person
+ *
+ * @author Gustavo A. Arellano (GAA)
+ * @version 1.0-SNAPSHOT
+ */
 @RestController
 @Api(value = "persona")
 @RequestMapping(value = "/api/personas")
@@ -47,6 +54,10 @@ public class PersonaController {
     @Autowired
     private PersonaService personaService;
 
+    /**
+     * Obtiene un arreglo de personas registradas en el sistema
+     * @return Arreglo de tipo 'PersonaPojo' con las personas registradas
+     */
     @ApiOperation(
             value = "PersonaController::getAll",
             notes = "Regresa un arreglo de todos los objetos de tipo 'Persona' en el sistema")

@@ -34,10 +34,23 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
+/**
+ * <p>Descripción:</p>
+ * Implementacion del controlador del trainer
+ *
+ * @author Gustavo A. Arellano (GAA)
+ * @version 1.0-SNAPSHOT
+ */
 @RestController
 @Api(value = "trainer")
 @RequestMapping(value = "/api/chatbot/trainer")
 public class TrainerController {
+	
+	/**
+	 * 
+	 * @param intent
+	 * @return
+	 */
     @ApiOperation(
         value = "TrainerController::create-intent",
         notes = "Crea un intent y lo almacena en la base de Conocimientos :=D ")
