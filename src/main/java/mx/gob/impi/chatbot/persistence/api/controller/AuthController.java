@@ -38,7 +38,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import mx.gob.impi.chatbot.persistence.api.model.domain.Login;
 import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
-import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 
 @RestController
@@ -68,10 +67,22 @@ public class AuthController {
         value = "/request-restore.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse requestRestore(@RequestBody String mail) {
-        return null;
+    public LoginResponse requestRestore(@RequestBody String mail) {
+        return loginService.requestRestore(mail);
     }
 
+    @ApiOperation(
+            value = "AuthController::restore",
+            notes = "Restaura la clave de un usuario")
+        @RequestMapping(
+            value = "/restore-password.json",
+            method = GET,
+            produces = "application/json; charset=utf-8")
+        public LoginResponse restorePassword(String securityToken, String password) {
+            return loginService.restorePassword(securityToken, password);
+        }
+
+    
 // Cambia Clave (régular)
     @ApiOperation(
         value = "AuthController::change-password",
@@ -81,20 +92,7 @@ public class AuthController {
         method = POST,
         produces = "application/json; charset=utf-8")
     public LoginResponse changePassword(@RequestHeader("jwt") String jwt, @RequestBody Login login) {
-        //System.out.println(jwt);
-        //System.out.println(login.getUser());
-        //System.out.println(login.getPassword());
         return loginService.changePassword(login.getUser(), login.getPassword(), jwt);
     }
-// valida token de seguridad
-    @ApiOperation(
-        value = "AuthController::validate-token",
-        notes = "Valida la cadena que se envia para cambiar una clave")
-    @RequestMapping(
-        value = "/validate-token.json",
-        method = GET,
-        produces = "application/json; charset=utf-8")
-    public MainControllerResponse validateToken(@RequestBody String token) {
-        return null;
-    }
+
 }

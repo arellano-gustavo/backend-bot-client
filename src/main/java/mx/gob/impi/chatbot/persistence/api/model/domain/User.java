@@ -75,7 +75,7 @@ public class User implements Serializable {
     private String secretAnswer;
     
     private String securityToken;
-    private int securityTokenWindow;
+    private long securityTokenWindow;
     
     /** Indica la última vez que la cuenta fué accedida */
     private Date lastAccessDate;
@@ -207,11 +207,11 @@ public class User implements Serializable {
         this.securityToken = securityToken;
     }
 
-    public int getSecurityTokenWindow() {
+    public long getSecurityTokenWindow() {
         return securityTokenWindow;
     }
 
-    public void setSecurityTokenWindow(int securityTokenWindow) {
+    public void setSecurityTokenWindow(long securityTokenWindow) {
         this.securityTokenWindow = securityTokenWindow;
     }
 

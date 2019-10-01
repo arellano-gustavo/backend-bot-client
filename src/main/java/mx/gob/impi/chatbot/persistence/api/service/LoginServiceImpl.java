@@ -54,6 +54,9 @@ public class LoginServiceImpl implements LoginService {
     private JwtManagerService jwtManagerService;
     
     @Autowired
+    private ChatbotMailSenderService chatbotMailSenderService;
+   
+    @Autowired
     private CustomDigestEncoderService cde;
     
     @Value("${login.blokedWindowTime}")
@@ -61,6 +64,9 @@ public class LoginServiceImpl implements LoginService {
     
     @Value("${login.maxInvalidTries}")
     private int maxInvalidTries;
+    
+    @Value("${login.securityTokenWindow}")
+    private long securityTokenWindow;
     
     @Override
     public LoginResponse changePassword(String user, String password, String jwt) {
@@ -87,7 +93,6 @@ public class LoginServiceImpl implements LoginService {
     public LoginResponse login(String user, String password) {
         // Preparando un objeto de tipo User
         User usuario = null;
-        //ok("tavo");
         // Primero revisamos si no existe una razón evidente por la cual no autenticar:
         try {
             evalErrorCondition(user==null || user.trim().length()<1,         "User vacío");
@@ -95,15 +100,10 @@ public class LoginServiceImpl implements LoginService {
             
             usuario = userMapper.getUserByName(user);
             evalErrorCondition(usuario==null, "User no existe");
-            
-            evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
-            
-            evalErrorCondition(usuario.isExpiredCredential(), "Credenciales expiradas");
-
             evalErrorCondition(usuario.isExpiredAccount(), "Cuenta expirada");
-            
             evalErrorCondition(usuario.isBloquedAccount(), "Cuenta bloqueada");
-            
+            evalErrorCondition(usuario.isExpiredCredential(), "Credenciales expiradas");
+            evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
             evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, "Máximo numero de intentos alcanzado");
             
             if(usuario.getBloquedDate()!=null) {
@@ -116,7 +116,7 @@ public class LoginServiceImpl implements LoginService {
             
             /** /
             ok("root");
-            
+            ok("tavo");
             ok("tercero");
             ok("cuarto");
             ok("quinto");
@@ -180,5 +180,70 @@ public class LoginServiceImpl implements LoginService {
     public boolean diffDates(Date inicial, Date terminal, long delta) {
         long diff = (terminal.getTime() -inicial.getTime())/1000;
         return (diff<delta);
+    }
+    @Override
+    public LoginResponse requestRestore(String mail) {
+        User user = userMapper.getUserByMail(mail);
+        if(user==null) {
+            return new LoginResponse("Unknown", true, "Revisa tu mail: " + mail);
+        }
+        
+        Date now = new Date();
+        long nowLong = now.getTime();
+        long window = nowLong + securityTokenWindow*60*1000;
+        user.setSecurityTokenWindow(window);// now plus 5 minutes
+        String secTok = createSecurityToken();
+        user.setSecurityToken(secTok);
+        this.chatbotMailSenderService.sendMail(
+                mail, "Procedimiento de recuperación de contraseña", 
+                getMailTemplate(secTok, user.getUsr()));
+        return new LoginResponse(user.getUsr(), true, "Revisa tu mail: " + mail);
+    }
+
+    @Override
+    public LoginResponse restorePassword(String securityToken, String password) {
+        User user = userMapper.getUserBySecurityToken(securityToken);
+        if(user==null) {
+            return new LoginResponse("Unknown", false, "Token inexistente");
+        }
+        long timeToExpire = user.getSecurityTokenWindow();
+        Date now = new Date();
+        long nowLong = now.getTime();
+        
+        if(nowLong>timeToExpire) {
+            return new LoginResponse(user.getUsr(), false, "Token expirado");
+        }
+        String newPassword = cde.digest(password, user.getUsr());
+        user.setPassword(newPassword);
+        user.setSecurityTokenWindow(0);
+        user.setFailedAtemptCounter(0);
+        userMapper.update(user);
+        this.chatbotMailSenderService.sendMail(
+                user.getMail(), "Password Cambiado exitosamente", 
+                "Hola, "+user.getUsr()+" tu password ha cambiado." );
+        return new LoginResponse(user.getUsr(), true, "Password restaurado correctamente");
+    }
+    
+    private String getMailTemplate(String secTok, String name) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hola, estimado "+name+" !!!");
+        sb.append("<h1>Usa esta liga:</h1>");
+        sb.append("<h2><a href='http://localhost:8080/api/recupera?token=");
+        sb.append(secTok);
+        sb.append("'>recupera</a></h2>");
+        return sb.toString();
+    }
+
+    private static String createSecurityToken() {
+        String store = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+                      //123456789_123456789_123456789_123456789_123456789_123456789_12  // 62 caracteres
+        String result = "";
+        for(int i=0; i<50;i++) {
+            double prev = Math.random()*62; // de 0 hasta 61
+            int position = (int)prev;
+            char data = store.charAt(position);
+            result = result + data;
+        }
+        return result; // 2^6^50 cadenas = 2^300
     }
 }

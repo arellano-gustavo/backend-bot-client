@@ -58,4 +58,8 @@ public interface LoginService {
      * @return LoginResponse, con el dictamen del cambio
      */
     LoginResponse changePassword(String user, String password, String jwt);
+
+    LoginResponse restorePassword(String securityToken, String password);
+
+    LoginResponse requestRestore(String mail);
 }

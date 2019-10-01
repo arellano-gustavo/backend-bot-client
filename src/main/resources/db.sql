@@ -16,7 +16,7 @@ CREATE TABLE user (
  secret_question            varchar(50) default '',
  secret_answer              varchar(50) default '',
  security_token             varchar(50) default '',
- security_token_window      int default 1000,
+ security_token_window      bigint default 0,
  last_access_date           date,
  last_password_update_date  date,
  PRIMARY KEY (id)
