@@ -22,6 +22,22 @@
         <org.springframework.version>4.3.14.RELEASE</org.springframework.version>
         <org.slf4j.version>1.7.7</org.slf4j.version>
     </properties>
+    
+    <repositories>
+        <repository>
+            <id>nexus.ci.gustavo-arellano.com</id>
+            <url>https://nexus.ci.gustavo-arellano.com/repository/all/</url>
+            <name>Kebblar Repository</name>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus.ci.gustavo-arellano.com</id>
+            <url>https://nexus.ci.gustavo-arellano.com/repository/maven-snapshots/</url>
+            <uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
