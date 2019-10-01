@@ -36,8 +36,15 @@ public class MainControllerResponse {
     private String longMessage = "";
     private boolean succeed = false;
 
+    /**
+     * Constructor default de la clase.
+     */
     public MainControllerResponse(){}
 
+    /**
+     * Constructor con los atributos del estatus de la repuesta generica
+     * de los metodos rest.
+     */
     public MainControllerResponse(String message, String longMessage, boolean succeed) {
         this.message = message;
         this.longMessage = longMessage;

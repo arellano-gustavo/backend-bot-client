@@ -7,7 +7,7 @@
  *              cualquier medio electrónico o impreso sin el
  *              permiso explícito y por escrito del cliente.
  *
- * Proyecto:    Chatbot AETI
+ * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.support
  * Módulo:      FileUtils
  * Tipo:        clase

@@ -32,5 +32,14 @@ package mx.gob.impi.chatbot.persistence.api.service;
  * @version 1.0-SNAPSHOT
  */
 public interface ChatbotMailSenderService {
+	
+	/**
+	 * Envio correo electronicos desde la aplicacion chatbot
+	 * @param to Cadena con los correos electronicos a los que se
+	 *           el mensaje que genera el chatbot
+	 * @param subject Cadena con el titulo del correo electronico
+	 * @param body Cadena con el cuerpo del mensaje que se envia
+	 *             desde el chatbot
+	 */
     void sendMail(String to, String subject, String body);
 }

@@ -38,9 +38,15 @@ public class LoginResponse {
     private String jwt = "";
     private boolean succeed = false;
     
+    /**
+     * Constructor default de la clase.
+     */
     public LoginResponse() {
     }
     
+    /**
+     * Constructor con los atributos del estatus del intento del login.
+     */
     public LoginResponse(String user, boolean succeed, String message) {
         this.user = user;
         this.succeed = succeed;

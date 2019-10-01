@@ -39,6 +39,9 @@ public class UserRol implements Serializable {
     private int idUser;
     private int idRol;
     
+    /**
+     * Constructor default de la clase.
+     */
     public UserRol(){
     }
     
