@@ -45,14 +45,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
    */
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-      /*
-    registry
-      .addResourceHandler("/**")
-      .addResourceLocations("classpath:/static/");
-    */
     registry
       .addResourceHandler("")
-      .addResourceLocations("classpath:/static/");
+      .addResourceLocations("classpath:/assets/");
     
     registry
         .addResourceHandler("swagger-ui.html")
@@ -64,15 +59,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     registry
         .addResourceHandler("/css/**")
-        .addResourceLocations("classpath:/static/css/");
+        .addResourceLocations("classpath:/assets/css/");
 
     registry
         .addResourceHandler("/js/**")
-        .addResourceLocations("classpath:/static/js/");
+        .addResourceLocations("classpath:/assets/js/");
 
     registry
         .addResourceHandler("/img/**")
-        .addResourceLocations("classpath:/static/img/");
+        .addResourceLocations("classpath:/assets/img/");
   }
 
 }
