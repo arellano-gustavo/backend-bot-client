@@ -136,6 +136,27 @@
             <artifactId>jjwt</artifactId>
             <version>0.6.0</version>
         </dependency>
+        <!-- google libraries -->
+        <dependency>
+		    <groupId>com.google.auth</groupId>
+		    <artifactId>google-auth-library-oauth2-http</artifactId>
+		    <version>0.17.1</version>
+		</dependency>
+	    <dependency>
+		    <groupId>com.google.apis</groupId>
+		    <artifactId>google-api-services-dialogflow</artifactId>
+		    <version>v2-rev81-1.25.0</version>
+		</dependency>
+		<dependency>
+	        <groupId>com.google.api-client</groupId>
+	        <artifactId>google-api-client</artifactId>
+	        <version>1.30.2</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>com.google.api-client</groupId>
+		    <artifactId>google-api-client-gson</artifactId>
+		    <version>1.30.2</version>
+		</dependency>
     </dependencies>
     
     <build>
