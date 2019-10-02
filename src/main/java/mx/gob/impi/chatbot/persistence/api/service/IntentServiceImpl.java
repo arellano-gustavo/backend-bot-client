@@ -16,9 +16,9 @@ implements IntentService
 {
 
 	@Override
-	public DialogflowRequest<GoogleCloudDialogflowV2Intent> getRequestPost(String method, String uriTemplate, GoogleCloudDialogflowV2Intent requestEntity,
+	public DialogflowRequest<GoogleCloudDialogflowV2Intent> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2Intent requestEntity,
 			Class<GoogleCloudDialogflowV2Intent> responseClass) {
-		DialogflowRequest<GoogleCloudDialogflowV2Intent> dialogflowRequest =new IntentRepository(client, method, uriTemplate, requestEntity, responseClass);
+		DialogflowRequest<GoogleCloudDialogflowV2Intent> dialogflowRequest =new IntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
 		return dialogflowRequest;
 	}
 	
@@ -30,32 +30,32 @@ implements IntentService
 	
 	@Override
 	public GoogleCloudDialogflowV2Intent List(EntityItem<GoogleCloudDialogflowV2Intent> requestGet, MainControllerResponse response) {
-		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/intents?intentView=INTENT_VIEW_FULL");		
+		requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/intents?intentView=INTENT_VIEW_FULL");		
 		return super.List(requestGet, response);
 	}
 	
 	@Override
 	public MainControllerResponse Create(EntityItem<GoogleCloudDialogflowV2Intent> requestPost) {
-		requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/intents");		
+		requestPost.setUriTemplate("v2/projects/" + this.getProjectId(requestPost.getAreaId()) + "/agent/intents");		
 		return super.Create(requestPost);
 	}
 	
 	@Override
 	public GoogleCloudDialogflowV2Intent Get(EntityItem<GoogleCloudDialogflowV2Intent> requestGet, MainControllerResponse response) {
 		
-		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/intents/" + requestGet.getId() + "?intentView=INTENT_VIEW_FULL");		
+		requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/intents/" + requestGet.getId() + "?intentView=INTENT_VIEW_FULL");		
 		return super.List(requestGet, response);
 	}
 	
 	@Override
 	public MainControllerResponse Update(EntityItem<GoogleCloudDialogflowV2Intent> requestPut) {
-		requestPut.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/intents/" + requestPut.getId());
+		requestPut.setUriTemplate("v2/projects/" + this.getProjectId(requestPut.getAreaId()) + "/agent/intents/" + requestPut.getId());
 		return super.Update(requestPut);
 	}
 	
 	@Override
 	public MainControllerResponse Delete(EntityItem<GoogleCloudDialogflowV2Intent> requestDelete) {
-		requestDelete.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/intents/" + requestDelete.getId());
+		requestDelete.setUriTemplate("v2/projects/" + this.getProjectId(requestDelete.getAreaId()) + "/agent/intents/" + requestDelete.getId());
 		return super.Delete(requestDelete);
 	}
 }

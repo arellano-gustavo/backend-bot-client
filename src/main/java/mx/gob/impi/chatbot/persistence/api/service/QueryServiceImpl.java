@@ -16,9 +16,9 @@ extends DialogflowServiceImpl<GoogleCloudDialogflowV2DetectIntentResponse, Googl
 implements QueryService
 {
 	
-	public DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> getRequestPost(String method, String uriTemplate, GoogleCloudDialogflowV2DetectIntentRequest requestEntity,
+	public DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2DetectIntentRequest requestEntity,
 			Class<GoogleCloudDialogflowV2DetectIntentResponse> responseClass) {
-		DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> dialogflowRequest = new DetectIntentRepository(client, method, uriTemplate, requestEntity, responseClass);
+		DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> dialogflowRequest = new DetectIntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
 		return dialogflowRequest;
 	}
 	/*

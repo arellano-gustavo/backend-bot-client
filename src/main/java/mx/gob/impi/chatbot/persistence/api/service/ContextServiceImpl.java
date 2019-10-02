@@ -16,9 +16,9 @@ implements ContextService
 {
 	
 	@Override
-	public DialogflowRequest<GoogleCloudDialogflowV2Context> getRequestPost(String method, String uriTemplate, GoogleCloudDialogflowV2Context requestEntity,
+	public DialogflowRequest<GoogleCloudDialogflowV2Context> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2Context requestEntity,
 			Class<GoogleCloudDialogflowV2Context> responseClass) {
-		DialogflowRequest<GoogleCloudDialogflowV2Context> dialogflowRequest =new ContextRepository(client, method, uriTemplate, requestEntity, responseClass);
+		DialogflowRequest<GoogleCloudDialogflowV2Context> dialogflowRequest =new ContextRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
 		return dialogflowRequest;
 	}
 	
@@ -30,31 +30,31 @@ implements ContextService
 	
 	@Override
 	public GoogleCloudDialogflowV2Context List(EntityItem<GoogleCloudDialogflowV2Context> requestGet, MainControllerResponse response) {
-		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/sessions/" + requestGet.getSessionId() + "/contexts");		
+		requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/sessions/" + requestGet.getSessionId() + "/contexts");		
 		return super.List(requestGet, response);
 	}
 	
 	@Override
 	public MainControllerResponse Create(EntityItem<GoogleCloudDialogflowV2Context> requestPost) {
-		requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts");		
+		requestPost.setUriTemplate("v2/projects/" + this.getProjectId(requestPost.getAreaId()) + "/agent/contexts");		
 		return super.Create(requestPost);
 	}
 	
 	@Override
 	public GoogleCloudDialogflowV2Context Get(EntityItem<GoogleCloudDialogflowV2Context> requestGet, MainControllerResponse response) {
-		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts/" + requestGet.getId());		
+		requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/contexts/" + requestGet.getId());		
 		return super.List(requestGet, response);
 	}
 	
 	@Override
 	public MainControllerResponse Update(EntityItem<GoogleCloudDialogflowV2Context> requestPut) {
-		requestPut.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts/" + requestPut.getId());
+		requestPut.setUriTemplate("v2/projects/" + this.getProjectId(requestPut.getAreaId()) + "/agent/contexts/" + requestPut.getId());
 		return super.Update(requestPut);
 	}
 	
 	@Override
 	public MainControllerResponse Delete(EntityItem<GoogleCloudDialogflowV2Context> requestDelete) {
-		requestDelete.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts/" + requestDelete.getId());
+		requestDelete.setUriTemplate("v2/projects/" + this.getProjectId(requestDelete.getAreaId()) + "/agent/contexts/" + requestDelete.getId());
 		return super.Delete(requestDelete);
 	}
 

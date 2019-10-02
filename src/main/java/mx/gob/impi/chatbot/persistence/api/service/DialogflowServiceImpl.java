@@ -1,16 +1,8 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.Collections;
 
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.dialogflow.v2.Dialogflow;
 import com.google.api.services.dialogflow.v2.DialogflowRequest;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
@@ -18,72 +10,33 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
 public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowService<TEntity, TReques> {
 	
-	GoogleCredentials credentials;
-	String projectId;
-	Dialogflow client;	
+	DialogflowCredentials credentials;
+	
 	
 	public DialogflowServiceImpl(){
 		
+		this.credentials = new DialogflowCredentials();
+		
+	}
+	
+	public String getProjectId(String area){
+		return ((ServiceAccountCredentials)this.credentials.getBagCredentials().get(area)).getProjectId();
+	}
+	
+	public String getToken(String area) {
 		try {
-			
-			//MARCAS
-			credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/Felix/Downloads/impi-marcas-fppooy-2bb298a3d05e.json"));//Administrador de la API de Dialogflow
-			
-			//PORTAL
-			//credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/Felix/Downloads/impi-bot-htsggt-89aea42a10f2.json"));//Administrador de la API de Dialogflow
-			
-			//PATENTES
-			//credentials = GoogleCredentials.fromStream(new FileInputStream("/Users/Felix/Downloads/newagent-yueqxh-9a4da2d7a395.json"));//Administrador de la API de Dialogflow
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			credentials.getBagCredentials().get(area).refreshIfExpired();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-    	if (credentials.createScopedRequired()) {
-    	    credentials = credentials.createScoped(Collections.singletonList("https://www.googleapis.com/auth/dialogflow"));
-    	}
-
-    	
-    	
-    	
-    	JacksonFactory jacksonFactory = JacksonFactory.getDefaultInstance();
-
-        com.google.api.client.http.HttpTransport transport = null;
-		try {
-			transport = GoogleNetHttpTransport.newTrustedTransport();
-		} catch (GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-       
-		this.projectId = ((ServiceAccountCredentials)credentials).getProjectId();
-        
-        this.client = new Dialogflow.Builder(transport, jacksonFactory, null).setApplicationName(this.projectId).build();
-    	
+		return this.credentials.getBagCredentials().get(area).getAccessToken().getTokenValue();
 	}
-	
-	public String getProjectId(){
-		return this.projectId;
+	/*
+	public Dialogflow getClient(String area) {
+		return credentials.getBagClients().get(area);
 	}
-	
-	public String getToken() {
-		try {
-			credentials.refreshIfExpired();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return this.credentials.getAccessToken().getTokenValue();
-	}
-	
-	public Dialogflow getClient() {
-		return client;
-	}
-	
+	*/
 	
 	
 	public TEntity execute(EntityItem<TReques> requestPost, TEntity responseEntity, MainControllerResponse response){
@@ -93,9 +46,9 @@ public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowServic
         @SuppressWarnings("unchecked")
 		Class<TEntity> responseClass = (Class<TEntity>) responseEntity.getClass();        
         
-		DialogflowRequest<TEntity> dialogflowRequest =  getRequestPost(requestPost.getMethod(), requestPost.getUriTemplate(), requestEntity, responseClass);
+		DialogflowRequest<TEntity> dialogflowRequest =  getRequestPost(requestPost.getAreaId(), requestPost.getMethod(), requestPost.getUriTemplate(), requestEntity, responseClass);
                 
-        String token = getToken();
+        String token = getToken(requestPost.getAreaId());
         
         com.google.api.client.http.HttpHeaders headers = new com.google.api.client.http.HttpHeaders();
         headers.setAuthorization("Bearer " + token);
@@ -115,7 +68,7 @@ public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowServic
         return responseEntity;
 	}
 
-	public DialogflowRequest<TEntity> getRequestPost(String method, String uriTemplate, TReques requestEntity,
+	public DialogflowRequest<TEntity> getRequestPost(String area, String method, String uriTemplate, TReques requestEntity,
 			Class<TEntity> responseClass) {
 		// TODO Auto-generated method stub
 		return null;

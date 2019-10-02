@@ -15,9 +15,9 @@ extends DialogflowServiceImpl<GoogleCloudDialogflowV2EntityType, GoogleCloudDial
 implements EntityTypeService{
 
 	@Override
-	public DialogflowRequest<GoogleCloudDialogflowV2EntityType> getRequestPost(String method, String uriTemplate, GoogleCloudDialogflowV2EntityType requestEntity,
+	public DialogflowRequest<GoogleCloudDialogflowV2EntityType> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2EntityType requestEntity,
 			Class<GoogleCloudDialogflowV2EntityType> responseClass) {
-		DialogflowRequest<GoogleCloudDialogflowV2EntityType> dialogflowRequest =new EntityTypeRepository(client, method, uriTemplate, requestEntity, responseClass);
+		DialogflowRequest<GoogleCloudDialogflowV2EntityType> dialogflowRequest =new EntityTypeRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
 		return dialogflowRequest;
 	}
 	
@@ -29,31 +29,31 @@ implements EntityTypeService{
 	
 	@Override
 	public GoogleCloudDialogflowV2EntityType List(EntityItem<GoogleCloudDialogflowV2EntityType> requestGet, MainControllerResponse response) {
-		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/entityTypes");		
+		requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/entityTypes");		
 		return super.List(requestGet, response);
 	}
 	
 	@Override
 	public MainControllerResponse Create(EntityItem<GoogleCloudDialogflowV2EntityType> requestPost) {
-		requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/entityTypes");		
+		requestPost.setUriTemplate("v2/projects/" + this.getProjectId(requestPost.getAreaId()) + "/agent/entityTypes");		
 		return super.Create(requestPost);
 	}
 	
 	@Override
 	public GoogleCloudDialogflowV2EntityType Get(EntityItem<GoogleCloudDialogflowV2EntityType> requestGet, MainControllerResponse response) {
-		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/entityTypes/" + requestGet.getId());		
+		requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/entityTypes/" + requestGet.getId());		
 		return super.List(requestGet,  response);
 	}
 	
 	@Override
 	public MainControllerResponse Update(EntityItem<GoogleCloudDialogflowV2EntityType> requestPut) {
-		requestPut.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/entityTypes/" + requestPut.getId());
+		requestPut.setUriTemplate("v2/projects/" + this.getProjectId(requestPut.getAreaId()) + "/agent/entityTypes/" + requestPut.getId());
 		return super.Update(requestPut);
 	}
 	
 	@Override
 	public MainControllerResponse Delete(EntityItem<GoogleCloudDialogflowV2EntityType> requestDelete) {
-		requestDelete.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/entityTypes/" + requestDelete.getId());
+		requestDelete.setUriTemplate("v2/projects/" + this.getProjectId(requestDelete.getAreaId()) + "/agent/entityTypes/" + requestDelete.getId());
 		return super.Delete(requestDelete);
 	}
 }
