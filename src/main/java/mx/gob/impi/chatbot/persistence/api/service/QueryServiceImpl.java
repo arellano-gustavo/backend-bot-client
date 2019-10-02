@@ -1,5 +1,7 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import org.springframework.stereotype.Service;
+
 import com.google.api.services.dialogflow.v2.DialogflowRequest;
 import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2DetectIntentRequest;
 import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2DetectIntentResponse;
@@ -8,6 +10,7 @@ import mx.gob.impi.chatbot.persistence.api.db.DetectIntentRepository;
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
+@Service
 public class QueryServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2DetectIntentResponse, GoogleCloudDialogflowV2DetectIntentRequest>
 implements QueryService

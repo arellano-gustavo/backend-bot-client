@@ -1,5 +1,7 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import org.springframework.stereotype.Service;
+
 import com.google.api.services.dialogflow.v2.DialogflowRequest;
 import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Context;
 
@@ -7,7 +9,7 @@ import mx.gob.impi.chatbot.persistence.api.db.ContextRepository;
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
-
+@Service
 public class ContextServiceImpl 
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2Context, GoogleCloudDialogflowV2Context>
 implements ContextService

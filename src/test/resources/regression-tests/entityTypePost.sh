@@ -41,4 +41,4 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
         ],
         \"kind\": \"KIND_MAP\"
   }  
-}" "http://localhost:8080/chatbotserver/entityType"
+}" "http://localhost:8080/api/chatbot/trainer/insert-entityType.json"

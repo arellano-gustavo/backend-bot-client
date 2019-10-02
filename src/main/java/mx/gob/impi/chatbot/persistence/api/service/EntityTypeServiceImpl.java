@@ -1,5 +1,7 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import org.springframework.stereotype.Service;
+
 import com.google.api.services.dialogflow.v2.DialogflowRequest;
 import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2EntityType;
 
@@ -7,6 +9,7 @@ import mx.gob.impi.chatbot.persistence.api.db.EntityTypeRepository;
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
+@Service
 public class EntityTypeServiceImpl 
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2EntityType, GoogleCloudDialogflowV2EntityType>
 implements EntityTypeService{
