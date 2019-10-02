@@ -24,9 +24,23 @@
 package mx.gob.impi.chatbot.persistence;
 
 import org.slf4j.*;
+
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.Collections;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
@@ -53,5 +67,14 @@ public class MainApp {
     logger.info("Concluye Inicialización de applicacion Spring Boot *******************************");
     logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json ***************");
     logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ****************************");
+  }
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+      return new WebMvcConfigurerAdapter() {
+          @Override
+          public void addCorsMappings(CorsRegistry registry) {
+              registry.addMapping("/**").allowedOrigins("*");
+          }
+      };
   }
 }
