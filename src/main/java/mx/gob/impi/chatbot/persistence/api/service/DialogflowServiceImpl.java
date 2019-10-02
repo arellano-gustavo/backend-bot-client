@@ -14,6 +14,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
+import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
 public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowService<TEntity, TReques> {
 	
@@ -85,7 +86,7 @@ public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowServic
 	
 	
 	
-	public TEntity execute(EntityItem<TReques> requestPost, TEntity responseEntity){
+	public TEntity execute(EntityItem<TReques> requestPost, TEntity responseEntity, MainControllerResponse response){
 		
 		TReques requestEntity = requestPost.getItem();
         
@@ -105,6 +106,9 @@ public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowServic
 			responseEntity = (TEntity) dialogflowRequest.execute();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			response.setLongMessage(e.toString());
+			response.setMessage("Error");
+			response.setSucceed(false);
 			e.printStackTrace();
 		}
         
@@ -117,47 +121,47 @@ public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowServic
 		return null;
 	}
 	
-	public TEntity execute(EntityItem<TReques> requestGet){
-		return execute((EntityItem<TReques>)requestGet, null);		
+	public TEntity execute(EntityItem<TReques> requestGet, MainControllerResponse response){
+		return execute((EntityItem<TReques>)requestGet, null, response);		
 	}
 
 	@Override
-	public TEntity List(EntityItem<TReques> requestGet) {
+	public TEntity List(EntityItem<TReques> requestGet, MainControllerResponse response) {		
 		requestGet.setMethod("GET");
-		TEntity entity = execute(requestGet);
-		//TEntity response = new TEntity("Listado", entity);
+		TEntity entity = execute(requestGet, response);
 		return entity;
 	}
 		
 	@Override
-	public TEntity Create(EntityItem<TReques> requestPost) {
+	public MainControllerResponse Create(EntityItem<TReques> requestPost) {
+		MainControllerResponse response = new MainControllerResponse("Creado", "Creado", true);
 		requestPost.setMethod("POST");
-		TEntity entity = execute(requestPost);
-		//TEntity response = new TEntity("Creado", entity);
-		return entity;
+		execute(requestPost, response);
+		return response;
 	}
 	
 	@Override
-	public TEntity Get(EntityItem<TReques> requestGet) {
+	public TEntity Get(EntityItem<TReques> requestGet, MainControllerResponse response) {
+		
 		requestGet.setMethod("GET");
-		TEntity entity = execute(requestGet);
+		TEntity entity = execute(requestGet, response);
 		//TEntity response = new TEntity("Recuperado", entity);
 		return entity;
 	}
 	
 	@Override
-	public TEntity Update(EntityItem<TReques> requestPut) {
+	public MainControllerResponse Update(EntityItem<TReques> requestPut) {
+		MainControllerResponse response = new MainControllerResponse("Actualizado", "Actualizado", true);
 		requestPut.setMethod("PATCH");
-		TEntity entity = execute(requestPut);
-		//TEntity response = new TEntity("Actualizado", entity);
-		return entity;
+		execute(requestPut, response);
+		return response;
 	}
 	
 	@Override
-	public TEntity Delete(EntityItem<TReques> requestDelete) {
+	public MainControllerResponse Delete(EntityItem<TReques> requestDelete) {
+		MainControllerResponse response = new MainControllerResponse("Borrado", "Borrado", true);
 		requestDelete.setMethod("DELETE");
-		TEntity entity = execute(requestDelete);
-		//TEntity response = new TEntity("Borrado", entity);
-		return entity;
+		execute(requestDelete, response);
+		return response;
 	}
 }

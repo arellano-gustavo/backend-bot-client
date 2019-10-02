@@ -37,4 +37,4 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
       }
     ]
   }  
-}" "http://localhost:8080/chatbotserver/intent"
+}" "http://localhost:8080/api/chatbot/trainer/insert-intent.json"

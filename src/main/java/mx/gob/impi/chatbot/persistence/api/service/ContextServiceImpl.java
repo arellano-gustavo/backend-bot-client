@@ -5,6 +5,7 @@ import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Contex
 
 import mx.gob.impi.chatbot.persistence.api.db.ContextRepository;
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
+import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
 
 public class ContextServiceImpl 
@@ -20,37 +21,37 @@ implements ContextService
 	}
 	
 	@Override
-	public GoogleCloudDialogflowV2Context execute(EntityItem<GoogleCloudDialogflowV2Context> requestEnity){
+	public GoogleCloudDialogflowV2Context execute(EntityItem<GoogleCloudDialogflowV2Context> requestEnity, MainControllerResponse response){
 		GoogleCloudDialogflowV2Context responseEntity = new GoogleCloudDialogflowV2Context();
-		return execute(requestEnity, responseEntity);		
+		return execute(requestEnity, responseEntity, response);		
 	}
 	
 	@Override
-	public GoogleCloudDialogflowV2Context List(EntityItem<GoogleCloudDialogflowV2Context> requestGet) {
+	public GoogleCloudDialogflowV2Context List(EntityItem<GoogleCloudDialogflowV2Context> requestGet, MainControllerResponse response) {
 		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/sessions/" + requestGet.getSessionId() + "/contexts");		
-		return super.List(requestGet);
+		return super.List(requestGet, response);
 	}
 	
 	@Override
-	public GoogleCloudDialogflowV2Context Create(EntityItem<GoogleCloudDialogflowV2Context> requestPost) {
+	public MainControllerResponse Create(EntityItem<GoogleCloudDialogflowV2Context> requestPost) {
 		requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts");		
 		return super.Create(requestPost);
 	}
 	
 	@Override
-	public GoogleCloudDialogflowV2Context Get(EntityItem<GoogleCloudDialogflowV2Context> requestGet) {
+	public GoogleCloudDialogflowV2Context Get(EntityItem<GoogleCloudDialogflowV2Context> requestGet, MainControllerResponse response) {
 		requestGet.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts/" + requestGet.getId());		
-		return super.List(requestGet);
+		return super.List(requestGet, response);
 	}
 	
 	@Override
-	public GoogleCloudDialogflowV2Context Update(EntityItem<GoogleCloudDialogflowV2Context> requestPut) {
+	public MainControllerResponse Update(EntityItem<GoogleCloudDialogflowV2Context> requestPut) {
 		requestPut.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts/" + requestPut.getId());
 		return super.Update(requestPut);
 	}
 	
 	@Override
-	public GoogleCloudDialogflowV2Context Delete(EntityItem<GoogleCloudDialogflowV2Context> requestDelete) {
+	public MainControllerResponse Delete(EntityItem<GoogleCloudDialogflowV2Context> requestDelete) {
 		requestDelete.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/contexts/" + requestDelete.getId());
 		return super.Delete(requestDelete);
 	}

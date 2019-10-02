@@ -6,6 +6,7 @@ import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Detect
 
 import mx.gob.impi.chatbot.persistence.api.db.DetectIntentRepository;
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
+import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
 public class QueryServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2DetectIntentResponse, GoogleCloudDialogflowV2DetectIntentRequest>
@@ -17,17 +18,17 @@ implements QueryService
 		DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> dialogflowRequest = new DetectIntentRepository(client, method, uriTemplate, requestEntity, responseClass);
 		return dialogflowRequest;
 	}
-	
+	/*
 	@Override
 	public GoogleCloudDialogflowV2DetectIntentResponse Create(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestPost) {
 		requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/sessions/" + requestPost.getSessionId() + ":detectIntent");
 		return super.Create(requestPost);
 	}
-	
+	*/
 	@Override
-	public GoogleCloudDialogflowV2DetectIntentResponse execute(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestEnity){
+	public GoogleCloudDialogflowV2DetectIntentResponse execute(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestEnity, MainControllerResponse response){
 		GoogleCloudDialogflowV2DetectIntentResponse responseEntity = new GoogleCloudDialogflowV2DetectIntentResponse();
-		return execute(requestEnity, responseEntity);		
+		return execute(requestEnity, responseEntity, response);		
 	}
 	
 
