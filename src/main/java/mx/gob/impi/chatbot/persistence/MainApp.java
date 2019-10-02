@@ -59,7 +59,7 @@ public class MainApp {
     logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json ***************");
     logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ****************************");
   }
-  /*
+  
   @SuppressWarnings("deprecation")
   @Bean
   public WebMvcConfigurer corsConfigurer() {
@@ -69,5 +69,5 @@ public class MainApp {
               registry.addMapping("/**").allowedOrigins("*");
           }
       };
-  }*/
+  }
 }
