@@ -24,6 +24,8 @@
  */
 package mx.gob.impi.chatbot.persistence.api.model.domain;
 
+import java.util.List;
+
 /**
  * <p>Descripción:</p>
  * POJO asociado a la entidad 'login'
@@ -34,14 +36,16 @@ package mx.gob.impi.chatbot.persistence.api.model.domain;
 public class LoginResponse {
     private String user = "";
     private String message = "";
-    private String longMessage = "";
+    private String detailedMessage = "";
     private String jwt = "";
     private boolean succeed = false;
+    private List<UserArea> areas;
+    private List<UserRol> roles;
     
     /**
      * Constructor default de la clase.
      */
-    public LoginResponse() {
+    public LoginResponse(int a) {
     }
     
     /**
@@ -53,6 +57,13 @@ public class LoginResponse {
         this.message = message;
     }
     
+    public LoginResponse(String user, boolean succeed, String message, List<UserRol> roles, List<UserArea> areas) {
+        this.user = user;
+        this.succeed = succeed;
+        this.message = message;
+        this.setRoles(roles);
+        this.setAreas(areas);
+    }
     public boolean isSucceed() {
         return succeed;
     }
@@ -78,11 +89,29 @@ public class LoginResponse {
         this.jwt = jwt;
     }
 
-    public String getLongMessage() {
-        return longMessage;
+    public String getDetailedMessage() {
+        return detailedMessage;
     }
 
-    public void setLongMessage(String longMessage) {
-        this.longMessage = longMessage;
+    public void setDetailedMessage(String detailedMessage) {
+        this.detailedMessage = detailedMessage;
     }
+
+	public List<UserArea> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<UserArea> areas) {
+		this.areas = areas;
+	}
+
+	public List<UserRol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<UserRol> roles) {
+		this.roles = roles;
+	}
+
+
 }

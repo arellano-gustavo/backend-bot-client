@@ -25,6 +25,7 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +33,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import mx.gob.impi.chatbot.persistence.api.db.UserAreaMapper;
 import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
+import mx.gob.impi.chatbot.persistence.api.db.UserRolMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
+import mx.gob.impi.chatbot.persistence.api.model.domain.UserArea;
+import mx.gob.impi.chatbot.persistence.api.model.domain.UserRol;
 
 /**
  * <p>Descripción:</p>
@@ -46,6 +51,12 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 @Service
 public class LoginServiceImpl implements LoginService {
     private final static Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+
+    @Autowired
+    private UserRolMapper userRolMapper;
+    
+    @Autowired
+    private UserAreaMapper userAreaMapper;
     
     @Autowired
     private UserMapper userMapper;
@@ -76,10 +87,7 @@ public class LoginServiceImpl implements LoginService {
                 String newPassword = cde.digest(password, user);
                 usuario.setPassword(newPassword);
                 userMapper.update(usuario);
-                LoginResponse loginResponse = new LoginResponse();
-                loginResponse.setSucceed(true);
-                loginResponse.setMessage("Password cambiado, " + user);
-                loginResponse.setUser(user);
+                LoginResponse loginResponse = new LoginResponse(user, true, "Password cambiado, " + user);
                 loginResponse.setJwt(jwtManagerService.createToken(user));
                 return loginResponse;
             }
@@ -124,16 +132,15 @@ public class LoginServiceImpl implements LoginService {
             /**/
             
             if(encodedPassword.equals(usuario.getPassword())) {
+            	List<UserArea> areas = userAreaMapper.getByIdUser(usuario.getId());
+            	List<UserRol> roles = userRolMapper.getByIdUser(usuario.getId());
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
                 usuario.setBloquedDate(null);
                 userMapper.update(usuario);
 
                 // Prepara y envía respuesta
-                LoginResponse loginResponse = new LoginResponse();
-                loginResponse.setSucceed(true);
-                loginResponse.setMessage("Bienvenido, " + usuario.getUsr());
-                loginResponse.setUser(usuario.getUsr());
+                LoginResponse loginResponse = new LoginResponse(usuario.getUsr(), true, "Bienvenido, " + usuario.getUsr(), roles, areas);
                 loginResponse.setJwt(jwtManagerService.createToken(user));
                 return loginResponse;
             } else {
