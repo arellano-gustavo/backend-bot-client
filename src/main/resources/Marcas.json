@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "impi-marcas-fppooy",
+  "private_key_id": "2bb298a3d05ee0068bfb05b50d301cdb325888d5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDJt8QL0WdVbXVo\nAAflzWY/d8Clepr1P5M4S6kLMj5BIioYJn2rkw8MCcRIqWUVjk2YTfQSAlrzU0xH\npMSVqQP16VWGPcm6tCqVOOldpghtN+pKlloww5iJxB1DUdPoa7w9oLXrnfWRhOIS\nguV7IpjceMmj95UCSjaczsTBdcOizGrXrYBjkiukqCLCpsgI9+If/YjsNeHjg66r\nlKfxtLuAPPGFPujfG2PE4gHmTU05plmSzJvfJZ9o00UzYbjVmEimB3yh1HD8vc0A\nJb3nllrEV2Q2apVmXCpiSjSIF7H28OzSxu79jNPUfOho1y+HU5MqoMnHZYev1umP\nLhyHzPDrAgMBAAECggEAQCjIHW4sbNqU5lBkMq6jH/rJ9phJo0nmXJiMGviPHo5s\nTyQnAqSSu6R7nxTqBvItMg1RXU0Meqp676qzsFqC3PurbThH6q+Vf8MLTvMZaQvI\n5JJv+2SrJt6O5DOpsBpcVEnCsz+ZtQBMG9EwhnrZnf55PELqTUEnn7aQlGwNnsDP\nExpLJOwQlW64c730V3BPnrgMlixs6SxltjWJegesmjSRRts92Q/mpnLOvtlX1DkU\n7jBwZ0uTwWgr0hvcxuqKvzvPgZKuLRGpJfdjzh6kjz+RJZep4VP7Rsb2WefH/bTZ\nhRT19/M1V9aHJZRuHndqgI/1uS0vOhKwwJC1sHm96QKBgQD2B8ZNcoc7aoVpUc+Y\nrp7fypM5TLbl2cWNSLXLESmj8+srjSxDjoCeIQYv65OYv41XSLtCpegtSGFqfnIa\nNO6hqOqPMTXmVBhhaIFRQCFnHwBAAYjvsSDyn6q4+OlhA+BF396JpQkxalqJWj1+\nDbsVRoLlC/g8Xi2oWJFzCwq/TQKBgQDR5E9QuHxPvlm4fU0ImeT9FtjWXmfrZu2W\nCYKS8ziXh/trN/cUCajcrNfD3D4ZdSlqJb95rG/rrFcEbBzjpnSaG8vy7+ktVm0S\nYwkewtBNe83YjYqLNJNzQ+dGyfgSXwSgSxe25Lzl0BTZmMSoBRDY3rHzgTDkBPEm\njEE8/l5FFwKBgQCImHRu12FhiZicisF5ganPkkb/DyqUnr3h3TahkdvOnUQ6H90t\nfNbH9Inc3SxLKD6u8UCWlko7qe38FEwBZNYAhyoDak0EnjgTDNSPac2h1UJsRu3i\nNjOWwTMmE3xvUpmX8d06Cpj6CJRPofx2GeV+wHE3/ddKnPc4ekP23XCQGQKBgQCU\nFKy0uYPSyuwH0jcwE0tQF/dhvnc4yIRkr071GC3cEq8Z5QEnnO0Ky9LqNw+E7HkM\nj5c4Y6UOs6cs0o3LOtvXAjdwrTxopSoMp9x+XFmT4P3Ig4u0TKKe1tBrzAB+DZV4\n9aHEgjqXNKgRIMvV8sUBDJSlxIbWyHnOhXNdceTWfwKBgQCRhnwpn76//R04hOJ1\nUjuQI5GMXd4SAO5KXRcfnJxgmQttvUSrDkwmfzg13nR0BuWNssWVtXVgugtVQWNo\nSVOGSMSfWPl9jmvZAvYhnlATWjfQzSmGOMzFURR6YZv9z8nEIE8y9x+Nzbvguss5\nj75A2DFeaTiFFg3LtDtMMnOkdg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "marcas-impi@impi-marcas-fppooy.iam.gserviceaccount.com",
+  "client_id": "113337061637711385247",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/marcas-impi%40impi-marcas-fppooy.iam.gserviceaccount.com"
+}

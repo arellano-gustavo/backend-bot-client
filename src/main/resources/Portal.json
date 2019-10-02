@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "impi-bot-htsggt",
+  "private_key_id": "89aea42a10f2ffb295c0ab0961f7c173d1f3b29d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDYJeRQWHcJ2xLY\neilm9OilXdFHwb8QlotQc6Ovnm6YgXOUx+EGStN+u6fpmLDkeZHqVkvwPGI4AEXh\nccW36Vaehbmi+T1Z4Xkqoz96ysWyco6e92zzgV1hngC3Wr5b5opQSapxWx2tuDHI\nszFvXJE5VEsCzfLaXHtjERglgc0U+0rF0owo2wk7hffMluzrtdHSOLx67x7q3lTr\nngat+ZKkZM2io/65p1hEJjSr7h7NgN+LcvIJmiLz6hb1QwI06Tg5Kw7VP/mZGoEE\nhokzn6zDzDTD8ijNTwsXqjXIWJUUYIA5Len4+9Q27Xn8ep62X6/h1U2jIwr0UDsK\ndMnMLCg9AgMBAAECggEAAWy+hIkQv8/h3+tuOm+C2RQ1PPPZ/pH/eRhKC+5PbFHu\nIRzwLspvenZiNPf8soTaoWDQP1UmkJfv3fySARRYrdLT1m8uKFmEIvPQh06u3u5C\nYmnfHfvMUcho2MyQVKrAXqcdqIGhQHPmYBxORx2lF2um0u3om+fgKFcEgbrJT0oV\nqik2gJUVsQtCXVXpC+eWZc+L7OGh7+yPJKxr/9I9YXacrhH0+vMZ6O93x18KAuyP\nf+yANcOXiOhZ8YLnySa9RwDVRe0blAXqwHQOLzLedt6omOq/Za68XI8O7DHQ1iJJ\nXE6BJHzP2WB0MptYq9iWj+kKZ8tXGbAyNqge25yWAQKBgQDtLHvMSxBimv7wtTjT\nUHVuh/X4xyf7uHgsAWPFsms7hRvf9VO9gYZZax0yMLzpro1qZMQ+fB3vn6i4r/gJ\noBKISO40Z8kc5UbjSb4ADnXxterk+nHgBMxtroSdld1C0Wpk3p6QMEIgqH40UPOu\nUA1msEQZcN729mbwVzWAK7qPKQKBgQDpTiby816i/sdg0BfymuA1bKoIMHv8WTdO\nHENWLAHGtJ9crh8KKdu+03pdPkNZ4irpAyBmW9MicMRrY5rLgr/qKj8PT5vlg4h9\ngpnvg1qF4C16tI5SAoFnT2qkfeVgg3slqzuHax9thMYK96YuggUByYGb/3Qj+ZZj\nFWttV0q29QKBgQDXp9YdibepYXQk3TOBeax9x6TSBA0IJtEmelEFZ1l38m3JM6Jk\nM009K1eN1qE//pbZwixrAKKby1o4LNFltyaCw4XNIv3Mh3Hwo5HfLUbzdM3UTSGU\nZ+iWZtRxEd7xrceHVqFpTGgkl/DBk0YwHtxAnlAdrfMfLielrDaah6iIGQKBgFOT\naIZ9wjgXlurKgNmqu4jH3X1DiRbUCujTXRfged5p0/DKe1oTtqF8dogyhsQLLh38\nvb2NRWxAA00JCGnA8+j5q09b0Ff+r4VupKBVaLcuoHwldBpSxXJx050LcIELeLD8\nzz1qlX6RIrTJFGHyt8J1IhX1A/DjNwlVof8wVxaFAoGABB+8HKCivXcC7Bmj9R2R\nmIjjo4NgEWjHM1iSkdO4MG6FhoHR6+fMP0+hmj9J6q6ylGQNGoIZ4dKkpYPEkuSR\n+7PbJKE1ZDOnDqPIiYX1MkHC1vJZpGqI96Bhy/22IOYyg4L/2M1BqXF7a1zm8KAS\n2adzmFe+hYUGDbbfWUfpTuE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "impi-portal@impi-bot-htsggt.iam.gserviceaccount.com",
+  "client_id": "104109284070695335299",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/impi-portal%40impi-bot-htsggt.iam.gserviceaccount.com"
+}
