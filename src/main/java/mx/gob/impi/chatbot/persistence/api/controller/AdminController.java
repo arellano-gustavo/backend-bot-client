@@ -43,6 +43,13 @@ import io.swagger.annotations.ApiOperation;
 import mx.gob.impi.chatbot.persistence.api.model.domain.*;
 import mx.gob.impi.chatbot.persistence.api.service.*;
 
+/**
+ * <p>Descripción:</p>
+ * Implementacion del controlador de administracion
+ *
+ * @author Gustavo A. Arellano (GAA)
+ * @version 1.0-SNAPSHOT
+ */
 @RestController
 @Api(value = "admin")
 @RequestMapping(value = "/api/chatbot/admin")
@@ -68,8 +75,8 @@ public class AdminController {
 
 //selectAll
     /**
-     * hola gus
-     * @return lista chida...
+     * Obtiene una lista con los usuario registrados en el sistema
+     * @return Lista de tipo 'List<User>' con los usuarios del sistena
      */
     @ApiOperation(
         value = "AdminController::getAllUsers",
@@ -82,6 +89,10 @@ public class AdminController {
         return usuarioService.getAllUsers();
     }
     
+    /**
+     * Obtiene una lista de roles registrados en el sistema
+     * @return Lista de tipo 'List<Rol>' con los roles del sistema
+     */
     @ApiOperation(
         value = "AdminController::getAllRoles",
         notes = "Regresa un arreglo de todas los roles en el sistema")
@@ -93,6 +104,10 @@ public class AdminController {
         return rolService.getAll();
     }
     
+    /**
+     * Obtiene  una lista de roles registrado en el sistema
+     * @return Lista de tipo 'List<Area>' con las areas del sistema
+     */
     @ApiOperation(
         value = "AdminController::getAllAreas",
         notes = "Regresa un arreglo de todas las areas en el sistema")
@@ -105,6 +120,11 @@ public class AdminController {
     }
     
 //selectById
+    /**
+     * Obtiene un usuario por medio de su id
+     * @param id Identificador del usuario
+     * @return Objeto de tipo 'User' relacionado a un identificador dado
+     */
     @ApiOperation(
         value = "AdminController::getUserById",
         notes = "Regresa un Usuario con base en su ID")
@@ -116,6 +136,11 @@ public class AdminController {
         return usuarioService.findUserById(id);
     }
     
+    /**
+     * Obtiene un rol por medio de su id
+     * @param id Identificador del rol
+     * @return Objeto de tipo 'Rol' relacionado a un identificador dado
+     */
     @ApiOperation(
         value = "AdminController::getRoleById",
         notes = "Regresa un Rol con base en su ID")
@@ -127,6 +152,11 @@ public class AdminController {
         return rolService.getRolById(id);
     }
     
+    /**
+     * Obtiene un area por medio de su id
+     * @param id Identificador del area
+     * @return Objeto de tipo 'Area' relacionada a un identificador dado
+     */
     @ApiOperation(
         value = "AdminController::getAreaById",
         notes = "Regresa una Area con base en su ID")
@@ -139,6 +169,11 @@ public class AdminController {
     }
     
 // getUserByMail, getUserByToken getUserByName
+    /**
+     * Obtiene un usuario por medio de su mail
+     * @param mail Cadena con el mail ingresado
+     * @return Objeto de tipo 'User' relacionado con el mail dado
+     */
     @ApiOperation(
         value = "AdminController::getUserByMail",
         notes = "Regresa un Usuario con base en su Mail")
@@ -150,6 +185,11 @@ public class AdminController {
         return usuarioService.findUserByMail(mail);
     }
     
+    /**
+     * Obtiene un usuario por medio de su nombre
+     * @param name Cadena con el nombre de un usuario
+     * @return Objeto de tipo 'User' relacionado con el name dado
+     */
     @ApiOperation(
         value = "AdminController::getUserByName",
         notes = "Regresa un Usuario con base en su Name")
@@ -161,6 +201,11 @@ public class AdminController {
         return usuarioService.findUserByName(name);
     }
     
+    /**
+     * Obtiene un usuario por medio de un token
+     * @param token Cadena con el token asignado a un usuario
+     * @return Objeto de tipo 'User' relacionado con el token dado
+     */
     @ApiOperation(
         value = "AdminController::getUserByToken",
         notes = "Regresa una Usuario con base en su token de cambio de clave")
@@ -173,6 +218,12 @@ public class AdminController {
     }
     
 //insert
+    /**
+     * Ingresa un usuario en el sistema
+     * @param user Objeto de tipo 'User' a registrar
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la insercion
+     */
     @ApiOperation(
             value = "AdminController::insert-user",
             notes = "Inserta un usuario al sistema")
@@ -184,6 +235,12 @@ public class AdminController {
             return usuarioService.save(user);
         }
     
+    /**
+     * Ingresa un rol en el sistema
+     * @param rol Objeto de tipo 'Rol' a registrar
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la insercion
+     */
     @ApiOperation(
         value = "AdminController::insert-rol",
         notes = "Inserta un rol al sistema")
@@ -195,6 +252,12 @@ public class AdminController {
         return rolService.save(rol);
     }
     
+    /**
+     * Ingresa un area en el sistema
+     * @param area Objeto de tipo 'Area' a registrar
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la insercion
+     */
     @ApiOperation(
         value = "AdminController::insert-area",
         notes = "Inserta una area al sistema")
@@ -207,6 +270,12 @@ public class AdminController {
     }
     
 //update
+    /**
+     * Actualiza un area regustrada en el sistema
+     * @param area Objeto de tipo 'Area' a actualizar
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la actualizacion
+     */
     @ApiOperation(
         value = "AdminController::update-area",
         notes = "Actualiza una area al sistema")
@@ -218,6 +287,12 @@ public class AdminController {
         return areaService.update(area);
     }
     
+    /**
+     * Actualiza un rol registrado en el sistema
+     * @param rol Objeto de tipo 'Rol' a actualizar
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la actualizacion 
+     */
     @ApiOperation(
         value = "AdminController::update-rol",
         notes = "Actualiza una rol al sistema")
@@ -229,6 +304,12 @@ public class AdminController {
         return rolService.update(rol);
     }
     
+    /**
+     * Actualiza un usuario en el sistema
+     * @param user Objeto de tipo 'User' a actulizar
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la actualizacion
+     */
     @ApiOperation(
         value = "AdminController::update-user",
         notes = "Actualiza una usuario al sistema")
@@ -241,6 +322,12 @@ public class AdminController {
     }
     
 //relaciona
+    /**
+     * Registra la relacion entre un usuario y un area
+     * @param userArea Objeto con la relacion entre el usuario y un area
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la insercion
+     */
     @ApiOperation(
         value = "AdminController::register-user-area",
         notes = "Asigna una area a un usuario")
@@ -252,6 +339,12 @@ public class AdminController {
         return userAreaService.save(userArea.getIdUser(), userArea.getIdArea());
     }
     
+    /**
+     * Registra la relacion entre un usuario y un rol
+     * @param userRol Objeto con la relacion entre el usuario y un rol
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la insercion
+     */
     @ApiOperation(
         value = "AdminController::register-user-rol",
         notes = "Actualiza una rol a un usuario")
@@ -264,6 +357,13 @@ public class AdminController {
     }
     
 // elimina relacion
+    /**
+     * Elimina la relacion entre un usuario y un area
+     * @param idUser Identificador del usuario
+     * @param idArea Identificador del area
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la eliminacion
+     */
     @ApiOperation(
         value = "AdminController::remove-user-area",
         notes = "Remueve una area a un usuario")
@@ -275,6 +375,13 @@ public class AdminController {
         return userAreaService.delete(idUser, idArea);
     }
     
+    /**
+     * Elimina la relacion entre un usuario y un rol
+     * @param idUser Identificador del usuario
+     * @param idRol Identificador del rol
+     * @return Objeto de tipo 'MainControllerResponse'
+     *         con el resultado de la eliminacion
+     */
     @ApiOperation(
         value = "AdminController::remove-user-rol",
         notes = "Remueve una rol a un usuario")

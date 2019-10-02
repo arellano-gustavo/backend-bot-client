@@ -155,6 +155,10 @@ public class LoginServiceImpl implements LoginService {
         }
     }
     
+    /**
+     * Genera un hash del usuario dado
+     * @param name Cadena con el nombre de usuario
+     */
     public void ok(String name) {
         String digestWord = cde.digest("clave", name);
         logger.info("Digestión: "+digestWord);
@@ -163,6 +167,14 @@ public class LoginServiceImpl implements LoginService {
         userMapper.update(user); 
     }
     
+    /**
+     * Genera una excepcion deacaurdo al resultado de 
+     * la condicion previamente evaluda
+     * @param condition Boleano con el resualtado de una
+     *                  expresion previamente evaluda
+     * @param msg Cadena con el mensaje que se desea mandar
+     * @throws Exception Objeto de tipo 'Exception' que contiene el mensaje
+     */
     private void evalErrorCondition(boolean condition, String msg) throws Exception {
         if(condition) throw new Exception(msg);
     }
@@ -224,6 +236,14 @@ public class LoginServiceImpl implements LoginService {
         return new LoginResponse(user.getUsr(), true, "Password restaurado correctamente");
     }
     
+    /**
+     * Cuerpo del mensaje de respuesta a una solicitud de
+     * restablecimiento de contraseña
+     * @param secTok Cadena con el token que identifica al usuario
+     *               que solicita restablecer su contraseña
+     * @param name Cadena con el nombre del usuario
+     * @return Cadena con el cuerpo del mensaje de restablecimiento
+     */
     private String getMailTemplate(String secTok, String name) {
         StringBuilder sb = new StringBuilder();
         sb.append("Hola, estimado "+name+" !!!");
@@ -234,6 +254,10 @@ public class LoginServiceImpl implements LoginService {
         return sb.toString();
     }
 
+    /**
+     * Genera un token para validar un usuario
+     * @return Cadena con el token de verificacion
+     */
     private static String createSecurityToken() {
         String store = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
                       //123456789_123456789_123456789_123456789_123456789_123456789_12  // 62 caracteres
