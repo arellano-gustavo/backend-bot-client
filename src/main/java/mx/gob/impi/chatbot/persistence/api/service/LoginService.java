@@ -64,10 +64,9 @@ public interface LoginService {
      * se le habia asignado un token temporal
      * @param securityToken Cadena con el token asignado al usuario 
      *                      que se solicita cambiar la ccontraseña
-     * @param password Cadena con la nueva contraseña
      * @return LoginResponse, con el dictamen del restablecimiento
      */
-    LoginResponse restorePassword(String securityToken, String password);
+    LoginResponse restorePassword(String securityToken);
 
     /**
      * Genera un token que se envia a un mail dado relacionado
