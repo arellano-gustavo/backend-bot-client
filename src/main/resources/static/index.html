@@ -2,17 +2,11 @@
 <html>
 	<head>
 	    <meta charset="UTF-8">
-        <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
-        <script>
-		var sock = new SockJS('http://localhost:8080/greeting');
-		
-		sock.onmessage = function(e) {
-		    //console.log('message', e.data);
-		    alert(e.data);
-		}
-		</script>
+        <script src="js/prueba.js"></script>
+        <link href="css/main.css" rel="stylesheet" type="text/css" media="all">
 	</head>
     <body>
-		<label>Hola</label>
+		<h1>Hola</h1>
+        <h2 onclick="saluda();">adios</h2>
 	</body>
 </html>
