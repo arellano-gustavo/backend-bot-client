@@ -80,6 +80,13 @@ public class LoginServiceImpl implements LoginService {
     @Value("${login.securityTokenWindow}")
     private long securityTokenWindow;
     
+	@Value("${login.url-auth}")
+	private String urlAuth;
+
+	@Value("${login.url-verifica}")
+	private String urlVerifica;
+
+    
     @Override
     public LoginResponse changePassword(String usr, String psw, String jwt) {
         if(jwtManagerService.verifyToken(jwt, usr)) {
@@ -208,6 +215,7 @@ public class LoginServiceImpl implements LoginService {
         long diff = (terminal.getTime() -inicial.getTime())/1000;
         return (diff<delta);
     }
+    
     @Override
     public LoginResponse requestRestore(String mail) {
         User user = userMapper.getUserByMail(mail);
@@ -229,7 +237,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public LoginResponse restorePassword(String securityToken) {
+    public LoginResponse restorePassword(String psw, String securityToken) {
         User user = userMapper.getUserBySecurityToken(securityToken);
         if(user==null) {
             return new LoginResponse("Unknown", false, "Token inexistente");
@@ -241,6 +249,18 @@ public class LoginServiceImpl implements LoginService {
         if(nowLong>timeToExpire) {
             return new LoginResponse(user.getUsr(), false, "Token expirado");
         }
+        
+        String newPassword = cde.digest(psw, user.getUsr());
+        user.setPassword(newPassword);
+        user.setSecurityTokenWindow(0);
+        user.setFailedAtemptCounter(0);
+        user.setSecurityToken(createSecurityToken());
+        userMapper.update(user);
+
+        this.chatbotMailSenderService.sendHtmlMail(
+                user.getMail(), "Password Cambiado exitosamente", 
+                "Hola, "+user.getUsr()+" tu password ha cambiado." );
+        
         LoginResponse loginResponse = new LoginResponse(user.getUsr(), true, "Password restaurado correctamente");
         loginResponse.setJwt(jwtManagerService.createToken(user.getUsr()));
         return loginResponse;
@@ -256,16 +276,14 @@ public class LoginServiceImpl implements LoginService {
      * @return Cadena con el cuerpo del mensaje de restablecimiento
      */
     private String getMailTemplate(String secTok, String name) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.urlAuth);
+		sb.append(this.urlVerifica);
+		sb.append("?token=");
+		sb.append(secTok);
     	String template = getTextFromFile("emailTemplate.txt");
     	template = template.replace("$USER_NAME", name);
-    	template = template.replace("$SECURE_TOKEN", secTok);
-    	
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("Hola, estimado "+name+" !!!");
-//        sb.append("<h1>Usa esta liga:</h1>");
-//        sb.append("<h2><a href='http://jenkins.ci.gustavo-arellano.com:8787/swagger-ui.html?token=");
-//        sb.append(secTok);
-//        sb.append("'>recupera</a></h2>");
+    	template = template.replace("$URL", sb.toString());
         return template;
     }
     

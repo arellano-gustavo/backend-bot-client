@@ -28,7 +28,13 @@ package mx.gob.impi.chatbot.persistence.api.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +58,12 @@ import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 @Api(value = "auth")
 @RequestMapping(value = "/api/chatbot/auth")
 public class AuthController {
+	@Value("${login.url-auth}")
+	private String urlAuth;
+
+	@Value("${login.url-recupera}")
+	private String urlRecupera;
+	
 	@Autowired
     private LoginService loginService;
     
@@ -104,8 +116,12 @@ public class AuthController {
             value = "/restore-password.json",
             method = GET,
             produces = "application/json; charset=utf-8")
-        public LoginResponse restorePassword(String securityToken) {
-            return loginService.restorePassword(securityToken);
+        public LoginResponse restorePassword(String password, String securityToken) {
+    		if(securityToken!=null) {
+    			return loginService.restorePassword(password, securityToken);
+    		} else {
+    			return new LoginResponse("Unknown", false, "Invalid token for Change Password");
+    		}
         }
 
     
@@ -127,5 +143,29 @@ public class AuthController {
     public LoginResponse changePassword(@RequestHeader("jwt") String jwt, @RequestBody Login login) {
         return loginService.changePassword(login.getUser(), login.getPassword(), jwt);
     }
-
+    
+    /**
+     * This endpoint receives a string as a parameter sent in a GET request which is a token
+     * that we will use to locate a user in our database and (if found) we will redirect the
+     * request to a VueJS location.
+     * 
+     * @param token
+     * @return
+     */
+    @GetMapping(value = "/check.json")
+    ResponseEntity<Void> proceedChangePasswordCheckRedirect(@RequestParam String token) {
+    	if(token!=null) {
+  		  StringBuilder sb = new StringBuilder();
+  			sb.append(this.urlAuth);
+  			sb.append(this.urlRecupera);
+  			sb.append("?token=");
+  			sb.append(token);
+        return ResponseEntity.status(HttpStatus.FOUND)      
+            .location(URI.create(sb.toString()))
+            .build();    		
+    	}
+    	return ResponseEntity.status(HttpStatus.FOUND)      
+                .location(URI.create(this.urlAuth+""))
+                .build();
+    }
 }

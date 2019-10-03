@@ -66,13 +66,14 @@ public interface LoginService {
      *                      que se solicita cambiar la ccontraseña
      * @return LoginResponse, con el dictamen del restablecimiento
      */
-    LoginResponse restorePassword(String securityToken);
+    LoginResponse restorePassword(String psw, String securityToken);
 
     /**
      * Genera un token que se envia a un mail dado relacionado
      * a un usuario que solicita el cambio de contrasela
      * @param mail Cadena con la direcion de mail del usuario 
      *             que solicita cambiar su contrasela
+     * @param psw  Pasword a ser cambiado
      * @return LoginResponse, con el dictamen de solicitud de restablecimiento
      */
     LoginResponse requestRestore(String mail);
