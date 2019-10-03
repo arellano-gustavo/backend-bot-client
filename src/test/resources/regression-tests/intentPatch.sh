@@ -2,10 +2,10 @@
 #se debe cambiar el id deacuerdo al intent que se 
 #desea visualizar
 
-curl -X PATCH --header "Content-Type: application/json" --header "Accept: application/json;charset=utf-8" -d "{
+curl -X PUT --header "Content-Type: application/json" --header "Accept: application/json;charset=utf-8" -d "{
   \"areaId\":\"1\",
   \"sessionId\":\"9fa2c5fc-ea33-4861-a1ca-165f2c68fae5\",
-  \"id\":\"706ffc1f-0df4-4c1b-bcb8-e78f82f3bba4\",
+  \"id\":\"29996ff1-dbac-4f53-947c-1906a9644aa7\",
   \"item\":{
     \"displayName\":\"intentReading\",
     \"trainingPhrases\":[{
@@ -31,4 +31,4 @@ curl -X PATCH --header "Content-Type: application/json" --header "Accept: applic
         }
       ]}
     ]}  
-}" "http://localhost:8080/chatbotserver/intent"
+}" "http://localhost:8080/api/chatbot/trainer/update-intent.json"

@@ -2,10 +2,10 @@
 #se debe cambiar el id deacuerdo a la entidad que se 
 #desea visualizar
 
-curl -X PATCH --header "Content-Type: application/json" --header "Accept: application/json;charset=utf-8" -d "{
+curl -X PUT --header "Content-Type: application/json" --header "Accept: application/json;charset=utf-8" -d "{
   \"areaId\":\"1\",
   \"sessionId\":\"9fa2c5fc-ea33-4861-a1ca-165f2c68fae5\",
-  \"id\":\"bdaecaa1-ff49-4bb6-95a8-5c6e9eb0912a\",
+  \"id\":\"1b88e311-d174-4c89-874c-0e625c1a3c45\",
   \"item\":{
          \"displayName\": \"EjemploActualizado\",
         \"entities\": [
@@ -44,4 +44,4 @@ curl -X PATCH --header "Content-Type: application/json" --header "Accept: applic
         ],
         \"kind\": \"KIND_MAP\"
   }  
-}" "http://localhost:8080/chatbotserver/entityType"
+}" "http://localhost:8080/api/chatbot/trainer/update-entityType.json"
