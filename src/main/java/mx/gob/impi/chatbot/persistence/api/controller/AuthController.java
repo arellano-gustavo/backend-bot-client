@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -85,7 +86,7 @@ public class AuthController {
         value = "/request-restore.json",
         method = POST,
         produces = "application/json; charset=utf-8")
-    public LoginResponse requestRestore(@RequestBody String mail) {
+    public LoginResponse requestRestore(@RequestParam String mail) {
         return loginService.requestRestore(mail);
     }
 
