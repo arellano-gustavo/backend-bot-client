@@ -64,8 +64,7 @@ public class MainApp {
     //application.setBannerMode(Banner.Mode.OFF);
     //application.run(args);
   }
-  
-  //@SuppressWarnings("deprecation")
+  /* * /
   @Bean
   public WebMvcConfigurer corsConfigurer() {
 	  // check this out: https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
@@ -77,4 +76,5 @@ public class MainApp {
           }
       };
   }
+  /**/
 }
