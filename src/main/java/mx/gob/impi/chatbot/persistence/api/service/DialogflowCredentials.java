@@ -32,6 +32,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.dialogflow.v2.Dialogflow;
@@ -50,6 +53,8 @@ public class DialogflowCredentials {
 	private Map<String, GoogleCredentials> bagCredentials;
 	private Map<String, Dialogflow> bagClients;
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private static DialogflowCredentials instance = null;
 	
 	/**
@@ -57,7 +62,7 @@ public class DialogflowCredentials {
 	 * @return Objeto con las credenciales para consumir los endpoint
 	 */
 	public static DialogflowCredentials getInstance() {
-        if (instance==null) {
+        if (instance==null) {        	
             instance = new DialogflowCredentials();
         }
         return instance;
@@ -67,14 +72,19 @@ public class DialogflowCredentials {
 	 * El constructor es privado, no permite que se genere un constructor por defecto.
 	 */
 	private DialogflowCredentials() {
+		
+		logger.info("Crea las credenciales de dialogflow");
+		
 		this.bagCredentials = new HashMap<String, GoogleCredentials>();
 		this.bagClients= new HashMap<String, Dialogflow>();
 		
-		//Crea MARCAS
+		//Crea las credenciales del area de MARCAS del agente de dialogflow
 		Create("area1", "Marcas.json");
-		//PORTAL
+		
+		//Crea las credenciales del area de PORTAL del agente de dialogflow
 		Create("area2", "Portal.json");
-		//PATENTES
+		
+		//Crea las credenciales del area de PATENTES del agente de dialogflow
 		Create("area3", "Patentes.json");
 	}	
 	
@@ -88,7 +98,9 @@ public class DialogflowCredentials {
 		GoogleCredentials credentials = null;
 		Dialogflow client;
 		
+		//Crea el objeto que contiene las credenciales para conectar al agente de dialogflow
 		try {
+			logger.info("Carga las crendeciales del agente");
 			InputStream stream = 
 					DialogflowCredentials
 	                .class
@@ -97,10 +109,10 @@ public class DialogflowCredentials {
 			
 			credentials = GoogleCredentials.fromStream(stream);//Administrador de la API de Dialogflow
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			logger.error("Error  al abrir las credenciales del " + area + e.toString());
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.error("Error  al abrir las credenciales del " + area + e.toString());
 			e.printStackTrace();
 		}
 
@@ -108,20 +120,23 @@ public class DialogflowCredentials {
     	    credentials = credentials.createScoped(Collections.singletonList("https://www.googleapis.com/auth/dialogflow"));
     	}
     	
+    	//Inicia la creacion de parametros del cliente
     	JacksonFactory jacksonFactory = JacksonFactory.getDefaultInstance();
 
         com.google.api.client.http.HttpTransport transport = null;
 		try {
 			transport = GoogleNetHttpTransport.newTrustedTransport();
 		} catch (GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
+			logger.error("Error  al instanciar el transporte para el area " + area + e.toString());
 			e.printStackTrace();
 		}
        
 		String projectId = ((ServiceAccountCredentials)credentials).getProjectId();
         
+		//Crea el cliente que realiza las peticiones al agente de dialogflow 
         client = new Dialogflow.Builder(transport, jacksonFactory, null).setApplicationName(projectId).build();
         
+        //Guarda la credencial y el criente del area de un agente de dialogflow
         this.bagCredentials.put(area, credentials);
 		this.bagClients.put(area, client);
     	

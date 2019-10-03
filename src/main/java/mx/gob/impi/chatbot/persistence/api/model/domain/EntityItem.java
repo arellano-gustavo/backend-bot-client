@@ -1,14 +1,19 @@
 package mx.gob.impi.chatbot.persistence.api.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class EntityItem <TEntity> {
 	
 	String areaId;
 	String sessionId;
 	
+	@JsonIgnore
 	String uriTemplate;
 	
+	@JsonIgnore
 	String method;
 
+	@JsonIgnore
 	String id;
 	
 	TEntity item;
