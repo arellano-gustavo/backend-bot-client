@@ -45,7 +45,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
    */
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
+    registry
+      .addResourceHandler("")
+      .addResourceLocations("classpath:/static/");
+    registry
+      .addResourceHandler("/")
+      .addResourceLocations("classpath:/static/");
+    registry
+      .addResourceHandler("index.html")
+      .addResourceLocations("classpath:/static/");
     registry
         .addResourceHandler("swagger-ui.html")
         .addResourceLocations("classpath:/META-INF/resources/");
@@ -53,18 +61,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     registry
         .addResourceHandler("/webjars/**")
         .addResourceLocations("classpath:/META-INF/resources/webjars/");
-
-    registry
-        .addResourceHandler("/resources/**")
-        .addResourceLocations("(/resources/");
-
-    registry
-        .addResourceHandler("index.html")
-        .addResourceLocations("classpath:/static/");
-
-    registry
-        .addResourceHandler("Terms.html")
-        .addResourceLocations("classpath:/static/Terms.html");
 
     registry
         .addResourceHandler("/css/**")
@@ -75,24 +71,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         .addResourceLocations("classpath:/static/js/");
 
     registry
-        .addResourceHandler("/fonts/**")
-        .addResourceLocations("classpath:/static/fonts/");
-
-    registry
-        .addResourceHandler("/images/**")
-        .addResourceLocations("classpath:/static/images/");
-
-    registry
-        .addResourceHandler("pouchdb.js")
-        .addResourceLocations("classpath:/static/pouchdb.js");
-
-    registry
-        .addResourceHandler("/**")
-        .addResourceLocations("classpath:/META-INF/resources/");
-
-    registry
-        .addResourceHandler("/")
-        .addResourceLocations("classpath:/static/index.html");
+        .addResourceHandler("/img/**")
+        .addResourceLocations("classpath:/static/img/");
   }
 
 }
+

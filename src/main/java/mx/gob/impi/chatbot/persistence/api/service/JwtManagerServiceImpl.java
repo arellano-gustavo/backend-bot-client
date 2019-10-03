@@ -37,7 +37,7 @@ public class JwtManagerServiceImpl implements JwtManagerService {
     }
 
     @Override
-    public boolean verifyToken(String jwt) {
+    public boolean verifyToken(String jwt, String user) {
         try {
             Claims claims = Jwts.parser()
                .setSigningKey("gustavo".getBytes())
@@ -47,6 +47,9 @@ public class JwtManagerServiceImpl implements JwtManagerService {
             logger.debug("Issuer: " + claims.getIssuer());
             logger.debug("Expiration: " + claims.getExpiration());
             logger.debug("IssuedAt: " + claims.getIssuedAt());
+            if(!user.equals(claims.getId())) {
+            	return false;
+            }
         } catch(Exception e) {
             logger.error("Given token has not been verified. Error: " + e.getMessage());
             return false;

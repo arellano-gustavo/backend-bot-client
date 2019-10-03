@@ -103,8 +103,8 @@ public class AuthController {
             value = "/restore-password.json",
             method = GET,
             produces = "application/json; charset=utf-8")
-        public LoginResponse restorePassword(String securityToken, String password) {
-            return loginService.restorePassword(securityToken, password);
+        public LoginResponse restorePassword(String securityToken) {
+            return loginService.restorePassword(securityToken);
         }
 
     

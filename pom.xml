@@ -157,6 +157,12 @@
 		    <artifactId>google-api-client-gson</artifactId>
 		    <version>1.30.2</version>
 		</dependency>
+        <!-- IMPI FRONTEND -->
+        <dependency>
+            <groupId>mx.gob.impi</groupId>
+            <artifactId>chatbot-frontend</artifactId>
+            <version>1.0.5-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     
     <build>
