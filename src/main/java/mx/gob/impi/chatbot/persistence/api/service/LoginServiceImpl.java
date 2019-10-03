@@ -211,7 +211,7 @@ public class LoginServiceImpl implements LoginService {
     public LoginResponse requestRestore(String mail) {
         User user = userMapper.getUserByMail(mail);
         if(user==null) {
-            return new LoginResponse("Unknown", true, "Revisa tu mail: " + mail);
+            return new LoginResponse("Unknown", true, "Revisa tu mail::: " + mail);
         }
         
         Date now = new Date();
