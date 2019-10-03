@@ -211,7 +211,7 @@ public class LoginServiceImpl implements LoginService {
     public LoginResponse requestRestore(String mail) {
         User user = userMapper.getUserByMail(mail);
         if(user==null) {
-            return new LoginResponse("Unknown", true, "Revisa tu mail::: " + mail);
+            return new LoginResponse("Unknown", true, "Revisa tu mail -->" + mail + "<--");
         }
         
         Date now = new Date();
@@ -223,7 +223,7 @@ public class LoginServiceImpl implements LoginService {
         this.chatbotMailSenderService.sendHtmlMail(
                 mail, "Procedimiento de recuperación de contraseña", 
                 getMailTemplate(secTok, user.getUsr()));
-        return new LoginResponse(user.getUsr(), true, "Revisa tu mail: " + mail);
+        return new LoginResponse(user.getUsr(), true, "Revisa tu mail: [" + mail + "]");
     }
 
     @Override

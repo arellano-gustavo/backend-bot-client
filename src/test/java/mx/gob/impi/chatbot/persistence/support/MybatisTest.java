@@ -62,6 +62,11 @@ public class MybatisTest {
      */
     @Test
     public void whenFindByName_thenReturnEmployee() {
+    	User uu = userMapper.getUserByMail("arellano.gustavo@gmail.com");
+    	if(uu!=null) {
+    		logger.info(uu.getUsr()); 
+    	}
+    	
         List<User> all = userMapper.getAll();
         /* */
         User u1 = userMapper.getUserById(1);
