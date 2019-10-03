@@ -12,17 +12,38 @@ public class DialogflowServiceImpl<TEntity, TReques> implements DialogflowServic
 	
 	DialogflowCredentials credentials;
 	
-	
+	/**
+	 * Contructor en el que se crea el almacen de las 
+	 * credenciales para consumir los endpoints de dialogflow
+	 * 
+	 */
 	public DialogflowServiceImpl(){
 		
-		this.credentials = new DialogflowCredentials();
+		this.credentials = DialogflowCredentials.getInstance();
 		
 	}
 	
+	/**
+	 * Obtiene por medio del area el identificador 
+	 * del proyecto del agente de dialogflow el cual
+	 * se utiliza para construr el URI del endpoint
+	 * @param area Cadena del area a la que se quiere
+	 *              realizar una peticion
+	 * @return Cadena que contiene el identificador del
+	 *         agente al que quiere realizar peticiones
+	 */
 	public String getProjectId(String area){
 		return ((ServiceAccountCredentials)this.credentials.getBagCredentials().get(area)).getProjectId();
 	}
 	
+	/**
+	 * Obtiene el token del area del agente de dialogflow
+	 * a donde se desea realizar una pericion
+	 * @param area Cadena del area a la que se quiere
+	 *              realizar una peticion
+	 * @return Cadena con el token del area de agente de 
+	 *         dialogflow al que se realizara la peticion
+	 */         
 	public String getToken(String area) {
 		try {
 			credentials.getBagCredentials().get(area).refreshIfExpired();
