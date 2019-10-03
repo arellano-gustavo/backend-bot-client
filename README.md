@@ -4,10 +4,10 @@ Backend code for IMPI Chatbot project. It contains AUTH, ADMIN & TRAINNING funct
 ### By Goose & Team
 
 [![Image](https://www.springboottutorial.com/images/Course-Spring-Framework-Master-Class---Beginner-to-Expert.png 
-"IMPI Chatbot Bakend - All by Goose & Team")]
+"IMPI Chatbot Bakend - All by Goose & Team")](http://dev.ci.gustavo-arellano.com/swagger-ui.html)
 
 [![Image](https://www.springboottutorial.com/images/Course-Master-Microservices-with-Spring-Boot-and-Spring-Cloud.png 
-"Master Microservices with Spring Boot and Spring Cloud")]
+"Master Microservices with Spring Boot and Spring Cloud")](http://dev.ci.gustavo-arellano.com:8000)
 
 <ul>
 <li>Bakend: http://dev.ci.gustavo-arellano.com/swagger-ui.html</li>
