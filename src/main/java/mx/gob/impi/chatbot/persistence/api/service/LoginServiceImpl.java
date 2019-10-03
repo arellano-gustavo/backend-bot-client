@@ -26,6 +26,7 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -220,6 +221,7 @@ public class LoginServiceImpl implements LoginService {
         user.setSecurityTokenWindow(window);// now plus 5 minutes
         String secTok = createSecurityToken();
         user.setSecurityToken(secTok);
+        userMapper.update(user);
         this.chatbotMailSenderService.sendHtmlMail(
                 mail, "Procedimiento de recuperación de contraseña", 
                 getMailTemplate(secTok, user.getUsr()));
@@ -254,13 +256,28 @@ public class LoginServiceImpl implements LoginService {
      * @return Cadena con el cuerpo del mensaje de restablecimiento
      */
     private String getMailTemplate(String secTok, String name) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Hola, estimado "+name+" !!!");
-        sb.append("<h1>Usa esta liga:</h1>");
-        sb.append("<h2><a href='http://jenkins.ci.gustavo-arellano.com:8787/swagger-ui.html?token=");
-        sb.append(secTok);
-        sb.append("'>recupera</a></h2>");
-        return sb.toString();
+    	String template = getTextFromFile("emailTemplate.txt");
+    	template = template.replace("$USER_NAME", name);
+    	template = template.replace("$SECURE_TOKEN", secTok);
+    	
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Hola, estimado "+name+" !!!");
+//        sb.append("<h1>Usa esta liga:</h1>");
+//        sb.append("<h2><a href='http://jenkins.ci.gustavo-arellano.com:8787/swagger-ui.html?token=");
+//        sb.append(secTok);
+//        sb.append("'>recupera</a></h2>");
+        return template;
+    }
+    
+    @SuppressWarnings("resource")
+	private String getTextFromFile(String filename) {
+    	String text = new Scanner(LoginServiceImpl
+    			.class
+    			.getClassLoader()
+    			.getResourceAsStream(filename), "UTF-8")
+    			.useDelimiter("\\A")
+    			.next();
+    	return text;
     }
 
     /**
