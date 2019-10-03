@@ -257,7 +257,7 @@ public class LoginServiceImpl implements LoginService {
         StringBuilder sb = new StringBuilder();
         sb.append("Hola, estimado "+name+" !!!");
         sb.append("<h1>Usa esta liga:</h1>");
-        sb.append("<h2><a href='http://localhost:8080/api/recupera?token=");
+        sb.append("<h2><a href='http://jenkins.ci.gustavo-arellano.com:8787/swagger-ui.html?token=");
         sb.append(secTok);
         sb.append("'>recupera</a></h2>");
         return sb.toString();
