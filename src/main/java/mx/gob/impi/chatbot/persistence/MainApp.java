@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
@@ -58,12 +58,19 @@ public class MainApp {
     logger.info("Concluye Inicialización de applicacion Spring Boot *******************************");
     logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json ***************");
     logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ****************************");
+    
+    //SpringApplication application = new SpringApplication(MainApp.class);
+    /* Setting Boot banner off default value is true */
+    //application.setBannerMode(Banner.Mode.OFF);
+    //application.run(args);
   }
   
-  @SuppressWarnings("deprecation")
+  //@SuppressWarnings("deprecation")
   @Bean
   public WebMvcConfigurer corsConfigurer() {
-      return new WebMvcConfigurerAdapter() {
+	  // check this out: https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
+	  // https://stackoverflow.com/questions/27381781/java-spring-boot-how-to-map-my-app-root-to-index-html
+      return new WebMvcConfigurer() {
           @Override
           public void addCorsMappings(CorsRegistry registry) {
               registry.addMapping("/**").allowedOrigins("*");
