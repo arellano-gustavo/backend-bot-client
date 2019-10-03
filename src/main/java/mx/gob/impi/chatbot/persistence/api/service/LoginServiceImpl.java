@@ -25,6 +25,7 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +33,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import mx.gob.impi.chatbot.persistence.api.db.UserAreaMapper;
 import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
+import mx.gob.impi.chatbot.persistence.api.db.UserRolMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
+import mx.gob.impi.chatbot.persistence.api.model.domain.UserArea;
+import mx.gob.impi.chatbot.persistence.api.model.domain.UserRol;
 
 /**
  * <p>Descripción:</p>
@@ -46,6 +51,12 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 @Service
 public class LoginServiceImpl implements LoginService {
     private final static Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+
+    @Autowired
+    private UserRolMapper userRolMapper;
+    
+    @Autowired
+    private UserAreaMapper userAreaMapper;
     
     @Autowired
     private UserMapper userMapper;
@@ -69,23 +80,27 @@ public class LoginServiceImpl implements LoginService {
     private long securityTokenWindow;
     
     @Override
-    public LoginResponse changePassword(String user, String password, String jwt) {
-        if(jwtManagerService.verifyToken(jwt)) {
-            User usuario = userMapper.getUserByName(user);
-            if(usuario!=null) {
-                String newPassword = cde.digest(password, user);
-                usuario.setPassword(newPassword);
-                userMapper.update(usuario);
-                LoginResponse loginResponse = new LoginResponse();
-                loginResponse.setSucceed(true);
-                loginResponse.setMessage("Password cambiado, " + user);
-                loginResponse.setUser(user);
-                loginResponse.setJwt(jwtManagerService.createToken(user));
+    public LoginResponse changePassword(String usr, String psw, String jwt) {
+        if(jwtManagerService.verifyToken(jwt, usr)) {
+            User user = userMapper.getUserByName(usr);
+            if(user!=null) {
+                String newPassword = cde.digest(psw, usr);
+                user.setPassword(newPassword);
+                user.setSecurityTokenWindow(0);
+                user.setFailedAtemptCounter(0);
+                userMapper.update(user);
+
+                this.chatbotMailSenderService.sendHtmlMail(
+                        user.getMail(), "Password Cambiado exitosamente", 
+                        "Hola, "+user.getUsr()+" tu password ha cambiado." );
+                
+                LoginResponse loginResponse = new LoginResponse(usr, true, "Password cambiado, " + usr);
+                loginResponse.setJwt(jwtManagerService.createToken(usr));
                 return loginResponse;
             }
-            return new LoginResponse(user, false, "Usuario no existe !!");
+            return new LoginResponse(usr, false, "Usuario no existe !!");
         } else {
-            return new LoginResponse(user, false, "Token Inválido");
+            return new LoginResponse(usr, false, "Token Inválido");
         }
     }
         
@@ -124,16 +139,15 @@ public class LoginServiceImpl implements LoginService {
             /**/
             
             if(encodedPassword.equals(usuario.getPassword())) {
+            	List<UserArea> areas = userAreaMapper.getByIdUser(usuario.getId());
+            	List<UserRol> roles = userRolMapper.getByIdUser(usuario.getId());
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
                 usuario.setBloquedDate(null);
                 userMapper.update(usuario);
 
                 // Prepara y envía respuesta
-                LoginResponse loginResponse = new LoginResponse();
-                loginResponse.setSucceed(true);
-                loginResponse.setMessage("Bienvenido, " + usuario.getUsr());
-                loginResponse.setUser(usuario.getUsr());
+                LoginResponse loginResponse = new LoginResponse(usuario.getUsr(), true, "Bienvenido, " + usuario.getUsr(), roles, areas);
                 loginResponse.setJwt(jwtManagerService.createToken(user));
                 return loginResponse;
             } else {
@@ -206,14 +220,14 @@ public class LoginServiceImpl implements LoginService {
         user.setSecurityTokenWindow(window);// now plus 5 minutes
         String secTok = createSecurityToken();
         user.setSecurityToken(secTok);
-        this.chatbotMailSenderService.sendMail(
+        this.chatbotMailSenderService.sendHtmlMail(
                 mail, "Procedimiento de recuperación de contraseña", 
                 getMailTemplate(secTok, user.getUsr()));
         return new LoginResponse(user.getUsr(), true, "Revisa tu mail: " + mail);
     }
 
     @Override
-    public LoginResponse restorePassword(String securityToken, String password) {
+    public LoginResponse restorePassword(String securityToken) {
         User user = userMapper.getUserBySecurityToken(securityToken);
         if(user==null) {
             return new LoginResponse("Unknown", false, "Token inexistente");
@@ -225,15 +239,10 @@ public class LoginServiceImpl implements LoginService {
         if(nowLong>timeToExpire) {
             return new LoginResponse(user.getUsr(), false, "Token expirado");
         }
-        String newPassword = cde.digest(password, user.getUsr());
-        user.setPassword(newPassword);
-        user.setSecurityTokenWindow(0);
-        user.setFailedAtemptCounter(0);
-        userMapper.update(user);
-        this.chatbotMailSenderService.sendMail(
-                user.getMail(), "Password Cambiado exitosamente", 
-                "Hola, "+user.getUsr()+" tu password ha cambiado." );
-        return new LoginResponse(user.getUsr(), true, "Password restaurado correctamente");
+        LoginResponse loginResponse = new LoginResponse(user.getUsr(), true, "Password restaurado correctamente");
+        loginResponse.setJwt(jwtManagerService.createToken(user.getUsr()));
+        return loginResponse;
+
     }
     
     /**

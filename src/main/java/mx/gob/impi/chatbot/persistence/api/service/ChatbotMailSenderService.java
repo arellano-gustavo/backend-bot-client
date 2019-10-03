@@ -41,5 +41,7 @@ public interface ChatbotMailSenderService {
 	 * @param body Cadena con el cuerpo del mensaje que se envia
 	 *             desde el chatbot
 	 */
-    void sendMail(String to, String subject, String body);
+    void sendMail2(String to, String subject, String body);
+
+	void sendHtmlMail(String to, String subject, String body);
 }

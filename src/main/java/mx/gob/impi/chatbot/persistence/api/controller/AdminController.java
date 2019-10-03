@@ -186,7 +186,7 @@ public class AdminController {
     }
     
     /**
-     * Obtiene un usuario por medio de su nombre
+     * Obtiene un usuario por medio de su nombre.
      * @param name Cadena con el nombre de un usuario
      * @return Objeto de tipo 'User' relacionado con el name dado
      */
