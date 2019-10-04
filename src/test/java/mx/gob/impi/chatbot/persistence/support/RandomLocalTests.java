@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class RandomLocalTests {
-    private static String createSecurityToken() {
+    public static String createSecurityToken() {
         String store = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
                       //123456789_123456789_123456789_123456789_123456789_123456789_12  // 62 caracteres
         String result = "";

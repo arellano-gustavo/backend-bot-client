@@ -236,7 +236,6 @@ public class LoginServiceImpl implements LoginService {
         if(user==null) {
             return new LoginResponse("Unknown", true, "Revisa tu mail -->" + mail + "<--");
         }
-        
         Date now = new Date();
         long nowLong = now.getTime();
         long window = nowLong + securityTokenWindow*60*1000;
@@ -327,8 +326,9 @@ public class LoginServiceImpl implements LoginService {
     @SuppressWarnings("resource")
 	private String getTextFromFile(String filename) {
     	InputStream stream = LoginServiceImpl.class.getResourceAsStream(filename);
+    	//TODO : Por alguna razón, aqui 'stream' sale vacio en producción, pero en desarrollo si jala. !!!! :(
     	if(stream==null) {
-    		return "<a href='$URL'>ok</a>"; 
+    		return "<a href='$URL'>Liga para recuperar tu password ("+filename+")</a>";
     	}
     	String text = new Scanner(stream, "UTF-8").useDelimiter("\\A").next();
     	return text;

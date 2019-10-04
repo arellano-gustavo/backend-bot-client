@@ -31,7 +31,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +44,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import mx.gob.impi.chatbot.persistence.api.model.domain.Login;
 import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
-import mx.gob.impi.chatbot.persistence.api.service.JwtManagerService;
 import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 
 /**
