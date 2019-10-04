@@ -141,15 +141,15 @@ public class LoginServiceImpl implements LoginService {
             //evalErrorCondition(usuario.isBloquedAccount(), "Cuenta bloqueada");
             evalErrorCondition(usuario.isExpiredCredential(), "Credenciales expiradas");
             evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
-            Date now = new Date();
-            long remanent = blokedWindowTime - now.getTime() + usuario.getBloquedDate().getTime();
-            evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, "Máximo numero de intentos alcanzado: "+maxInvalidTries+" espere "+remanent+" segundos");
-            
-            if(usuario.getBloquedDate()!=null) {
-                evalErrorCondition(remanent>0, "Aun no se puede desbloquear. Faltan aun " + remanent + " segundos");
-            }
-            
-            String encodedPassword = cde.digest(password, user);
+            long remanent = blokedWindowTime - System.currentTimeMillis() + usuario.getBloquedDate().getTime();
+            long faltan = remanent/1000;
+            evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, 
+            		"Máximo numero de intentos alcanzado: "
+			            + maxInvalidTries 
+			            + " favor de intentar nuevamente en "
+			            + faltan
+			            +" segundos");
+			            String encodedPassword = cde.digest(password, user);
             
             /** /
             ok("root");
@@ -180,8 +180,8 @@ public class LoginServiceImpl implements LoginService {
                 if(intentosActuales<maxInvalidTries) {
                     throw new Exception("Invalid Password");
                 } else {
-                	usuario.setBloquedAccount(true);
-                    usuario.setBloquedDate(new Date());
+                	//usuario.setBloquedAccount(true);
+                    usuario.setBloquedDate(new Date(System.currentTimeMillis()));
                     userMapper.updateBlocked(usuario);
                     throw new Exception("Invalid Password. Cuenta bloqueada. Max alcanzado: " + maxInvalidTries);
                 }
