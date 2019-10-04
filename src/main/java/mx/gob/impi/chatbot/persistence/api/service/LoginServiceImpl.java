@@ -24,6 +24,7 @@
  */
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -292,12 +293,11 @@ public class LoginServiceImpl implements LoginService {
     
     @SuppressWarnings("resource")
 	private String getTextFromFile(String filename) {
-    	String text = new Scanner(LoginServiceImpl
-    			.class
-    			.getClassLoader()
-    			.getResourceAsStream(filename), "UTF-8")
-    			.useDelimiter("\\A")
-    			.next();
+    	InputStream stream = LoginServiceImpl.class.getResourceAsStream(filename);
+    	if(stream==null) {
+    		return "<a href='$URL'>ok</a>"; 
+    	}
+    	String text = new Scanner(stream, "UTF-8").useDelimiter("\\A").next();
     	return text;
     }
 

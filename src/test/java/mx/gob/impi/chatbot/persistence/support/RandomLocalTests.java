@@ -1,5 +1,9 @@
 package mx.gob.impi.chatbot.persistence.support;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class RandomLocalTests {
     private static String createSecurityToken() {
         String store = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -13,8 +17,13 @@ public class RandomLocalTests {
         }
         return result;
     }
-    public static void main(String...argv) {
-        for(int i=0;i<25;i++)
-        System.out.println(createSecurityToken());
+    public static void main(String...argv) throws IOException {
+        //for(int i=0;i<25;i++)
+        //System.out.println(createSecurityToken());
+    	ok();
+    }
+    public static void ok() throws IOException {
+    	byte[] content = Files.readAllBytes(Paths.get("emailTemplate.txt"));
+    	System.out.println(new String(content));
     }
 }
