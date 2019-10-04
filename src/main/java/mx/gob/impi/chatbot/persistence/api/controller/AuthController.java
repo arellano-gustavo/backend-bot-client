@@ -58,21 +58,26 @@ import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 @Api(value = "auth")
 @RequestMapping(value = "/api/chatbot/auth")
 public class AuthController {
-	@Value("${login.url-auth}")
-	private String urlAuth;
+    @Value("${login.url-base}")
+    private String urlBase;
 
-	@Value("${login.url-recupera}")
-	private String urlRecupera;
-	
-	@Autowired
+    @Value("${login.url-front}")
+    private String front;
+    
+    @Value("${login.url-front-ok}")
+    private String frontOk;
+    
+    @Value("${login.url-front-bad}")
+    private String frontBad;
+    @Autowired
     private LoginService loginService;
     
 //LOGIN
-	/**
-	 * Firma al usuario en el sistema con las credenciales proporcionadas
-	 * @param login Objeto  de tipo 'Login' con las credenciales proporcionadas por el usuario
-	 * @return Objeto de tipo 'LoginResponse' con el resultado de la autencicacion
-	 */
+    /**
+     * Firma al usuario en el sistema con las credenciales proporcionadas
+     * @param login Objeto  de tipo 'Login' con las credenciales proporcionadas por el usuario
+     * @return Objeto de tipo 'LoginResponse' con el resultado de la autencicacion
+     */
     @ApiOperation(
         value = "AuthController::login",
         notes = "Firma a un usuario al sistema")
@@ -105,7 +110,7 @@ public class AuthController {
     /**
      * Cambio de contraseña de un usuario relaciona al token dado
      * @param securityToken Cadena con el el token relacionado al usuario
-     * 						al que se quiere cambiar la contraseña
+     *                         al que se quiere cambiar la contraseña
      * @param password Cadena con la nueva contraseña de un usuario dado
      * @return Objeto de tipo 'LoginResponse' con el resultado del cambio de contraseña
      */
@@ -117,11 +122,11 @@ public class AuthController {
             method = GET,
             produces = "application/json; charset=utf-8")
         public LoginResponse restorePassword(String password, String securityToken) {
-    		if(securityToken!=null) {
-    			return loginService.restorePassword(password, securityToken);
-    		} else {
-    			return new LoginResponse("Unknown", false, "Invalid token for Change Password");
-    		}
+            if(securityToken!=null) {
+                return loginService.restorePassword(password, securityToken);
+            } else {
+                return new LoginResponse("Unknown", false, "Invalid token for Change Password");
+            }
         }
 
     
@@ -154,18 +159,23 @@ public class AuthController {
      */
     @GetMapping(value = "/check.json")
     ResponseEntity<Void> proceedChangePasswordCheckRedirect(@RequestParam String token) {
-    	if(token!=null) {
-  		  StringBuilder sb = new StringBuilder();
-  			sb.append(this.urlAuth);
-  			sb.append(this.urlRecupera);
-  			sb.append("?token=");
-  			sb.append(token);
+        if(token!=null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(this.urlBase);
+            sb.append(this.front);
+            sb.append(this.frontOk);
+            sb.append(token);
         return ResponseEntity.status(HttpStatus.FOUND)      
             .location(URI.create(sb.toString()))
-            .build();    		
-    	}
-    	return ResponseEntity.status(HttpStatus.FOUND)      
-                .location(URI.create(this.urlAuth+""))
-                .build();
+            .build();            
+        }
+        // the token is NOT valid... please goto "invalid-token" page
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.urlBase);
+        sb.append(this.front);
+        sb.append(this.frontBad);
+        return ResponseEntity.status(HttpStatus.FOUND)      
+            .location(URI.create(sb.toString()))
+            .build();
     }
 }

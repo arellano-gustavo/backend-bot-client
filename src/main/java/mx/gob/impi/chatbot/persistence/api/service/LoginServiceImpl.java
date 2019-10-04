@@ -80,12 +80,15 @@ public class LoginServiceImpl implements LoginService {
     @Value("${login.securityTokenWindow}")
     private long securityTokenWindow;
     
+	@Value("${login.url-base}")
+	private String urlBase;
+
 	@Value("${login.url-auth}")
 	private String urlAuth;
 
 	@Value("${login.url-verifica}")
 	private String urlVerifica;
-
+	
     
     @Override
     public LoginResponse changePassword(String usr, String psw, String jwt) {
@@ -277,9 +280,9 @@ public class LoginServiceImpl implements LoginService {
      */
     private String getMailTemplate(String secTok, String name) {
 		StringBuilder sb = new StringBuilder();
+		sb.append(this.urlBase);
 		sb.append(this.urlAuth);
 		sb.append(this.urlVerifica);
-		sb.append("?token=");
 		sb.append(secTok);
     	String template = getTextFromFile("emailTemplate.txt");
     	template = template.replace("$USER_NAME", name);
