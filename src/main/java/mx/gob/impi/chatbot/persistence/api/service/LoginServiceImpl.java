@@ -154,7 +154,7 @@ public class LoginServiceImpl implements LoginService {
 			            +" segundos");
 			} else {
                 usuario.setFailedAtemptCounter(0);
-                usuario.setBloquedDate(null);
+                usuario.setBloquedDate(new Date(1));
                 userMapper.update(usuario);
 			}
             
@@ -172,7 +172,7 @@ public class LoginServiceImpl implements LoginService {
             	List<UserRol> roles = userRolMapper.getByIdUser(usuario.getId());
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
-                usuario.setBloquedDate(null);
+                usuario.setBloquedDate(new Date(System.currentTimeMillis()));
                 userMapper.update(usuario);
 
                 // Prepara y envía respuesta

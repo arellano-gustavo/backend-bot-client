@@ -60,7 +60,7 @@ public class User implements Serializable {
     private boolean expiredCredential;
     
     /** Indica que la cuenta ha sido bloqueada */
-    private boolean bloquedAccount;
+    //private boolean bloquedAccount;
     
     /** Indica si la cuenta ha sido inhabilitada */
     private boolean disabled;
@@ -69,7 +69,7 @@ public class User implements Serializable {
     private int failedAtemptCounter;
     
     /** Fecha en la que la cuenta ha sido bloqueada*/
-    private Date bloquedDate;
+    private Date bloquedDate = new Date(1);
     
     private String secretQuestion;
     private String secretAnswer;
@@ -142,7 +142,7 @@ public class User implements Serializable {
     public void setExpiredAccount(boolean expiredAccount) {
         this.expiredAccount = expiredAccount;
     }
-
+/*
     public boolean isBloquedAccount() {
         return bloquedAccount;
     }
@@ -150,7 +150,7 @@ public class User implements Serializable {
     public void setBloquedAccount(boolean bloquedAccount) {
         this.bloquedAccount = bloquedAccount;
     }
-
+*/
     public boolean isExpiredCredential() {
         return expiredCredential;
     }
