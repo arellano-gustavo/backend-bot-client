@@ -138,7 +138,7 @@ public class LoginServiceImpl implements LoginService {
             usuario = userMapper.getUserByName(user);
             evalErrorCondition(usuario==null, "User no existe");
             evalErrorCondition(usuario.isExpiredAccount(), "Cuenta expirada");
-            evalErrorCondition(usuario.isBloquedAccount(), "Cuenta bloqueada");
+            //evalErrorCondition(usuario.isBloquedAccount(), "Cuenta bloqueada");
             evalErrorCondition(usuario.isExpiredCredential(), "Credenciales expiradas");
             evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
             evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, "Máximo numero de intentos alcanzado");
@@ -183,7 +183,7 @@ public class LoginServiceImpl implements LoginService {
                 	usuario.setBloquedAccount(true);
                     usuario.setBloquedDate(new Date());
                     userMapper.updateBlocked(usuario);
-                    throw new Exception("Invalid Password. Cuenta bloqueada. Max alcanzado");
+                    throw new Exception("Invalid Password. Cuenta bloqueada. Max alcanzado: " + maxInvalidTries);
                 }
             }
         } catch(Exception e) {
