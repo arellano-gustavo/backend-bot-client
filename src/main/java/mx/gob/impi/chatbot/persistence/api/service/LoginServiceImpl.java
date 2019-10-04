@@ -143,13 +143,16 @@ public class LoginServiceImpl implements LoginService {
             evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
             long remanent = blokedWindowTime - System.currentTimeMillis() + usuario.getBloquedDate().getTime();
             long faltan = remanent/1000;
-            evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, 
-            		"Máximo numero de intentos alcanzado: "
+            String encodedPassword = cde.digest(password, user);
+            
+            if(faltan>0) {
+            	evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, 
+            			"Máximo numero de intentos alcanzado: "
 			            + maxInvalidTries 
 			            + " favor de intentar nuevamente en "
 			            + faltan
 			            +" segundos");
-			            String encodedPassword = cde.digest(password, user);
+			}
             
             /** /
             ok("root");
