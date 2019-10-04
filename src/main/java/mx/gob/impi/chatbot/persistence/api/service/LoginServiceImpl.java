@@ -152,6 +152,10 @@ public class LoginServiceImpl implements LoginService {
 			            + " favor de intentar nuevamente en "
 			            + faltan
 			            +" segundos");
+			} else {
+                usuario.setFailedAtemptCounter(0);
+                usuario.setBloquedDate(null);
+                userMapper.update(usuario);
 			}
             
             /** /
