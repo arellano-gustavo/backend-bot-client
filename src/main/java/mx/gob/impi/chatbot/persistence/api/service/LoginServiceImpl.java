@@ -141,11 +141,11 @@ public class LoginServiceImpl implements LoginService {
             //evalErrorCondition(usuario.isBloquedAccount(), "Cuenta bloqueada");
             evalErrorCondition(usuario.isExpiredCredential(), "Credenciales expiradas");
             evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
-            evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, "Máximo numero de intentos alcanzado");
+            Date now = new Date();
+            long remanent = blokedWindowTime - now.getTime() + usuario.getBloquedDate().getTime();
+            evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, "Máximo numero de intentos alcanzado: "+maxInvalidTries+" espere "+remanent+" segundos");
             
             if(usuario.getBloquedDate()!=null) {
-                Date now = new Date();
-                long remanent = blokedWindowTime - now.getTime() + usuario.getBloquedDate().getTime();
                 evalErrorCondition(remanent>0, "Aun no se puede desbloquear. Faltan aun " + remanent + " segundos");
             }
             
