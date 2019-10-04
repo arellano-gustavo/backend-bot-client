@@ -53,7 +53,6 @@ public class MybatisTest {
     @Autowired
     private UserMapper userMapper;
 
-    //@InjectMocks
     @Autowired
     private CustomDigestEncoderService customDigestEncoderService;
 
