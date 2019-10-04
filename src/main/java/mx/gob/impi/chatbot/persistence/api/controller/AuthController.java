@@ -45,6 +45,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import mx.gob.impi.chatbot.persistence.api.model.domain.Login;
 import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
+import mx.gob.impi.chatbot.persistence.api.service.JwtManagerService;
 import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 
 /**
@@ -58,20 +59,12 @@ import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 @Api(value = "auth")
 @RequestMapping(value = "/api/chatbot/auth")
 public class AuthController {
-    @Value("${login.url-base}")
-    private String urlBase;
-
-    @Value("${login.url-front}")
-    private String front;
     
-    @Value("${login.url-front-ok}")
-    private String frontOk;
-    
-    @Value("${login.url-front-bad}")
-    private String frontBad;
     @Autowired
     private LoginService loginService;
     
+
+
 //LOGIN
     /**
      * Firma al usuario en el sistema con las credenciales proporcionadas
@@ -159,23 +152,9 @@ public class AuthController {
      */
     @GetMapping(value = "/check.json")
     ResponseEntity<Void> proceedChangePasswordCheckRedirect(@RequestParam String token) {
-        if(token!=null) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(this.urlBase);
-            sb.append(this.front);
-            sb.append(this.frontOk);
-            sb.append(token);
-        return ResponseEntity.status(HttpStatus.FOUND)      
-            .location(URI.create(sb.toString()))
-            .build();            
-        }
-        // the token is NOT valid... please goto "invalid-token" page
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.urlBase);
-        sb.append(this.front);
-        sb.append(this.frontBad);
-        return ResponseEntity.status(HttpStatus.FOUND)      
-            .location(URI.create(sb.toString()))
+    	String sTok = loginService.buildRestoreUrl(token);
+        return ResponseEntity.status(HttpStatus.FOUND)
+            .location(URI.create(sTok))
             .build();
     }
 }

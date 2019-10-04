@@ -77,4 +77,6 @@ public interface LoginService {
      * @return LoginResponse, con el dictamen de solicitud de restablecimiento
      */
     LoginResponse requestRestore(String mail);
+
+	String buildRestoreUrl(String securityToken);
 }

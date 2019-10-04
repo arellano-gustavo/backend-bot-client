@@ -89,6 +89,16 @@ public class LoginServiceImpl implements LoginService {
 
 	@Value("${login.url-verifica}")
 	private String urlVerifica;
+
+    @Value("${login.url-front}")
+    private String front;
+    
+    @Value("${login.url-front-ok}")
+    private String frontOk;
+    
+    @Value("${login.url-front-bad}")
+    private String frontBad;
+
 	
     
     @Override
@@ -238,6 +248,29 @@ public class LoginServiceImpl implements LoginService {
                 mail, "Procedimiento de recuperación de contraseña", 
                 getMailTemplate(secTok, user.getUsr()));
         return new LoginResponse(user.getUsr(), true, "Revisa tu mail: [" + mail + "]");
+    }
+    
+    @Override
+    public String buildRestoreUrl(String securityToken) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.urlBase);
+        sb.append(this.front);
+        sb.append(this.frontBad);
+    	if(securityToken==null || securityToken.trim().length()<1) {
+    		return sb.toString();
+    	}
+    	User user = userMapper.getUserBySecurityToken(securityToken);
+        if(user==null) {
+            return sb.toString();
+        }
+        sb = new StringBuilder();
+        sb.append(this.urlBase);
+        sb.append(this.front);
+        sb.append(this.frontOk);
+        sb.append(securityToken);
+        
+        return sb.toString();
+        
     }
 
     @Override
