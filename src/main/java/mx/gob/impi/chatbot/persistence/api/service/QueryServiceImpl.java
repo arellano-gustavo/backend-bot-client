@@ -52,6 +52,7 @@ implements QueryService
 	
 	public DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2DetectIntentRequest requestEntity,
 			Class<GoogleCloudDialogflowV2DetectIntentResponse> responseClass) {
+		// Crear el cliente de la entidad del endpoint 
 		DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> dialogflowRequest = new DetectIntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
 		return dialogflowRequest;
 	}
@@ -64,7 +65,9 @@ implements QueryService
 	*/
 	@Override
 	public GoogleCloudDialogflowV2DetectIntentResponse execute(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestEnity, MainControllerResponse response){
+		// Crear el objeto de la entidad de respuesta del endpoint
 		GoogleCloudDialogflowV2DetectIntentResponse responseEntity = new GoogleCloudDialogflowV2DetectIntentResponse();
+		//Se realiza la solicitud al endpoint de dialogflow
 		return execute(requestEnity, responseEntity, response);		
 	}
 	
