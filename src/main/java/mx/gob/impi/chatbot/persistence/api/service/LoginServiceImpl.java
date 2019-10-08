@@ -179,7 +179,7 @@ public class LoginServiceImpl implements LoginService {
                 userMapper.update(usuario);
 
                 // Prepara y envía respuesta
-                LoginResponse loginResponse = new LoginResponse(usuario.getUsr(), true, "Bienvenido, " + usuario.getUsr(), roles, areas);
+                LoginResponse loginResponse = new LoginResponse(usuario.getFullName(), usuario.getUsr(), true, "Bienvenido, " + usuario.getUsr(), roles, areas);
                 loginResponse.setJwt(jwtManagerService.createToken(user));
                 return loginResponse;
             } else {

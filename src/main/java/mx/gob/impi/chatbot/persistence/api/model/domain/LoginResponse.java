@@ -34,6 +34,7 @@ import java.util.List;
  * @version 1.0-SNAPSHOT
  */
 public class LoginResponse {
+	private String fullName = "";
     private String user = "";
     private String message = "";
     private String detailedMessage = "";
@@ -55,9 +56,10 @@ public class LoginResponse {
         this.user = user;
         this.succeed = succeed;
         this.message = message;
+        this.fullName = fullName;
     }
     
-    public LoginResponse(String user, boolean succeed, String message, List<UserRol> roles, List<UserArea> areas) {
+    public LoginResponse(String fullName, String user, boolean succeed, String message, List<UserRol> roles, List<UserArea> areas) {
         this.user = user;
         this.succeed = succeed;
         this.message = message;
@@ -111,6 +113,14 @@ public class LoginResponse {
 
 	public void setRoles(List<UserRol> roles) {
 		this.roles = roles;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 
