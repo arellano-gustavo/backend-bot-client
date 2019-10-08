@@ -128,6 +128,15 @@ public class LoginServiceImpl implements LoginService {
         
     @Override
     public LoginResponse login(String user, String password) {
+        /* * /
+        ok("root");
+        ok("tavo");
+        ok("tercero");
+        ok("cuarto");
+        ok("quinto");
+        ok("sexto");
+        /**/
+
         // Preparando un objeto de tipo User
         User usuario = null;
         // Primero revisamos si no existe una razón evidente por la cual no autenticar:
@@ -158,21 +167,12 @@ public class LoginServiceImpl implements LoginService {
                 usuario.setBloquedDate(new Date(1));
                 userMapper.updateBlocked(usuario);
 			}
-            
-            /** /
-            ok("root");
-            ok("tavo");
-            ok("tercero");
-            ok("cuarto");
-            ok("quinto");
-            ok("sexto");
-            /**/
-            
+                        
             if(encodedPassword.equals(usuario.getPassword())) {
             	List<UserArea> areas = userAreaMapper.getByIdUser(usuario.getId());
-            	logger.info(""+ areas.get(0).getIdArea());
+            	//logger.info(""+ areas.get(0).getIdArea());
             	List<UserRol> roles = userRolMapper.getByIdUser(usuario.getId());
-            	logger.info("");
+            	//logger.info("");
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
                 usuario.setBloquedDate(new Date(System.currentTimeMillis()));

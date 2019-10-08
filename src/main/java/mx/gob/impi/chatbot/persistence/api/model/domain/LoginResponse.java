@@ -56,10 +56,10 @@ public class LoginResponse {
         this.user = user;
         this.succeed = succeed;
         this.message = message;
-        this.fullName = fullName;
     }
     
     public LoginResponse(String fullName, String user, boolean succeed, String message, List<UserRol> roles, List<UserArea> areas) {
+        this.fullName = fullName;
         this.user = user;
         this.succeed = succeed;
         this.message = message;
