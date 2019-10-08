@@ -43,5 +43,12 @@ public interface ChatbotMailSenderService {
 	 */
     void sendMail2(String to, String subject, String body);
 
+    /**
+     * Envio del chatbot por medio de JavaMailSender
+     * @param to Cadena con los correos electronicos a quienes
+     *           se desea enviar el correo generado
+     * @param subject Cadena con el titulo del correo electronico
+     * @param body Cadena con el cuerpodo del mensaje de correo
+     */
 	void sendHtmlMail(String to, String subject, String body);
 }

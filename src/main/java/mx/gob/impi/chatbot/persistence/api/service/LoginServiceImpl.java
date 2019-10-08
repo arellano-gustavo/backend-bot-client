@@ -331,6 +331,13 @@ public class LoginServiceImpl implements LoginService {
         return template;
     }
     
+    /**
+     * Obtiene el cuerpo del mensaje de restablecer el password
+     * @param filename Cadena con la ruta que contiene el cuerpo
+     *                 del mensaje que se envia al usuario
+     * @return Cadena con el cuerpo del mesaje para restablecer
+     *         la contraseña del usuario que lo solicita
+     */
     @SuppressWarnings("resource")
 	private String getTextFromFile(String filename) {
     	InputStream stream = LoginServiceImpl.class.getResourceAsStream(filename);

@@ -63,6 +63,11 @@ public class TrainerController {
 	EntityTypeService entityTypeService;
 	ContextService contextService;
 	
+	/**
+	 * Inicicializa los servicio que utilizaran los controladores
+	 * Se utiliza construccion de dependecias por contruccion
+	 * porque se envia el objeto que se crea a las calses padre
+	 */
 	@Autowired
 	public TrainerController(IntentService intentService, EntityTypeService entityTypeService, ContextService contextService) {
 		this.intentService = intentService;

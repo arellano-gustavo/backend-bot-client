@@ -69,6 +69,9 @@ public class DataConfig {
     
     private Properties properties = new Properties();
     
+    /**
+     * Constructor default de la clase.
+     */
     public DataConfig() {
         super();
         InputStream stream = 
@@ -84,6 +87,12 @@ public class DataConfig {
         }
     }
     
+    /**
+     * Regresa la propiedad solicitada
+     * @param name Cadena con el nombre de la propiedad
+     *             que se quiere recuperar
+     * @return Cadena con la propiedad recuperada
+     */
     private String getProp(String name) {
         String data = properties.get("c3p0."+name).toString();
         if("password".equals(name) && data.startsWith("ENC(")) {
@@ -98,6 +107,10 @@ public class DataConfig {
         return data;
     }
     
+    /**
+     * Crea pool de conexiones
+     * @return Regresa el data source
+     */
     @Bean
     public DataSource dataSource(){
         try {
@@ -113,11 +126,23 @@ public class DataConfig {
         }
     }
     
+    /**
+     * Administrador de transaciones de base de datos
+     * @return Objeto de tipo 'DataSourceTransactionManager'
+     *         para administrar las transaciones de base de datos
+     */
     @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 
+    /**
+     * Fabrica de sesiones de base de datos
+     * @return Objeto de tipo 'SqlSessionFactoryBean' para
+     *         conectarse a la base de datos
+     * @throws Exception Objeto con la excepcion al intentar
+     *                   crear la sesion de base de datos
+     */
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();

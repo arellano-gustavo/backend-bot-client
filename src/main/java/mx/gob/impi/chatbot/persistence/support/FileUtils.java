@@ -48,6 +48,9 @@ public final class FileUtils {
      */
     public static final String DEFAULT_ENCONDING = "UTF-8";
     
+    /**
+     * Constructor default de la clase.
+     */
     private FileUtils() {
     }
 

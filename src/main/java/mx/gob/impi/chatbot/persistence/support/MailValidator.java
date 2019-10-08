@@ -33,6 +33,11 @@ public final class MailValidator {
     private static final String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final Pattern pattern = Pattern.compile(regex);
     
+    /**
+     * Valida la estructura del correo electronico
+     * @param email Cadena con el correo electronico a validar
+     * @return Boleano con el resultado de la validacion
+     */
     public boolean validateMailStructure(String email) {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
