@@ -169,7 +169,9 @@ public class LoginServiceImpl implements LoginService {
             
             if(encodedPassword.equals(usuario.getPassword())) {
             	List<UserArea> areas = userAreaMapper.getByIdUser(usuario.getId());
+            	logger.info(""+ areas.get(0).getIdArea());
             	List<UserRol> roles = userRolMapper.getByIdUser(usuario.getId());
+            	logger.info("");
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
                 usuario.setBloquedDate(new Date(System.currentTimeMillis()));

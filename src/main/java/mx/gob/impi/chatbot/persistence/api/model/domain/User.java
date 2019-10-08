@@ -82,6 +82,8 @@ public class User implements Serializable {
     
     /** Indica la última vez que la cuenta fué actualizada */
     private Date lastPasswordUpdateDate;
+    
+    private String fullName;
 
     /**
      * Constructor default de la clase.
@@ -230,7 +232,15 @@ public class User implements Serializable {
     public void setLastPasswordUpdateDate(Date lastPasswordUpdateDate) {
         this.lastPasswordUpdateDate = lastPasswordUpdateDate;
     }
-    
+
+	public String getFullName() {
+		return fullName;
+	}
+	
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
     public String toString() {
         String separator = ", ";
         StringBuilder sb = new StringBuilder();

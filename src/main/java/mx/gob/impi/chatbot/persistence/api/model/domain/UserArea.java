@@ -36,8 +36,8 @@ import java.io.Serializable;
 public class UserArea implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private int idUser;
-    private int idArea;
+    private Integer idUser;
+    private Integer idArea;
     
     /**
      * Constructor default de la clase.
@@ -45,16 +45,16 @@ public class UserArea implements Serializable {
     public UserArea(){
     }
     
-    public int getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
-    public void setIdUser(int idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
-    public int getIdArea() {
+    public Integer getIdArea() {
         return idArea;
     }
-    public void setIdArea(int idArea) {
+    public void setIdArea(Integer idArea) {
         this.idArea = idArea;
     }
     

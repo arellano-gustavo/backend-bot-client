@@ -65,7 +65,8 @@ public interface UserMapper {
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
             @Result(property = "lastAccessDate",         column = "last_access_date"),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date")
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date"),
+            @Result(property = "fullName",               column = "full_name")
           })
     /**
      * Obtiene un usuario realizando la búsqueda con el nombre de pila.
@@ -134,7 +135,8 @@ public interface UserMapper {
             +"security_token, "
             +"security_token_window, "
             +"last_access_date, "
-            +"last_password_update_date "
+            +"last_password_update_date, "
+            +" full_name "
             +") VALUES("
             //+"#{id}, "
             +"#{usr}, "
@@ -152,7 +154,8 @@ public interface UserMapper {
             +"#{securityToken}, "
             +"#{securityTokenWindow}, "
             +"#{lastAccessDate}, "
-            +"#{lastPasswordUpdateDate}"
+            +"#{lastPasswordUpdateDate}, "
+            +"#{fullName}"
             +");";
     /** Procedimiento de inserción con mapeo FULL incluido */
     @Results(value = {
@@ -172,7 +175,8 @@ public interface UserMapper {
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
             @Result(property = "lastAccessDate",         column = "last_access_date"),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date")
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date"),
+            @Result(property = "fullName",               column = "full_name")
           })
     @Insert(full_insert_statement)
     void fullInsert(User user);
@@ -215,7 +219,8 @@ public interface UserMapper {
             +"security_token            = #{securityToken}, "
             +"security_token_window     = #{securityTokenWindow}, "
             +"last_access_date          = #{lastAccessDate}, "
-            +"last_password_update_date = #{lastPasswordUpdateDate} "
+            +"last_password_update_date = #{lastPasswordUpdateDate}, "
+            +"full_name                 = #{fullName} "
             +"WHERE "
             +"id = #{id}";
     /** Procedimiento de actualización con mapeo incluido */
@@ -263,6 +268,7 @@ CREATE TABLE user (
  security_token_window      int default 1000,
  last_access_date           date,
  last_password_update_date  date,
+ full_name                  varchar(100)
  PRIMARY KEY (id)
 );
 CREATE UNIQUE INDEX user_usr_idx ON user(usr);
@@ -286,7 +292,8 @@ secret_answer,
 security_token, 
 security_token_window,
 last_access_date,
-last_password_update_date
+last_password_update_date.
+full_name
 )
 values(
 3,
@@ -305,7 +312,8 @@ NULL,
 'token_de_seguridad',
 1234,
 TO_DATE( '2-DEC-2006', 'DD-MON-YYYY' ),
-TO_DATE( '2-DEC-2006', 'DD-MON-YYYY' )
+TO_DATE( '2-DEC-2006', 'DD-MON-YYYY' ),
+'Gustavo Arellano Sandoval'
 );
 select * from usuario;
 

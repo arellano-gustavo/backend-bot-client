@@ -27,6 +27,8 @@ package mx.gob.impi.chatbot.persistence.api.db;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import mx.gob.impi.chatbot.persistence.api.model.domain.UserArea;
 
@@ -38,18 +40,38 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.UserArea;
  * @version 1.0-SNAPSHOT
  */
 public interface UserAreaMapper {
+    @Results(value = {
+            @Result(property = "idUser", column = "id_user"),
+            @Result(property = "idArea", column = "id_area")
+          })
     @Insert("INSERT INTO user_area(id_user, id_area) VALUES(#{idUser}, #{idArea}) ")
     void insert(Integer idUser, Integer idArea);
     
+    @Results(value = {
+            @Result(property = "idUser", column = "id_user"),
+            @Result(property = "idArea", column = "id_area")
+          })    
     @Delete("DELETE FROM user_area WHERE id_user=#{idUser} and id_area=#{idArea} ")
     void delete(Integer idUser, Integer idArea);
-    
+
+    @Results(value = {
+            @Result(property = "idUser", column = "id_user"),
+            @Result(property = "idArea", column = "id_area")
+          })
     @Select("SELECT * from user_area")
     List<UserArea> getAll();
     
+    @Results(value = {
+            @Result(property = "idUser", column = "id_user"),
+            @Result(property = "idArea", column = "id_area")
+          })
     @Select("SELECT * from user_area WHERE id_user=#{idUser}")
     List<UserArea> getByIdUser(Integer idUser);
     
+    @Results(value = {
+            @Result(property = "idUser", column = "id_user"),
+            @Result(property = "idArea", column = "id_area")
+          })
     @Select("SELECT * from user_area WHERE id_area=#{idArea}")
     List<UserArea> getByIdArea(Integer idArea);
 
