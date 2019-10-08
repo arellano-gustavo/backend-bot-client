@@ -78,5 +78,10 @@ public interface LoginService {
      */
     LoginResponse requestRestore(String mail);
 
-	String buildRestoreUrl(String securityToken);
+	/**
+	 * Redirecciona al usuario dependiendo del token recibido
+	 * @param securityToken Cadena con el token a validar
+	 * @return Cadena a donde se debe direccionar la solicitud
+	 */
+    String buildRestoreUrl(String securityToken);
 }
