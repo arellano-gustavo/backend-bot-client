@@ -32,7 +32,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import mx.gob.impi.chatbot.persistence.api.model.domain.Area;
-import mx.gob.impi.chatbot.persistence.api.model.domain.AreaPlus;
 import mx.gob.impi.chatbot.persistence.api.model.domain.UserArea;
 
 /**
