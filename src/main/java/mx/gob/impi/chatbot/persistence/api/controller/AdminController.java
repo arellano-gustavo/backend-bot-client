@@ -34,6 +34,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -132,7 +133,7 @@ public class AdminController {
         value = "/get-user.json",
         method = GET,
         produces = "application/json; charset=utf-8")
-    public User getUserById(Integer id) {
+    public User getUserById(@RequestParam  int id) {
         return usuarioService.findUserById(id);
     }
     
@@ -148,7 +149,7 @@ public class AdminController {
         value = "/get-rol.json",
         method = GET,
         produces = "application/json; charset=utf-8")
-    public Rol getRolById(Integer id) {
+    public Rol getRolById(@RequestParam  int id) {
         return rolService.getRolById(id);
     }
     
@@ -164,7 +165,7 @@ public class AdminController {
         value = "/get-area.json",
         method = GET,
         produces = "application/json; charset=utf-8")
-    public Area getAreaById(Integer id) {
+    public Area getAreaById(@RequestParam  int id) {
         return areaService.getAreaById(id);
     }
     
