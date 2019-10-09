@@ -79,7 +79,9 @@ public interface LoginService {
     LoginResponse requestRestore(String mail);
 
 	/**
-	 * Redirecciona al usuario dependiendo del token recibido
+     * Retorna una URL que conduce ya sea a una página de error o bien a 
+     * una página que permitirá restaurar el password de una cuenta dada.
+     * 
 	 * @param securityToken Cadena con el token a validar
 	 * @return Cadena a donde se debe direccionar la solicitud
 	 */

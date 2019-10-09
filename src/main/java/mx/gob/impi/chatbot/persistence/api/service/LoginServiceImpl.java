@@ -224,10 +224,11 @@ public class LoginServiceImpl implements LoginService {
      * 
      * @param inicial Fecha inicial
      * @param terminal Fecha terminal
-     * @param delta diferencial contra el que se va a comparar
+     * @param delta diferencial (EN SEGUNDOS) contra el que se va a comparar
      * 
      * @param seconds true si y sólo si la diferencia es menor que el delta dato
-     * @return
+     * @return true si y sólo si la distancia entre la fecha inicial y la fecha final
+     *  es menor que el diferencial dado
      */
     public boolean diffDates(Date inicial, Date terminal, long delta) {
         long diff = (terminal.getTime() -inicial.getTime())/1000;
@@ -236,17 +237,27 @@ public class LoginServiceImpl implements LoginService {
     
     @Override
     public LoginResponse requestRestore(String mail) {
+    	// find a user with such a mail. Return null if not found:
         User user = userMapper.getUserByMail(mail);
+        
+        // if wrong mail, just log this condition, but say nothing about it to the request sender:
         if(user==null) {
+        	logger.error("El mail '"+mail+"' no se encontró en la base de datos");
             return new LoginResponse("Unknown", true, "Revisa tu mail -->" + mail + "<--");
         }
-        Date now = new Date();
-        long nowLong = now.getTime();
-        long window = nowLong + securityTokenWindow*60*1000;
-        user.setSecurityTokenWindow(window);// now plus 5 minutes
+        
+        //set expiration time:
+        long window = System.currentTimeMillis() + (securityTokenWindow*60*1000);
+        user.setSecurityTokenWindow(window);// NOW plus 'securityTokenWindow' minutes
+        
+        // set security token:
         String secTok = createSecurityToken();
         user.setSecurityToken(secTok);
+        
+        // update database:
         userMapper.update(user);
+        
+        // since everything was ok, send the restore mail:
         this.chatbotMailSenderService.sendHtmlMail(
                 mail, "Procedimiento de recuperación de contraseña", 
                 getMailTemplate(secTok, user.getUsr()));
@@ -271,40 +282,39 @@ public class LoginServiceImpl implements LoginService {
         sb.append(this.front);
         sb.append(this.frontOk);
         sb.append(securityToken);
-        
+
         return sb.toString();
-        
     }
 
     @Override
     public LoginResponse restorePassword(String psw, String securityToken) {
         User user = userMapper.getUserBySecurityToken(securityToken);
+        // realiza verificaciones pertinentes
         if(user==null) {
+        	logger.error("No existe un usuario asociado al token: " + securityToken);
             return new LoginResponse("Unknown", false, "Token inexistente");
         }
         long timeToExpire = user.getSecurityTokenWindow();
-        Date now = new Date();
-        long nowLong = now.getTime();
-        
-        if(nowLong>timeToExpire) {
+        if(System.currentTimeMillis()>timeToExpire) {
+        	logger.error("Token expirado: " + securityToken + " para usuario: " + user.getUsr());
             return new LoginResponse(user.getUsr(), false, "Token expirado");
         }
-        
-        String newPassword = cde.digest(psw, user.getUsr());
-        user.setPassword(newPassword);
-        user.setSecurityTokenWindow(0);
-        user.setFailedAtemptCounter(0);
-        user.setSecurityToken(createSecurityToken());
+        // Si el usuario existe para el token dado y el token dado no ha expirado:
+        String newPassword = cde.digest(psw, user.getUsr()); // digesta nuevo password dado
+        user.setPassword(newPassword); // asigna nuevo password digestado
+        user.setSecurityTokenWindow(0); // resetea ventana
+        user.setFailedAtemptCounter(0); // resetea contador de intentos fallidos
+        user.setSecurityToken(createSecurityToken()); // coloca un nuevo token (caduco) para impedir que se use el anterior
         userMapper.update(user);
 
+        // manda mail que avisa que el password ha sido cambiado:
         this.chatbotMailSenderService.sendHtmlMail(
                 user.getMail(), "Password Cambiado exitosamente", 
                 "Hola, "+user.getUsr()+" tu password ha cambiado." );
         
         LoginResponse loginResponse = new LoginResponse(user.getUsr(), true, "Password restaurado correctamente");
-        loginResponse.setJwt(jwtManagerService.createToken(user.getUsr()));
+        loginResponse.setJwt(jwtManagerService.createToken(user.getUsr())); // genera un nuevo jwt
         return loginResponse;
-
     }
     
     /**
