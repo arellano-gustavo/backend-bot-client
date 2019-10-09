@@ -26,7 +26,7 @@ public class TextClientSrvAdminImpl implements TextClientSrvAdmin{
                 respuesta.setIdsuario("1");
                 respuesta.setUsuario("Demo");
             }
-            else
+            else                
             {
                  respuesta.setIdsuario("-1");
                 respuesta.setUsuario("No Autorizado");
