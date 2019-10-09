@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import mx.gob.impi.chatbot.persistence.api.db.*;
@@ -346,13 +347,27 @@ public class LoginServiceImpl implements LoginService {
      */
     @SuppressWarnings("resource")
 	private String getTextFromFile(String filename) {
-    	InputStream stream = LoginServiceImpl.class.getResourceAsStream(filename);
-    	//TODO : Por alguna razón, aqui 'stream' sale vacio en producción, pero en desarrollo si jala. !!!! :(
+    	InputStream stream2 = LoginServiceImpl.class.getResourceAsStream(filename);
+    	//TODO: Por alguna razón, aqui 'stream' sale vacio en producción, pero en desarrollo si jala. !!!! :(
+    	//TODO: quizá esto sirva: 	
+    	ClassPathResource resource = new ClassPathResource(filename);
+    	//TODO: 
+    	InputStream stream = getInputStream(resource);
+    	
     	if(stream==null) {
-    		return "<a href='$URL'>Liga para recuperar tu password ("+filename+")</a>";
+    		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
     	}
     	String text = new Scanner(stream, "UTF-8").useDelimiter("\\A").next();
     	return text;
+    }
+    
+    private InputStream getInputStream(ClassPathResource resource) {
+    	try {
+			return resource.getInputStream();
+		} catch (Exception e) {
+			logger.error("Error getting stream from resource: " + e.getMessage()); 
+			return null;
+		}
     }
 
     /**
