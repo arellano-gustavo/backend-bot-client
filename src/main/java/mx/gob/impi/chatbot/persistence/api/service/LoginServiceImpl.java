@@ -35,13 +35,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import mx.gob.impi.chatbot.persistence.api.db.UserAreaMapper;
-import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
-import mx.gob.impi.chatbot.persistence.api.db.UserRolMapper;
-import mx.gob.impi.chatbot.persistence.api.model.domain.LoginResponse;
-import mx.gob.impi.chatbot.persistence.api.model.domain.User;
-import mx.gob.impi.chatbot.persistence.api.model.domain.UserArea;
-import mx.gob.impi.chatbot.persistence.api.model.domain.UserRol;
+import mx.gob.impi.chatbot.persistence.api.db.*;
+import mx.gob.impi.chatbot.persistence.api.model.domain.*;
 
 /**
  * <p>Descripción:</p>
@@ -169,10 +164,9 @@ public class LoginServiceImpl implements LoginService {
 			}
                         
             if(encodedPassword.equals(usuario.getPassword())) {
-            	List<UserArea> areas = userAreaMapper.getByIdUser(usuario.getId());
-            	//logger.info(""+ areas.get(0).getIdArea());
-            	List<UserRol> roles = userRolMapper.getByIdUser(usuario.getId());
-            	//logger.info("");
+            	Integer uid = usuario.getId();
+            	List<Area> areas = userAreaMapper.getAreasFromUserId(uid);
+            	List<Rol> roles = userRolMapper.getRolesFromUserId(uid);
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
                 usuario.setBloquedDate(new Date(System.currentTimeMillis()));

@@ -111,3 +111,26 @@ values(
 select * from usuario;
 
 
+
+
+
+create view areasFromUser as (
+select 
+user.id uid,
+area.*  
+from 
+user, user_area, area 
+where 
+user.id=user_area.id_user and area.id = user_area.id_area);
+select id, name, description, active FROM areasFromUser where uid=1;
+
+create view rolesFromUser as (
+select 
+user.id uid,
+rol.*  
+from 
+user, user_rol, rol 
+where 
+user.id=user_rol.id_user and rol.id = user_rol.id_rol);
+select id, name, description, active FROM rolesFromUser where uid=1;
+

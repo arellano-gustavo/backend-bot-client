@@ -30,6 +30,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+
+import mx.gob.impi.chatbot.persistence.api.model.domain.Area;
+import mx.gob.impi.chatbot.persistence.api.model.domain.AreaPlus;
 import mx.gob.impi.chatbot.persistence.api.model.domain.UserArea;
 
 /**
@@ -75,4 +78,15 @@ public interface UserAreaMapper {
     @Select("SELECT * from user_area WHERE id_area=#{idArea}")
     List<UserArea> getByIdArea(Integer idArea);
 
+    /* * /
+    @Results(value = {
+            @Result(property = "usuario",     column = "uid"),
+            @Result(property = "id",          column = "id"),
+            @Result(property = "name",        column = "name"),
+            @Result(property = "description", column = "description"),
+            @Result(property = "active",      column = "active")
+          })
+    /**/
+    @Select("select id, name, description, active FROM areasFromUser where uid=#{xyz}") 
+    List<Area> getAreasFromUserId(int xyz);
 }

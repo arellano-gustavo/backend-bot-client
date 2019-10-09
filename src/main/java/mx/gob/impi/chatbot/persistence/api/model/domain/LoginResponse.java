@@ -40,8 +40,8 @@ public class LoginResponse {
     private String detailedMessage = "";
     private String jwt = "";
     private boolean succeed = false;
-    private List<UserArea> areas;
-    private List<UserRol> roles;
+    private List<Area> areas;
+    private List<Rol> roles;
     
     /**
      * Constructor default de la clase.
@@ -58,7 +58,7 @@ public class LoginResponse {
         this.message = message;
     }
     
-    public LoginResponse(String fullName, String user, boolean succeed, String message, List<UserRol> roles, List<UserArea> areas) {
+    public LoginResponse(String fullName, String user, boolean succeed, String message, List<Rol> roles, List<Area> areas) {
         this.fullName = fullName;
         this.user = user;
         this.succeed = succeed;
@@ -99,22 +99,6 @@ public class LoginResponse {
         this.detailedMessage = detailedMessage;
     }
 
-	public List<UserArea> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(List<UserArea> areas) {
-		this.areas = areas;
-	}
-
-	public List<UserRol> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<UserRol> roles) {
-		this.roles = roles;
-	}
-
 	public String getFullName() {
 		return fullName;
 	}
@@ -123,5 +107,20 @@ public class LoginResponse {
 		this.fullName = fullName;
 	}
 
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
 
 }

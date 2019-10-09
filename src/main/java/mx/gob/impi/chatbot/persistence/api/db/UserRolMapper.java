@@ -30,6 +30,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+
+import mx.gob.impi.chatbot.persistence.api.model.domain.Rol;
 import mx.gob.impi.chatbot.persistence.api.model.domain.UserRol;
 
 /**
@@ -74,4 +76,7 @@ public interface UserRolMapper {
           })
     @Select("SELECT * from user_rol WHERE id_rol=#{idRol}")
     List<UserRol> getByIdRol(Integer idRol);
+    
+    @Select("select id, name, description, active FROM rolesFromUser where uid=#{xyz};")
+    List<Rol> getRolesFromUserId(Integer xyz);
 }
