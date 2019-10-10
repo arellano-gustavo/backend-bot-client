@@ -330,7 +330,7 @@ public class LoginServiceImpl implements LoginService {
 		sb.append(this.urlAuth);
 		sb.append(this.urlVerifica);
 		sb.append(secTok);
-    	String template = getTextFromFile("emailTemplate.txt", true);
+    	String template = getTextFromFile("emailTemplate.txt", false);
     	template = template.replace("$USER_NAME", name);
     	template = template.replace("$URL", sb.toString());
         return template;
