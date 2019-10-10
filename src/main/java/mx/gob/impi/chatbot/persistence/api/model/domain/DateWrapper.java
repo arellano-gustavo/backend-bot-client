@@ -44,7 +44,7 @@ public class DateWrapper implements Serializable {
     /**
      * Representa una hora en milisegundos
      */
-    private long oneHour = 60 * 60 * 1000L;
+    private long oneHour = 60L * 60L * 1000L;
 
     /**
      * Crea una nueva instancia date wrapper.
