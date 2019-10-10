@@ -24,15 +24,12 @@
  */
 package mx.gob.impi.chatbot.persistence.support;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Clase utilitaria que proveé algunos métodos para interactuar con las clases de IO.
@@ -102,24 +99,6 @@ public final class FileUtils {
             } catch (Exception ex) {
                 LOGGER.error("Error al cerrar el InputStreamReader", ex);
             }
-        }
-    }
-    
-    /**
-     * Recupera un InputStreamReader a partir de la ruta dada. Intenta usar la codificación
-     * UFT-8, en caso de error se usa la default del sistema.
-     * 
-     * @param filePath
-     * @return 
-     * @throws FileNotFoundException 
-     */
-    public static InputStreamReader getInputStream(String filePath) throws FileNotFoundException {
-        FileInputStream fis = new FileInputStream(filePath);
-        try {
-            return new InputStreamReader(fis, DEFAULT_ENCONDING);
-        } catch (UnsupportedEncodingException ex) {
-            LOGGER.warn("No fue posible usar la codificación UTF-8, se usará la default del sistema", ex);
-            return new InputStreamReader(fis, Charset.defaultCharset());
         }
     }
     

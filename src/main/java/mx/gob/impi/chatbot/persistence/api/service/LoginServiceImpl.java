@@ -337,10 +337,11 @@ public class LoginServiceImpl implements LoginService {
     }
     
 	private String getTextFromFileWithFullPath(String filenameFullpath) {
+		Scanner scanner = null;
 		try {
 	    	logger.info("email template given full path: ["+filenameFullpath+"]");
 	    	File file = new File(filenameFullpath);
-			Scanner scanner = new Scanner(file, "UTF-8" );
+			scanner = new Scanner(file, "UTF-8" );
 			String text = scanner.useDelimiter("\\A").next();
 			scanner.close();
 			if(text.trim().length()<9) {
@@ -351,6 +352,8 @@ public class LoginServiceImpl implements LoginService {
 		} catch (Exception e) {
     		logger.error("Couldn't find the given file: " + filenameFullpath); 
     		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filenameFullpath+")</a>";			
+		} finally {
+			if(scanner!=null) scanner.close();
 		}
 	}
 	
