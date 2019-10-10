@@ -91,5 +91,14 @@ public interface UserService {
      */
     MainControllerResponse update(User user);
     
-    
+    /**
+     * Retorna un objeto de tipo 'User' que fue precargado por un 
+     * web service que nos ha dado el cliente con base sólo en el id del empleado.
+     * Si el ID de empleado no existe, este método regresa 'null'. 
+     * 
+     * @param idEmpleado ID de un empleado del IMPI
+     * 
+     * @return objeto User o en su caso, 'null' si el id del empleado no existe.
+     */
+    User loadUserFromWs(Integer idEmpleado);
 }

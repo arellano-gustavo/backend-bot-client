@@ -393,5 +393,26 @@ public class AdminController {
     public MainControllerResponse removeUsuarioRol(@RequestBody Integer idUser, @RequestBody Integer idRol) {
         return userRolService.delete(idUser, idRol);
     }
-
+    
+    
+    /**
+     * Obtiene un usuario desde un web service que nos ha dado el cliente, por medio de su id.
+     * Si el ID no existe, regresa un usuario vacio.
+     * 
+     * @param id Identificador del empleado del impi
+     * 
+     * @return Objeto de tipo 'User' relacionado a un identificador dado
+     */
+    @ApiOperation(
+        value = "AdminController::loadUserFromWs",
+        notes = "Regresa un Usuario desde un WS del IMPI con base en su ID de Empleado con varios datos precargados, aunque no todos")
+    @RequestMapping(
+        value = "/load-user-from-ws.json",
+        method = GET,
+        produces = "application/json; charset=utf-8")
+    public User loadUserFromWs(@RequestParam  int id) {
+        User u = usuarioService.loadUserFromWs(id);
+        if (u!=null) {return u;}
+        return new User();
+    }
 }

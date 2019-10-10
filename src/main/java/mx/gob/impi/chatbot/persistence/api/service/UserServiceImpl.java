@@ -82,4 +82,11 @@ public class UserServiceImpl implements UserService {
         return new MainControllerResponse("message", "longMessage", true);
     }
 
+    @Override
+    public User loadUserFromWs(Integer idEmpleado) {
+    	//TODO: conectar con el web service real aqui
+    	User user = new User("carlos", "abc", "xyz@aol.com");
+    	user.setFullName("Carlos Salinas de Gortari");
+    	return user;
+    }
 }
