@@ -48,7 +48,7 @@ public class PersonaServiceImpl implements PersonaService {
         loginService.login("root", "algo1");
         System.out.println("post");
 
-        PersonaPojo personas[] = new PersonaPojo[3];
+        PersonaPojo[] personas = new PersonaPojo[3];
         personas[0] = new PersonaPojo(71, "gus","are____");
         personas[1] = new PersonaPojo(72, "tavo","sabd");
         personas[2] = new PersonaPojo(73, "luis","perez");

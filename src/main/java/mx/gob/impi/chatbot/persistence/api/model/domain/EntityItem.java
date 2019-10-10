@@ -29,19 +29,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class EntityItem <TEntity> {
 
-    String areaId;
-    String sessionId;
+    private String areaId;
+    private String sessionId;
 
     @JsonIgnore
-    String uriTemplate;
+    private String uriTemplate;
 
     @JsonIgnore
-    String method;
+    private String method;
 
     @JsonIgnore
-    String id;
+    private String id;
 
-    TEntity item;
+    private TEntity item;
 
     public TEntity getItem() {
         return item;

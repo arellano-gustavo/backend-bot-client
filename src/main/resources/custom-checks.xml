@@ -78,6 +78,9 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+        
+        
+        <!-- 
         <module name="JavadocVariable">
             <property name="scope" value="public"/>
         </module>
@@ -88,7 +91,7 @@
         <module name="JavadocMethod">
             <property name="allowMissingPropertyJavadoc" value="false"/>
         </module>
-
+ -->
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->

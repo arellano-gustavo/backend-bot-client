@@ -412,7 +412,9 @@ public class AdminController {
         produces = "application/json; charset=utf-8")
     public User loadUserFromWs(@RequestParam  int id) {
         User u = usuarioService.loadUserFromWs(id);
-        if (u!=null) {return u;}
+        if (u!=null) {
+        	return u;
+        }
         return new User();
     }
 }

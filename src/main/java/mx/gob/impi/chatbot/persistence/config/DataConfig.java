@@ -30,7 +30,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -65,7 +66,7 @@ public class DataConfig {
     @Value("${db.driver}")
     private String driver;
 
-    private final static Logger logger = LoggerFactory.getLogger(DataConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
 
     private Properties properties = new Properties();
 
@@ -115,10 +116,10 @@ public class DataConfig {
     public DataSource dataSource(){
         try {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
-            cpds.setDriverClass( getProp("driverClass") );
-            cpds.setJdbcUrl    ( getProp("jdbcUrl") );
-            cpds.setUser       ( getProp("user") );
-            cpds.setPassword   ( getProp("password") );
+            cpds.setDriverClass(getProp("driverClass"));
+            cpds.setJdbcUrl(getProp("jdbcUrl"));
+            cpds.setUser(getProp("user"));
+            cpds.setPassword(getProp("password"));
             return cpds;
         } catch(Exception e) {
             logger.info("No fué posible crear un datasource con C3P0: " + e.getMessage());

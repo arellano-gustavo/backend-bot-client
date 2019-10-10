@@ -33,7 +33,8 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Descripción:</p>
@@ -48,7 +49,7 @@ public class ChatbotMailSenderServiceImpl implements ChatbotMailSenderService {
   @Autowired
   private JavaMailSender javaMailSender;
 
-  Logger logger = LoggerFactory.getLogger(this.getClass());
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Override
   public void sendMail2(String to, String subject, String body) {

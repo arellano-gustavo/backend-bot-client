@@ -38,5 +38,5 @@ public interface PersonaService {
      * Proporciona un arreglo de 'Personas' registradas, estén o no activas.
      * @return Objeto de tipo 'Array' con la totalidad de las Personas registradas.
      */
-    public PersonaPojo[] getAll();
+    PersonaPojo[] getAll();
 }

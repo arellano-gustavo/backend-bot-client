@@ -57,11 +57,10 @@ import mx.gob.impi.chatbot.persistence.api.service.IntentService;
 @RestController
 @Api(value = "trainer")
 @RequestMapping(value = "/api/chatbot/trainer")
-public class TrainerController {
-
-    IntentService intentService;
-    EntityTypeService entityTypeService;
-    ContextService contextService;
+public class TrainerController { 
+    private IntentService intentService;
+    private EntityTypeService entityTypeService;
+    private ContextService contextService;
 
     /**
      * Inicicializa los servicio que utilizaran los controladores

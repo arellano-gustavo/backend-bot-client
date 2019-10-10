@@ -49,7 +49,7 @@ import mx.gob.impi.chatbot.persistence.api.service.PersonaService;
 @Api(value = "persona")
 @RequestMapping(value = "/api/personas")
 public class PersonaController {
-    private final static Logger logger = LoggerFactory.getLogger(PersonaController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PersonaController.class);
 
     @Autowired
     private PersonaService personaService;

@@ -29,8 +29,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.slf4j.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,7 +42,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CustomDigestEncoderServiceImpl implements CustomDigestEncoderService {
-    private final static Logger logger = LoggerFactory.getLogger(CustomDigestEncoderServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomDigestEncoderServiceImpl.class);
 
     @Override
     public String digest(String source, String salt) {

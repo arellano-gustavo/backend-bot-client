@@ -45,7 +45,7 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 @SpringBootApplication
 @ComponentScan("mx.gob.impi.chatbot.persistence")
 public class MainApp {
-    private final static Logger logger = LoggerFactory.getLogger(MainApp.class);
+    private static final Logger logger = LoggerFactory.getLogger(MainApp.class);
 
   /**
    * <p>main.</p>
