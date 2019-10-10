@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Dialogflow
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Miercoles 18 de Septiembre de 2019 (18_05)
  * Version:     1.0-SNAPSHOT
@@ -28,7 +28,7 @@ import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Intent
 
 /**
  * <p>Descripción:</p>
- * Interfaz con los metodos para consumir los endpoint 
+ * Interfaz con los metodos para consumir los endpoint
  * de la entidad Intent del agente de dialogflow
  *
  * @author Gustavo A. Arellano (GAA)

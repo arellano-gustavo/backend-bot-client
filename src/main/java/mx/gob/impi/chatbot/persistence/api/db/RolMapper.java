@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.db
  * Modulo:      Rol
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad perfil 
+ * Interface 'Mapper' MyBatis asociado a la entidad perfil
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -43,13 +43,13 @@ public interface RolMapper {
 
     @Insert("INSERT INTO rol(name, description, active) VALUES(#{name}, #{description}, #{active});")
     void insert(Rol rol);
-    
+
     @Update("UPDATE rol SET name=#{name}, description=#{description}, active=#{active} WHERE id=#{id};")
     void update(Rol rol);
-    
+
     @Select("SELECT * FROM rol WHERE id = #{id}")
     Rol getRolById(Integer id);
-    
+
     @Select("SELECT * FROM rol")
     List<Rol> getAll();
 }

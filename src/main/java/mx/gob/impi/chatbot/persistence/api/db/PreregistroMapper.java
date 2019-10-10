@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.db
  * Modulo:      Preregistro
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad preregistro 
+ * Interface 'Mapper' MyBatis asociado a la entidad preregistro
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -41,7 +41,7 @@ public interface PreregistroMapper extends IMapper<Preregistro> {
      *
      * @param correo Dirección de correo electrónico.
      *
-     * @return El pre-registro encontrado asociado a la dirección de correo 
+     * @return El pre-registro encontrado asociado a la dirección de correo
      * electrónico.
      */
     Preregistro getByCorreo(String correo);

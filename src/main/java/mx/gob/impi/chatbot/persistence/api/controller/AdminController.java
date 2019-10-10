@@ -15,7 +15,7 @@
  * Fecha:       Lunes 23 de Septiembre de 2019
  * Version:     0.0.1
  * .
- * Clase controller de los servicios rest 
+ * Clase controller de los servicios rest
  * para la administracion de los usuarios
  *
  * Historia:    .
@@ -65,7 +65,7 @@ public class AdminController {
     private UserAreaService userAreaService;
     @Autowired
     private UserRolService userRolService;
-    
+
     // PONGAN ATENCIÓN !!!!
     /*
     2XX --> TODITITITO OK
@@ -89,7 +89,7 @@ public class AdminController {
     public List<User> getAllUsers() {
         return usuarioService.getAllUsers();
     }
-    
+
     /**
      * Obtiene una lista de roles registrados en el sistema
      * @return Lista de tipo 'List<Rol>' con los roles del sistema
@@ -104,7 +104,7 @@ public class AdminController {
     public List<Rol> getAllRoles() {
         return rolService.getAll();
     }
-    
+
     /**
      * Obtiene  una lista de roles registrado en el sistema
      * @return Lista de tipo 'List<Area>' con las areas del sistema
@@ -119,7 +119,7 @@ public class AdminController {
     public List<Area> getAllAreas() {
         return areaService.getAll();
     }
-    
+
 //selectById
     /**
      * Obtiene un usuario por medio de su id
@@ -136,7 +136,7 @@ public class AdminController {
     public User getUserById(@RequestParam  int id) {
         return usuarioService.findUserById(id);
     }
-    
+
     /**
      * Obtiene un rol por medio de su id
      * @param id Identificador del rol
@@ -152,7 +152,7 @@ public class AdminController {
     public Rol getRolById(@RequestParam  int id) {
         return rolService.getRolById(id);
     }
-    
+
     /**
      * Obtiene un area por medio de su id
      * @param id Identificador del area
@@ -168,7 +168,7 @@ public class AdminController {
     public Area getAreaById(@RequestParam  int id) {
         return areaService.getAreaById(id);
     }
-    
+
 // getUserByMail, getUserByToken getUserByName
     /**
      * Obtiene un usuario por medio de su mail
@@ -185,7 +185,7 @@ public class AdminController {
     public User getUserByMail(String mail) {
         return usuarioService.findUserByMail(mail);
     }
-    
+
     /**
      * Obtiene un usuario por medio de su nombre.
      * @param name Cadena con el nombre de un usuario
@@ -201,7 +201,7 @@ public class AdminController {
     public User getUserByName(String name) {
         return usuarioService.findUserByName(name);
     }
-    
+
     /**
      * Obtiene un usuario por medio de un token
      * @param token Cadena con el token asignado a un usuario
@@ -217,7 +217,7 @@ public class AdminController {
     public User getUserByToken(String token) {
         return usuarioService.findUserByToken(token);
     }
-    
+
 //insert
     /**
      * Ingresa un usuario en el sistema
@@ -235,7 +235,7 @@ public class AdminController {
         public MainControllerResponse insertUser(@RequestBody User user) {
             return usuarioService.save(user);
         }
-    
+
     /**
      * Ingresa un rol en el sistema
      * @param rol Objeto de tipo 'Rol' a registrar
@@ -252,7 +252,7 @@ public class AdminController {
     public MainControllerResponse insertRol(@RequestBody Rol rol) {
         return rolService.save(rol);
     }
-    
+
     /**
      * Ingresa un area en el sistema
      * @param area Objeto de tipo 'Area' a registrar
@@ -269,7 +269,7 @@ public class AdminController {
     public MainControllerResponse insertArea(@RequestBody Area area) {
         return areaService.save(area);
     }
-    
+
 //update
     /**
      * Actualiza un area regustrada en el sistema
@@ -287,12 +287,12 @@ public class AdminController {
     public MainControllerResponse updateArea(@RequestBody Area area) {
         return areaService.update(area);
     }
-    
+
     /**
      * Actualiza un rol registrado en el sistema
      * @param rol Objeto de tipo 'Rol' a actualizar
      * @return Objeto de tipo 'MainControllerResponse'
-     *         con el resultado de la actualizacion 
+     *         con el resultado de la actualizacion
      */
     @ApiOperation(
         value = "AdminController::update-rol",
@@ -304,7 +304,7 @@ public class AdminController {
     public MainControllerResponse updateRol(@RequestBody  Rol rol) {
         return rolService.update(rol);
     }
-    
+
     /**
      * Actualiza un usuario en el sistema
      * @param user Objeto de tipo 'User' a actulizar
@@ -321,7 +321,7 @@ public class AdminController {
     public MainControllerResponse updateUser(@RequestBody User user) {
         return usuarioService.update(user);
     }
-    
+
 //relaciona
     /**
      * Registra la relacion entre un usuario y un area
@@ -339,7 +339,7 @@ public class AdminController {
     public MainControllerResponse insertUsuarioArea(@RequestBody UserArea userArea) {
         return userAreaService.save(userArea.getIdUser(), userArea.getIdArea());
     }
-    
+
     /**
      * Registra la relacion entre un usuario y un rol
      * @param userRol Objeto con la relacion entre el usuario y un rol
@@ -356,7 +356,7 @@ public class AdminController {
     public MainControllerResponse insertUsuarioRol(@RequestBody UserRol userRol) {
         return userRolService.save(userRol.getIdUser(), userRol.getIdRol());
     }
-    
+
 // elimina relacion
     /**
      * Elimina la relacion entre un usuario y un area
@@ -375,7 +375,7 @@ public class AdminController {
     public MainControllerResponse removeUsuarioArea(@RequestBody Integer idUser, @RequestBody Integer idArea) {
         return userAreaService.delete(idUser, idArea);
     }
-    
+
     /**
      * Elimina la relacion entre un usuario y un rol
      * @param idUser Identificador del usuario
@@ -393,14 +393,14 @@ public class AdminController {
     public MainControllerResponse removeUsuarioRol(@RequestBody Integer idUser, @RequestBody Integer idRol) {
         return userRolService.delete(idUser, idRol);
     }
-    
-    
+
+
     /**
      * Obtiene un usuario desde un web service que nos ha dado el cliente, por medio de su id.
      * Si el ID no existe, regresa un usuario vacio.
-     * 
+     *
      * @param id Identificador del empleado del impi
-     * 
+     *
      * @return Objeto de tipo 'User' relacionado a un identificador dado
      */
     @ApiOperation(

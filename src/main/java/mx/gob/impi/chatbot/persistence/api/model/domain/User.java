@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      User
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad User 
+ * POJO asociado a la entidad User
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -37,52 +37,52 @@ import java.util.Date;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     /** Llave primaria de un usuario (es un entero incremental) */
     private Integer id;
-    
+
     /** Cadena alfanumérica que identifica a un usuario de manera única */
     private String usr;
-    
+
     /** Cadena alfanumérica que representa un password */
     private String password;
-    
+
     /** Correo electrónico del usuario*/
     private String mail;
-    
+
     /** Fecha en la que se ha creado la cuenta */
     private Date creationDate;
-    
+
     /** Indica si la vida de la CUENTA ha expirado */
     private boolean expiredAccount;
-    
+
     /** Indica si la vida de las credenciales ha expirado */
     private boolean expiredCredential;
-    
+
     /** Indica que la cuenta ha sido bloqueada */
     private boolean bloquedAccount;
-    
+
     /** Indica si la cuenta ha sido inhabilitada */
     private boolean disabled;
-    
+
     /** Contador de intentos de login fallidos */
     private int failedAtemptCounter;
-    
+
     /** Fecha en la que la cuenta ha sido bloqueada*/
     private Date bloquedDate = new Date(1);
-    
+
     private String secretQuestion;
     private String secretAnswer;
-    
+
     private String securityToken;
     private long securityTokenWindow;
-    
+
     /** Indica la última vez que la cuenta fué accedida */
     private Date lastAccessDate;
-    
+
     /** Indica la última vez que la cuenta fué actualizada */
     private Date lastPasswordUpdateDate;
-    
+
     private String fullName;
 
     /**
@@ -96,7 +96,7 @@ public class User implements Serializable {
         this.mail = mail;
         this.creationDate = new Date();
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -233,13 +233,13 @@ public class User implements Serializable {
         this.lastPasswordUpdateDate = lastPasswordUpdateDate;
     }
 
-	public String getFullName() {
-		return fullName;
-	}
-	
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public String toString() {
         String separator = ", ";

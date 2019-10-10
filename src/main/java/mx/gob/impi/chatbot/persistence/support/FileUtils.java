@@ -15,7 +15,7 @@
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Clase que se usa para interactuar con data streams 
+ * Clase que se usa para interactuar con data streams
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -44,7 +44,7 @@ public final class FileUtils {
      * Encoding usado en el aplicación: UTF-8
      */
     public static final String DEFAULT_ENCONDING = "UTF-8";
-    
+
     /**
      * Constructor default de la clase.
      */
@@ -101,5 +101,5 @@ public final class FileUtils {
             }
         }
     }
-    
+
 }

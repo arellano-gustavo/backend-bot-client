@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.db
  * Modulo:      Dialogflow
- * Tipo:        class 
+ * Tipo:        class
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Jueves 12 de Septiembre de 2019 (16_47)
  * Version:     1.0-SNAPSHOT
  * .
- * Clase que crea el cliente para consumir los endpoint de 
+ * Clase que crea el cliente para consumir los endpoint de
  * EntityType del agente de dialogflow
  * Historia:    .
  *              20190912_1647 Creación del tipo
@@ -28,33 +28,33 @@ import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Entity
 
 /**
  * <p>Descripción:</p>
- * Clase EntityType que consume los endpoint 
+ * Clase EntityType que consume los endpoint
  * de la entidad Intent del agente de dialogflow
  *
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-public class EntityTypeRepository 
+public class EntityTypeRepository
 extends DialogflowRequest<GoogleCloudDialogflowV2EntityType>  {
 
-	/**
-	 * Constructor que crea el cliente para consumir los endpoint
-	 * de EntityType del agente de dialogflow
-	 * @param client Objeto cliente que realiza las peticiones a
-	 *               los endpoints de dialogflow
-	 * @param method Cadena con el metodo de HTTP para realizar
-	 *               la peticion
-	 * @param uriTemplate Cadena con el URI donde se encuentra el end pount
-	 * @param content Objeto con los parametros de la peticion
-	 *                al endpoint de dialogflow
-	 * @param responseClass Indica el tipo de la clase con la que el
-	 *                      endpoint responde a la peticion
-	 */
-	public EntityTypeRepository(Dialogflow client, String method, String uriTemplate, Object content,
-			Class<GoogleCloudDialogflowV2EntityType> responseClass) {
-		super(client, method, uriTemplate, content, responseClass);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * Constructor que crea el cliente para consumir los endpoint
+     * de EntityType del agente de dialogflow
+     * @param client Objeto cliente que realiza las peticiones a
+     *               los endpoints de dialogflow
+     * @param method Cadena con el metodo de HTTP para realizar
+     *               la peticion
+     * @param uriTemplate Cadena con el URI donde se encuentra el end pount
+     * @param content Objeto con los parametros de la peticion
+     *                al endpoint de dialogflow
+     * @param responseClass Indica el tipo de la clase con la que el
+     *                      endpoint responde a la peticion
+     */
+    public EntityTypeRepository(Dialogflow client, String method, String uriTemplate, Object content,
+            Class<GoogleCloudDialogflowV2EntityType> responseClass) {
+        super(client, method, uriTemplate, content, responseClass);
+        // TODO Auto-generated constructor stub
+    }
 
 
 }

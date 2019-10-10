@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      Login
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (11_23)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad 'Login' 
+ * POJO asociado a la entidad 'Login'
  *
  * Historia:    .
  *              20190920_1123 Creación del tipo
@@ -34,7 +34,7 @@ import java.util.List;
  * @version 1.0-SNAPSHOT
  */
 public class LoginResponse {
-	private String fullName = "";
+    private String fullName = "";
     private String user = "";
     private String message = "";
     private String detailedMessage = "";
@@ -42,13 +42,13 @@ public class LoginResponse {
     private boolean succeed = false;
     private List<Area> areas;
     private List<Rol> roles;
-    
+
     /**
      * Constructor default de la clase.
      */
     public LoginResponse(int a) {
     }
-    
+
     /**
      * Constructor con los atributos del estatus del intento del login.
      */
@@ -57,7 +57,7 @@ public class LoginResponse {
         this.succeed = succeed;
         this.message = message;
     }
-    
+
     public LoginResponse(String fullName, String user, boolean succeed, String message, List<Rol> roles, List<Area> areas) {
         this.fullName = fullName;
         this.user = user;
@@ -99,28 +99,28 @@ public class LoginResponse {
         this.detailedMessage = detailedMessage;
     }
 
-	public String getFullName() {
-		return fullName;
-	}
+    public String getFullName() {
+        return fullName;
+    }
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-	public List<Area> getAreas() {
-		return areas;
-	}
+    public List<Area> getAreas() {
+        return areas;
+    }
 
-	public void setAreas(List<Area> areas) {
-		this.areas = areas;
-	}
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
+    }
 
-	public List<Rol> getRoles() {
-		return roles;
-	}
+    public List<Rol> getRoles() {
+        return roles;
+    }
 
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
-	}
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
 
 }

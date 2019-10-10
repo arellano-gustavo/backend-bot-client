@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.db
  * Modulo:      Bitacora
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad bitacora 
+ * Interface 'Mapper' MyBatis asociado a la entidad bitacora
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -41,7 +41,7 @@ public interface BitacoraMapper extends IMapper<Bitacora> {
      * @param bitacora Instancia con los valores a actualizar.
      */
     void upeventDate(Bitacora bitacora);
-    
+
     /**
      * Realiza la tarea de limpieza de un objeto de tipo DateWrapper.
      *

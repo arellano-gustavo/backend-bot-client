@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      MailStructureTest
- * Tipo:        CLASE 
+ * Tipo:        CLASE
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 25 de Septiembre de 2019 (09_47)
  * Version:     1.0-SNAPSHOT
@@ -44,9 +44,9 @@ import org.junit.Test;
 // https://howtodoinjava.com/regex/java-regex-validate-email-address/
 public class MailStructureTest {
     private static final Logger logger = LoggerFactory.getLogger(MailStructureTest.class);
-    
+
     private MailValidator me = new MailValidator();
-    
+
     /**
      * Prueba la validacion de la estructura de las
      * direcciones de correo electronico
@@ -60,15 +60,15 @@ public class MailStructureTest {
         emails.add("user.name@domain.com");
         emails.add("user_name@domain.com");
         emails.add("username@yahoo.corporate.in");
-         
+
         //Invalid emails
         emails.add(".username@yahoo.com");
         emails.add("username@yahoo.com.");
         emails.add("username@yahoo..com");
         emails.add("username@yahoo.c");
         emails.add("username@yahoo.corporate");
-        
+
         assertTrue(me.validateMailStructure(emails.get(0)));
-        
+
     }
 }

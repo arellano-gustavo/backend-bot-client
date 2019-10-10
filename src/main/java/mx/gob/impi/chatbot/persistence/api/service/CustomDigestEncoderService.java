@@ -15,7 +15,7 @@
  * Fecha:       Viernes 26 de Septiembre de 2019 (16_26)
  * Version:     1.0-SNAPSHOT
  * .
- * Encoder de cadenas 
+ * Encoder de cadenas
  *
  * Historia:    .
  *              20190926_1626 Creación del tipo
@@ -33,13 +33,13 @@ package mx.gob.impi.chatbot.persistence.api.service;
  * @version 1.0-SNAPSHOT
  */
 public interface CustomDigestEncoderService {
-    /** 
-     * Retorna una cadena hexadecimal asociada a la cadena 'source', pero 
+    /**
+     * Retorna una cadena hexadecimal asociada a la cadena 'source', pero
      * con un 'salt' arbitrario.
-     * 
+     *
      * @param source Cadena a hashear
      * @param salt Salt a inyectar
-     * 
+     *
      * @return Cadena satlteada y hasheada
      */
     String digest(String source, String salt);

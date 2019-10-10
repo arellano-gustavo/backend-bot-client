@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.persona
  * Modulo:      Persona
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad Persona 
+ * POJO asociado a la entidad Persona
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -35,13 +35,13 @@ public class PersonaPojo {
     private int id;
     private String nombre;
     private String apellido;
-    
+
     /**
      * Constructor default de la clase.
      */
     public PersonaPojo() {
     }
-    
+
     /**
      * Constructor con los atributos que conforman la clase.
      */

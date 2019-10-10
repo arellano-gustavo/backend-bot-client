@@ -22,7 +22,7 @@
         <org.springframework.version>4.3.14.RELEASE</org.springframework.version>
         <org.slf4j.version>1.7.7</org.slf4j.version>
     </properties>
-    
+
     <repositories>
         <repository>
             <id>nexus.ci.gustavo-arellano.com</id>
@@ -142,25 +142,25 @@
         </dependency>
         <!-- google libraries -->
         <dependency>
-		    <groupId>com.google.auth</groupId>
-		    <artifactId>google-auth-library-oauth2-http</artifactId>
-		    <version>0.17.1</version>
-		</dependency>
-	    <dependency>
-		    <groupId>com.google.apis</groupId>
-		    <artifactId>google-api-services-dialogflow</artifactId>
-		    <version>v2-rev81-1.25.0</version>
-		</dependency>
-		<dependency>
-	        <groupId>com.google.api-client</groupId>
-	        <artifactId>google-api-client</artifactId>
-	        <version>1.30.2</version>
-	    </dependency>
-	    <dependency>
-		    <groupId>com.google.api-client</groupId>
-		    <artifactId>google-api-client-gson</artifactId>
-		    <version>1.30.2</version>
-		</dependency>
+            <groupId>com.google.auth</groupId>
+            <artifactId>google-auth-library-oauth2-http</artifactId>
+            <version>0.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-dialogflow</artifactId>
+            <version>v2-rev81-1.25.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.30.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client-gson</artifactId>
+            <version>1.30.2</version>
+        </dependency>
         <!-- IMPI FRONTEND -->
         <dependency>
             <groupId>mx.gob.impi</groupId>
@@ -168,14 +168,32 @@
             <version>1.0.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
-    
 
 
 
 
 
-    <reporting>
+
+
+
+
+
+
+
+
+    <build>
         <plugins>
+            <!-- Package as an executable jar/war -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+
+
+
+
+
             <!-- Generación de Reportes -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -225,20 +243,7 @@
                             </configuration>
                         </plugin>
 
-                        <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>findbugs-maven-plugin</artifactId>
-                            <version>3.0.1</version>
-                            <configuration>
-                                <!-- Enables analysis which takes more memory but finds more bugs. 
-                                    If you run out of memory, changes the value of the effort element to 'low'. -->
-                                <effort>Max</effort>
-                                <!-- Reports all bugs (other values are medium and max) -->
-                                <threshold>Low</threshold>
-                                <!-- Produces XML report -->
-                                <xmlOutput>true</xmlOutput>
-                            </configuration>
-                        </plugin>
+
 
                         <!-- Genera reporte que Revisa el estilo -->
                         <plugin>
@@ -270,20 +275,12 @@
 
                 </configuration>
             </plugin>
-        </plugins>
-    </reporting>
 
 
 
 
 
-    <build>
-        <plugins>
-            <!-- Package as an executable jar/war -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+
         </plugins>
     </build>
 

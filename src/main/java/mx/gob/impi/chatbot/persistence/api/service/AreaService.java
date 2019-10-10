@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      User
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -39,28 +39,28 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.Area;
 public interface AreaService {
     /**
      * Proporciona la lista de Areas registradas, estén o no activas.
-     * 
+     *
      * @return Objeto de tipo 'List' con la totalidad de Areas registradas.
      */
     List<Area> getAll();
     /**
      * Proporciona un objeto de tipo 'Area' cuyo id es proporcionado.
      * @param id Entero con el id (llave primaria) de una Area.
-     * 
+     *
      * @return Objeto de tipo 'Area' asociado al id proporcionado.
      */
     Area getAreaById(Integer id);
     /**
      * Guarda en la base de datos el objeto de tipo 'Area' proporcionado.
      * @param area Objeto de tipo 'Area' a almacenar.
-     * 
+     *
      * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de guardado.
      */
     MainControllerResponse save(Area area);
     /**
      * Actualiza en la base de datos el objeto de tipo 'Area' proporcionado.
      * @param area Objeto de tipo 'Area' a actualizar.
-     * 
+     *
      * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de actualzación.
      */
     MainControllerResponse update(Area area);

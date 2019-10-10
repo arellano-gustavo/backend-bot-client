@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Persona
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -41,13 +41,13 @@ public class PersonaServiceImpl implements PersonaService {
     @Autowired
     private LoginService loginService;
 
-    
+
     @Override
     public PersonaPojo[] getAll() {
         System.out.println("pre");
         loginService.login("root", "algo1");
         System.out.println("post");
-        
+
         PersonaPojo personas[] = new PersonaPojo[3];
         personas[0] = new PersonaPojo(71, "gus","are____");
         personas[1] = new PersonaPojo(72, "tavo","sabd");

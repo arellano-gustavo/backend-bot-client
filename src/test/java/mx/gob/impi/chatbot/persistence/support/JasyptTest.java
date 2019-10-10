@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      JasyptTest
- * Tipo:        CLASE 
+ * Tipo:        CLASE
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 27 de Septiembre de 2019 (19_26)
  * Version:     1.0-SNAPSHOT
@@ -42,10 +42,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @version 1.0-SNAPSHOT
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest 
+@SpringBootTest
 public class JasyptTest {
     private final static Logger logger = LoggerFactory.getLogger(JasyptTest.class);
-    
+
     @Value("${welcome.message}")
     private String welcome;
 
@@ -54,21 +54,21 @@ public class JasyptTest {
         logger.info("-------------------------------------------->"+welcome+"<---------------------");
         assertTrue("No coincide el password", "Password@1".equals(welcome));
     }
-    
+
     @Test
     public void encript() {
         String jasyptPassword = "password";
         String cadenaOculta ="UrbiEtOrbi1";
-        
+
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
         textEncryptor.setPassword(jasyptPassword);
-        
+
         String myEncryptedText = textEncryptor.encrypt(cadenaOculta);
         logger.info("Cadena encriptada:"+myEncryptedText);
-        
+
         String plainText = textEncryptor.decrypt(myEncryptedText);
         logger.info("Cadena des-encriptada:"+plainText);
-        
+
         assertTrue("Las cadenas no fueros iguales", cadenaOculta.equals(plainText));
     }
 }

@@ -15,7 +15,7 @@
  * Fecha:       Lunes 23 de Septiembre de 2019
  * Version:     0.0.1
  * .
- * Clase controller de los servicios rest 
+ * Clase controller de los servicios rest
  * para la autenticacion y autorizacion
  * de los usuarios
  *
@@ -57,10 +57,10 @@ import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 @Api(value = "auth")
 @RequestMapping(value = "/api/chatbot/auth")
 public class AuthController {
-    
+
     @Autowired
     private LoginService loginService;
-    
+
 
 
 //LOGIN
@@ -82,9 +82,9 @@ public class AuthController {
 
 // Recupera clave (forgot)
     /**
-     * Solictud del cambio de contraseña de un usuario por medio del mail dado 
+     * Solictud del cambio de contraseña de un usuario por medio del mail dado
      * @param mail Cadena con el mail del usuario al que se solicita cambiar la contraseña
-     * @return Objeto de tipo 'LoginResponse' con el resultado de la solicitud 
+     * @return Objeto de tipo 'LoginResponse' con el resultado de la solicitud
      *         del cambio de contraseña
      */
     @ApiOperation(
@@ -118,7 +118,7 @@ public class AuthController {
             }
         }
 
-    
+
 // Cambia Clave (régular)
     /**
      * Cambio de contraseña requerido por el sistema al
@@ -136,18 +136,18 @@ public class AuthController {
     public LoginResponse changePassword(@RequestHeader("jwt") String jwt, @RequestBody Login login) {
         return loginService.changePassword(login.getUser(), login.getPassword(), jwt);
     }
-    
+
     /**
      * This endpoint receives a string as a parameter sent in a GET request which is a token
      * that we will use to locate a user in our database and (if found) we will redirect the
      * request to a VueJS location.
-     * 
+     *
      * @param token
      * @return
      */
     @GetMapping(value = "/check.json")
     public ResponseEntity<Void> proceedChangePasswordCheckRedirect(@RequestParam String token) {
-    	String sTok = loginService.buildRestoreUrl(token);
+        String sTok = loginService.buildRestoreUrl(token);
         return ResponseEntity.status(HttpStatus.FOUND)
             .location(URI.create(sTok))
             .build();

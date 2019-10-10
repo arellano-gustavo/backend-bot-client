@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      CustomDigestEncoderTest
- * Tipo:        CLASE 
+ * Tipo:        CLASE
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Miercoles 25 de Septiembre de 2019 (18_17)
  * Version:     1.0-SNAPSHOT
@@ -43,15 +43,15 @@ import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
  * @version 1.0-SNAPSHOT
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest 
+@SpringBootTest
 public class CustomDigestEncoderTest {
     private static final Logger logger = LoggerFactory.getLogger(CustomDigestEncoderTest.class);
-    
+
     // Load the 'real' bean, instead a mock (we need to combine 2 annotations)
     //@InjectMocks
     @Autowired
     private CustomDigestEncoderService customDigestEncoderService;
-    
+
     /**
      * Prueba los metodos de creacion del hash de una cadena
      */
@@ -65,7 +65,7 @@ public class CustomDigestEncoderTest {
         logger.info(message);
         assertTrue("No coincide el hash", "628e854b4b74f508267228648293fc880164c46c1113b0e9643b81079d3ccd08".equals(message));
     }
-    
+
     private String getHashedSaltedPassword(String password, String user) {
         return customDigestEncoderService.digest(password, user);
     }

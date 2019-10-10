@@ -49,7 +49,7 @@ public class DateWrapper implements Serializable {
     /**
      * Crea una nueva instancia date wrapper.
      *
-     * @param days Es el número de días que tienen que pasar para que un 
+     * @param days Es el número de días que tienen que pasar para que un
      * registro se pueda borrar de la tabla
      * preregistro. mediante este parámetro, el sistema fija un limite
      * en el que el usuario pueda completar su registro.
@@ -71,7 +71,7 @@ public class DateWrapper implements Serializable {
     }
 
     /**
-     * Genera una instancia del calendario, inicializando el año con el valor 
+     * Genera una instancia del calendario, inicializando el año con el valor
      * especificado como argumento, obteniendo el
      * tiempo actual en milisegundos.
      *

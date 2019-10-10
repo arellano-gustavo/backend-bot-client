@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      Rol
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad perfil 
+ * POJO asociado a la entidad perfil
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -36,7 +36,7 @@ import java.io.Serializable;
 public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Integer id;
     private String name;
     private String description;

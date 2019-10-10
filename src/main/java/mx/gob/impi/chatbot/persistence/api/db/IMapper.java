@@ -10,13 +10,13 @@
  * Proyecto:    Chatbot IMPI persistence
  * Paquete:     mx.gob.impi.chatbot.persistence.api.db
  * Modulo:      Mapper
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       viernes 20 de septiembre de 2019 (17_20)
  * Version:     1.0-SNAPSHOT
  * .
  * Interface    'Mapper' MyBatis asociado a los metos que deben
- *              implementar todos los mapper de la entidades 
+ *              implementar todos los mapper de la entidades
  *
  * Historia:    .
  *              20190920_1720 Generado GOOSE

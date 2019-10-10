@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      MybatisTest
- * Tipo:        CLASE 
+ * Tipo:        CLASE
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 27 de Septiembre de 2019 (18_11)
  * Version:     1.0-SNAPSHOT
@@ -46,10 +46,10 @@ import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
  * @version 1.0-SNAPSHOT
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest 
+@SpringBootTest
 public class MybatisTest {
     private static final Logger logger = LoggerFactory.getLogger(MybatisTest.class);
-    
+
     @Autowired
     private UserMapper userMapper;
 
@@ -61,11 +61,11 @@ public class MybatisTest {
      */
     @Test
     public void whenFindByName_thenReturnEmployee() {
-    	User uu = userMapper.getUserByMail("arellano.gustavo@gmail.com");
-    	if(uu!=null) {
-    		logger.info(uu.getUsr()); 
-    	}
-    	
+        User uu = userMapper.getUserByMail("arellano.gustavo@gmail.com");
+        if(uu!=null) {
+            logger.info(uu.getUsr());
+        }
+
         List<User> all = userMapper.getAll();
         /* */
         User u1 = userMapper.getUserById(1);
@@ -79,7 +79,7 @@ public class MybatisTest {
         for(User u : all) {
             logger.info("User: "+u.toString());
         }
-        
+
         /**/
         u1.setUsr("sexto");
         String pass = customDigestEncoderService.digest("hola", u1.getUsr());
@@ -90,7 +90,7 @@ public class MybatisTest {
 
         //u1.setFailedAtemptCounter(2);
         //userMapper.fullInsert(u1);
-        
+
         userMapper.updateFailure(u1);
         assert(true);
     }

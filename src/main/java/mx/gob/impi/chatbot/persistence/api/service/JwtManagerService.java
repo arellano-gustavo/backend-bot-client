@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      JwtManagerService
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       1 de Octubre de 2019 (12_26)
  * Version:     1.0-SNAPSHOT
@@ -32,16 +32,16 @@ package mx.gob.impi.chatbot.persistence.api.service;
  * @version 1.0-SNAPSHOT
  */
 public interface JwtManagerService {
-	/**
-	 * Crea el JWT para el usuario solicitado
-	 * @param username Cadena con el nombre de usuario
-	 *                 para el que se le genera el JWT
-	 * @return Cadena con el JSON Web Token
-	 */
-    String createToken(String username);
-    
     /**
-     * Verifica que el JWT que se recibe correnponde con 
+     * Crea el JWT para el usuario solicitado
+     * @param username Cadena con el nombre de usuario
+     *                 para el que se le genera el JWT
+     * @return Cadena con el JSON Web Token
+     */
+    String createToken(String username);
+
+    /**
+     * Verifica que el JWT que se recibe correnponde con
      * el usuario que se quiere autorizar
      * @param jwt
      * @param user

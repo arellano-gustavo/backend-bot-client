@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Persona
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -34,9 +34,9 @@ import mx.gob.impi.chatbot.persistence.api.model.persona.PersonaPojo;
  * @version 1.0-SNAPSHOT
  */
 public interface PersonaService {
-	/**
-	 * Proporciona un arreglo de 'Personas' registradas, estén o no activas.
-	 * @return Objeto de tipo 'Array' con la totalidad de las Personas registradas.
-	 */
+    /**
+     * Proporciona un arreglo de 'Personas' registradas, estén o no activas.
+     * @return Objeto de tipo 'Array' con la totalidad de las Personas registradas.
+     */
     public PersonaPojo[] getAll();
 }

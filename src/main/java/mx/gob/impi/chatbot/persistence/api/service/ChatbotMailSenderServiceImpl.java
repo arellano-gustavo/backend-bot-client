@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Mail
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -44,12 +44,12 @@ import org.slf4j.*;
  */
 @Service
 public class ChatbotMailSenderServiceImpl implements ChatbotMailSenderService {
-  
+
   @Autowired
   private JavaMailSender javaMailSender;
-  
+
   Logger logger = LoggerFactory.getLogger(this.getClass());
-  
+
   @Override
   public void sendMail2(String to, String subject, String body) {
     SimpleMailMessage mail = new SimpleMailMessage();
@@ -60,19 +60,19 @@ public class ChatbotMailSenderServiceImpl implements ChatbotMailSenderService {
     javaMailSender.send(mail);
     logger.info("Done!");
   }
-  
+
     @Override
-	@Async
-	public void sendHtmlMail(String to, String subject, String body) {
-	  try {
-			MimeMessage mail = javaMailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-			helper.setTo(to);
-			helper.setSubject(subject);
-			helper.setText(body, true);
-			javaMailSender.send(mail);
-		} catch (MessagingException me) {
-			logger.error("error in mail service sendHtmlMail method"+me.getMessage());
-		}
-	}
+    @Async
+    public void sendHtmlMail(String to, String subject, String body) {
+      try {
+            MimeMessage mail = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+            javaMailSender.send(mail);
+        } catch (MessagingException me) {
+            logger.error("error in mail service sendHtmlMail method"+me.getMessage());
+        }
+    }
 }

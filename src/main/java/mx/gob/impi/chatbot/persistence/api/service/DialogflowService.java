@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Dialogflow
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Martes 17 de Septiembre de 2019 (15_25)
  * Version:     1.0-SNAPSHOT
@@ -39,63 +39,63 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  * @param <TRequest> Objeto con los parametros para consumir los endpoint
  */
 public interface DialogflowService<TEntity, TRequest> {
-	
-	/**
-	 * Metodo que crea el cliente mediante el que se hacen las
-	 * peticiones al agente de dialogflow
-	 * @param area Cadena con el Area al se realizaran las
-	 *             peticiones del agente agente de dialogflow
-	 * @param method Cadena con el metodo de HTTP para realizar
-	 *               la peticion
-	 * @param uriTemplate Cadena con el URI donde se encuentra el end pount
-	 * @param requestEntity Objeto con los parametros de la peticion
-	 *                      al endpoint de dialogflow
-	 * @param responseClass Indica el tipo de la clase con la que el
-	 *                      endpoint responde a la peticion
-	 * @return Objeto cliente que realiza las peticiones
-	 *         endpoint de dialogflow
-	 */
-	DialogflowRequest<TEntity> getRequestPost(String area, String method, String uriTemplate, TRequest requestEntity,
-			Class<TEntity> responseClass);
-	
-	/**
-	 * Metodo que crea la referencia de la entidad con la que el endpoint
-	 * de dialogflow responde a las peticiones que realiza el cliente
-	 * @param requestGet Objeto con los parametro que se le envian endpoint
-	 * @param response Objeto con el estatus de la peticiones se hacen
-	 *                 al endpoint de dialogflow
-	 * @return Objeto con la respuesta del endpoint
-	 *         del agente de dialogflow
-	 */
-	TEntity execute(EntityItem<TRequest> requestGet, MainControllerResponse response);
-	
-	/**
-	 * Metodo donde el cliente que se creo hace la llamado
-	 * a los endpoints del agente de dialogflow
-	 * @param requestPost Objeto con los parametro que se le envian endpoint
-	 * @param responseEntity Objeto de respuesta a la llamada del cliente al
-	 *                       end poit del agente de dialogflow
-	 * @param response Objeto con el estatus de la peticiones se hacen
-	 *                 al endpoint de dialogflow
-	 * @return
-	 */
-	TEntity execute(EntityItem<TRequest> requestPost, TEntity responseEntity, MainControllerResponse response);
-	
-	/**
-	 * Obtiene todos los registros que se encuentran
-	 * registrados en el agente de dialogflow
-	 * @param requestGet Objeto con los paramentros con los que
-	 *                  se consume el endpoint
-	 * @param response Objeto con el status del proceso para obtener 
-	 *                 todos los registros desde el agente de dialogflow
-	 * @return Objeto que contiene la lista 
-	 */
+
+    /**
+     * Metodo que crea el cliente mediante el que se hacen las
+     * peticiones al agente de dialogflow
+     * @param area Cadena con el Area al se realizaran las
+     *             peticiones del agente agente de dialogflow
+     * @param method Cadena con el metodo de HTTP para realizar
+     *               la peticion
+     * @param uriTemplate Cadena con el URI donde se encuentra el end pount
+     * @param requestEntity Objeto con los parametros de la peticion
+     *                      al endpoint de dialogflow
+     * @param responseClass Indica el tipo de la clase con la que el
+     *                      endpoint responde a la peticion
+     * @return Objeto cliente que realiza las peticiones
+     *         endpoint de dialogflow
+     */
+    DialogflowRequest<TEntity> getRequestPost(String area, String method, String uriTemplate, TRequest requestEntity,
+            Class<TEntity> responseClass);
+
+    /**
+     * Metodo que crea la referencia de la entidad con la que el endpoint
+     * de dialogflow responde a las peticiones que realiza el cliente
+     * @param requestGet Objeto con los parametro que se le envian endpoint
+     * @param response Objeto con el estatus de la peticiones se hacen
+     *                 al endpoint de dialogflow
+     * @return Objeto con la respuesta del endpoint
+     *         del agente de dialogflow
+     */
+    TEntity execute(EntityItem<TRequest> requestGet, MainControllerResponse response);
+
+    /**
+     * Metodo donde el cliente que se creo hace la llamado
+     * a los endpoints del agente de dialogflow
+     * @param requestPost Objeto con los parametro que se le envian endpoint
+     * @param responseEntity Objeto de respuesta a la llamada del cliente al
+     *                       end poit del agente de dialogflow
+     * @param response Objeto con el estatus de la peticiones se hacen
+     *                 al endpoint de dialogflow
+     * @return
+     */
+    TEntity execute(EntityItem<TRequest> requestPost, TEntity responseEntity, MainControllerResponse response);
+
+    /**
+     * Obtiene todos los registros que se encuentran
+     * registrados en el agente de dialogflow
+     * @param requestGet Objeto con los paramentros con los que
+     *                  se consume el endpoint
+     * @param response Objeto con el status del proceso para obtener
+     *                 todos los registros desde el agente de dialogflow
+     * @return Objeto que contiene la lista
+     */
     TEntity List(EntityItem<TRequest> requestGet, MainControllerResponse response);
-    
+
     /**
      * Ingresa un objeto en el agende de dialogflow
      * @param requestPost Objeto con los parametros de la entidad a insertar
-     * @return Objeto de tipo MainControllerResponse con el status del 
+     * @return Objeto de tipo MainControllerResponse con el status del
      *         proceso de insertar un registro en el agente de dialogflow
      */
     MainControllerResponse Create(EntityItem<TRequest>  requestPost);
@@ -103,15 +103,15 @@ public interface DialogflowService<TEntity, TRequest> {
      /**
       * Obtiene un objeto registrado en el agente de dialogflow
       * por medio de su identificador
-      * @param requestGet Objeto que contiene el identificador 
+      * @param requestGet Objeto que contiene el identificador
       *                   del objeto que se esta buscando
-      * @param response Objeto con el status del proceso para obtener 
-	  *                 el una registro desde el agente de dialogflow
+      * @param response Objeto con el status del proceso para obtener
+      *                 el una registro desde el agente de dialogflow
       * @return Objeto de tipo MainControllerResponse con el status del
       *         proceso de buscar una entidad en el agente de dialogflow
       */
      TEntity Get(EntityItem<TRequest> requestGet, MainControllerResponse response);
-     
+
      /**
       * Actualiza un registro en el agente de dialogflow
       * @param requestPut Objeto con los parametros para actualizar
@@ -120,7 +120,7 @@ public interface DialogflowService<TEntity, TRequest> {
       *         proceso de actualizar una entidad en el agente de dialogflow
       */
      MainControllerResponse Update(EntityItem<TRequest> requestPut);
-     
+
      /**
       * Borra un registro en el agente de dialogflow
       * por medio de su identificador

@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      Bitacora
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad bitacora 
+ * POJO asociado a la entidad bitacora
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -37,7 +37,7 @@ import java.util.Date;
 public class Bitacora implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Integer bitacoraPk;
     private String username;
     private String ip;

@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      MockitoTest
- * Tipo:        CLASE 
+ * Tipo:        CLASE
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 27 de Septiembre de 2019 (19_24)
  * Version:     1.0-SNAPSHOT
@@ -47,14 +47,14 @@ import mx.gob.impi.chatbot.persistence.api.service.UserService;
 public class MockitoTest {
     @MockBean
     private UserService userService;
-    
+
     @Before
     public void setUp() {
         User gus = new User("goose", "xyz", "gus@hotmail.com");
         Mockito.when(userService.findUserByName("goose"))
           .thenReturn(gus);
     }
-    
+
     @Test
     public void whenFindByName_thenReturnEmployee() {
         // given

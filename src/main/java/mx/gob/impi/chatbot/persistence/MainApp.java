@@ -58,7 +58,7 @@ public class MainApp {
     logger.info("Concluye Inicialización de applicacion Spring Boot *******************************");
     logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json ***************");
     logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ****************************");
-    
+
     //SpringApplication application = new SpringApplication(MainApp.class);
     /* Setting Boot banner off default value is true */
     //application.setBannerMode(Banner.Mode.OFF);
@@ -67,8 +67,8 @@ public class MainApp {
   /* */
   @Bean
   public WebMvcConfigurer corsConfigurer() {
-	  // check this out: https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
-	  // https://stackoverflow.com/questions/27381781/java-spring-boot-how-to-map-my-app-root-to-index-html
+      // check this out: https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
+      // https://stackoverflow.com/questions/27381781/java-spring-boot-how-to-map-my-app-root-to-index-html
       return new WebMvcConfigurer() {
           @Override
           public void addCorsMappings(CorsRegistry registry) {

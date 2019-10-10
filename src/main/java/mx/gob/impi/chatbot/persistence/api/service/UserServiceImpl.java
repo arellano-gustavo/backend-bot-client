@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      User
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -84,9 +84,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loadUserFromWs(Integer idEmpleado) {
-    	//TODO: conectar con el web service real aqui
-    	User user = new User("carlos", "abc", "xyz@aol.com");
-    	user.setFullName("Carlos Salinas de Gortari");
-    	return user;
+        //TODO: conectar con el web service real aqui
+        User user = new User("carlos", "abc", "xyz@aol.com");
+        user.setFullName("Carlos Salinas de Gortari");
+        return user;
     }
 }

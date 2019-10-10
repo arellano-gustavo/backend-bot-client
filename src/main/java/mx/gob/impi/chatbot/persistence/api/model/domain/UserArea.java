@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      UserArea
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -35,16 +35,16 @@ import java.io.Serializable;
  */
 public class UserArea implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private Integer idUser;
     private Integer idArea;
-    
+
     /**
      * Constructor default de la clase.
      */
     public UserArea(){
     }
-    
+
     public Integer getIdUser() {
         return idUser;
     }
@@ -57,5 +57,5 @@ public class UserArea implements Serializable {
     public void setIdArea(Integer idArea) {
         this.idArea = idArea;
     }
-    
+
 }

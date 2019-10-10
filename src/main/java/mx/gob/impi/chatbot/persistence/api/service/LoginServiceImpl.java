@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Login
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -52,46 +52,46 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private UserRolMapper userRolMapper;
-    
+
     @Autowired
     private UserAreaMapper userAreaMapper;
-    
+
     @Autowired
     private UserMapper userMapper;
-    
+
     @Autowired
     private JwtManagerService jwtManagerService;
-    
+
     @Autowired
     private ChatbotMailSenderService chatbotMailSenderService;
-   
+
     @Autowired
     private CustomDigestEncoderService cde;
-    
+
     @Value("${login.blokedWindowTime}")
     private long blokedWindowTime;
-    
+
     @Value("${login.maxInvalidTries}")
     private int maxInvalidTries;
-    
+
     @Value("${login.securityTokenWindow}")
     private long securityTokenWindow;
-    
-	@Value("${login.url-base}")
-	private String urlBase;
 
-	@Value("${login.url-auth}")
-	private String urlAuth;
+    @Value("${login.url-base}")
+    private String urlBase;
 
-	@Value("${login.url-verifica}")
-	private String urlVerifica;
+    @Value("${login.url-auth}")
+    private String urlAuth;
+
+    @Value("${login.url-verifica}")
+    private String urlVerifica;
 
     @Value("${login.url-front}")
     private String front;
-    
+
     @Value("${login.url-front-ok}")
     private String frontOk;
-    
+
     @Value("${login.url-front-bad}")
     private String frontBad;
 
@@ -107,9 +107,9 @@ public class LoginServiceImpl implements LoginService {
                 userMapper.update(user);
 
                 this.chatbotMailSenderService.sendHtmlMail(
-                        user.getMail(), "Password Cambiado exitosamente", 
+                        user.getMail(), "Password Cambiado exitosamente",
                         "Hola, "+user.getUsr()+" tu password ha cambiado." );
-                
+
                 LoginResponse loginResponse = new LoginResponse(usr, true, "Password cambiado, " + usr);
                 loginResponse.setJwt(jwtManagerService.createToken(usr));
                 return loginResponse;
@@ -119,7 +119,7 @@ public class LoginServiceImpl implements LoginService {
             return new LoginResponse(usr, false, "Token Inválido");
         }
     }
-        
+
     @Override
     public LoginResponse login(String user, String password) {
         /* * /
@@ -137,7 +137,7 @@ public class LoginServiceImpl implements LoginService {
         try {
             evalErrorCondition(user==null || user.trim().length()<1,         "User vacío");
             evalErrorCondition(password==null || password.trim().length()<1, "Password vacío");
-            
+
             usuario = userMapper.getUserByName(user);
             evalErrorCondition(usuario==null, "User no existe");
             evalErrorCondition(usuario.isExpiredAccount(), "Cuenta expirada");
@@ -147,25 +147,25 @@ public class LoginServiceImpl implements LoginService {
             long remanent = blokedWindowTime + usuario.getBloquedDate().getTime() - System.currentTimeMillis();
             long faltan = remanent/1000;
             String encodedPassword = cde.digest(password, user);
-            
+
             if(faltan>0) {
-            	evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries, 
-            			"Máximo numero de intentos alcanzado: "
-			            + maxInvalidTries 
-			            + " favor de intentar nuevamente en "
-			            + faltan
-			            +" segundos");
-			} else if(usuario.getFailedAtemptCounter()>maxInvalidTries - 1){
+                evalErrorCondition(usuario.getFailedAtemptCounter()>maxInvalidTries,
+                        "Máximo numero de intentos alcanzado: "
+                        + maxInvalidTries
+                        + " favor de intentar nuevamente en "
+                        + faltan
+                        +" segundos");
+            } else if(usuario.getFailedAtemptCounter()>maxInvalidTries - 1){
                 usuario.setFailedAtemptCounter(0);
                 userMapper.updateFailure(usuario);
                 usuario.setBloquedDate(new Date(1));
                 userMapper.updateBlocked(usuario);
-			}
-                        
+            }
+
             if(encodedPassword.equals(usuario.getPassword())) {
-            	Integer uid = usuario.getId();
-            	List<Area> areas = userAreaMapper.getAreasFromUserId(uid);
-            	List<Rol> roles = userRolMapper.getRolesFromUserId(uid);
+                Integer uid = usuario.getId();
+                List<Area> areas = userAreaMapper.getAreasFromUserId(uid);
+                List<Rol> roles = userRolMapper.getRolesFromUserId(uid);
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
                 usuario.setBloquedDate(new Date(System.currentTimeMillis()));
@@ -179,11 +179,11 @@ public class LoginServiceImpl implements LoginService {
                 int intentosActuales = usuario.getFailedAtemptCounter() + 1;
                 usuario.setFailedAtemptCounter(intentosActuales);
                 userMapper.updateFailure(usuario);
-                
+
                 if(intentosActuales<maxInvalidTries) {
                     throw new Exception("Invalid Password");
                 } else {
-                	//usuario.setBloquedAccount(true);
+                    //usuario.setBloquedAccount(true);
                     usuario.setBloquedDate(new Date(System.currentTimeMillis()));
                     userMapper.updateBlocked(usuario);
                     throw new Exception("Invalid Password. Cuenta bloqueada. Max alcanzado: " + maxInvalidTries);
@@ -193,7 +193,7 @@ public class LoginServiceImpl implements LoginService {
             return new LoginResponse(user, false, e.getMessage());
         }
     }
-    
+
     /**
      * Genera un hash del usuario dado
      * @param name Cadena con el nombre de usuario
@@ -203,11 +203,11 @@ public class LoginServiceImpl implements LoginService {
         logger.info("Digestión: "+digestWord);
         User user = userMapper.getUserByName(name);
         user.setPassword(digestWord);
-        userMapper.update(user); 
+        userMapper.update(user);
     }
-    
+
     /**
-     * Genera una excepcion deacaurdo al resultado de 
+     * Genera una excepcion deacaurdo al resultado de
      * la condicion previamente evaluda
      * @param condition Boleano con el resualtado de una
      *                  expresion previamente evaluda
@@ -220,11 +220,11 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * Informa si el diferencial en segundos entre dos fechas es menor o no que un delta dado.
-     * 
+     *
      * @param inicial Fecha inicial
      * @param terminal Fecha terminal
      * @param delta diferencial (EN SEGUNDOS) contra el que se va a comparar
-     * 
+     *
      * @param seconds true si y sólo si la diferencia es menor que el delta dato
      * @return true si y sólo si la distancia entre la fecha inicial y la fecha final
      *  es menor que el diferencial dado
@@ -233,46 +233,46 @@ public class LoginServiceImpl implements LoginService {
         long diff = (terminal.getTime() -inicial.getTime())/1000;
         return (diff<delta);
     }
-    
+
     @Override
     public LoginResponse requestRestore(String mail) {
-    	// find a user with such a mail. Return null if not found:
+        // find a user with such a mail. Return null if not found:
         User user = userMapper.getUserByMail(mail);
-        
+
         // if wrong mail, just log this condition, but say nothing about it to the request sender:
         if(user==null) {
-        	logger.error("El mail '"+mail+"' no se encontró en la base de datos");
+            logger.error("El mail '"+mail+"' no se encontró en la base de datos");
             return new LoginResponse("Unknown", true, "Revisa tu mail -->" + mail + "<--");
         }
-        
+
         //set expiration time:
         long window = System.currentTimeMillis() + (securityTokenWindow*60*1000);
         user.setSecurityTokenWindow(window);// NOW plus 'securityTokenWindow' minutes
-        
+
         // set security token:
         String secTok = createSecurityToken();
         user.setSecurityToken(secTok);
-        
+
         // update database:
         userMapper.update(user);
-        
+
         // since everything was ok, send the restore mail:
         this.chatbotMailSenderService.sendHtmlMail(
-                mail, "Procedimiento de recuperación de contraseña", 
+                mail, "Procedimiento de recuperación de contraseña",
                 getMailTemplate(secTok, user.getUsr()));
         return new LoginResponse(user.getUsr(), true, "Revisa tu mail: [" + mail + "]");
     }
-    
+
     @Override
     public String buildRestoreUrl(String securityToken) {
         StringBuilder sb = new StringBuilder();
         sb.append(this.urlBase);
         sb.append(this.front);
         sb.append(this.frontBad);
-    	if(securityToken==null || securityToken.trim().length()<1) {
-    		return sb.toString();
-    	}
-    	User user = userMapper.getUserBySecurityToken(securityToken);
+        if(securityToken==null || securityToken.trim().length()<1) {
+            return sb.toString();
+        }
+        User user = userMapper.getUserBySecurityToken(securityToken);
         if(user==null) {
             return sb.toString();
         }
@@ -290,12 +290,12 @@ public class LoginServiceImpl implements LoginService {
         User user = userMapper.getUserBySecurityToken(securityToken);
         // realiza verificaciones pertinentes
         if(user==null) {
-        	logger.error("No existe un usuario asociado al token: " + securityToken);
+            logger.error("No existe un usuario asociado al token: " + securityToken);
             return new LoginResponse("Unknown", false, "Token inexistente");
         }
         long timeToExpire = user.getSecurityTokenWindow();
         if(System.currentTimeMillis()>timeToExpire) {
-        	logger.error("Token expirado: " + securityToken + " para usuario: " + user.getUsr());
+            logger.error("Token expirado: " + securityToken + " para usuario: " + user.getUsr());
             return new LoginResponse(user.getUsr(), false, "Token expirado");
         }
         // Si el usuario existe para el token dado y el token dado no ha expirado:
@@ -308,14 +308,14 @@ public class LoginServiceImpl implements LoginService {
 
         // manda mail que avisa que el password ha sido cambiado:
         this.chatbotMailSenderService.sendHtmlMail(
-                user.getMail(), "Password Cambiado exitosamente", 
+                user.getMail(), "Password Cambiado exitosamente",
                 "Hola, "+user.getUsr()+" tu password ha cambiado." );
-        
+
         LoginResponse loginResponse = new LoginResponse(user.getUsr(), true, "Password restaurado correctamente");
         loginResponse.setJwt(jwtManagerService.createToken(user.getUsr())); // genera un nuevo jwt
         return loginResponse;
     }
-    
+
     /**
      * Cuerpo del mensaje de respuesta a una solicitud de
      * restablecimiento de contraseña
@@ -325,71 +325,71 @@ public class LoginServiceImpl implements LoginService {
      * @return Cadena con el cuerpo del mensaje de restablecimiento
      */
     private String getMailTemplate(String secTok, String name) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(this.urlBase);
-		sb.append(this.urlAuth);
-		sb.append(this.urlVerifica);
-		sb.append(secTok);
-    	String template = getTextFromFile("emailTemplate.txt", false);
-    	template = template.replace("$USER_NAME", name);
-    	template = template.replace("$URL", sb.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.urlBase);
+        sb.append(this.urlAuth);
+        sb.append(this.urlVerifica);
+        sb.append(secTok);
+        String template = getTextFromFile("emailTemplate.txt", false);
+        template = template.replace("$USER_NAME", name);
+        template = template.replace("$URL", sb.toString());
         return template;
     }
-    
-	private String getTextFromFileWithFullPath(String filenameFullpath) {
-		Scanner scanner = null;
-		try {
-	    	logger.info("email template given full path: ["+filenameFullpath+"]");
-	    	File file = new File(filenameFullpath);
-			scanner = new Scanner(file, "UTF-8" );
-			String text = scanner.useDelimiter("\\A").next();
-			scanner.close();
-			if(text.trim().length()<9) {
-	    		logger.error("Couldn't find the given file: " + filenameFullpath); 
-	    		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filenameFullpath+")</a>";
-			}
-			return text;
-		} catch (Exception e) {
-    		logger.error("Couldn't find the given file: " + filenameFullpath); 
-    		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filenameFullpath+")</a>";			
-		} finally {
-			if(scanner!=null) scanner.close();
-		}
-	}
-	
-	private String getTextFromFileWithRelativePath(String filenameRelativepath) {
-		InputStream stream = 
-				DialogflowCredentials
+
+    private String getTextFromFileWithFullPath(String filenameFullpath) {
+        Scanner scanner = null;
+        try {
+            logger.info("email template given full path: ["+filenameFullpath+"]");
+            File file = new File(filenameFullpath);
+            scanner = new Scanner(file, "UTF-8" );
+            String text = scanner.useDelimiter("\\A").next();
+            scanner.close();
+            if(text.trim().length()<9) {
+                logger.error("Couldn't find the given file: " + filenameFullpath);
+                return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filenameFullpath+")</a>";
+            }
+            return text;
+        } catch (Exception e) {
+            logger.error("Couldn't find the given file: " + filenameFullpath);
+            return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filenameFullpath+")</a>";
+        } finally {
+            if(scanner!=null) scanner.close();
+        }
+    }
+
+    private String getTextFromFileWithRelativePath(String filenameRelativepath) {
+        InputStream stream =
+                DialogflowCredentials
                 .class
                 .getClassLoader()
                 .getResourceAsStream(filenameRelativepath);
-		if(stream==null) {
-			logger.error("Error loading "+filenameRelativepath); 
-			return "<a>bad request</a>";
-		}
-		Scanner scanner = new Scanner(stream, "UTF-8");
-		String text = scanner.useDelimiter("\\A").next();
-		scanner.close();
-		return text;
-	}
-	
+        if(stream==null) {
+            logger.error("Error loading "+filenameRelativepath);
+            return "<a>bad request</a>";
+        }
+        Scanner scanner = new Scanner(stream, "UTF-8");
+        String text = scanner.useDelimiter("\\A").next();
+        scanner.close();
+        return text;
+    }
+
     /**
      * Obtiene el cuerpo del mensaje de restablecer el password.
-     * 
+     *
      * @param filename Cadena con la ruta que contiene el cuerpo
      *                 del mensaje que se envia al usuario.
      * @param relative If true, the file will be taken from inside the jar. If false, will use an absolute path.
-     * 
+     *
      * @return Cadena con el cuerpo del mesaje para restablecer
      *         la contraseña del usuario que lo solicita
      */
-	private String getTextFromFile(String filename, boolean relative) {
-		if(relative) {
-			return getTextFromFileWithRelativePath(filename);
-		} else {
-			String basePath = "/chat/";
-			return getTextFromFileWithFullPath(basePath+ filename);
-		}
+    private String getTextFromFile(String filename, boolean relative) {
+        if(relative) {
+            return getTextFromFileWithRelativePath(filename);
+        } else {
+            String basePath = "/chat/";
+            return getTextFromFileWithFullPath(basePath+ filename);
+        }
     }
 
     /**

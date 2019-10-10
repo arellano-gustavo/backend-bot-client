@@ -15,7 +15,7 @@
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Clase para el envio de mails 
+ * Clase para el envio de mails
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -29,10 +29,10 @@ import java.util.regex.Pattern;
 
 public final class MailValidator {
     //private final static Logger logger = LoggerFactory.getLogger(MailValidator.class);
-    
+
     private static final String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final Pattern pattern = Pattern.compile(regex);
-    
+
     /**
      * Valida la estructura del correo electronico
      * @param email Cadena con el correo electronico a validar

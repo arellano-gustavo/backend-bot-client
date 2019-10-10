@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      UserRol
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -35,16 +35,16 @@ import java.io.Serializable;
  */
 public class UserRol implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private int idUser;
     private int idRol;
-    
+
     /**
      * Constructor default de la clase.
      */
     public UserRol(){
     }
-    
+
     public int getIdUser() {
         return idUser;
     }
@@ -57,5 +57,5 @@ public class UserRol implements Serializable {
     public void setIdRol(int idRol) {
         this.idRol = idRol;
     }
-    
+
 }

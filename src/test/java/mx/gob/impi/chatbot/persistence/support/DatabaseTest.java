@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      DatabaseTest
- * Tipo:        CLASE 
+ * Tipo:        CLASE
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Miercoles 25 de Septiembre de 2019 (17_52)
  * Version:     1.0-SNAPSHOT
@@ -42,22 +42,22 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @version 1.0-SNAPSHOT
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest 
+@SpringBootTest
 public class DatabaseTest {
     private final static Logger logger = LoggerFactory.getLogger(DatabaseTest.class);
-    
+
     @Value("${db.username}")
     private String username;
 
     @Value("${db.password}")
     private String password;
-    
+
     @Value("${db.url}")
     private String url;
-    
+
     @Value("${db.driver}")
     private String driver;
-    
+
     /**
      * Prueba la conexion a la base de datos
      */

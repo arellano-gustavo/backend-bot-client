@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      Estado
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad Estado 
+ * POJO asociado a la entidad Estado
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -45,7 +45,7 @@ public class EstadoPojo implements Serializable {
      */
     public EstadoPojo() {
     }
-    
+
     /**
      * Constructor con los atributos que conforman la llave de la clase
      * y el nombre del Estado.
@@ -69,7 +69,7 @@ public class EstadoPojo implements Serializable {
     public void setEstadoPk(Integer estadoPk) {
         this.estadoPk = estadoPk;
     }
-    
+
     public String getNombre() {
         return nombre;
     }

@@ -15,14 +15,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtManagerServiceImpl implements JwtManagerService {
     private static final Logger logger = LoggerFactory.getLogger(JwtManagerServiceImpl.class);
     private static final String ENCRYPT_KEY = "gustavo";
-    
+
     @Override
     public String createToken(final String username) {
         byte[] key = ENCRYPT_KEY.getBytes();
-        
+
         Calendar calendar = Calendar.getInstance();
         Date issued = calendar.getTime();
-        
+
         calendar.add(Calendar.MINUTE, 50);// 50 minutes !!!!!!
         Date expiration = calendar.getTime();
 
@@ -49,8 +49,8 @@ public class JwtManagerServiceImpl implements JwtManagerService {
             logger.debug("Expiration: " + claims.getExpiration());
             logger.debug("IssuedAt: " + claims.getIssuedAt());
             if(!user.equals(claims.getId())) {
-            	logger.error("issuer not verfied !!!");
-            	return false;
+                logger.error("issuer not verfied !!!");
+                return false;
             }
         } catch(Exception e) {
             logger.error("Given token has not been verified. Error: " + e.getMessage());

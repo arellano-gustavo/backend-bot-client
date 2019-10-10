@@ -20,10 +20,10 @@ public class RandomLocalTests {
     public static void main(String...argv) throws IOException {
         //for(int i=0;i<25;i++)
         //System.out.println(createSecurityToken());
-    	ok();
+        ok();
     }
     public static void ok() throws IOException {
-    	byte[] content = Files.readAllBytes(Paths.get("emailTemplate.txt"));
-    	System.out.println(new String(content));
+        byte[] content = Files.readAllBytes(Paths.get("emailTemplate.txt"));
+        System.out.println(new String(content));
     }
 }

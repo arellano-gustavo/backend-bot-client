@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.config
  * Modulo:      DataConfig
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -58,35 +58,35 @@ public class DataConfig {
 
     @Value("${db.password}")
     private String password;
-    
+
     @Value("${db.url}")
     private String url;
-    
+
     @Value("${db.driver}")
     private String driver;
-    
+
     private final static Logger logger = LoggerFactory.getLogger(DataConfig.class);
-    
+
     private Properties properties = new Properties();
-    
+
     /**
      * Constructor default de la clase.
      */
     public DataConfig() {
         super();
-        InputStream stream = 
+        InputStream stream =
                 DataConfig
                 .class
                 .getClassLoader()
                 .getResourceAsStream("c3p0.properties");
         try {
             properties.load(stream);
-            logger.info("Properties have been loaded"); 
+            logger.info("Properties have been loaded");
         } catch (IOException e1) {
             logger.error(e1.getMessage());
         }
     }
-    
+
     /**
      * Regresa la propiedad solicitada
      * @param name Cadena con el nombre de la propiedad
@@ -99,14 +99,14 @@ public class DataConfig {
             BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
             textEncryptor.setPassword(name);
             //String encr = textEncryptor.encrypt("gustavo");
-            //System.out.println(encr); 
+            //System.out.println(encr);
             String pass = data.substring(4, data.length()-1);
             String plainPassword = textEncryptor.decrypt(pass);
             return plainPassword;
         }
         return data;
     }
-    
+
     /**
      * Crea pool de conexiones
      * @return Regresa el data source
@@ -125,7 +125,7 @@ public class DataConfig {
             return null;
         }
     }
-    
+
     /**
      * Administrador de transaciones de base de datos
      * @return Objeto de tipo 'DataSourceTransactionManager'

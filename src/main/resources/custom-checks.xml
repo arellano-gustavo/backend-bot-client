@@ -81,7 +81,9 @@
         <module name="JavadocVariable">
             <property name="scope" value="public"/>
         </module>
-        <module name="JavadocStyle"/>
+        <module name="JavadocStyle">
+           <property name="checkFirstSentence" value="false"/>
+        </module>
         <module name="JavadocType"/>
         <module name="JavadocMethod">
             <property name="allowMissingPropertyJavadoc" value="false"/>
@@ -160,7 +162,7 @@
         <module name="OperatorWrap"/>
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
-        <!-- 
+        <!--
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround"/>
  -->
@@ -184,7 +186,7 @@
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <!-- 
+        <!--
         <module name="HiddenField"/>
         <module name="MagicNumber"/>
          -->

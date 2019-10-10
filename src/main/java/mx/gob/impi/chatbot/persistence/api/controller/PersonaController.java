@@ -15,7 +15,7 @@
  * Fecha:       Lunes 23 de Septiembre de 2019
  * Version:     0.0.1
  * .
- * Clase controller de los servicios rest 
+ * Clase controller de los servicios rest
  * para la administracion de las personas
  * registradas
  *
@@ -50,7 +50,7 @@ import mx.gob.impi.chatbot.persistence.api.service.PersonaService;
 @RequestMapping(value = "/api/personas")
 public class PersonaController {
     private final static Logger logger = LoggerFactory.getLogger(PersonaController.class);
-    
+
     @Autowired
     private PersonaService personaService;
 

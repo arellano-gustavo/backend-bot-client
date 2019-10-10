@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.config
  * Modulo:      CorsFilter
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -47,7 +47,7 @@ public class CorsFilter {//implements Filter {
     // https://stackoverflow.com/questions/40418441/spring-security-cors-filter
     public void doFilterX(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-    	System.out.println("*****************\n*****************\n***********+");
+        System.out.println("*****************\n*****************\n***********+");
 //        HttpServletResponse response = (HttpServletResponse) res;
 //        HttpServletRequest request = (HttpServletRequest) req;
 //        response.setHeader("Access-Control-Allow-Origin", "*");

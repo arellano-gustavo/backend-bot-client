@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      Main Module
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad 'Message' 
+ * POJO asociado a la entidad 'Message'
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -74,5 +74,5 @@ public class MainControllerResponse {
     public void setSucceed(boolean succeed) {
         this.succeed = succeed;
     }
-    
+
 }

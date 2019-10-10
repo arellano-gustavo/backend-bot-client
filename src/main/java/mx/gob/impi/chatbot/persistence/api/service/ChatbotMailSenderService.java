@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Mail
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
@@ -32,15 +32,15 @@ package mx.gob.impi.chatbot.persistence.api.service;
  * @version 1.0-SNAPSHOT
  */
 public interface ChatbotMailSenderService {
-	
-	/**
-	 * Envio correo electronicos desde la aplicacion chatbot
-	 * @param to Cadena con los correos electronicos a los que se
-	 *           el mensaje que genera el chatbot
-	 * @param subject Cadena con el titulo del correo electronico
-	 * @param body Cadena con el cuerpo del mensaje que se envia
-	 *             desde el chatbot
-	 */
+
+    /**
+     * Envio correo electronicos desde la aplicacion chatbot
+     * @param to Cadena con los correos electronicos a los que se
+     *           el mensaje que genera el chatbot
+     * @param subject Cadena con el titulo del correo electronico
+     * @param body Cadena con el cuerpo del mensaje que se envia
+     *             desde el chatbot
+     */
     void sendMail2(String to, String subject, String body);
 
     /**
@@ -50,5 +50,5 @@ public interface ChatbotMailSenderService {
      * @param subject Cadena con el titulo del correo electronico
      * @param body Cadena con el cuerpodo del mensaje de correo
      */
-	void sendHtmlMail(String to, String subject, String body);
+    void sendHtmlMail(String to, String subject, String body);
 }

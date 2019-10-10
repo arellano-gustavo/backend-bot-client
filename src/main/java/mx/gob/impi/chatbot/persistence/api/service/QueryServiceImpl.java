@@ -10,7 +10,7 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.service
  * Modulo:      Dialogflow
- * Tipo:        class 
+ * Tipo:        class
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Miercoles 18 de Septiembre de 2019 (18_05)
  * Version:     1.0-SNAPSHOT
@@ -36,7 +36,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 
 /**
  * <p>Descripción:</p>
- * Clase con los metodos para consumir los endpoint 
+ * Clase con los metodos para consumir los endpoint
  * de la entidad IntentRequest del agente de dialogflow
  *
  * @author Gustavo A. Arellano (GAA)
@@ -49,27 +49,27 @@ public class QueryServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2DetectIntentResponse, GoogleCloudDialogflowV2DetectIntentRequest>
 implements QueryService
 {
-	
-	public DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2DetectIntentRequest requestEntity,
-			Class<GoogleCloudDialogflowV2DetectIntentResponse> responseClass) {
-		// Crear el cliente de la entidad del endpoint 
-		DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> dialogflowRequest = new DetectIntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
-		return dialogflowRequest;
-	}
-	/*
-	@Override
-	public GoogleCloudDialogflowV2DetectIntentResponse Create(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestPost) {
-		requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/sessions/" + requestPost.getSessionId() + ":detectIntent");
-		return super.Create(requestPost);
-	}
-	*/
-	@Override
-	public GoogleCloudDialogflowV2DetectIntentResponse execute(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestEnity, MainControllerResponse response){
-		// Crear el objeto de la entidad de respuesta del endpoint
-		GoogleCloudDialogflowV2DetectIntentResponse responseEntity = new GoogleCloudDialogflowV2DetectIntentResponse();
-		//Se realiza la solicitud al endpoint de dialogflow
-		return execute(requestEnity, responseEntity, response);		
-	}
-	
+
+    public DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2DetectIntentRequest requestEntity,
+            Class<GoogleCloudDialogflowV2DetectIntentResponse> responseClass) {
+        // Crear el cliente de la entidad del endpoint
+        DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> dialogflowRequest = new DetectIntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
+        return dialogflowRequest;
+    }
+    /*
+    @Override
+    public GoogleCloudDialogflowV2DetectIntentResponse Create(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestPost) {
+        requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/sessions/" + requestPost.getSessionId() + ":detectIntent");
+        return super.Create(requestPost);
+    }
+    */
+    @Override
+    public GoogleCloudDialogflowV2DetectIntentResponse execute(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestEnity, MainControllerResponse response){
+        // Crear el objeto de la entidad de respuesta del endpoint
+        GoogleCloudDialogflowV2DetectIntentResponse responseEntity = new GoogleCloudDialogflowV2DetectIntentResponse();
+        //Se realiza la solicitud al endpoint de dialogflow
+        return execute(requestEnity, responseEntity, response);
+    }
+
 
 }

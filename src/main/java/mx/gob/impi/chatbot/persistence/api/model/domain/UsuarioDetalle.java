@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
  * Modulo:      UsuarioDetalle
- * Tipo:        clase 
+ * Tipo:        clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * POJO asociado a la entidad usuario_detalle 
+ * POJO asociado a la entidad usuario_detalle
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -36,7 +36,7 @@ import java.io.Serializable;
 public class UsuarioDetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Integer usuarioFk;
     private String nombre;
     private String apPaterno;

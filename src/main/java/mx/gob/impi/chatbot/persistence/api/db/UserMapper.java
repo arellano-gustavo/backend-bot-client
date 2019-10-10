@@ -10,12 +10,12 @@
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.db
  * Modulo:      User
- * Tipo:        interface 
+ * Tipo:        interface
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 20 de Septiembre de 2019 (13_41)
  * Version:     1.0-SNAPSHOT
  * .
- * Interface 'Mapper' MyBatis asociado a la entidad usuario 
+ * Interface 'Mapper' MyBatis asociado a la entidad usuario
  *
  * Historia:    .
  *              20190920_1341 Creación del tipo
@@ -51,7 +51,7 @@ public interface UserMapper {
      */
     @Select("SELECT * FROM user;")
     List<User> getAll();
-    
+
     /* Mapeo de campos objeto-entidad */
     @Results(value = {
             @Result(property = "creationDate",           column = "creation_date"),
@@ -87,12 +87,12 @@ public interface UserMapper {
      */
     @Select("SELECT * FROM user WHERE mail = #{mail}")
     User getUserByMail(String mail);
-    
+
     /**
      * Obtiene un usuario realizando la búsqueda con la llave primaria
-     * 
-     * @param id Llave primaria 
-     * 
+     *
+     * @param id Llave primaria
+     *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Select("SELECT * FROM user WHERE id = #{id}")
@@ -109,15 +109,15 @@ public interface UserMapper {
     User getUserBySecurityToken(String securityToken);
 
     /**
-     * Elimina al usuario cuyo ID es el dado y también elimina a las 
+     * Elimina al usuario cuyo ID es el dado y también elimina a las
      * dependencias que este tiene en la base de datos.
      *
      * @param id El id del usuario
      */
     @Update("UPDATE user SET disabled=true WHERE id=#{id}")
     void deleteUserByIdLogico(int id);
-    
-    String full_insert_statement = 
+
+    String full_insert_statement =
             "INSERT INTO user("
             //+"id, "
             +"usr, "
@@ -180,19 +180,19 @@ public interface UserMapper {
           })
     @Insert(full_insert_statement)
     void fullInsert(User user);
-    
-    String short_insert_statement = 
+
+    String short_insert_statement =
             "INSERT INTO user("
             //+"id, "
             +"usr, "
             +"password, "
-            +"mail, " 
+            +"mail, "
             + "creation_date "
             +") VALUES("
             //+"#{id}, "
             +"#{usr}, "
             +"#{password}, "
-            +"#{mail}, " 
+            +"#{mail}, "
             +"#{creationDate}"
             +");";
     /** Procedimiento de inserción con mapeo incluido */
@@ -202,7 +202,7 @@ public interface UserMapper {
     @Insert(short_insert_statement)
     void shortInsert(User user);
 
-    String update_statement = 
+    String update_statement =
             "UPDATE user SET "
             +"usr                       = #{usr}, "
             +"password                  = #{password}, "
@@ -227,7 +227,7 @@ public interface UserMapper {
     @Update(update_statement)
     void update(User user);
 
-    String updateFailure_statement = 
+    String updateFailure_statement =
             "UPDATE user SET "
             +"failed_atempt_counter     = #{failedAtemptCounter} "
             +"WHERE "
@@ -236,7 +236,7 @@ public interface UserMapper {
     @Update(updateFailure_statement)
     void updateFailure(User usuario);
 
-    String updateLocked_statement = 
+    String updateLocked_statement =
             "UPDATE user SET "
             +"bloqued_account           = #{bloquedAccount}, "
             +"bloqued_date              = #{bloquedDate} "
@@ -244,7 +244,7 @@ public interface UserMapper {
             +"id = #{id}";
     /** Procedimiento de actualización de bloqueo de usuario con mapeo incluido */
     @Update(updateLocked_statement)
-	void updateBlocked(User usuario);
+    void updateBlocked(User usuario);
 }
 
 
@@ -275,21 +275,21 @@ CREATE UNIQUE INDEX user_usr_idx ON user(usr);
 CREATE UNIQUE INDEX user_mail_idx ON user(mail);
 CREATE INDEX user_security_token_idx ON user(security_token);
 
-insert into user ( 
-id, 
-usr, 
-password, 
-mail, 
-creation_date, 
-expired_account, 
-bloqued_account, 
-expired_credential,  
+insert into user (
+id,
+usr,
+password,
+mail,
+creation_date,
+expired_account,
+bloqued_account,
+expired_credential,
 disabled,
-failed_atempt_counter,  
-bloqued_date, 
-secret_question, 
-secret_answer, 
-security_token, 
+failed_atempt_counter,
+bloqued_date,
+secret_question,
+secret_answer,
+security_token,
 security_token_window,
 last_access_date,
 last_password_update_date.

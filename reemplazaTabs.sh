@@ -13,7 +13,7 @@ if [ $# == 1 ]; then
     IFS=$'\n'
     EXT_TMP="-rem.tmp"
 
-    for I in $(find $1 -type f -not -path '.git' -iname '*.xml'); do
+    for I in $(find $1 -type f -not -path '.git' -iname '*.java'); do
         NUM=$(file $I | cut -d ':' -f 2 | grep -i text | wc -l)
 
         if [ $NUM -eq "1" ]; then

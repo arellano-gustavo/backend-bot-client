@@ -16,7 +16,7 @@
  * Versión:     1.0-SNAPSHOT
  *
  * Historia:    20190927_1622
- * 
+ *
  */
 package mx.gob.impi.chatbot.persistence.api.model.domain;
 
@@ -30,22 +30,22 @@ import java.io.Serializable;
  * @version 1.0-SNAPSHOT
  */
 public class Login implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
-	private String user;
-	private String password;
-	
-	public String getUser() {
-		return user;
-	}
-	public void setUser(String user) {
-		this.user = user;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
+    private static final long serialVersionUID = 1L;
+
+    private String user;
+    private String password;
+
+    public String getUser() {
+        return user;
+    }
+    public void setUser(String user) {
+        this.user = user;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
