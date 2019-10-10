@@ -24,6 +24,8 @@
  */
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
@@ -347,27 +349,35 @@ public class LoginServiceImpl implements LoginService {
      */
     @SuppressWarnings("resource")
 	private String getTextFromFile(String filename) {
-    	InputStream stream2 = LoginServiceImpl.class.getResourceAsStream(filename);
+    	// InputStream stream2 = LoginServiceImpl.class.getResourceAsStream(filename);
     	//TODO: Por alguna razón, aqui 'stream' sale vacio en producción, pero en desarrollo si jala. !!!! :(
     	//TODO: quizá esto sirva: 	
-    	ClassPathResource resource = new ClassPathResource(filename);
+    	//ClassPathResource resource = new ClassPathResource(filename);
     	//TODO: 
-    	InputStream stream = getInputStream(resource);
+    	//InputStream stream = getInputStream(resource);
     	
-    	if(stream==null) {
+    	File file = new File(".");
+    	String template = file.getAbsolutePath() + "/src/main/resources/emailTemplate.txt";
+    	Scanner scanner = null;
+    	try {
+    		scanner = new Scanner( new File(template), "UTF-8" );
+    		String text = scanner.useDelimiter("\\A").next();
+    		if(text.trim().length()<9) {
+        		logger.error("Couldn't find the given file: " + template); 
+        		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
+    		}
+    		return text;
+    		
+    	} catch(FileNotFoundException fnf) {
+    		logger.error("Couldn't find the given file: " + template); 
     		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
     	}
-    	String text = new Scanner(stream, "UTF-8").useDelimiter("\\A").next();
-    	return text;
     }
     
-    private InputStream getInputStream(ClassPathResource resource) {
-    	try {
-			return resource.getInputStream();
-		} catch (Exception e) {
-			logger.error("Error getting stream from resource: " + e.getMessage()); 
-			return null;
-		}
+    private void ok() {
+    	File file = new File(".");
+    	String path = file.getAbsolutePath();
+    	System.out.println(path);
     }
 
     /**

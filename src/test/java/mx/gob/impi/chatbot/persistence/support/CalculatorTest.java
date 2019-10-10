@@ -2,6 +2,7 @@ package mx.gob.impi.chatbot.persistence.support;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 
 import org.slf4j.*;
 import org.junit.Test;
@@ -21,6 +22,14 @@ public class CalculatorTest {
         
         int result3 = calc.divide(1, 2);
         assertTrue("Este es un mensaje de error 2", result3==0);
-
+    }
+    @Test
+    public void ok() {
+    	File file = new File(".");
+    	String path = file.getAbsolutePath();
+    	System.out.println(path+"/src/main/resources/emailTemplate.txt");
+    	// /Users/garellano/development/code/impi-chatbot-admin/   
+    	// src/main/resources/emailTemplate.txt
+    	// file.getAbsolutePath() + "/src/main/resources/emailTemplate.txt"
     }
 }
