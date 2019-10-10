@@ -25,7 +25,6 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
@@ -331,12 +330,46 @@ public class LoginServiceImpl implements LoginService {
 		sb.append(this.urlAuth);
 		sb.append(this.urlVerifica);
 		sb.append(secTok);
-    	String template = getTextFromFile("emailTemplate.txt");
+    	String template = getTextFromFile("emailTemplate.txt", true);
     	template = template.replace("$USER_NAME", name);
     	template = template.replace("$URL", sb.toString());
         return template;
     }
     
+	private String getTextFromFileWithFullPath(String filenameFullpath) {
+		try {
+	    	logger.info("email template given full path: ["+filenameFullpath+"]");
+	    	File file = new File(filenameFullpath);
+			Scanner scanner = new Scanner(file, "UTF-8" );
+			String text = scanner.useDelimiter("\\A").next();
+			scanner.close();
+			if(text.trim().length()<9) {
+	    		logger.error("Couldn't find the given file: " + filenameFullpath); 
+	    		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filenameFullpath+")</a>";
+			}
+			return text;
+		} catch (Exception e) {
+    		logger.error("Couldn't find the given file: " + filenameFullpath); 
+    		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filenameFullpath+")</a>";			
+		}
+	}
+	
+	private String getTextFromFileWithRelativePath(String filenameRelativepath) {
+		InputStream stream = 
+				DialogflowCredentials
+                .class
+                .getClassLoader()
+                .getResourceAsStream(filenameRelativepath);
+		if(stream==null) {
+			logger.error("Error loading "+filenameRelativepath); 
+			return "<a>bad request</a>";
+		}
+		Scanner scanner = new Scanner(stream, "UTF-8");
+		String text = scanner.useDelimiter("\\A").next();
+		scanner.close();
+		return text;
+	}
+	
     /**
      * Obtiene el cuerpo del mensaje de restablecer el password
      * @param filename Cadena con la ruta que contiene el cuerpo
@@ -344,44 +377,13 @@ public class LoginServiceImpl implements LoginService {
      * @return Cadena con el cuerpo del mesaje para restablecer
      *         la contraseña del usuario que lo solicita
      */
-    @SuppressWarnings("resource")
-	private String getTextFromFile(String filename) {
-    	String tempo = getTextFromFile2(filename);
-    	logger.info("email template path 1: ---------------->"+tempo+"<----------------");
-    	//String template = file.getAbsolutePath() + "/src/main/resources/emailTemplate.txt";
-    	
-    	// Previous code is only a test. This is the good one (by now...) 
-    	String template = "/chat/"+ filename;
-    	logger.info("email template path 2: ---------------->"+template+"<----------------");
-    	Scanner scanner = null;
-    	try {
-    		scanner = new Scanner( new File(template), "UTF-8" );
-    		String text = scanner.useDelimiter("\\A").next();
-    		if(text.trim().length()<9) {
-        		logger.error("Couldn't find the given file: " + template); 
-        		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
-    		}
-    		return text;
-    	} catch(FileNotFoundException fnf) {
-    		logger.error("Couldn't find the given file: " + template); 
-    		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
-    	}
-    }
-    
-    private String getTextFromFile2(String path) {
-		InputStream stream = 
-				DialogflowCredentials
-                .class
-                .getClassLoader()
-                .getResourceAsStream(path);
-		if(stream==null) {
-			logger.error("Error loading "+path); 
-			return "<a>bad request</a>";
+	private String getTextFromFile(String filename, boolean relative) {
+		if(relative) {
+			return getTextFromFileWithRelativePath(filename);
+		} else {
+			String basePath = "/chat/";
+			return getTextFromFileWithFullPath(basePath+ filename);
 		}
-		Scanner scanner = new Scanner(stream, "UTF-8");
-		String text = scanner.useDelimiter("\\A").next();
-		scanner.close();
-		return text;
     }
 
     /**
