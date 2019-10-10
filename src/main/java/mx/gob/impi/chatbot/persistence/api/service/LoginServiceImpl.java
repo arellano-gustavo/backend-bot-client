@@ -26,6 +26,7 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -198,7 +199,7 @@ public class LoginServiceImpl implements LoginService {
      * Genera un hash del usuario dado
      * @param name Cadena con el nombre de usuario
      */
-    public void ok(String name) {
+    public void buildHashForName(String name) {
         String digestWord = cde.digest("clave", name);
         logger.info("Digestión: "+digestWord);
         User user = userMapper.getUserByName(name);
@@ -345,9 +346,13 @@ public class LoginServiceImpl implements LoginService {
      */
     @SuppressWarnings("resource")
 	private String getTextFromFile(String filename) {
+    	String tempo = getTextFromFile2(filename);
+    	logger.info("email template path 1: ---------------->"+tempo+"<----------------");
     	//String template = file.getAbsolutePath() + "/src/main/resources/emailTemplate.txt";
+    	
+    	// Previous code is only a test. This is the good one (by now...) 
     	String template = "/chat/"+ filename;
-    	logger.info("email template path: ---------------->"+template+"<----------------");
+    	logger.info("email template path 2: ---------------->"+template+"<----------------");
     	Scanner scanner = null;
     	try {
     		scanner = new Scanner( new File(template), "UTF-8" );
@@ -357,11 +362,26 @@ public class LoginServiceImpl implements LoginService {
         		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
     		}
     		return text;
-    		
     	} catch(FileNotFoundException fnf) {
     		logger.error("Couldn't find the given file: " + template); 
     		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
     	}
+    }
+    
+    private String getTextFromFile2(String path) {
+		InputStream stream = 
+				DialogflowCredentials
+                .class
+                .getClassLoader()
+                .getResourceAsStream(path);
+		if(stream==null) {
+			logger.error("Error loading "+path); 
+			return "<a>bad request</a>";
+		}
+		Scanner scanner = new Scanner(stream, "UTF-8");
+		String text = scanner.useDelimiter("\\A").next();
+		scanner.close();
+		return text;
     }
 
     /**
