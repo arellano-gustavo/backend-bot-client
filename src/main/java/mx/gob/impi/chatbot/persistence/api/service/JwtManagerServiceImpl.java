@@ -14,10 +14,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtManagerServiceImpl implements JwtManagerService {
     private static final Logger logger = LoggerFactory.getLogger(JwtManagerServiceImpl.class);
+    private static final String ENCRYPT_KEY = "gustavo";
     
     @Override
     public String createToken(final String username) {
-        byte[] key = "gustavo".getBytes();
+        byte[] key = ENCRYPT_KEY.getBytes();
         
         Calendar calendar = Calendar.getInstance();
         Date issued = calendar.getTime();
@@ -32,7 +33,7 @@ public class JwtManagerServiceImpl implements JwtManagerService {
         jwtBuilder.setId(username);
         jwtBuilder.setExpiration(expiration);
         String token = jwtBuilder.signWith(SignatureAlgorithm.HS256, key).compact();
-        logger.debug("Token has been created: " + token);
+        logger.debug("Token for '"+username+"' has been created: " + token);
         return token;
     }
 
@@ -40,7 +41,7 @@ public class JwtManagerServiceImpl implements JwtManagerService {
     public boolean verifyToken(String jwt, String user) {
         try {
             Claims claims = Jwts.parser()
-               .setSigningKey("gustavo".getBytes())
+               .setSigningKey(ENCRYPT_KEY.getBytes())
                .parseClaimsJws(jwt).getBody();
             logger.debug("ID: " + claims.getId());
             logger.debug("Subject: " + claims.getSubject());
@@ -48,6 +49,7 @@ public class JwtManagerServiceImpl implements JwtManagerService {
             logger.debug("Expiration: " + claims.getExpiration());
             logger.debug("IssuedAt: " + claims.getIssuedAt());
             if(!user.equals(claims.getId())) {
+            	logger.error("issuer not verfied !!!");
             	return false;
             }
         } catch(Exception e) {

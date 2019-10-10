@@ -26,7 +26,6 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -35,7 +34,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import mx.gob.impi.chatbot.persistence.api.db.*;
@@ -97,8 +95,6 @@ public class LoginServiceImpl implements LoginService {
     @Value("${login.url-front-bad}")
     private String frontBad;
 
-	
-    
     @Override
     public LoginResponse changePassword(String usr, String psw, String jwt) {
         if(jwtManagerService.verifyToken(jwt, usr)) {
@@ -349,17 +345,9 @@ public class LoginServiceImpl implements LoginService {
      */
     @SuppressWarnings("resource")
 	private String getTextFromFile(String filename) {
-    	// InputStream stream2 = LoginServiceImpl.class.getResourceAsStream(filename);
-    	//TODO: Por alguna razón, aqui 'stream' sale vacio en producción, pero en desarrollo si jala. !!!! :(
-    	//TODO: quizá esto sirva: 	
-    	//ClassPathResource resource = new ClassPathResource(filename);
-    	//TODO: 
-    	//InputStream stream = getInputStream(resource);
-    	
-    	File file = new File(".");
-    	String template = file.getAbsolutePath() + "/src/main/resources/emailTemplate.txt";
-    	template = "/chat/emailTemplate.txt";
-    	logger.info("---------------->"+template+"<----------------");
+    	//String template = file.getAbsolutePath() + "/src/main/resources/emailTemplate.txt";
+    	String template = "/chat/"+ filename;
+    	logger.info("email template path: ---------------->"+template+"<----------------");
     	Scanner scanner = null;
     	try {
     		scanner = new Scanner( new File(template), "UTF-8" );
@@ -374,12 +362,6 @@ public class LoginServiceImpl implements LoginService {
     		logger.error("Couldn't find the given file: " + template); 
     		return "<a href='$URL'>Liga (secundaria) para recuperar tu password ("+filename+")</a>";
     	}
-    }
-    
-    private void ok() {
-    	File file = new File(".");
-    	String path = file.getAbsolutePath();
-    	System.out.println(path);
     }
 
     /**
