@@ -358,6 +358,8 @@ public class LoginServiceImpl implements LoginService {
     	
     	File file = new File(".");
     	String template = file.getAbsolutePath() + "/src/main/resources/emailTemplate.txt";
+    	template = "/chat/emailTemplate.txt";
+    	logger.info("---------------->"+template+"<----------------");
     	Scanner scanner = null;
     	try {
     		scanner = new Scanner( new File(template), "UTF-8" );
