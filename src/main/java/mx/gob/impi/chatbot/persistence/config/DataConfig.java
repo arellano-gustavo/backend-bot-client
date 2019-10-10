@@ -83,7 +83,7 @@ public class DataConfig {
             properties.load(stream);
             logger.info("Properties have been loaded"); 
         } catch (IOException e1) {
-            e1.printStackTrace();
+            logger.error(e1.getMessage());
         }
     }
     

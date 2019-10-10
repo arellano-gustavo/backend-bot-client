@@ -25,7 +25,6 @@
  */
 package mx.gob.impi.chatbot.persistence.api.controller;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.net.URI;
@@ -34,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,9 +90,8 @@ public class AuthController {
     @ApiOperation(
         value = "AuthController::request-restore",
         notes = "Solicita la recuperación de la clave de un usuario")
-    @RequestMapping(
+    @PostMapping(
         value = "/request-restore.json",
-        method = POST,
         produces = "application/json; charset=utf-8")
     public LoginResponse requestRestore(@RequestParam String mail) {
         return loginService.requestRestore(mail);
@@ -108,9 +107,8 @@ public class AuthController {
     @ApiOperation(
             value = "AuthController::restore",
             notes = "Restaura la clave de un usuario")
-        @RequestMapping(
+        @GetMapping(
             value = "/restore-password.json",
-            method = GET,
             produces = "application/json; charset=utf-8")
         public LoginResponse restorePassword(String password, String securityToken) {
             if(securityToken!=null) {
@@ -132,9 +130,8 @@ public class AuthController {
     @ApiOperation(
         value = "AuthController::change-password",
         notes = "Realiza el cambio de la clave de un usuario")
-    @RequestMapping(
+    @PostMapping(
         value = "/change-password.json",
-        method = POST,
         produces = "application/json; charset=utf-8")
     public LoginResponse changePassword(@RequestHeader("jwt") String jwt, @RequestBody Login login) {
         return loginService.changePassword(login.getUser(), login.getPassword(), jwt);
@@ -149,7 +146,7 @@ public class AuthController {
      * @return
      */
     @GetMapping(value = "/check.json")
-    ResponseEntity<Void> proceedChangePasswordCheckRedirect(@RequestParam String token) {
+    public ResponseEntity<Void> proceedChangePasswordCheckRedirect(@RequestParam String token) {
     	String sTok = loginService.buildRestoreUrl(token);
         return ResponseEntity.status(HttpStatus.FOUND)
             .location(URI.create(sTok))
