@@ -9,7 +9,7 @@
  *
  * Proyecto:    Chatbot IMPI
  * Paquete:     mx.gob.impi.chatbot.persistence.api.model.domain
- * Módulo:      DateWrapper
+ * Módulo:      Login
  * Tipo:        Clase
  * Autor:       Gustavo A. Arellano (GAA)
  * Fecha:       Viernes 27 de Septiembre de 2019 (16_22)

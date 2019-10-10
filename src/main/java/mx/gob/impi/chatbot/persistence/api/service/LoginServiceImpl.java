@@ -48,7 +48,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.*;
  */
 @Service
 public class LoginServiceImpl implements LoginService {
-    private final static Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Autowired
     private UserRolMapper userRolMapper;
@@ -371,9 +371,12 @@ public class LoginServiceImpl implements LoginService {
 	}
 	
     /**
-     * Obtiene el cuerpo del mensaje de restablecer el password
+     * Obtiene el cuerpo del mensaje de restablecer el password.
+     * 
      * @param filename Cadena con la ruta que contiene el cuerpo
-     *                 del mensaje que se envia al usuario
+     *                 del mensaje que se envia al usuario.
+     * @param relative If true, the file will be taken from inside the jar. If false, will use an absolute path.
+     * 
      * @return Cadena con el cuerpo del mesaje para restablecer
      *         la contraseña del usuario que lo solicita
      */

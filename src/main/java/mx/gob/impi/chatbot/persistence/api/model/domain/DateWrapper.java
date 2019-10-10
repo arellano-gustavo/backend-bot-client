@@ -24,10 +24,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
-
-
 import org.slf4j.*;
-//import org.slf4j.LoggerFactory;
 
 /**
  * La clase DateWrapper.
@@ -38,10 +35,8 @@ import org.slf4j.*;
 public class DateWrapper implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    //private static final Logger LOGGER = Logger.getLogger(DateWrapper.class);
     private static final Logger LOGGER = LoggerFactory.getLogger(DateWrapper.class);
 
-    //public static Timestamp NOW = new Timestamp(System.currentTimeMillis());
     /**
      * Representa la fecha máxima (límite superior)
      */
@@ -49,7 +44,7 @@ public class DateWrapper implements Serializable {
     /**
      * Representa una hora en milisegundos
      */
-    private long oneHour = 60 * 60 * 1000;
+    private long oneHour = 60 * 60 * 1000L;
 
     /**
      * Crea una nueva instancia date wrapper.
