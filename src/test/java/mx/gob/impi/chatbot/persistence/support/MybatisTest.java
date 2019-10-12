@@ -68,7 +68,7 @@ public class MybatisTest {
 
         List<User> all = userMapper.getAll();
         /* */
-        User u1 = userMapper.getUserById(21);
+        User u1 = userMapper.getUserById(1);
         logger.info("u1:"+u1.getUsr());
         User u2 = userMapper.getUserByMail("arellano.gustavo@gmail.com");
         logger.info("u2:"+u2.getUsr());
