@@ -96,14 +96,14 @@ public class DataConfig {
      */
     private String getProp(String name) {
         String data = properties.get("c3p0."+name).toString();
-        if("password".equals(name) && data.startsWith("ENC(")) {
-            BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-            textEncryptor.setPassword(name);
-            //String encr = textEncryptor.encrypt("gustavo");
-            //System.out.println(encr);
-            String pass = data.substring(4, data.length()-1);
-            String plainPassword = textEncryptor.decrypt(pass);
-            return plainPassword;
+        if("password".equals(name)) {
+        	if(data.startsWith("ENC(")) {
+        		BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+        		textEncryptor.setPassword(name);
+        		String pass = data.substring(4, data.length()-1);
+        		return textEncryptor.decrypt(pass);
+        	}
+        	return data;
         }
         return data;
     }

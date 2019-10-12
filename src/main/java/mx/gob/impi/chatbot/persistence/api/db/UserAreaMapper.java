@@ -86,6 +86,6 @@ public interface UserAreaMapper {
             @Result(property = "active",      column = "active")
           })
     /**/
-    @Select("select id, name, description, active FROM areasFromUser where uid=#{xyz}")
-    List<Area> getAreasFromUserId(int xyz);
+    @Select("select id, name, description, active FROM AREAS_FROM_USER where user_id=#{userId}")
+    List<Area> getAreasFromUserId(int userId);
 }

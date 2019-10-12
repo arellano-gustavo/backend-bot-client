@@ -49,7 +49,23 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
-    @Select("SELECT * FROM user;")
+    /* Mapeo de campos objeto-entidad */
+    @Results(value = {
+            @Result(property = "creationDate",           column = "creation_date"),
+            @Result(property = "expiredAccount",         column = "expired_account"),
+            @Result(property = "bloquedAccount",         column = "bloqued_account"),
+            @Result(property = "expiredCredential",      column = "expired_credential"),
+            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
+            @Result(property = "bloquedDate",            column = "bloqued_date"),
+            @Result(property = "secretQuestion",         column = "secret_question"),
+            @Result(property = "secretAnswer",           column = "secret_answer"),
+            @Result(property = "securityToken",          column = "security_token"),
+            @Result(property = "securityTokenWindow",    column = "security_token_window"),
+            @Result(property = "lastAccessDate",         column = "last_access_date"),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date"),
+            @Result(property = "fullName",               column = "full_name")
+          })
+    @Select("SELECT * FROM users")
     List<User> getAll();
 
     /* Mapeo de campos objeto-entidad */
@@ -75,7 +91,7 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
-    @Select("SELECT * FROM user WHERE usr = #{usr}")
+    @Select("SELECT * FROM users WHERE usr = #{usr}")
     User getUserByName(String user);
 
     /**
@@ -85,7 +101,7 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
-    @Select("SELECT * FROM user WHERE mail = #{mail}")
+    @Select("SELECT * FROM users WHERE mail = #{mail}")
     User getUserByMail(String mail);
 
     /**
@@ -95,7 +111,7 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
-    @Select("SELECT * FROM user WHERE id = #{id}")
+    @Select("SELECT * FROM users WHERE id = #{id}")
     User getUserById(Integer id);
 
     /**
@@ -105,7 +121,7 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
-    @Select("SELECT * FROM user WHERE security_token = #{securityToken}")
+    @Select("SELECT * FROM users WHERE security_token = #{securityToken}")
     User getUserBySecurityToken(String securityToken);
 
     /**
@@ -114,11 +130,11 @@ public interface UserMapper {
      *
      * @param id El id del usuario
      */
-    @Update("UPDATE user SET disabled=true WHERE id=#{id}")
+    @Update("UPDATE users SET disabled=true WHERE id=#{id}")
     void deleteUserByIdLogico(int id);
 
     String full_insert_statement =
-            "INSERT INTO user("
+            "INSERT INTO users("
             //+"id, "
             +"usr, "
             +"password, "
@@ -182,7 +198,7 @@ public interface UserMapper {
     void fullInsert(User user);
 
     String short_insert_statement =
-            "INSERT INTO user("
+            "INSERT INTO users("
             //+"id, "
             +"usr, "
             +"password, "
@@ -203,7 +219,7 @@ public interface UserMapper {
     void shortInsert(User user);
 
     String update_statement =
-            "UPDATE user SET "
+            "UPDATE users SET "
             +"usr                       = #{usr}, "
             +"password                  = #{password}, "
             +"mail                      = #{mail}, "
@@ -228,7 +244,7 @@ public interface UserMapper {
     void update(User user);
 
     String updateFailure_statement =
-            "UPDATE user SET "
+            "UPDATE users SET "
             +"failed_atempt_counter     = #{failedAtemptCounter} "
             +"WHERE "
             +"id = #{id}";
@@ -237,7 +253,7 @@ public interface UserMapper {
     void updateFailure(User usuario);
 
     String updateLocked_statement =
-            "UPDATE user SET "
+            "UPDATE users SET "
             +"bloqued_account           = #{bloquedAccount}, "
             +"bloqued_date              = #{bloquedDate} "
             +"WHERE "

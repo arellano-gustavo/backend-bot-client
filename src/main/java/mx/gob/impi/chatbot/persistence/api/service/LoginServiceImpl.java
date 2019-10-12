@@ -169,6 +169,7 @@ public class LoginServiceImpl implements LoginService {
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
                 usuario.setBloquedDate(new Date(System.currentTimeMillis()));
+                usuario.setSecretQuestion("x");
                 userMapper.update(usuario);
 
                 // Prepara y envía respuesta

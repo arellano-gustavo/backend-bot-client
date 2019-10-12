@@ -32,6 +32,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -182,7 +184,7 @@ public class AdminController {
         value = "/get-user-by-mail.json",
         method = GET,
         produces = "application/json; charset=utf-8")
-    public User getUserByMail(String mail) {
+    public User getUserByMail(@RequestParam  String mail) {
         return usuarioService.findUserByMail(mail);
     }
 
@@ -194,11 +196,10 @@ public class AdminController {
     @ApiOperation(
         value = "AdminController::getUserByName",
         notes = "Regresa un Usuario con base en su Name")
-    @RequestMapping(
+    @GetMapping(
         value = "/get-user-by-name.json",
-        method = GET,
         produces = "application/json; charset=utf-8")
-    public User getUserByName(String name) {
+    public User getUserByName(@RequestParam String name) {
         return usuarioService.findUserByName(name);
     }
 
@@ -210,11 +211,10 @@ public class AdminController {
     @ApiOperation(
         value = "AdminController::getUserByToken",
         notes = "Regresa una Usuario con base en su token de cambio de clave")
-    @RequestMapping(
-            value = "/get-user-by-token.json",
-        method = GET,
+    @GetMapping(
+        value = "/get-user-by-token.json",
         produces = "application/json; charset=utf-8")
-    public User getUserByToken(String token) {
+    public User getUserByToken(@RequestParam String token) {
         return usuarioService.findUserByToken(token);
     }
 
@@ -228,9 +228,8 @@ public class AdminController {
     @ApiOperation(
             value = "AdminController::insert-user",
             notes = "Inserta un usuario al sistema")
-        @RequestMapping(
+        @PostMapping(
             value = "/insert-user.json",
-            method = POST,
             produces = "application/json; charset=utf-8")
         public MainControllerResponse insertUser(@RequestBody User user) {
             return usuarioService.save(user);

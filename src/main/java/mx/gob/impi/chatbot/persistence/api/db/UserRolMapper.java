@@ -77,6 +77,6 @@ public interface UserRolMapper {
     @Select("SELECT * from user_rol WHERE id_rol=#{idRol}")
     List<UserRol> getByIdRol(Integer idRol);
 
-    @Select("select id, name, description, active FROM rolesFromUser where uid=#{xyz};")
-    List<Rol> getRolesFromUserId(Integer xyz);
+    @Select("select id, name, description, active FROM ROLES_FROM_USER where user_id=#{idUser}")
+    List<Rol> getRolesFromUserId(Integer idUser);
 }
