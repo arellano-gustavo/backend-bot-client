@@ -49,7 +49,6 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
-    /* Mapeo de campos objeto-entidad */
     @Results(value = {
             @Result(property = "creationDate",           column = "creation_date"),
             @Result(property = "expiredAccount",         column = "expired_account"),
@@ -68,7 +67,13 @@ public interface UserMapper {
     @Select("SELECT * FROM users")
     List<User> getAll();
 
-    /* Mapeo de campos objeto-entidad */
+    /**
+     * Obtiene un usuario realizando la búsqueda con el nombre de pila.
+     *
+     * @param usuario Nombre de pila del usuario.
+     *
+     * @return el usuario encontrado con el criterio de búsqueda.
+     */
     @Results(value = {
             @Result(property = "creationDate",           column = "creation_date"),
             @Result(property = "expiredAccount",         column = "expired_account"),
@@ -84,13 +89,6 @@ public interface UserMapper {
             @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date"),
             @Result(property = "fullName",               column = "full_name")
           })
-    /**
-     * Obtiene un usuario realizando la búsqueda con el nombre de pila.
-     *
-     * @param usuario Nombre de pila del usuario.
-     *
-     * @return el usuario encontrado con el criterio de búsqueda.
-     */
     @Select("SELECT * FROM users WHERE usr = #{usr}")
     User getUserByName(String user);
 
@@ -101,6 +99,21 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
+    @Results(value = {
+            @Result(property = "creationDate",           column = "creation_date"),
+            @Result(property = "expiredAccount",         column = "expired_account"),
+            @Result(property = "bloquedAccount",         column = "bloqued_account"),
+            @Result(property = "expiredCredential",      column = "expired_credential"),
+            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
+            @Result(property = "bloquedDate",            column = "bloqued_date"),
+            @Result(property = "secretQuestion",         column = "secret_question"),
+            @Result(property = "secretAnswer",           column = "secret_answer"),
+            @Result(property = "securityToken",          column = "security_token"),
+            @Result(property = "securityTokenWindow",    column = "security_token_window"),
+            @Result(property = "lastAccessDate",         column = "last_access_date"),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date"),
+            @Result(property = "fullName",               column = "full_name")
+          })
     @Select("SELECT * FROM users WHERE mail = #{mail}")
     User getUserByMail(String mail);
 
@@ -111,6 +124,21 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
+    @Results(value = {
+            @Result(property = "creationDate",           column = "creation_date"),
+            @Result(property = "expiredAccount",         column = "expired_account"),
+            @Result(property = "bloquedAccount",         column = "bloqued_account"),
+            @Result(property = "expiredCredential",      column = "expired_credential"),
+            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
+            @Result(property = "bloquedDate",            column = "bloqued_date"),
+            @Result(property = "secretQuestion",         column = "secret_question"),
+            @Result(property = "secretAnswer",           column = "secret_answer"),
+            @Result(property = "securityToken",          column = "security_token"),
+            @Result(property = "securityTokenWindow",    column = "security_token_window"),
+            @Result(property = "lastAccessDate",         column = "last_access_date"),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date"),
+            @Result(property = "fullName",               column = "full_name")
+          })
     @Select("SELECT * FROM users WHERE id = #{id}")
     User getUserById(Integer id);
 
@@ -121,6 +149,21 @@ public interface UserMapper {
      *
      * @return el usuario encontrado con el criterio de búsqueda.
      */
+    @Results(value = {
+            @Result(property = "creationDate",           column = "creation_date"),
+            @Result(property = "expiredAccount",         column = "expired_account"),
+            @Result(property = "bloquedAccount",         column = "bloqued_account"),
+            @Result(property = "expiredCredential",      column = "expired_credential"),
+            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
+            @Result(property = "bloquedDate",            column = "bloqued_date"),
+            @Result(property = "secretQuestion",         column = "secret_question"),
+            @Result(property = "secretAnswer",           column = "secret_answer"),
+            @Result(property = "securityToken",          column = "security_token"),
+            @Result(property = "securityTokenWindow",    column = "security_token_window"),
+            @Result(property = "lastAccessDate",         column = "last_access_date"),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date"),
+            @Result(property = "fullName",               column = "full_name")
+          })
     @Select("SELECT * FROM users WHERE security_token = #{securityToken}")
     User getUserBySecurityToken(String securityToken);
 

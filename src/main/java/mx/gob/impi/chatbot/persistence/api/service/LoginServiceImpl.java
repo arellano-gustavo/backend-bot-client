@@ -295,9 +295,21 @@ public class LoginServiceImpl implements LoginService {
             return new LoginResponse("Unknown", false, "Token inexistente");
         }
         long timeToExpire = user.getSecurityTokenWindow();
-        if(System.currentTimeMillis()>timeToExpire) {
-            logger.error("Token expirado: " + securityToken + " para usuario: " + user.getUsr());
-            return new LoginResponse(user.getUsr(), false, "Token expirado");
+        long currentTime = System.currentTimeMillis();
+        if(currentTime>timeToExpire) {
+        	StringBuilder sb = new StringBuilder();
+        	sb.append("Token expirado: ");
+        	sb.append(securityToken);
+        	sb.append(" para usuario: ");
+        	sb.append(user.getUsr());
+        	sb.append(" time to expire: ");
+        	sb.append(timeToExpire);
+        	sb.append(" current time in miliseconds: ");
+        	sb.append(currentTime);
+        	sb.append(" delta: " + securityTokenWindow + " * 60 * 1000");
+        	String msg = sb.toString();
+            logger.error(msg);
+            return new LoginResponse(user.getUsr(), false, msg);
         }
         // Si el usuario existe para el token dado y el token dado no ha expirado:
         String newPassword = cde.digest(psw, user.getUsr()); // digesta nuevo password dado
@@ -409,4 +421,18 @@ public class LoginServiceImpl implements LoginService {
         }
         return result; // 2^6^50 cadenas = 2^300
     }
+    /*
+    private String this_urlBase2() {
+    	String env = System.getenv("RUNTIME_ENV");
+    	if(env==null || env.trim().length()<1) {
+    		logger.error("No se pudo recuperar la variable de ambiente RUNTIME_ENV");
+    		return urlBase1;
+    	}
+    	if(env.contentEquals("dev-gus")) {return this.urlBase1;}
+    	if(env.contentEquals("ip-impi")) {return this.urlBase1;}
+    	if(env.contentEquals("dns-impi")) {return this.urlBase1;}
+    	
+    	logger.warn("Si se encontró la variable de ambiente RUNTIME_ENV, pero no se ajustó a un valor esperado ("+env+")");
+    	return this.urlBase1;
+    }*/
 }

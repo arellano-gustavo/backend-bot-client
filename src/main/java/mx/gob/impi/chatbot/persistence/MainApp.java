@@ -29,6 +29,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -53,6 +54,18 @@ public class MainApp {
    * @param args an array of {@link java.lang.String} objects.
    */
   public static void main(String[] args) {
+    // Calculando el ambiente que hemos enviado en nuestra linea de arranque:
+    logger.info(">>>>>> Calculando ambiente para runtime....");
+    String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
+    
+    if(actPro!=null && actPro.length>0 && actPro[0]!=null && actPro[0].trim().length()>0) {
+    	logger.info("Active profile: [" + actPro[0] + "] <------- Current profile !!!!");
+    	System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, actPro[0]);
+    } else {
+    	logger.error("Using Profile by default !!!!");
+    }
+    
+    
     logger.info("Inicializando applicacion Spring Boot ********************************************");
     SpringApplication.run(MainApp.class, args);
     logger.info("Concluye Inicialización de applicacion Spring Boot *******************************");

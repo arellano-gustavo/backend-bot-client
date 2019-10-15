@@ -75,11 +75,23 @@ public class DataConfig {
      */
     public DataConfig() {
         super();
+        logger.info("Calculando ambiente para C3P0 ....");
+        String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
+        String activeProfile = "";
+        
+        if(actPro[0]!=null && actPro[0].trim().length()>0) {
+        	activeProfile = "-"+actPro[0];
+        	logger.info("Active profile: [" + actPro[0] + "] <------- Current profile !!!!");
+        	logger.info("Usung prefix for C3P0 !!!");
+        } else {
+        	logger.error("Couldn't use any profile... Using Profile by default !!!!");
+        }
+
         InputStream stream =
                 DataConfig
                 .class
                 .getClassLoader()
-                .getResourceAsStream("c3p0.properties");
+                .getResourceAsStream("c3p0"+activeProfile+".properties");
         try {
             properties.load(stream);
             logger.info("Properties have been loaded");
