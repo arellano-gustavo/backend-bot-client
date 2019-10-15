@@ -65,6 +65,7 @@ public class MainApp {
     	logger.error("Using Profile by default !!!!");
     }
     
+    //System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "impi");
     
     logger.info("Inicializando applicacion Spring Boot ********************************************");
     SpringApplication.run(MainApp.class, args);
