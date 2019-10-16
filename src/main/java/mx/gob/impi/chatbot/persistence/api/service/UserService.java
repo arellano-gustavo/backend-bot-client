@@ -29,6 +29,7 @@ import java.util.List;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
+import mx.gob.impi.chatbot.persistence.api.model.domain.UserPagination;
 
 /**
  * <p>Descripción:</p>
@@ -44,7 +45,7 @@ public interface UserService {
      */
     List<User> getAllUsers();
     
-    List<User> getAllUsers(PageBoundaries pb); 
+    UserPagination getAllUsers(PageBoundaries pb); 
 
     /**
      * Proporciona un objeto de tipo 'User' cuyo id es proporcionado.

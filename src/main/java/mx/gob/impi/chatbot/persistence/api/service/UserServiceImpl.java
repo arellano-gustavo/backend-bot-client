@@ -36,6 +36,7 @@ import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
+import mx.gob.impi.chatbot.persistence.api.model.domain.UserPagination;
 
 /**
  * <p>Descripción:</p>
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.getAll(pb);
     }
     @Override
-    public List<User> getAllUsers(PageBoundaries pb) {
+    public UserPagination getAllUsers(PageBoundaries pb) {
         List<User> allUsers = null;
         if(pb.isAscending()) {
             allUsers = userMapper.getAll(pb);
@@ -67,19 +68,20 @@ public class UserServiceImpl implements UserService {
         return paginate(allUsers, pb.getPage(), pb.getSize());
     }
     
-    private List<User> paginate(List<User> originalArray, Integer pageNumber, Integer pageSize) {
-        if(pageSize<1 || pageNumber<1) return new ArrayList<>();
+    private UserPagination paginate(List<User> originalArray, Integer pageNumber, Integer pageSize) {
+    	UserPagination emptyResponse = new UserPagination(0,new ArrayList<>());
+        if(pageSize<1 || pageNumber<1) return emptyResponse;
         int a = pageSize * pageNumber - pageSize +1;
         int b = pageSize * pageNumber;
         int len = originalArray.size();
-        if(a>len) return new ArrayList<>();
-        if(b>len) b = originalArray.size();
+        if(a>len) return emptyResponse;
+        if(b>len) b = len;
         int newLen = b-a+1;
         List<User> result = new ArrayList<>();
         for(int i = 0; i<newLen; i++) {
             result.add(originalArray.get(a+i-1));
         }
-        return result;
+        return new UserPagination(len, result);
     }
     
     @Override

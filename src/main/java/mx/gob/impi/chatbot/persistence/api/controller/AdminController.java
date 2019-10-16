@@ -112,7 +112,7 @@ public class AdminController {
     @PostMapping( 
         value = "/all-users.json",
         produces = "application/json; charset=utf-8")
-    public List<User> getAllUsers(@RequestBody PageBoundaries paginationParams) {
+    public UserPagination getAllUsers(@RequestBody PageBoundaries paginationParams) {
         return usuarioService.getAllUsers(paginationParams);
     }
     
