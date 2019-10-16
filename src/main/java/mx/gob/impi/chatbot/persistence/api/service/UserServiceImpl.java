@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
         } catch(RuntimeException  rte) {
         	String msg = rte.getCause().getMessage();
             logger.error(msg);
-            return new MainControllerResponse("Error al insertar un nuevo Usuario en la base de datos", msg, false);
+            return new MainControllerResponse("Error al insertar un nuevo Usuario en la base de datos debido a que el usuario o el correo están duplicados", msg, false);
         }
     }
 
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
         } catch(RuntimeException  rte) {
         	String msg = rte.getCause().getMessage();
             logger.error(msg);
-            return new MainControllerResponse("Error al actualizar un Usuario existente en la base de datos", msg, false);
+            return new MainControllerResponse("Error al actualizar un Usuario existente en la base de datos debido a que el usuario o el correo están duplicados", msg, false);
         }
     }
 

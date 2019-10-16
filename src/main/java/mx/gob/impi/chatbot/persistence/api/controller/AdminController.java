@@ -306,7 +306,7 @@ public class AdminController {
         notes = "Actualiza una area al sistema")
     @RequestMapping(
         value = "/update-area.json",
-        method = PUT,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateArea(@RequestBody Area area) {
         return areaService.update(area);
@@ -323,7 +323,7 @@ public class AdminController {
         notes = "Actualiza una rol al sistema")
     @RequestMapping(
         value = "/update-rol.json",
-        method = PUT,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateRol(@RequestBody  Rol rol) {
         return rolService.update(rol);
@@ -340,7 +340,7 @@ public class AdminController {
         notes = "Actualiza una usuario al sistema")
     @RequestMapping(
         value = "/update-user.json",
-        method = PUT,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateUser(@RequestBody User user) {
         return usuarioService.update(user);
