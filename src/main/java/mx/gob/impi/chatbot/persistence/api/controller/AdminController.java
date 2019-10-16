@@ -59,12 +59,16 @@ import mx.gob.impi.chatbot.persistence.api.service.*;
 public class AdminController {
     @Autowired
     private UserService usuarioService;
+    
     @Autowired
     private RolService rolService;
+    
     @Autowired
     private AreaService areaService;
+    
     @Autowired
     private UserAreaService userAreaService;
+    
     @Autowired
     private UserRolService userRolService;
 
@@ -76,16 +80,41 @@ public class AdminController {
     500 --> RECIBI ALGO ADECUADO Y CORRECTO, PERO LUEGO TUVE PROBLEMAS INTERNOS Y YA NO LOGRÉ PROCESAR NADA BIEN
     */
 
-//selectAll
+    /**
+     * Regresa una lista de todos los usuarios en el sistema 
+     * debidamente paginados con base en el payload de 
+     * request que determina el tamaño de la página, la 
+     * longitud de la página, el campo por el que se va a 
+     * ordenar y si el orden es ascendente o descendente.
+     * <br/><br/>
+     * En caso de que los parámetros proporcionados <b><i><label style='color:red;'>excedan</label><i></b> las 
+     * dimensiones de la lista real de datos, este método es 
+     * capaz de ajustar lo necesario para que la lista resultante 
+     * sea suceptible de ser manipulada adecuadamente.
+     * 
+     * @param paginationParams Parámetros de paginación
+     * 
+     * @return Lista paginada de usuarios acorde a los parámetros de paginación dados.
+     */
     @ApiOperation(
             value = "AdminController::getAllUsers",
-            notes = "Regresa un arreglo de todas los usuarios en el sistema")
-        @PostMapping(
-            value = "/all-users.json",
-            produces = "application/json; charset=utf-8")
-        public List<User> getAllUsers(@RequestBody PageBoundaries pb) {
-            return usuarioService.getAllUsers(pb);
-        }
+            notes = "Regresa una lista de todos los usuarios en el sistema "
+            		+ "debidamente paginados con base en el payload de "
+            		+ "request que determina el tamaño de la página, la "
+            		+ "longitud de la página, el campo por el que se va a "
+            		+ "ordenar y si el orden es ascendente o descendente."
+            		+ "<br/><br/>"
+            		+ "En el caso de que los parámetros proporcionados "
+            		+ "<b><i><label style='color:red;'>excedan</label><i></b> las "
+            		+ "dimensiones de la lista real de datos, este método es "
+            		+ "capaz de ajustar lo necesario para que la lista resultante "
+            		+ "sea suceptible de ser manipulada adecuadamente.")
+    @PostMapping( 
+        value = "/all-users.json",
+        produces = "application/json; charset=utf-8")
+    public List<User> getAllUsers(@RequestBody PageBoundaries paginationParams) {
+        return usuarioService.getAllUsers(paginationParams);
+    }
     
     /**
      * Obtiene una lista de roles registrados en el sistema
@@ -215,14 +244,15 @@ public class AdminController {
 
 //insert
     /**
-     * Ingresa un usuario en el sistema
+     * Ingresa un nuevo usuario en el sistema.
+     * 
      * @param user Objeto de tipo 'User' a registrar
      * @return Objeto de tipo 'MainControllerResponse'
      *         con el resultado de la insercion
      */
     @ApiOperation(
             value = "AdminController::insert-user",
-            notes = "Inserta un usuario al sistema")
+            notes = "Inserta un usuario al sistema.\nInforma de las posibles violaciones de integridad como llaves primarias duplicadas o indices únicos duplicados.")
         @PostMapping(
             value = "/insert-user.json",
             produces = "application/json; charset=utf-8")
