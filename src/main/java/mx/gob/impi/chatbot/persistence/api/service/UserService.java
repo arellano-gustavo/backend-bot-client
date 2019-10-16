@@ -44,8 +44,7 @@ public interface UserService {
      */
     List<User> getAllUsers();
     
-    List<User> getAllUsersAsc(PageBoundaries pb);
-    List<User> getAllUsersDesc(PageBoundaries pb); 
+    List<User> getAllUsers(PageBoundaries pb); 
 
     /**
      * Proporciona un objeto de tipo 'User' cuyo id es proporcionado.

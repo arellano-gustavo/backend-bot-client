@@ -26,6 +26,8 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,8 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  */
 @Service
 public class AreaServiceImpl implements AreaService {
+	private static final Logger logger = LoggerFactory.getLogger(AreaServiceImpl.class);
+	
     @Autowired
     private AreaMapper areaMapper;
 
@@ -57,14 +61,24 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public MainControllerResponse save(Area area) {
-        areaMapper.insert(area);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+        	areaMapper.insert(area);
+        	return new MainControllerResponse("area.id is "+area.getId(), "Object Area inserted on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in AreaService.save", rte.getMessage(), false);
+        }
     }
 
     @Override
     public MainControllerResponse update(Area area) {
-        areaMapper.update(area);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+        	areaMapper.update(area);
+        	return new MainControllerResponse("area.id is "+area.getId(), "Object Area updated on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in AreaService.save", rte.getMessage(), false);
+        }
     }
 
 }

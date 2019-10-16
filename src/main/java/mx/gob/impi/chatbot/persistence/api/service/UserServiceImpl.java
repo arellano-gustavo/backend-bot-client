@@ -27,6 +27,8 @@ package mx.gob.impi.chatbot.persistence.api.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,24 +46,24 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.User;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    
     @Autowired
     private UserMapper userMapper;
 
     @Override
     public List<User> getAllUsers() {
-        PageBoundaries pb = new PageBoundaries(0, 0, "id");
+        PageBoundaries pb = new PageBoundaries(0, 0, "id", true);
         return userMapper.getAll(pb);
     }
-    
     @Override
-    public List<User> getAllUsersAsc(PageBoundaries pb) {
-        List<User> allUsers = userMapper.getAll(pb);
-        return paginate(allUsers, pb.getPage(), pb.getSize());
-    }
-    
-    @Override
-    public List<User> getAllUsersDesc(PageBoundaries pb) {
-        List<User> allUsers = userMapper.getAllDesc(pb);
+    public List<User> getAllUsers(PageBoundaries pb) {
+        List<User> allUsers = null;
+        if(pb.isAscending()) {
+            allUsers = userMapper.getAll(pb);
+        } else {
+            allUsers = userMapper.getAllDesc(pb);
+        }
         return paginate(allUsers, pb.getPage(), pb.getSize());
     }
     
@@ -102,14 +104,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MainControllerResponse save(User user) {
-        userMapper.shortInsert(user);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+            userMapper.shortInsert(user);
+            return new MainControllerResponse("user.id is "+user.getId(), "Object User inserted on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in UserService.save", rte.getMessage(), false);
+        }
     }
 
     @Override
     public MainControllerResponse update(User user) {
-        userMapper.update(user);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+            userMapper.update(user);
+            return new MainControllerResponse("user.id is "+user.getId(), "Object User updated on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in UserService.update", rte.getMessage(), false);
+        }
     }
 
     @Override

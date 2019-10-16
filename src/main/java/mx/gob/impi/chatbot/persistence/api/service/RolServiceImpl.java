@@ -26,6 +26,8 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,8 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  */
 @Service
 public class RolServiceImpl implements RolService {
+	private static final Logger logger = LoggerFactory.getLogger(RolServiceImpl.class);
+	
     @Autowired
     private RolMapper rolMapper;
 
@@ -57,14 +61,24 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public MainControllerResponse save(Rol rol) {
-        rolMapper.insert(rol);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+        	rolMapper.insert(rol);
+        	return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol inserted on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in RolService.save", rte.getMessage(), false);
+        }
     }
 
     @Override
     public MainControllerResponse update(Rol rol) {
-        rolMapper.update(rol);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+        	rolMapper.update(rol);
+        	return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol updated on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in RolService.update", rte.getMessage(), false);
+        }
     }
 
 }

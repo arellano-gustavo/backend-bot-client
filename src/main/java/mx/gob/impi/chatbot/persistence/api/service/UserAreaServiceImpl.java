@@ -26,6 +26,8 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,8 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  */
 @Service
 public class UserAreaServiceImpl implements UserAreaService {
+	private static final Logger logger = LoggerFactory.getLogger(UserAreaServiceImpl.class);
+	
     @Autowired
     private UserAreaMapper userAreaMapper;
 
@@ -52,14 +56,24 @@ public class UserAreaServiceImpl implements UserAreaService {
 
     @Override
     public MainControllerResponse save(Integer idUser, Integer idArea) {
-        userAreaMapper.insert(idUser, idArea);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+        	userAreaMapper.insert(idUser, idArea);
+            return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea inserted on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in UserRolService.save", rte.getMessage(), false);
+        }
     }
 
     @Override
     public MainControllerResponse delete(Integer idUser, Integer idArea) {
-        userAreaMapper.delete(idUser, idArea);
-        return new MainControllerResponse("message", "longMessage", true);
+        try {
+        	userAreaMapper.delete(idUser, idArea);
+            return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea Deleted on DB", true);
+        } catch(RuntimeException  rte) {
+            logger.error(rte.getMessage());
+            return new MainControllerResponse("Error in UserRolService.save", rte.getMessage(), false);
+        }
     }
 
     @Override
