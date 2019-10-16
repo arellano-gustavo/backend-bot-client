@@ -31,7 +31,7 @@ public class RellenaDatosNull {
     
     @Test
     public void rellena() {
-    	PageBoundaries pb = new PageBoundaries(0, 0, "id");
+    	PageBoundaries pb = new PageBoundaries(0, 0, "id", true);
     	List<User> lista = userMapper.getAll(pb);
     	for(User u : lista) {
     		if(u.getId()==null) u.setId(1);

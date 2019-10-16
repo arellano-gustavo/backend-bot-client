@@ -66,7 +66,7 @@ public class MybatisTest {
         if(uu!=null) {
             logger.info(uu.getUsr());
         }
-    	PageBoundaries pb = new PageBoundaries(0, 0, "id");
+    	PageBoundaries pb = new PageBoundaries(0, 0, "id", true);
         List<User> all = userMapper.getAll(pb);
         /* */
         User u1 = userMapper.getUserById(1);
