@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         try {
             userMapper.shortInsert(user);
             User u = userMapper.getUserByMail(user.getMail());
-            return new MainControllerResponse("user.id is "+u.getId(), "Object User inserted on DB", true);
+            return new MainControllerResponse(u.getId()+"", "Object User inserted on DB", true);
         } catch(RuntimeException  rte) {
         	String msg = rte.getCause().getMessage();
             logger.error(msg);
