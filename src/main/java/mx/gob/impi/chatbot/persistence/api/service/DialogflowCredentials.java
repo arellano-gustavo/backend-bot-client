@@ -73,19 +73,19 @@ public class DialogflowCredentials {
      */
     private DialogflowCredentials() {
 
-        logger.info("Crea las credenciales de dialogflow");
+        logger.info("Crea las credenciales de dialogflow {}", "para cada area");
 
-        this.bagCredentials = new HashMap<String, GoogleCredentials>();
-        this.bagClients= new HashMap<String, Dialogflow>();
+        this.bagCredentials = new HashMap<>();
+        this.bagClients= new HashMap<>();
 
         //Crea las credenciales del area de MARCAS del agente de dialogflow
-        Create("area1", "Marcas.json");
+        create("area1", "Marcas.json");
 
         //Crea las credenciales del area de PORTAL del agente de dialogflow
-        Create("area2", "Portal.json");
+        create("area2", "Portal.json");
 
         //Crea las credenciales del area de PATENTES del agente de dialogflow
-        Create("area3", "Patentes.json");
+        create("area3", "Patentes.json");
     }
 
     /**
@@ -93,10 +93,11 @@ public class DialogflowCredentials {
      * @param area Cadena con el Area del agente que se quiere acceder
      * @param path Cadena con la ruta del archivo de donde secargan las credenciales
      */
-    private void Create(String area, String path)
+    private void create(String area, String path)
     {
         GoogleCredentials credentials = null;
         Dialogflow client;
+        String projectId = "";
 
         //Crea el objeto que contiene las credenciales para conectar al agente de dialogflow
         try {
@@ -108,18 +109,18 @@ public class DialogflowCredentials {
                     .getResourceAsStream(path);
 
             credentials = GoogleCredentials.fromStream(stream);//Administrador de la API de Dialogflow
+            
+            if (credentials.createScopedRequired()) {
+                credentials = credentials.createScoped(Collections.singletonList("https://www.googleapis.com/auth/dialogflow"));
+            }
+            projectId = ((ServiceAccountCredentials)credentials).getProjectId();
+            
         } catch (FileNotFoundException e) {
-            logger.error("Error  al abrir las credenciales del " + area + e.toString());
-            e.printStackTrace();
+            logger.error("No se encuentran las credenciales del {}", area + e.toString());
         } catch (IOException e) {
-            logger.error("Error  al abrir las credenciales del " + area + e.toString());
-            e.printStackTrace();
+            logger.error("Error  al abrir las credenciales del {}", area + e.toString());
         }
-
-        if (credentials.createScopedRequired()) {
-            credentials = credentials.createScoped(Collections.singletonList("https://www.googleapis.com/auth/dialogflow"));
-        }
-
+        
         //Inicia la creacion de parametros del cliente
         JacksonFactory jacksonFactory = JacksonFactory.getDefaultInstance();
 
@@ -127,11 +128,8 @@ public class DialogflowCredentials {
         try {
             transport = GoogleNetHttpTransport.newTrustedTransport();
         } catch (GeneralSecurityException | IOException e) {
-            logger.error("Error  al instanciar el transporte para el area " + area + e.toString());
-            e.printStackTrace();
+            logger.error("Error  al instanciar el transporte para el area {}", area + e.toString());
         }
-
-        String projectId = ((ServiceAccountCredentials)credentials).getProjectId();
 
         //Crea el cliente que realiza las peticiones al agente de dialogflow
         client = new Dialogflow.Builder(transport, jacksonFactory, null).setApplicationName(projectId).build();

@@ -38,7 +38,7 @@ public class EntityItem <TEntity> {
     @JsonIgnore
     private String method;
 
-    @JsonIgnore
+    
     private String id;
 
     private TEntity item;

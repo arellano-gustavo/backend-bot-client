@@ -35,10 +35,10 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  *
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
- * @param <TEntity> Objeto con la rspuesta del consumo de los endpoints
- * @param <TRequest> Objeto con los parametros para consumir los endpoint
+ * @param <T> Objeto con la rspuesta del consumo de los endpoints
+ * @param <R> Objeto con los parametros para consumir los endpoint
  */
-public interface DialogflowService<TEntity, TRequest> {
+public interface DialogflowService<T, R> {
 
     /**
      * Metodo que crea el cliente mediante el que se hacen las
@@ -55,8 +55,8 @@ public interface DialogflowService<TEntity, TRequest> {
      * @return Objeto cliente que realiza las peticiones
      *         endpoint de dialogflow
      */
-    DialogflowRequest<TEntity> getRequestPost(String area, String method, String uriTemplate, TRequest requestEntity,
-            Class<TEntity> responseClass);
+    DialogflowRequest<T> getRequestPost(String area, String method, String uriTemplate, R requestEntity,
+            Class<T> responseClass);
 
     /**
      * Metodo que crea la referencia de la entidad con la que el endpoint
@@ -67,7 +67,7 @@ public interface DialogflowService<TEntity, TRequest> {
      * @return Objeto con la respuesta del endpoint
      *         del agente de dialogflow
      */
-    TEntity execute(EntityItem<TRequest> requestGet, MainControllerResponse response);
+    T execute(EntityItem<R> requestGet, MainControllerResponse response);
 
     /**
      * Metodo donde el cliente que se creo hace la llamado
@@ -79,7 +79,7 @@ public interface DialogflowService<TEntity, TRequest> {
      *                 al endpoint de dialogflow
      * @return
      */
-    TEntity execute(EntityItem<TRequest> requestPost, TEntity responseEntity, MainControllerResponse response);
+    T execute(EntityItem<R> requestPost, T responseEntity, MainControllerResponse response);
 
     /**
      * Obtiene todos los registros que se encuentran
@@ -90,7 +90,7 @@ public interface DialogflowService<TEntity, TRequest> {
      *                 todos los registros desde el agente de dialogflow
      * @return Objeto que contiene la lista
      */
-    TEntity List(EntityItem<TRequest> requestGet, MainControllerResponse response);
+    T list(EntityItem<R> requestGet, MainControllerResponse response);
 
     /**
      * Ingresa un objeto en el agende de dialogflow
@@ -98,7 +98,7 @@ public interface DialogflowService<TEntity, TRequest> {
      * @return Objeto de tipo MainControllerResponse con el status del
      *         proceso de insertar un registro en el agente de dialogflow
      */
-    MainControllerResponse Create(EntityItem<TRequest>  requestPost);
+    MainControllerResponse create(EntityItem<R>  requestPost);
 
      /**
       * Obtiene un objeto registrado en el agente de dialogflow
@@ -110,8 +110,9 @@ public interface DialogflowService<TEntity, TRequest> {
       * @return Objeto de tipo MainControllerResponse con el status del
       *         proceso de buscar una entidad en el agente de dialogflow
       */
-     TEntity Get(EntityItem<TRequest> requestGet, MainControllerResponse response);
-
+     
+     T get(EntityItem<R> requestGet, MainControllerResponse response);
+     
      /**
       * Actualiza un registro en el agente de dialogflow
       * @param requestPut Objeto con los parametros para actualizar
@@ -119,7 +120,7 @@ public interface DialogflowService<TEntity, TRequest> {
       * @return Objeto de tipo MainControllerResponse con el status del
       *         proceso de actualizar una entidad en el agente de dialogflow
       */
-     MainControllerResponse Update(EntityItem<TRequest> requestPut);
+     MainControllerResponse update(EntityItem<R> requestPut);
 
      /**
       * Borra un registro en el agente de dialogflow
@@ -128,5 +129,5 @@ public interface DialogflowService<TEntity, TRequest> {
       *                      del registro que se quiere borrar
       * @return
       */
-     MainControllerResponse Delete(EntityItem<TRequest> requestDelete);
+     MainControllerResponse delete(EntityItem<R> requestDelete);
 }

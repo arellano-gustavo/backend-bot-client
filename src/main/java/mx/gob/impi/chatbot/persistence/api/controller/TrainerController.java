@@ -90,7 +90,7 @@ public class TrainerController {
         produces = "application/json; charset=utf-8")
     public ResponseEntity<GoogleCloudDialogflowV2Intent> getAllIntent(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaTodos", "RecuperaTodos", true);
-        GoogleCloudDialogflowV2Intent intent = intentService.List(requestGet, response);
+        GoogleCloudDialogflowV2Intent intent = intentService.list(requestGet, response);
         return ResponseEntity.ok(intent);
     }
 
@@ -108,7 +108,7 @@ public class TrainerController {
         method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse insertIntent(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestPost) {
-        MainControllerResponse response = intentService.Create(requestPost);
+        MainControllerResponse response = intentService.create(requestPost);
         return response;
     }
 
@@ -126,7 +126,7 @@ public class TrainerController {
         produces = "application/json; charset=utf-8")
     public GoogleCloudDialogflowV2Intent getIntentById(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaPorId", "RecuperaPorId", true);
-        GoogleCloudDialogflowV2Intent intent = intentService.Get(requestGet, response);
+        GoogleCloudDialogflowV2Intent intent = intentService.get(requestGet, response);
         return intent;
     }
 
@@ -144,7 +144,7 @@ public class TrainerController {
         method = PUT,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateIntent(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestPut) {
-        MainControllerResponse response = intentService.Update(requestPut);
+        MainControllerResponse response = intentService.update(requestPut);
         return response;
     }
 
@@ -162,7 +162,7 @@ public class TrainerController {
         method = DELETE,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse removeIntent(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestDelete) {
-        MainControllerResponse response = intentService.Delete(requestDelete);
+        MainControllerResponse response = intentService.delete(requestDelete);
         return response;
     }
 
@@ -184,7 +184,7 @@ public class TrainerController {
         produces = "application/json; charset=utf-8")
     public ResponseEntity<GoogleCloudDialogflowV2EntityType> getAllEntityType(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaTodos", "RecuperaTodos", true);
-        GoogleCloudDialogflowV2EntityType entityType = entityTypeService.List(requestGet, response);
+        GoogleCloudDialogflowV2EntityType entityType = entityTypeService.list(requestGet, response);
         return ResponseEntity.ok(entityType);
     }
 
@@ -202,7 +202,7 @@ public class TrainerController {
         method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse insertEntityType(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestPost) {
-        MainControllerResponse response = entityTypeService.Create(requestPost);
+        MainControllerResponse response = entityTypeService.create(requestPost);
         return response;
     }
 
@@ -220,7 +220,7 @@ public class TrainerController {
         produces = "application/json; charset=utf-8")
     public GoogleCloudDialogflowV2EntityType getEntityTypeById(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaPorId", "RecuperaPorId", true);
-        GoogleCloudDialogflowV2EntityType entityType = entityTypeService.Get(requestGet, response);
+        GoogleCloudDialogflowV2EntityType entityType = entityTypeService.get(requestGet, response);
         return entityType;
     }
 
@@ -238,7 +238,7 @@ public class TrainerController {
         method = PUT,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateEntityType(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestPut) {
-        MainControllerResponse response = entityTypeService.Update(requestPut);
+        MainControllerResponse response = entityTypeService.update(requestPut);
         return response;
     }
 
@@ -256,7 +256,7 @@ public class TrainerController {
         method = DELETE,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse removeEntityType(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestDelete) {
-        MainControllerResponse response = entityTypeService.Delete(requestDelete);
+        MainControllerResponse response = entityTypeService.delete(requestDelete);
         return response;
     }
 
@@ -277,7 +277,7 @@ public class TrainerController {
         produces = "application/json; charset=utf-8")
     public ResponseEntity<GoogleCloudDialogflowV2Context> getAllContext(@RequestBody EntityItem<GoogleCloudDialogflowV2Context> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaTodos", "RecuperaTodos", true);
-        GoogleCloudDialogflowV2Context context = contextService.List(requestGet, response);
+        GoogleCloudDialogflowV2Context context = contextService.list(requestGet, response);
         return ResponseEntity.ok(context);
     }
 
@@ -295,7 +295,7 @@ public class TrainerController {
         method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse insertContext(@RequestBody EntityItem<GoogleCloudDialogflowV2Context> requestPost) {
-        MainControllerResponse response = contextService.Create(requestPost);
+        MainControllerResponse response = contextService.create(requestPost);
         return response;
     }
 
@@ -313,7 +313,7 @@ public class TrainerController {
         produces = "application/json; charset=utf-8")
     public GoogleCloudDialogflowV2Context getContextById(@RequestBody EntityItem<GoogleCloudDialogflowV2Context> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaPorId", "RecuperaPorId", true);
-        GoogleCloudDialogflowV2Context context = contextService.Get(requestGet, response);
+        GoogleCloudDialogflowV2Context context = contextService.get(requestGet, response);
         return context;
     }
 
@@ -331,7 +331,7 @@ public class TrainerController {
         method = PUT,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse updateContext(@RequestBody EntityItem<GoogleCloudDialogflowV2Context> requestPut) {
-        MainControllerResponse response = contextService.Update(requestPut);
+        MainControllerResponse response = contextService.update(requestPut);
         return response;
     }
 
@@ -349,7 +349,7 @@ public class TrainerController {
         method = DELETE,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse removeContext(@RequestBody EntityItem<GoogleCloudDialogflowV2Context> requestDelete) {
-        MainControllerResponse response = contextService.Delete(requestDelete);
+        MainControllerResponse response = contextService.delete(requestDelete);
         return response;
     }
 }
