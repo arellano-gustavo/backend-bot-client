@@ -108,8 +108,9 @@ public class UserServiceImpl implements UserService {
             userMapper.shortInsert(user);
             return new MainControllerResponse("user.id is "+user.getId(), "Object User inserted on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in UserService.save", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error al insertar un nuevo Usuario en la base de datos", msg, false);
         }
     }
 
@@ -119,8 +120,9 @@ public class UserServiceImpl implements UserService {
             userMapper.update(user);
             return new MainControllerResponse("user.id is "+user.getId(), "Object User updated on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in UserService.update", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error al actualizar un Usuario existente en la base de datos", msg, false);
         }
     }
 

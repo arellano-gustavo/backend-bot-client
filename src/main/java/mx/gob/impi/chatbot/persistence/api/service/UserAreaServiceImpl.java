@@ -60,8 +60,9 @@ public class UserAreaServiceImpl implements UserAreaService {
         	userAreaMapper.insert(idUser, idArea);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea inserted on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in UserRolService.save", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error in UserRolService.save", msg, false);
         }
     }
 
@@ -71,8 +72,9 @@ public class UserAreaServiceImpl implements UserAreaService {
         	userAreaMapper.delete(idUser, idArea);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea Deleted on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in UserRolService.save", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error in UserRolService.save", msg, false);
         }
     }
 

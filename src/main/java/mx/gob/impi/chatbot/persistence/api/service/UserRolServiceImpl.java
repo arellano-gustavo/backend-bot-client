@@ -60,8 +60,9 @@ public class UserRolServiceImpl implements UserRolService {
             userRolMapper.insert(idUser, idRol);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idRol, "Object UserRol inserted on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in UserRolService.save", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error in UserRolService.save", msg, false);
         }
     }
 
@@ -71,8 +72,9 @@ public class UserRolServiceImpl implements UserRolService {
     		userRolMapper.delete(idUser, idRol);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idRol, "Object UserRol deleted on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in UserRolService.delete", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error in UserRolService.delete", msg, false);
         }
     }
 

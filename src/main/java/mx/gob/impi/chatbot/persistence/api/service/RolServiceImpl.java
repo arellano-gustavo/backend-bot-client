@@ -65,8 +65,9 @@ public class RolServiceImpl implements RolService {
         	rolMapper.insert(rol);
         	return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol inserted on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in RolService.save", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error al insertar un nuevo Rol en la base de datos", msg, false);
         }
     }
 
@@ -76,8 +77,9 @@ public class RolServiceImpl implements RolService {
         	rolMapper.update(rol);
         	return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol updated on DB", true);
         } catch(RuntimeException  rte) {
-            logger.error(rte.getMessage());
-            return new MainControllerResponse("Error in RolService.update", rte.getMessage(), false);
+        	String msg = rte.getCause().getMessage();
+            logger.error(msg);
+            return new MainControllerResponse("Error al actualizar un Rol existente en la base de datos", msg, false);
         }
     }
 
