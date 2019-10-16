@@ -3,7 +3,7 @@
 #desea borrar
 
 curl -X DELETE --header "Content-Type: application/json" --header "Accept: application/json;charset=utf-8" -d "{
-  \"areaId\":\"1\",
+  \"areaId\":\"area1\",
   \"sessionId\":\"9fa2c5fc-ea33-4861-a1ca-165f2c68fae5\",
-  \"id\":\"1b88e311-d174-4c89-874c-0e625c1a3c45\"
+  \"id\":\"6ad03e7b-d21e-4afc-a4b5-f3b3b91f61ec\"
 }" "http://localhost:8080/api/chatbot/trainer/remove-entityType.json"

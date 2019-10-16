@@ -43,11 +43,13 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-public abstract class DialogflowServiceImpl<TEntity, TReques> implements DialogflowService<TEntity, TReques> {
+public abstract class DialogflowServiceImpl<T, R> implements DialogflowService<T, R> {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     DialogflowCredentials credentials;
+    
+    static String version = "v2/projects/";
 
     /**
      * Contructor en el que se crea el almacen de las
@@ -88,23 +90,22 @@ public abstract class DialogflowServiceImpl<TEntity, TReques> implements Dialogf
             //Si el token de las credenciales ya expiro se genera uno nuevo
             credentials.getBagCredentials().get(area).refreshIfExpired();
         } catch (IOException e) {
-            logger.error("Error  al abrir las credenciales del " + area + e.toString());
-            e.printStackTrace();
+            logger.error("Error  al abrir las credenciales del {}", area + e.toString());
         }
         //Regresa el token de las credenciales guardadas previamente
         return this.credentials.getBagCredentials().get(area).getAccessToken().getTokenValue();
     }
 
-    public TEntity execute(EntityItem<TReques> requestPost, TEntity responseEntity, MainControllerResponse response){
+    public T execute(EntityItem<R> requestPost, T responseEntity, MainControllerResponse response){
 
-        TReques requestEntity = requestPost.getItem();
+        R requestEntity = requestPost.getItem();
 
         //Recupera el tipo de clase con la que el endpoint responde
         @SuppressWarnings("unchecked")
-        Class<TEntity> responseClass = (Class<TEntity>) responseEntity.getClass();
+        Class<T> responseClass = (Class<T>) responseEntity.getClass();
 
         //Crea el cliente de los endpoints
-        DialogflowRequest<TEntity> dialogflowRequest =  getRequestPost(requestPost.getAreaId(), requestPost.getMethod(), requestPost.getUriTemplate(), requestEntity, responseClass);
+        DialogflowRequest<T> dialogflowRequest =  getRequestPost(requestPost.getAreaId(), requestPost.getMethod(), requestPost.getUriTemplate(), requestEntity, responseClass);
 
         //Obtiene el token desde el objeto que almacena las credenciales
         String token = getToken(requestPost.getAreaId());
@@ -117,40 +118,35 @@ public abstract class DialogflowServiceImpl<TEntity, TReques> implements Dialogf
 
         try {
             //Realiza la solicitud al endpoint de dialogflow
-            responseEntity = (TEntity) dialogflowRequest.execute();
+            responseEntity = (T) dialogflowRequest.execute();
         } catch (IOException e) {
-            logger.error("Error en el endpoint del " + requestPost.getAreaId() + e.toString());
+            logger.error("Error en el endpoint del {}", requestPost.getAreaId() + e.toString());
             response.setLongMessage(e.toString());
             response.setMessage("Error");
             response.setSucceed(false);
-            e.printStackTrace();
         }
 
         return responseEntity;
     }
 
-    public DialogflowRequest<TEntity> getRequestPost(String area, String method, String uriTemplate, TReques requestEntity,
-            Class<TEntity> responseClass) {
-        // TODO Se debe crear el cliente de la entidad del endpoint
-        return null;
+    public DialogflowRequest<T> getRequestPost(String area, String method, String uriTemplate, R requestEntity,
+            Class<T> responseClass) {    return null;
     }
 
-    public TEntity execute(EntityItem<TReques> requestGet, MainControllerResponse response){
-        // TODO Se debe crear el objeto de la entidad de respuesta del endpoint
-        return execute((EntityItem<TReques>)requestGet, null, response);
+    public T execute(EntityItem<R> requestGet, MainControllerResponse response){
+        return execute((EntityItem<R>)requestGet, null, response);
     }
 
     @Override
-    public TEntity List(EntityItem<TReques> requestGet, MainControllerResponse response) {
+    public T list(EntityItem<R> requestList, MainControllerResponse response) {
         //Indica el metodo de HTTP con el que el cliente va a realizar la solicitud al endpoint
-        requestGet.setMethod("GET");
+        requestList.setMethod("GET");
         //Se realiza la solicitud al endpoint de dialogflow
-        TEntity entity = execute(requestGet, response);
-        return entity;
+        return execute(requestList, response);
     }
 
     @Override
-    public MainControllerResponse Create(EntityItem<TReques> requestPost) {
+    public MainControllerResponse create(EntityItem<R> requestPost) {
         //Crea el objeto de respuesta
         MainControllerResponse response = new MainControllerResponse("Creado", "Creado", true);
         //Indica el metodo de HTTP con el que el cliente va a realizar la solicitud al endpoint
@@ -161,15 +157,14 @@ public abstract class DialogflowServiceImpl<TEntity, TReques> implements Dialogf
     }
 
     @Override
-    public TEntity Get(EntityItem<TReques> requestGet, MainControllerResponse response) {
+    public T get(EntityItem<R> requestGet, MainControllerResponse response) {
         //Indica el metodo de HTTP con el que el cliente va a realizar la solicitud al endpoint
         requestGet.setMethod("GET");
-        TEntity entity = execute(requestGet, response);
-        return entity;
+        return execute(requestGet, response);
     }
 
     @Override
-    public MainControllerResponse Update(EntityItem<TReques> requestPut) {
+    public MainControllerResponse update(EntityItem<R> requestPut) {
         //Crea el objeto de respuesta
         MainControllerResponse response = new MainControllerResponse("Actualizado", "Actualizado", true);
         //Indica el metodo de HTTP con el que el cliente va a realizar la solicitud al endpoint
@@ -180,7 +175,7 @@ public abstract class DialogflowServiceImpl<TEntity, TReques> implements Dialogf
     }
 
     @Override
-    public MainControllerResponse Delete(EntityItem<TReques> requestDelete) {
+    public MainControllerResponse delete(EntityItem<R> requestDelete) {
         //Crea el objeto de respuesta
         MainControllerResponse response = new MainControllerResponse("Borrado", "Borrado", true);
         //Indica el metodo de HTTP con el que el cliente va a realizar la solicitud al endpoint
