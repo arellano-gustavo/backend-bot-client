@@ -26,6 +26,7 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import java.util.List;
 
+import mx.gob.impi.chatbot.persistence.api.model.domain.Empleado;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
@@ -103,6 +104,6 @@ public interface UserService {
      *
      * @return objeto User o en su caso, 'null' si el id del empleado no existe.
      */
-    User loadUserFromWs(Integer idEmpleado);
+    Empleado loadUserFromWs(Integer idEmpleado);
 
 }
