@@ -58,7 +58,7 @@ implements QueryService
     /*
     @Override
     public GoogleCloudDialogflowV2DetectIntentResponse Create(EntityItem<GoogleCloudDialogflowV2DetectIntentRequest> requestPost) {
-        requestPost.setUriTemplate("v2/projects/" + this.getProjectId() + "/agent/sessions/" + requestPost.getSessionId() + ":detectIntent");
+        requestPost.setUriTemplate(getVersion() + this.getProjectId() + "/agent/sessions/" + requestPost.getSessionId() + ":detectIntent");
         return super.Create(requestPost);
     }
     */

@@ -48,6 +48,8 @@ public class EntityTypeServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2EntityType, GoogleCloudDialogflowV2EntityType>
 implements EntityTypeService{
 
+	static String entidad = "/agent/entityTypes/";
+	
     @Override
     public DialogflowRequest<GoogleCloudDialogflowV2EntityType> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2EntityType requestEntity,
             Class<GoogleCloudDialogflowV2EntityType> responseClass) {
@@ -64,37 +66,37 @@ implements EntityTypeService{
     }
 
     @Override
-    public GoogleCloudDialogflowV2EntityType list(EntityItem<GoogleCloudDialogflowV2EntityType> requestGet, MainControllerResponse response) {
+    public GoogleCloudDialogflowV2EntityType list(EntityItem<GoogleCloudDialogflowV2EntityType> requestList, MainControllerResponse response) {
         //Establece la URI del endpoint para recuperar todos los registros de la entidad
-        requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/entityTypes");
-        return super.list(requestGet, response);
+        requestList.setUriTemplate(version + this.getProjectId(requestList.getAreaId()) + entidad);
+        return super.list(requestList, response);
     }
 
     @Override
     public MainControllerResponse create(EntityItem<GoogleCloudDialogflowV2EntityType> requestPost) {
         //Establece la URI del endpoint para crear un registro
-        requestPost.setUriTemplate("v2/projects/" + this.getProjectId(requestPost.getAreaId()) + "/agent/entityTypes");
+        requestPost.setUriTemplate(version + this.getProjectId(requestPost.getAreaId()) + entidad);
         return super.create(requestPost);
     }
 
     @Override
     public GoogleCloudDialogflowV2EntityType get(EntityItem<GoogleCloudDialogflowV2EntityType> requestGet, MainControllerResponse response) {
         //Establece la URI del endpoint para obtener el un registro de la entidad por medio de su identificador
-        requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/entityTypes/" + requestGet.getId());
+        requestGet.setUriTemplate(version + this.getProjectId(requestGet.getAreaId()) + entidad + requestGet.getId());
         return super.list(requestGet,  response);
     }
 
     @Override
     public MainControllerResponse update(EntityItem<GoogleCloudDialogflowV2EntityType> requestPut) {
         //Establece la URI del endpoint para actualizar un registro de la entidad por medio de su identificador
-        requestPut.setUriTemplate("v2/projects/" + this.getProjectId(requestPut.getAreaId()) + "/agent/entityTypes/" + requestPut.getId());
+        requestPut.setUriTemplate(version + this.getProjectId(requestPut.getAreaId()) + entidad + requestPut.getId());
         return super.update(requestPut);
     }
 
     @Override
     public MainControllerResponse delete(EntityItem<GoogleCloudDialogflowV2EntityType> requestDelete) {
         //Establece la URI del endpoint para borrar un registro de la entidad por medio de su identificador
-        requestDelete.setUriTemplate("v2/projects/" + this.getProjectId(requestDelete.getAreaId()) + "/agent/entityTypes/" + requestDelete.getId());
+        requestDelete.setUriTemplate(version + this.getProjectId(requestDelete.getAreaId()) + entidad + requestDelete.getId());
         return super.delete(requestDelete);
     }
 }

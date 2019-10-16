@@ -48,6 +48,7 @@ public class IntentServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2Intent, GoogleCloudDialogflowV2Intent>
 implements IntentService
 {
+	static String entidad = "/agent/intents/";
 
     @Override
     public DialogflowRequest<GoogleCloudDialogflowV2Intent> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2Intent requestEntity,
@@ -65,37 +66,37 @@ implements IntentService
     }
 
     @Override
-    public GoogleCloudDialogflowV2Intent list(EntityItem<GoogleCloudDialogflowV2Intent> requestGet, MainControllerResponse response) {
+    public GoogleCloudDialogflowV2Intent list(EntityItem<GoogleCloudDialogflowV2Intent> requestList, MainControllerResponse response) {
         //Establece la URI del endpoint para recuperar todos los registros de la entidad
-        requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/intents?intentView=INTENT_VIEW_FULL");
-        return super.list(requestGet, response);
+        requestList.setUriTemplate(version + this.getProjectId(requestList.getAreaId()) + "/agent/intents?intentView=INTENT_VIEW_FULL");
+        return super.list(requestList, response);
     }
 
     @Override
     public MainControllerResponse create(EntityItem<GoogleCloudDialogflowV2Intent> requestPost) {
         //Establece la URI del endpoint para crear un registro
-        requestPost.setUriTemplate("v2/projects/" + this.getProjectId(requestPost.getAreaId()) + "/agent/intents");
+        requestPost.setUriTemplate(version + this.getProjectId(requestPost.getAreaId()) + entidad);
         return super.create(requestPost);
     }
 
     @Override
     public GoogleCloudDialogflowV2Intent get(EntityItem<GoogleCloudDialogflowV2Intent> requestGet, MainControllerResponse response) {
         //Establece la URI del endpoint para obtener el un registro de la entidad por medio de su identificador
-        requestGet.setUriTemplate("v2/projects/" + this.getProjectId(requestGet.getAreaId()) + "/agent/intents/" + requestGet.getId() + "?intentView=INTENT_VIEW_FULL");
+        requestGet.setUriTemplate(version + this.getProjectId(requestGet.getAreaId()) + entidad + requestGet.getId() + "?intentView=INTENT_VIEW_FULL");
         return super.list(requestGet, response);
     }
 
     @Override
     public MainControllerResponse update(EntityItem<GoogleCloudDialogflowV2Intent> requestPut) {
         //Establece la URI del endpoint para actualizar un registro de la entidad por medio de su identificador
-        requestPut.setUriTemplate("v2/projects/" + this.getProjectId(requestPut.getAreaId()) + "/agent/intents/" + requestPut.getId());
+        requestPut.setUriTemplate(version + this.getProjectId(requestPut.getAreaId()) + entidad + requestPut.getId());
         return super.update(requestPut);
     }
 
     @Override
     public MainControllerResponse delete(EntityItem<GoogleCloudDialogflowV2Intent> requestDelete) {
         //Establece la URI del endpoint para borrar un registro de la entidad por medio de su identificador
-        requestDelete.setUriTemplate("v2/projects/" + this.getProjectId(requestDelete.getAreaId()) + "/agent/intents/" + requestDelete.getId());
+        requestDelete.setUriTemplate(version + this.getProjectId(requestDelete.getAreaId()) + entidad + requestDelete.getId());
         return super.delete(requestDelete);
     }
 }
