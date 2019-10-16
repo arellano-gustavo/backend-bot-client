@@ -27,6 +27,7 @@ package mx.gob.impi.chatbot.persistence.api.service;
 import java.util.List;
 
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
+import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 
 /**
@@ -42,6 +43,9 @@ public interface UserService {
      * @return Objeto de tipo 'List' con la totalidad de User registrados.
      */
     List<User> getAllUsers();
+    
+    List<User> getAllUsersAsc(PageBoundaries pb);
+    List<User> getAllUsersDesc(PageBoundaries pb); 
 
     /**
      * Proporciona un objeto de tipo 'User' cuyo id es proporcionado.
@@ -101,4 +105,5 @@ public interface UserService {
      * @return objeto User o en su caso, 'null' si el id del empleado no existe.
      */
     User loadUserFromWs(Integer idEmpleado);
+
 }

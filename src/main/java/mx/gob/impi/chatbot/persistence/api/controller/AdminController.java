@@ -92,6 +92,29 @@ public class AdminController {
         return usuarioService.getAllUsers();
     }
 
+    
+    
+    @ApiOperation(
+            value = "AdminController::getAllUsers",
+            notes = "Regresa un arreglo de todas los usuarios en el sistema")
+        @RequestMapping(
+            value = "/all-users-page-asc.json",
+            method = POST,
+            produces = "application/json; charset=utf-8")
+        public List<User> getAllUsersPageAsc(@RequestBody PageBoundaries pb) {
+            return usuarioService.getAllUsersAsc(pb);
+        }
+    @ApiOperation(
+            value = "AdminController::getAllUsers",
+            notes = "Regresa un arreglo de todas los usuarios en el sistema")
+        @RequestMapping(
+            value = "/all-users-page-desc.json",
+            method = POST,
+            produces = "application/json; charset=utf-8")
+        public List<User> getAllUsersPageDesc(@RequestBody PageBoundaries pb) {
+            return usuarioService.getAllUsersDesc(pb);
+        }
+    
     /**
      * Obtiene una lista de roles registrados en el sistema
      * @return Lista de tipo 'List<Rol>' con los roles del sistema

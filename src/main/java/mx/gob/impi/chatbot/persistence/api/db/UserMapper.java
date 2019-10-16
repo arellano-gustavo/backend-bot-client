@@ -33,6 +33,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
 
+import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 
 /**
@@ -65,9 +66,35 @@ public interface UserMapper {
             @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
             @Result(property = "fullName",               column = "full_name")
           })
-    @Select("SELECT * FROM users")
-    List<User> getAll();
+    @Select("SELECT * FROM users order by ${sortColumn} asc")
+    List<User> getAll(PageBoundaries pb);
 
+    
+    /**
+     * Obtiene un usuario realizando la búsqueda con el nombre de pila.
+     *
+     * @param usuario Nombre de pila del usuario.
+     *
+     * @return el usuario encontrado con el criterio de búsqueda.
+     */
+    @Results(value = {
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "expiredAccount",         column = "expired_account"),
+            @Result(property = "bloquedAccount",         column = "bloqued_account"),
+            @Result(property = "expiredCredential",      column = "expired_credential"),
+            @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "secretQuestion",         column = "secret_question"),
+            @Result(property = "secretAnswer",           column = "secret_answer"),
+            @Result(property = "securityToken",          column = "security_token"),
+            @Result(property = "securityTokenWindow",    column = "security_token_window"),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "fullName",               column = "full_name")
+          })
+    @Select("SELECT * FROM users order by ${sortColumn} desc")
+    List<User> getAllDesc(PageBoundaries pb);
+    
     /**
      * Obtiene un usuario realizando la búsqueda con el nombre de pila.
      *

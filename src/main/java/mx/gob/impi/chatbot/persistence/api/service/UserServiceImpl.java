@@ -24,6 +24,7 @@
  */
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import org.springframework.stereotype.Service;
 
 import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
+import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 
 /**
@@ -47,9 +49,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userMapper.getAll();
+        PageBoundaries pb = new PageBoundaries(0, 0, "id");
+        return userMapper.getAll(pb);
     }
-
+    
+    @Override
+    public List<User> getAllUsersAsc(PageBoundaries pb) {
+        List<User> allUsers = userMapper.getAll(pb);
+        return paginate(allUsers, pb.getPage(), pb.getSize());
+    }
+    
+    @Override
+    public List<User> getAllUsersDesc(PageBoundaries pb) {
+        List<User> allUsers = userMapper.getAllDesc(pb);
+        return paginate(allUsers, pb.getPage(), pb.getSize());
+    }
+    
+    private List<User> paginate(List<User> originalArray, Integer pageNumber, Integer pageSize) {
+        if(pageSize<1 || pageNumber<1) return new ArrayList<>();
+        int a = pageSize * pageNumber - pageSize +1;
+        int b = pageSize * pageNumber;
+        int len = originalArray.size();
+        if(a>len) return new ArrayList<>();
+        if(b>len) b = originalArray.size();
+        int newLen = b-a+1;
+        List<User> result = new ArrayList<>();
+        for(int i = 0; i<newLen; i++) {
+            result.add(originalArray.get(a+i-1));
+        }
+        return result;
+    }
+    
     @Override
     public User findUserById(Integer id) {
         return userMapper.getUserById(id);
@@ -89,4 +119,5 @@ public class UserServiceImpl implements UserService {
         user.setFullName("Carlos Salinas de Gortari");
         return user;
     }
+
 }

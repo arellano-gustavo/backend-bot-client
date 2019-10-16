@@ -35,6 +35,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
+import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
 
@@ -65,8 +66,8 @@ public class MybatisTest {
         if(uu!=null) {
             logger.info(uu.getUsr());
         }
-
-        List<User> all = userMapper.getAll();
+    	PageBoundaries pb = new PageBoundaries(0, 0, "id");
+        List<User> all = userMapper.getAll(pb);
         /* */
         User u1 = userMapper.getUserById(1);
         logger.info("u1:"+u1.getUsr());

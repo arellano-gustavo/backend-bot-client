@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
+import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
 
@@ -30,7 +31,8 @@ public class RellenaDatosNull {
     
     @Test
     public void rellena() {
-    	List<User> lista = userMapper.getAll();
+    	PageBoundaries pb = new PageBoundaries(0, 0, "id");
+    	List<User> lista = userMapper.getAll(pb);
     	for(User u : lista) {
     		if(u.getId()==null) u.setId(1);
     		if(u.isBloquedAccount()) u.setBloquedAccount(false);
@@ -52,7 +54,7 @@ public class RellenaDatosNull {
     		logger.info("Actualizando el Usuario: "+u.getUsr());
     		userMapper.update(u);
     	}
-    	List<User> lista2 = userMapper.getAll();
+    	List<User> lista2 = userMapper.getAll(pb);
     	for(User u : lista2) {
     		logger.info(u.getFullName());
     	}
