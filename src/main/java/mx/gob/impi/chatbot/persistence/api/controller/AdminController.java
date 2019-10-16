@@ -434,11 +434,11 @@ public class AdminController {
         value = "/load-user-from-ws.json",
         method = GET,
         produces = "application/json; charset=utf-8")
-    public User loadUserFromWs(@RequestParam  int id) {
-        User u = usuarioService.loadUserFromWs(id);
+    public Empleado loadUserFromWs(@RequestParam  int id) {
+        Empleado u = usuarioService.loadUserFromWs(id);
         if (u!=null) {
         	return u;
         }
-        return new User();
+        return new Empleado();
     }
 }
