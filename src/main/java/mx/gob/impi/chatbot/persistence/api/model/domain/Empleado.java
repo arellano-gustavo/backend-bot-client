@@ -191,4 +191,29 @@ public class Empleado {
 	public void setNombre_Completo(String Nombre_Completo){
 		this.nombre_Completo = Nombre_Completo;
 	}
+
+	public Empleado() {
+	}
+
+	public Empleado(String apellido_Materno, String apellido_Paterno, String curp, String correo_Institucional,
+			String estatus, String fecha_Alta_Tecnica, String fecha_Nacimiento, String fecha_Ultima_Promocion,
+			String grupo_Personal, String nombre, String rfc, String numero_Empleado_Entero, String numero_Empleado,
+			String nombre_Completo) {
+		this.apellido_Materno = apellido_Materno;
+		this.apellido_Paterno = apellido_Paterno;
+		this.curp = curp;
+		this.correo_Institucional = correo_Institucional;
+		this.estatus = estatus;
+		this.fecha_Alta_Tecnica = fecha_Alta_Tecnica;
+		this.fecha_Nacimiento = fecha_Nacimiento;
+		this.fecha_Ultima_Promocion = fecha_Ultima_Promocion;
+		this.grupo_Personal = grupo_Personal;
+		this.nombre = nombre;
+		this.rfc = rfc;
+		this.numero_Empleado_Entero = numero_Empleado_Entero;
+		this.numero_Empleado = numero_Empleado;
+		this.nombre_Completo = nombre_Completo;
+	}
+	
+	
 }
