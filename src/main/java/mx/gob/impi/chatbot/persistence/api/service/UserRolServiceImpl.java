@@ -84,7 +84,7 @@ public class UserRolServiceImpl implements UserRolService {
     }
 
     @Override
-    public List<UserRol> getUserRolByIdArea(Integer idArea) {
+    public List<UserRol> getUserRolByIdRol(Integer idArea) {
         return userRolMapper.getByIdRol(idArea);
     }
 

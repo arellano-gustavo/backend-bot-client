@@ -78,5 +78,5 @@ public interface UserRolService {
      * @return Objeto de tipo 'List' con la totalidad de UserRol registradas
      * con el idRol proporcionado.
      */
-    List<UserRol> getUserRolByIdArea(Integer idRol);
+    List<UserRol> getUserRolByIdRol(Integer idRol);
 }

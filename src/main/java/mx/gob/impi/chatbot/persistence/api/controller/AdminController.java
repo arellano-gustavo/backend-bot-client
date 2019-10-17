@@ -441,4 +441,60 @@ public class AdminController {
         }
         return new Empleado();
     }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    @ApiOperation(
+            value = "AdminController::getUserRolByIdUser2",
+            notes = "Regresa un Objeto de tipo UserRol con base en su ID de Empleado")
+        @RequestMapping(
+            value = "/get-user-rol-by-iduser.json",
+            method = GET,
+            produces = "application/json; charset=utf-8")
+        public List<UserRol> getUserRolByIdUser(@RequestParam  int id) {
+            return userRolService.getUserRolByIdUser(id);
+        }
+    @ApiOperation(
+            value = "AdminController::getUserRolByIdRol",
+            notes = "Regresa un Objeto de tipo UserRol con base en su ID de rol")
+        @RequestMapping(
+            value = "/get-user-rol-by-idrol.json",
+            method = GET,
+            produces = "application/json; charset=utf-8")
+        public List<UserRol> getUserRolByIdRol(@RequestParam  int id) {
+            return userRolService.getUserRolByIdRol(id);
+        }
+
+    
+    
+    @ApiOperation(
+            value = "AdminController::getUserAreaByIdUser",
+            notes = "Regresa un Objeto de tipo UserArea con base en su ID de Empleado")
+        @RequestMapping(
+            value = "/get-user-area-by-iduser.json",
+            method = GET,
+            produces = "application/json; charset=utf-8")
+        public List<UserArea> getUserAreaByIdUser(@RequestParam  int id) {
+            return userAreaService.getUserAreaByIdUser(id);
+        }
+
+    
+    @ApiOperation(
+            value = "AdminController::getUserAreaByIdArea",
+            notes = "Regresa un Objeto de tipo UserArea con base en su ID de Area")
+        @RequestMapping(
+            value = "/get-user-area-by-idarea.json",
+            method = GET,
+            produces = "application/json; charset=utf-8")
+        public List<UserArea> getUserAreaByIdArea(@RequestParam  int id) {
+            return userAreaService.getUserAreaByIdArea(id);
+        }
+
 }
