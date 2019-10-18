@@ -320,6 +320,7 @@ public class LoginServiceImpl implements LoginService {
         }
         // Si el usuario existe para el token dado y el token dado no ha expirado:
         String newPassword = cde.digest(psw, user.getUsr()); // digesta nuevo password dado
+        user.setDisabled(false);
         user.setPassword(newPassword); // asigna nuevo password digestado
         user.setSecurityTokenWindow(0); // resetea ventana
         user.setFailedAtemptCounter(0); // resetea contador de intentos fallidos
