@@ -39,6 +39,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 import mx.gob.impi.chatbot.persistence.api.model.domain.PageBoundaries;
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 import mx.gob.impi.chatbot.persistence.api.model.domain.UserPagination;
+import mx.gob.impi.chatbot.persistence.support.FileUtils;
 import mx.gob.impi.chatbot.persistence.support.WSConnect;
 
 /**
@@ -118,7 +119,8 @@ public class UserServiceImpl implements UserService {
             return new MainControllerResponse(u.getId()+"", "Object User inserted on DB", true);
         } catch(RuntimeException  rte) {
         	String msg = rte.getCause().getMessage();
-            logger.error(msg);
+        	msg = FileUtils.cleanString(msg);
+        	logger.error(msg);
             return new MainControllerResponse("Error al insertar un nuevo Usuario en la base de datos debido a que el usuario o el correo están duplicados", msg, false);
         }
     }

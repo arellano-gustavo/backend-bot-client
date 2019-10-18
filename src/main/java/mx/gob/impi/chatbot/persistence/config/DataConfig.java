@@ -35,10 +35,16 @@ import org.slf4j.LoggerFactory;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Component;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -50,23 +56,26 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * @version 1.0-SNAPSHOT
  */
 @Configuration
-@MapperScan("mx.gob.impi.chatbot.persistence.api.db")
+@EnableConfigurationProperties(DataConfig.class)
+@PropertySource("classpath:application.properties")
+@ConfigurationProperties(prefix = "mail")
+//@Component
+//
 public class DataConfig {
+    private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
 
     // https://www.baeldung.com/spring-value-annotation
-    @Value("${db.username}")
-    private String username;
-
-    @Value("${db.password}")
+    // https://www.baeldung.com/configuration-properties-in-spring-boot
+    
+    @Value("${mail.template}")
+    private String template;
+    
+    private String user;
+    
     private String password;
-
-    @Value("${db.url}")
-    private String url;
-
-    @Value("${db.driver}")
-    private String driver;
-
-    private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
+    
+    private String jdbcUrl;
+    private String driverClass;
 
     private Properties properties = new Properties();
 
@@ -75,6 +84,7 @@ public class DataConfig {
      */
     public DataConfig() {
         super();
+        logger.info("This is the url for our application dot properties: " + this.template);
         logger.info("Calculando ambiente para C3P0 ....");
         String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
         String activeProfile = "";
@@ -165,4 +175,46 @@ public class DataConfig {
         sessionFactory.setTypeAliasesPackage("mx.gob.impi.chatbot.persistence.api.db2");
         return sessionFactory;
     }
+  //To resolve ${} in @Value
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+    
+    
+    
+    
+    
+    
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getJdbcUrl() {
+		return jdbcUrl;
+	}
+
+	public void setJdbcUrl(String jdbcUrl) {
+		this.jdbcUrl = jdbcUrl;
+	}
+
+	public String getDriverClass() {
+		return driverClass;
+	}
+
+	public void setDriverClass(String driverClass) {
+		this.driverClass = driverClass;
+	}
 }
