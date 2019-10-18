@@ -207,7 +207,8 @@
 		        <configuration>
 		          <profiles>
 		            <profile>impi</profile>
-		            <profile>prod</profile>
+                    <profile>prod</profile>
+		            <profile>home</profile>
 		          </profiles>
 		        </configuration>
             </plugin>

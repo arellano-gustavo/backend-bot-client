@@ -34,6 +34,7 @@ public class RellenaDatosNull {
     	PageBoundaries pb = new PageBoundaries(0, 0, "id", true);
     	List<User> lista = userMapper.getAll(pb);
     	for(User u : lista) {
+    		String usr = "x"+System.currentTimeMillis()+"x";
     		if(u.getId()==null) u.setId(1);
     		if(u.isBloquedAccount()) u.setBloquedAccount(false);
     		if(u.isDisabled()) u.setDisabled(false);
@@ -45,12 +46,13 @@ public class RellenaDatosNull {
     		if(u.getFullName()==null) u.setFullName("Provisional " + System.currentTimeMillis());
     		if(u.getLastAccessDate()==null) u.setLastAccessDate(new Date(System.currentTimeMillis()));
     		if(u.getLastPasswordUpdateDate()==null) u.setLastPasswordUpdateDate(new Date(System.currentTimeMillis()));
-    		if(u.getMail()==null) u.setMail("x"+System.currentTimeMillis()+"x@aol.com");
-    		if(u.getPassword()==null) u.setPassword("abc");
+    		if(u.getMail()==null) u.setMail("correo_"+System.currentTimeMillis()+"_ok@aol.com");
+    		String pass = customDigestEncoderService.digest(usr, usr);
+    		if(u.getPassword()==null) u.setPassword(pass);
     		if(u.getSecretAnswer()==null) u.setSecretAnswer("x");
     		if(u.getSecretQuestion()==null) u.setSecretQuestion("x");
     		if(u.getSecurityToken()==null) u.setSecurityToken("xyz");
-    		if(u.getUsr()==null) u.setUsr("x"+System.currentTimeMillis()+"x");
+    		if(u.getUsr()==null) u.setUsr(usr);
     		logger.info("Actualizando el Usuario: "+u.getUsr());
     		userMapper.update(u);
     	}

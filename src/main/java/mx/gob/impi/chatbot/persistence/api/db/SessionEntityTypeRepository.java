@@ -53,7 +53,6 @@ extends DialogflowRequest<GoogleCloudDialogflowV2SessionEntityType>  {
     public SessionEntityTypeRepository(Dialogflow client, String method, String uriTemplate, Object content,
             Class<GoogleCloudDialogflowV2SessionEntityType> responseClass) {
         super(client, method, uriTemplate, content, responseClass);
-        // TODO Auto-generated constructor stub
     }
 
 
