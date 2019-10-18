@@ -34,12 +34,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
+/*
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+*/
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -53,22 +55,19 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * @version 1.0-SNAPSHOT
  */
 @Configuration
-@EnableConfigurationProperties(DataConfig.class)
-@PropertySource("classpath:application.properties")
-@ConfigurationProperties(prefix = "mail")
+//@EnableConfigurationProperties(DataConfig.class)
+//@PropertySource("classpath:application.properties")
+//@ConfigurationProperties(prefix = "mail")
 public class DataConfig {
     private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
 
     // https://www.baeldung.com/spring-value-annotation
     // https://www.baeldung.com/configuration-properties-in-spring-boot
     
-    @Value("${mail.template}")
+    //@Value("${mail.template}")
     private String template;
-    
     private String user;
-    
     private String password;
-    
     private String jdbcUrl;
     private String driverClass;
 
