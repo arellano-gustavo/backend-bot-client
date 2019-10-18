@@ -4,7 +4,7 @@ curl -X POST --header "Content-Type: application/json" --header "Accept: applica
   \"areaId\":\"area1\",
   \"sessionId\":\"9fa2c5fc-ea33-4861-a1ca-165f2c68fae5\",
   \"item\":{
-        \"displayName\": \"Ejemplo\",
+        \"displayName\": \"TipoMusica\",
         \"entities\": [
             {
                 \"synonyms\": [
