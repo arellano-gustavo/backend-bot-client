@@ -1,0 +1,54 @@
+
+       <center>
+        <table border="0" cellspacing="0" style="width: 80%">
+            <tr style="height: 30px;background-color:#71cd8e">
+                <td colspan="2" ></td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <table border="0">
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        <table>
+                            <tr>
+                                <td colspan="2"><h1>Estimado '$USER_NAME', ¿Perdiste tu contraseña?</h1></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><h3>No hay problema.</h3></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><h3>Da click en el boton de para elegir una nueva.</h3></td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                       <a href='$URL' 
+                                        style='background-color:#003366;
+                                        border: none;
+                                        text-decoration: none;
+                                        height: 80px;
+                                        padding: 5px 15px;
+                                        color: #ffffff;
+                                        font-size: 16px;
+                                        font-weight: 300;
+                                        margin-top: 10px;
+                                        margin-right: 10px;'>Recuperar contraseña</a>
+                                </td>
+                            </tr>
+                        </table>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                </td>
+            </tr>
+            <tr style="height: 30px;background-color:#71cd8e">
+                <td colspan="2" ></td>
+            </tr>
+        </table>
+    </center>

@@ -77,8 +77,11 @@ public class LoginServiceImpl implements LoginService {
     @Value("${login.securityTokenWindow}")
     private long securityTokenWindow;
 
-    @Value("${login.url-base}")
-    private String urlBase;
+    @Value("${login.url-backend}")
+    private String urlBackend;
+
+    @Value("${login.url-backend-port}")
+    private String urlBackendPort;
 
     @Value("${login.url-auth}")
     private String urlAuth;
@@ -86,8 +89,12 @@ public class LoginServiceImpl implements LoginService {
     @Value("${login.url-verifica}")
     private String urlVerifica;
 
-    @Value("${login.url-front}")
-    private String front;
+    @Value("${login.url-frontend}")
+    private String frontend;
+
+    @Value("${login.url-frontend-port}")
+    private String frontendPort;
+
 
     @Value("${login.url-front-ok}")
     private String frontOk;
@@ -267,8 +274,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String buildRestoreUrl(String securityToken) {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.urlBase);
-        sb.append(this.front);
+        sb.append(this.frontend);
+        sb.append(this.frontendPort);
         sb.append(this.frontBad);
         if(securityToken==null || securityToken.trim().length()<1) {
             return sb.toString();
@@ -278,8 +285,8 @@ public class LoginServiceImpl implements LoginService {
             return sb.toString();
         }
         sb = new StringBuilder();
-        sb.append(this.urlBase);
-        sb.append(this.front);
+        sb.append(this.frontend);
+        sb.append(this.frontendPort);
         sb.append(this.frontOk);
         sb.append(securityToken);
 
@@ -313,6 +320,7 @@ public class LoginServiceImpl implements LoginService {
         }
         // Si el usuario existe para el token dado y el token dado no ha expirado:
         String newPassword = cde.digest(psw, user.getUsr()); // digesta nuevo password dado
+        user.setDisabled(false);
         user.setPassword(newPassword); // asigna nuevo password digestado
         user.setSecurityTokenWindow(0); // resetea ventana
         user.setFailedAtemptCounter(0); // resetea contador de intentos fallidos
@@ -339,7 +347,8 @@ public class LoginServiceImpl implements LoginService {
      */
     private String getMailTemplate(String secTok, String name) {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.urlBase);
+        sb.append(this.urlBackend);
+        sb.append(this.urlBackendPort);
         sb.append(this.urlAuth);
         sb.append(this.urlVerifica);
         sb.append(secTok);

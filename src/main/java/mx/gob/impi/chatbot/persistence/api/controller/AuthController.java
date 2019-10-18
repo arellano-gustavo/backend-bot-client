@@ -57,11 +57,8 @@ import mx.gob.impi.chatbot.persistence.api.service.LoginService;
 @Api(value = "auth")
 @RequestMapping(value = "/api/chatbot/auth")
 public class AuthController {
-
     @Autowired
     private LoginService loginService;
-
-
 
 //LOGIN
     /**

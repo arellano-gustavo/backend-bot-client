@@ -23,10 +23,12 @@
  */
 package mx.gob.impi.chatbot.persistence;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.AbstractEnvironment;
@@ -42,9 +44,11 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
  * @author garellano
  * @version $Id: $Id
  */
+@EnableConfigurationProperties
 @EnableEncryptableProperties
 @SpringBootApplication
 @ComponentScan("mx.gob.impi.chatbot.persistence")
+@MapperScan("mx.gob.impi.chatbot.persistence.api.db")
 public class MainApp {
     private static final Logger logger = LoggerFactory.getLogger(MainApp.class);
 
@@ -87,7 +91,6 @@ public class MainApp {
           @Override
           public void addCorsMappings(CorsRegistry registry) {
               registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
-              // registry.addMapping("/robotpart/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
           }
       };
   }
