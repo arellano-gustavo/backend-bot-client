@@ -22,7 +22,7 @@ public class WSConnect {
 	
 	public static void main(String...argv) {
 		WSConnect wsc = WSConnect.getInstance();
-		Empleado empleado = wsc.loadUserFromWs(1996);
+		Empleado empleado = wsc.loadUserFromWs(1996, "http://192.168.10.108/ServicioSAP/SAPService.svc/basic/");
 		logger.info(empleado.getNombre());
 	}
 	
@@ -35,14 +35,13 @@ public class WSConnect {
 		return instance;
 	}
 	
-    public Empleado loadUserFromWs(Integer idEmpleado) {
+    public Empleado loadUserFromWs(Integer idEmpleado, String url) {
     	Empleado defaultEmpleado = new Empleado("OSORIO", "RAMIREZ", "RAOE800106HDFMSS09", "ESTEBAN.RAMIREZ@IMPI.GOB.MX", "ACTIVO", "2013-10-01", "1980-01-06", "2018-03-01", "OC", "ESTEBAN", "RAOE8001068C7", "1996" , "00001996", "ESTEBAN RAMIREZ OSORIO");
     	if("".length()<1) {
     		return defaultEmpleado;
     	}
     	
     	String respuesta = null;
-		String url = "http://192.168.10.108/ServicioSAP/SAPService.svc/basic/";
 		String xmlString = "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" + 
 	    		"<s:Body>" + 
 	    		"<GetEmpleado xmlns=\"http://tempuri.org/\">" + 

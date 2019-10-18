@@ -30,6 +30,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import mx.gob.impi.chatbot.persistence.api.db.UserMapper;
@@ -53,6 +54,9 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserMapper userMapper;
+    
+    @Value("${ws.empleado.url}")
+    private String wsUrl;
 
     @Override
     public List<User> getAllUsers() {
@@ -134,7 +138,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Empleado loadUserFromWs(Integer idEmpleado) {
     	WSConnect wsc = WSConnect.getInstance();
-	    return wsc.loadUserFromWs(idEmpleado);
+	    return wsc.loadUserFromWs(idEmpleado, this.wsUrl);
     }
 
 }
