@@ -104,7 +104,7 @@ public class AdminController {
             		+ "ordenar y si el orden es ascendente o descendente."
             		+ "<br/><br/>"
             		+ "En el caso de que los parámetros proporcionados "
-            		+ "<b><i><label style='color:red;'>excedan</label><i></b> las "
+            		+ "<b><i><label style='color:blue;'>excedan</label><i></b> las "
             		+ "dimensiones de la lista real de datos, este método es "
             		+ "capaz de ajustar lo necesario para que la lista resultante "
             		+ "sea suceptible de ser manipulada adecuadamente.")
