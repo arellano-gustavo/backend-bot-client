@@ -53,8 +53,8 @@ public interface UserRolMapper {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idRol", column = "id_rol")
           })
-    @Delete("DELETE FROM user_rol WHERE id_user=#{idUser} and id_rol=#{idRol} ")
-    void delete(Integer idUser, Integer idRol);
+    @Delete("DELETE FROM user_rol WHERE id_user=#{0} and id_rol=#{1} ")
+    void delete(int idUser, int idRol);
 
     @Results(value = {
             @Result(property = "idUser", column = "id_user"),

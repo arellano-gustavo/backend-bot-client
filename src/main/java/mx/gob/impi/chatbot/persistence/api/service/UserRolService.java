@@ -60,7 +60,7 @@ public interface UserRolService {
      * @param idRol Entero con el id de un Rol.
      * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de borrado.
      */
-    MainControllerResponse delete(Integer idUser, Integer idRol);
+    MainControllerResponse delete(int idUser, int idRol);
 
     /**
      * Proporciona objetos de tipo 'UserRol' cuyo idUser es proporcionado.

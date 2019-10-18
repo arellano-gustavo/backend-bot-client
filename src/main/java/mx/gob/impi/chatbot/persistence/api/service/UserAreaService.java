@@ -60,7 +60,7 @@ public interface UserAreaService {
      * @param idArea Entero con el id de un Area.
      * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de borrado.
      */
-    MainControllerResponse delete(Integer idUser, Integer idArea);
+    MainControllerResponse delete(int idUser, int idArea);
 
     /**
      * Proporciona objetos de tipo 'UserArea' cuyo idUser es proporcionado.

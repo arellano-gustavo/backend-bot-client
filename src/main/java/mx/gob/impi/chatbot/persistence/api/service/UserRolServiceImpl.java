@@ -67,7 +67,7 @@ public class UserRolServiceImpl implements UserRolService {
     }
 
     @Override
-    public MainControllerResponse delete(Integer idUser, Integer idRol) {
+    public MainControllerResponse delete(int idUser, int idRol) {
     	try {
     		userRolMapper.delete(idUser, idRol);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idRol, "Object UserRol deleted on DB", true);

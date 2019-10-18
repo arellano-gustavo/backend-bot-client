@@ -67,7 +67,7 @@ public class UserAreaServiceImpl implements UserAreaService {
     }
 
     @Override
-    public MainControllerResponse delete(Integer idUser, Integer idArea) {
+    public MainControllerResponse delete(int idUser, int idArea) {
         try {
         	userAreaMapper.delete(idUser, idArea);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea Deleted on DB", true);

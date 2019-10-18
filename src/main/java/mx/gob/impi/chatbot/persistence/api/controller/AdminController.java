@@ -395,7 +395,7 @@ public class AdminController {
         value = "/remove-user-area.json",
         method = DELETE,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse removeUsuarioArea(@RequestBody Integer idUser, @RequestBody Integer idArea) {
+    public MainControllerResponse removeUsuarioArea(@RequestParam int idUser, @RequestParam int idArea) {
         return userAreaService.delete(idUser, idArea);
     }
 
@@ -413,7 +413,7 @@ public class AdminController {
         value = "/remove-user-rol.json",
         method = DELETE,
         produces = "application/json; charset=utf-8")
-    public MainControllerResponse removeUsuarioRol(@RequestBody Integer idUser, @RequestBody Integer idRol) {
+    public MainControllerResponse removeUsuarioRol(@RequestParam int idUser, @RequestParam int idRol) {
         return userRolService.delete(idUser, idRol);
     }
 

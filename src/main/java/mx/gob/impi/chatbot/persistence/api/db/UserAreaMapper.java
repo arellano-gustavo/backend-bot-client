@@ -53,8 +53,8 @@ public interface UserAreaMapper {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idArea", column = "id_area")
           })
-    @Delete("DELETE FROM user_area WHERE id_user=#{idUser} and id_area=#{idArea} ")
-    void delete(Integer idUser, Integer idArea);
+    @Delete("DELETE FROM user_area WHERE id_user=#{0} and id_area=#{1} ")
+    void delete(int idUser, int idArea);
 
     @Results(value = {
             @Result(property = "idUser", column = "id_user"),
