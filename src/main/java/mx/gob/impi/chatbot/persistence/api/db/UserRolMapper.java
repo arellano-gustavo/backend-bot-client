@@ -46,14 +46,14 @@ public interface UserRolMapper {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idRol", column = "id_rol")
           })
-    @Insert("INSERT INTO user_rol(id_user, id_rol) VALUES(#{idUser}, #{idRol}) ")
-    void insert(Integer idUser, Integer idRol);
+    @Insert("INSERT INTO user_rol(id_user, id_rol) VALUES(#{0}, #{1})")
+    void insert(int idUser, int idRol);
 
     @Results(value = {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idRol", column = "id_rol")
           })
-    @Delete("DELETE FROM user_rol WHERE id_user=#{0} and id_rol=#{1} ")
+    @Delete("DELETE FROM user_rol WHERE id_user=#{0} and id_rol=#{1}")
     void delete(int idUser, int idRol);
 
     @Results(value = {
@@ -67,16 +67,16 @@ public interface UserRolMapper {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idRol", column = "id_rol")
           })
-    @Select("SELECT * from user_rol WHERE id_user=#{idUser}")
-    List<UserRol> getByIdUser(Integer idUser);
+    @Select("SELECT * from user_rol WHERE id_user=#{0}")
+    List<UserRol> getByIdUser(int idUser);
 
     @Results(value = {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idRol", column = "id_rol")
           })
-    @Select("SELECT * from user_rol WHERE id_rol=#{idRol}")
-    List<UserRol> getByIdRol(Integer idRol);
+    @Select("SELECT * from user_rol WHERE id_rol=#{0}")
+    List<UserRol> getByIdRol(int idRol);
 
-    @Select("select id, name, description, active FROM ROLES_FROM_USER where user_id=#{idUser}")
-    List<Rol> getRolesFromUserId(Integer idUser);
+    @Select("select id, name, description, active FROM ROLES_FROM_USER where user_id=#{0}")
+    List<Rol> getRolesFromUserId(int idUser);
 }

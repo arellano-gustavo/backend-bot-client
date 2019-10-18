@@ -51,7 +51,7 @@ public interface UserAreaService {
      * @param idArea Entero con el id de un Area.
      * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de guardado.
      */
-    MainControllerResponse save(Integer idUser, Integer idArea);
+    MainControllerResponse save(int idUser, int idArea);
 
     /**
      * Borra de la base de datos el objeto de tipo 'UserArea' proporcionado, si es que existe.
@@ -69,7 +69,7 @@ public interface UserAreaService {
      * @return Objeto de tipo 'List' con la totalidad de UserArea registradas
      * con el idUser proporcionado.
      */
-    List<UserArea> getUserAreaByIdUser(Integer idUser);
+    List<UserArea> getUserAreaByIdUser(int idUser);
 
     /**
      * Proporciona objetos de tipo 'UserArea' cuyo idArea es proporcionado.
@@ -78,5 +78,5 @@ public interface UserAreaService {
      * @return Objeto de tipo 'List' con la totalidad de UserArea registradas
      * con el idArea proporcionado.
      */
-    List<UserArea> getUserAreaByIdArea(Integer idArea);
+    List<UserArea> getUserAreaByIdArea(int idArea);
 }

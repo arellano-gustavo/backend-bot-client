@@ -55,7 +55,7 @@ public class UserRolServiceImpl implements UserRolService {
     }
 
     @Override
-    public MainControllerResponse save(Integer idUser, Integer idRol) {
+    public MainControllerResponse save(int idUser, int idRol) {
         try {
             userRolMapper.insert(idUser, idRol);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idRol, "Object UserRol inserted on DB", true);
@@ -79,12 +79,12 @@ public class UserRolServiceImpl implements UserRolService {
     }
 
     @Override
-    public List<UserRol> getUserRolByIdUser(Integer idUser) {
+    public List<UserRol> getUserRolByIdUser(int idUser) {
         return userRolMapper.getByIdUser(idUser);
     }
 
     @Override
-    public List<UserRol> getUserRolByIdRol(Integer idArea) {
+    public List<UserRol> getUserRolByIdRol(int idArea) {
         return userRolMapper.getByIdRol(idArea);
     }
 

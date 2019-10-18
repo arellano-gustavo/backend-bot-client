@@ -46,8 +46,8 @@ public interface UserAreaMapper {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idArea", column = "id_area")
           })
-    @Insert("INSERT INTO user_area(id_user, id_area) VALUES(#{idUser}, #{idArea}) ")
-    void insert(Integer idUser, Integer idArea);
+    @Insert("INSERT INTO user_area(id_user, id_area) VALUES(#{0}, #{1}) ")
+    void insert(int idUser, int idArea);
 
     @Results(value = {
             @Result(property = "idUser", column = "id_user"),
@@ -67,15 +67,15 @@ public interface UserAreaMapper {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idArea", column = "id_area")
           })
-    @Select("SELECT * from user_area WHERE id_user=#{idUser}")
-    List<UserArea> getByIdUser(Integer idUser);
+    @Select("SELECT * from user_area WHERE id_user=#{0}")
+    List<UserArea> getByIdUser(int idUser);
 
     @Results(value = {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idArea", column = "id_area")
           })
-    @Select("SELECT * from user_area WHERE id_area=#{idArea}")
-    List<UserArea> getByIdArea(Integer idArea);
+    @Select("SELECT * from user_area WHERE id_area=#{0}")
+    List<UserArea> getByIdArea(int idArea);
 
     /* * /
     @Results(value = {
@@ -86,6 +86,6 @@ public interface UserAreaMapper {
             @Result(property = "active",      column = "active")
           })
     /**/
-    @Select("select id, name, description, active FROM AREAS_FROM_USER where user_id=#{userId}")
+    @Select("select id, name, description, active FROM AREAS_FROM_USER where user_id=#{0}")
     List<Area> getAreasFromUserId(int userId);
 }

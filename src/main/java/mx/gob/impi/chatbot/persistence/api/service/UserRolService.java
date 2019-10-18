@@ -51,7 +51,7 @@ public interface UserRolService {
      * @param idRol Entero con el id de un Rol.
      * @return Objeto de tipo 'MainControllerResponse' que contiene el resultado de la operación de guardado.
      */
-    MainControllerResponse save(Integer idUser, Integer idRol);
+    MainControllerResponse save(int idUser, int idRol);
 
     /**
      * Borra de la base de datos el objeto de tipo 'UserRol' proporcionado, si es que existe.
@@ -69,7 +69,7 @@ public interface UserRolService {
      * @return Objeto de tipo 'List' con la totalidad de UserRol registradas
      * con el idUser proporcionado.
      */
-    List<UserRol> getUserRolByIdUser(Integer idUser);
+    List<UserRol> getUserRolByIdUser(int idUser);
 
     /**
      * Proporciona objetos de tipo 'UserRol' cuyo idRol es proporcionado.
@@ -78,5 +78,5 @@ public interface UserRolService {
      * @return Objeto de tipo 'List' con la totalidad de UserRol registradas
      * con el idRol proporcionado.
      */
-    List<UserRol> getUserRolByIdRol(Integer idRol);
+    List<UserRol> getUserRolByIdRol(int idRol);
 }

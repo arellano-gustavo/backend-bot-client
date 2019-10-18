@@ -55,7 +55,7 @@ public class UserAreaServiceImpl implements UserAreaService {
     }
 
     @Override
-    public MainControllerResponse save(Integer idUser, Integer idArea) {
+    public MainControllerResponse save(int idUser, int idArea) {
         try {
         	userAreaMapper.insert(idUser, idArea);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea inserted on DB", true);
@@ -79,12 +79,12 @@ public class UserAreaServiceImpl implements UserAreaService {
     }
 
     @Override
-    public List<UserArea> getUserAreaByIdUser(Integer idUser) {
+    public List<UserArea> getUserAreaByIdUser(int idUser) {
         return userAreaMapper.getByIdUser(idUser);
     }
 
     @Override
-    public List<UserArea> getUserAreaByIdArea(Integer idArea) {
+    public List<UserArea> getUserAreaByIdArea(int idArea) {
         return userAreaMapper.getByIdArea(idArea);
     }
 
