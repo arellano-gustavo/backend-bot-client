@@ -56,8 +56,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableConfigurationProperties(DataConfig.class)
 @PropertySource("classpath:application.properties")
 @ConfigurationProperties(prefix = "mail")
-//@Component
-//
 public class DataConfig {
     private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
 
