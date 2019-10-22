@@ -1,11 +1,13 @@
+RUTA=/Users/garellano/development/code/impi-chatbot-admin/target
 
 echo "Corriendo el aplicativo con un perfil determinado con docker"
 
 docker run -it \
 -p 8080:8080 \
--v /Users/garellano/development/code/impi-chatbot-admin/target:/chat \
+-v $RUTA:/chat \
 gustavoarellano/jdk18 \
 java -jar \
+-Dmaven.test.skip=true \
 -Dspring-boot.run.profiles=home \
 -Doracle.jdbc.timezoneAsRegion=false \
 /chat/chatbot-persistence-layer-1.0.war

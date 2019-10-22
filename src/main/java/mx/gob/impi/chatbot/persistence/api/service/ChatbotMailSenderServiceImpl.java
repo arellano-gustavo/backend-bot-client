@@ -30,6 +30,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -45,11 +49,14 @@ import org.slf4j.LoggerFactory;
  */
 @Service
 public class ChatbotMailSenderServiceImpl implements ChatbotMailSenderService {
+    private Logger logger = LoggerFactory.getLogger(ChatbotMailSenderServiceImpl.class);
 
-  @Autowired
-  private JavaMailSender javaMailSender;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
+  
+    public static int noOfQuickServiceThreads = 20;
+    private ScheduledExecutorService quickService = Executors.newScheduledThreadPool(noOfQuickServiceThreads); // Creates a thread pool that reuses fixed number of threads(as specified by noOfThreads in this case).
 
   @Override
   public void sendMail2(String to, String subject, String body) {
@@ -76,4 +83,27 @@ public class ChatbotMailSenderServiceImpl implements ChatbotMailSenderService {
             logger.error("error in mail service sendHtmlMail method"+me.getMessage());
         }
     }
+    
+    @Override
+	public void sendASynchronousHtmlMail(String to,String subject,String body) {
+		logger.debug("inside sendASynchronousMail method");
+        MimeMessage mail = javaMailSender.createMimeMessage();
+        try {
+	        MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+	        helper.setTo(to);
+	        helper.setSubject(subject);
+	        helper.setText(body, true);
+        } catch(MessagingException me) {
+            logger.error("error in mail service sendHtmlMail method"+me.getMessage());
+        }
+        // FROM: https://www.oodlestechnologies.com/blogs/Asynchronous-Mail-In-Spring-Boot/
+        quickService.submit(() -> {
+			try{
+				javaMailSender.send(mail);
+			}catch(Exception e){
+				logger.error("Exception occur while send a mail : ",e);
+			}
+        });
+	}
+
 }

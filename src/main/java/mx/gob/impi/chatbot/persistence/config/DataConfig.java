@@ -34,18 +34,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
-/*
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+/*
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
 */
+import org.springframework.context.annotation.PropertySource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 /**
  * <p>Descripción:</p>
@@ -54,8 +58,9 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-@Configuration
 //@EnableConfigurationProperties(DataConfig.class)
+//@EnableEncryptableProperties
+@Configuration
 //@PropertySource("classpath:application.properties")
 //@ConfigurationProperties(prefix = "mail")
 public class DataConfig {
@@ -64,7 +69,7 @@ public class DataConfig {
     // https://www.baeldung.com/spring-value-annotation
     // https://www.baeldung.com/configuration-properties-in-spring-boot
     
-    //@Value("${mail.template}")
+    @Value("${login.url-backend}")
     private String template;
     private String user;
     private String password;
@@ -78,7 +83,7 @@ public class DataConfig {
      */
     public DataConfig() {
         super();
-        logger.info("This is the url for our application dot properties: " + this.template);
+        logger.info("This is the url for our application dot properties: " + this.template + "<-----------");
         logger.info("Calculando ambiente para C3P0 ....");
         String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
         String activeProfile = "";
