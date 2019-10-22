@@ -13,4 +13,7 @@ java -jar \
 /chat/chatbot-persistence-layer-1.0.war
 
 
+# La siguiente linea se DEBE poner hasta arriba cuando aplique:
+# RUTA=/home/chatbot/source-code/impi-chatbot-admin
+
 

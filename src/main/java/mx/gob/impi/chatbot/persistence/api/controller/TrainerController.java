@@ -86,7 +86,7 @@ public class TrainerController {
         notes = "Regresa un arreglo de todos los intent en el sistema")
     @RequestMapping(
         value = "/all-intent.json",
-        method = GET,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public ResponseEntity<GoogleCloudDialogflowV2Intent> getAllIntent(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaTodos", "RecuperaTodos", true);
@@ -122,7 +122,7 @@ public class TrainerController {
         notes = "Regresa un Intent con base en su ID")
     @RequestMapping(
         value = "/get-intent.json",
-        method = GET,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public GoogleCloudDialogflowV2Intent getIntentById(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaPorId", "RecuperaPorId", true);
@@ -180,7 +180,7 @@ public class TrainerController {
         notes = "Regresa un arreglo de todos los entityType en el sistema")
     @RequestMapping(
         value = "/all-entityType.json",
-        method = GET,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public ResponseEntity<GoogleCloudDialogflowV2EntityType> getAllEntityType(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaTodos", "RecuperaTodos", true);
@@ -253,7 +253,7 @@ public class TrainerController {
         notes = "Remueve una entityType a un usuario")
     @RequestMapping(
         value = "/remove-entityType.json",
-        method = DELETE,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public MainControllerResponse removeEntityType(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestDelete) {
         MainControllerResponse response = entityTypeService.delete(requestDelete);
