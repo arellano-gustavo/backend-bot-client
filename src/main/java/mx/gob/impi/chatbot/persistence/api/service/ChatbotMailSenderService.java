@@ -51,4 +51,13 @@ public interface ChatbotMailSenderService {
      * @param body Cadena con el cuerpodo del mensaje de correo
      */
     void sendHtmlMail(String to, String subject, String body);
+
+    /**
+     * Este método usa un pool de executors para hacer su trabajo de manera asíncrona.
+     * 
+     * @param to
+     * @param subject
+     * @param body
+     */
+	void sendASynchronousHtmlMail(String to, String subject, String body);
 }
