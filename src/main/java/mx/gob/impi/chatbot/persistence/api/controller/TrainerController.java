@@ -25,7 +25,6 @@
 package mx.gob.impi.chatbot.persistence.api.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
@@ -216,7 +215,7 @@ public class TrainerController {
         notes = "Regresa un EntityType con base en su ID")
     @RequestMapping(
         value = "/get-entityType.json",
-        method = GET,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public GoogleCloudDialogflowV2EntityType getEntityTypeById(@RequestBody EntityItem<GoogleCloudDialogflowV2EntityType> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaPorId", "RecuperaPorId", true);
@@ -273,10 +272,11 @@ public class TrainerController {
         notes = "Regresa un arreglo de todos los context en el sistema")
     @RequestMapping(
         value = "/all-context.json",
-        method = GET,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public ResponseEntity<GoogleCloudDialogflowV2Context> getAllContext(@RequestBody EntityItem<GoogleCloudDialogflowV2Context> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaTodos", "RecuperaTodos", true);
+        //String resultado = contextService.listAll(requestGet, response);
         GoogleCloudDialogflowV2Context context = contextService.list(requestGet, response);
         return ResponseEntity.ok(context);
     }
@@ -309,7 +309,7 @@ public class TrainerController {
         notes = "Regresa un Context con base en su ID")
     @RequestMapping(
         value = "/get-context.json",
-        method = GET,
+        method = POST,
         produces = "application/json; charset=utf-8")
     public GoogleCloudDialogflowV2Context getContextById(@RequestBody EntityItem<GoogleCloudDialogflowV2Context> requestGet) {
         MainControllerResponse response = new MainControllerResponse("RecuperaPorId", "RecuperaPorId", true);

@@ -24,6 +24,8 @@
  */
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
 
 import com.google.api.services.dialogflow.v2.DialogflowRequest;
@@ -32,6 +34,9 @@ import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Contex
 import mx.gob.impi.chatbot.persistence.api.db.ContextRepository;
 import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
 import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * <p>Descripción:</p>
@@ -64,39 +69,68 @@ implements ContextService
         //Se realiza la solicitud al endpoint de dialogflow
         return execute(requestEnity, responseEntity, response);
     }
+    
+    
+    public String listAll(EntityItem<GoogleCloudDialogflowV2Context> requestList, MainControllerResponse response) {
+        
+    	String respuesta = "";
+    	
+    	OkHttpClient client = new OkHttpClient();
+				
+		String url = "https://dialogflow.googleapis.com/" + version + this.getProjectId(requestList.getAreaId()) + "/agent/sessions/-/contexts";
+		
+		String token = getToken(requestList.getAreaId());
+
+	    Request request = new Request.Builder()
+	    	.addHeader("Authorization", "Bearer "+token)
+	        .addHeader("Content-Type", "application/json; charset=UTF-8")
+	    	.url(url)
+	        .build();
+	    try {
+	        Response responseOk = client.newCall(request).execute() ;
+	    	respuesta = responseOk.body().string();
+	    	responseOk.close();
+	    } catch (IOException ioe) {
+	    	String msg = ioe.toString();
+            logger.error(msg);    	    
+		}
+    	
+        
+        return respuesta;    
+    }
 
     @Override
     public GoogleCloudDialogflowV2Context list(EntityItem<GoogleCloudDialogflowV2Context> requestList, MainControllerResponse response) {
         //Establece la URI del endpoint para recuperar todos los registros de la entidad
-        requestList.setUriTemplate(version + this.getProjectId(requestList.getAreaId()) + "/agent/sessions/" + requestList.getSessionId() + "/contexts");
+        requestList.setUriTemplate(version + this.getProjectId(requestList.getAreaId()) + "/agent/sessions/-/contexts");
         return super.list(requestList, response);
     }
 
     @Override
     public MainControllerResponse create(EntityItem<GoogleCloudDialogflowV2Context> requestPost) {
         //Establece la URI del endpoint para crear un registro
-        requestPost.setUriTemplate(version + this.getProjectId(requestPost.getAreaId()) + entidad);
+        requestPost.setUriTemplate(version + this.getProjectId(requestPost.getAreaId()) + "/agent/sessions/-/contexts");
         return super.create(requestPost);
     }
 
     @Override
     public GoogleCloudDialogflowV2Context get(EntityItem<GoogleCloudDialogflowV2Context> requestGet, MainControllerResponse response) {
         //Establece la URI del endpoint para obtener el un registro de la entidad por medio de su identificador
-        requestGet.setUriTemplate(version + this.getProjectId(requestGet.getAreaId()) + entidad + requestGet.getId());
+        requestGet.setUriTemplate(version + this.getProjectId(requestGet.getAreaId()) + "/agent/sessions/-/contexts/" + requestGet.getId());
         return super.list(requestGet, response);
     }
 
     @Override
     public MainControllerResponse update(EntityItem<GoogleCloudDialogflowV2Context> requestPut) {
         //Establece la URI del endpoint para actualizar un registro de la entidad por medio de su identificador
-        requestPut.setUriTemplate(version + this.getProjectId(requestPut.getAreaId()) + entidad + requestPut.getId());
+        requestPut.setUriTemplate(version + this.getProjectId(requestPut.getAreaId()) + "/agent/sessions/-/contexts/" + requestPut.getId());
         return super.update(requestPut);
     }
 
     @Override
     public MainControllerResponse delete(EntityItem<GoogleCloudDialogflowV2Context> requestDelete) {
         //Establece la URI del endpoint para borrar un registro de la entidad por medio de su identificador
-        requestDelete.setUriTemplate(version + this.getProjectId(requestDelete.getAreaId()) + entidad + requestDelete.getId());
+        requestDelete.setUriTemplate(version + this.getProjectId(requestDelete.getAreaId()) + "/agent/sessions/-/contexts/" + requestDelete.getId());
         return super.delete(requestDelete);
     }
 
