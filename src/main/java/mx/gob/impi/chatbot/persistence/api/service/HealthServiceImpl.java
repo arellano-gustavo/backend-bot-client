@@ -69,7 +69,7 @@ public class HealthServiceImpl implements HealthService {
     	info.put("Date time", date.toString());
         // get url
         // is https?
-    	info.put("Log location:", "/chat/log");
+    	info.put("Log location:", "/log");
     	
     	String activeProfile="";
     	String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
@@ -110,7 +110,7 @@ public class HealthServiceImpl implements HealthService {
         		HealthServiceImpl
                 .class
                 .getClassLoader()
-                .getResourceAsStream("/chat/log/GooseTimeBasedlogFile.log");
+                .getResourceAsStream("/log/GooseTimeBasedlogFile.log");
         BufferedReader r = new BufferedReader(new InputStreamReader(stream));
         String line;
         try {
