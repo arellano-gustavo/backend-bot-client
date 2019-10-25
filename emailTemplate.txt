@@ -13,7 +13,7 @@
                         <td>
                         <table>
                             <tr>
-                                <td colspan="2"><h1>Estimado '$USER_NAME', ¿Perdiste tu contraseña?</h1></td>
+                                <td colspan="2"><h1>Estimado '$USER_NAME' ($USER_NUM), ¿Perdiste tu contraseña?</h1></td>
                             </tr>
                             <tr>
                                 <td colspan="2"><h3>No hay problema.</h3></td>

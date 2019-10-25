@@ -36,12 +36,6 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-/*
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-*/
-import org.springframework.context.annotation.PropertySource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +43,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 /**
  * <p>Descripción:</p>

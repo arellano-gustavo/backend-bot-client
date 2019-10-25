@@ -7,6 +7,7 @@ docker rm chatbot-backend
 docker run -it \
 -p 8080:8080 \
 --name chatbot-backend \
+--restart unless-stopped \
 -v $RUTA/target:/chat \
 -v $RUTA/log:/log \
 gustavoarellano/jdk18 \
