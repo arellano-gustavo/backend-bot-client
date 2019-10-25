@@ -29,6 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,6 +71,10 @@ public class AdminController {
     
     @Autowired
     private UserRolService userRolService;
+    
+    @Autowired
+    private HealthService healthService;
+
 
     // PONGAN ATENCIÓN !!!!
     /*
@@ -495,5 +500,15 @@ public class AdminController {
         public List<UserArea> getUserAreaByIdArea(@RequestParam  int id) {
             return userAreaService.getUserAreaByIdArea(id);
         }
-
+    
+    @ApiOperation(
+            value = "AdminController::health",
+            notes = "Entrega un informe a cerca de las variables del sistema")
+        @RequestMapping(
+            value = "/health.json",
+            method = GET,
+            produces = "application/json; charset=utf-8")
+        public Map<String, String> health(@RequestParam  String data) throws Exception {
+            return healthService.getInfo(data);
+        }
 }

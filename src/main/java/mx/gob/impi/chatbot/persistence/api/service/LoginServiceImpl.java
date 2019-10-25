@@ -266,8 +266,8 @@ public class LoginServiceImpl implements LoginService {
 
         // since everything was ok, send the restore mail:
         this.chatbotMailSenderService.sendHtmlMail(
-                mail, "Procedimiento de recuperación de contraseña",
-                getMailTemplate(secTok, user.getUsr()));
+                mail, "Procedimiento para generación de nueva contraseña",
+                getMailTemplate(secTok, user.getFullName(), user.getUsr()));
         return new LoginResponse(user.getUsr(), true, "Revisa tu mail: [" + mail + "]");
     }
 
@@ -345,7 +345,7 @@ public class LoginServiceImpl implements LoginService {
      * @param name Cadena con el nombre del usuario
      * @return Cadena con el cuerpo del mensaje de restablecimiento
      */
-    private String getMailTemplate(String secTok, String name) {
+    private String getMailTemplate(String secTok, String name, String num) {
         StringBuilder sb = new StringBuilder();
         sb.append(this.urlBackend);
         sb.append(this.urlBackendPort);
@@ -353,6 +353,7 @@ public class LoginServiceImpl implements LoginService {
         sb.append(this.urlVerifica);
         sb.append(secTok);
         String template = getTextFromFile("emailTemplate.txt", false);
+        template = template.replace("$USER_NUM", num);
         template = template.replace("$USER_NAME", name);
         template = template.replace("$URL", sb.toString());
         return template;
