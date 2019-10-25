@@ -119,6 +119,7 @@ public class HealthServiceImpl implements HealthService {
 	        }
         } catch(Exception e) {
         	logger.error(e.getMessage());
+        	lista.add(e.getMessage());
         }
     	return lista;
     }
