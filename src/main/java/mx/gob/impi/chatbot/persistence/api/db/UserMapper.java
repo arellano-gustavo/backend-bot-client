@@ -270,11 +270,13 @@ public interface UserMapper {
             +"usr, "
             +"password, "
             +"mail, "
+            +"disabled, "
             +"creation_date, full_name"
             +") VALUES("
             +"#{usr}, "
             +"#{password}, "
             +"#{mail}, "
+            +"#{disabled}, "
             +"#{creationDate}, #{fullName}"
             +")";
     @Results(value = {
