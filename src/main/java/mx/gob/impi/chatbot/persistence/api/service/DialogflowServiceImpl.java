@@ -152,7 +152,8 @@ public abstract class DialogflowServiceImpl<T, R> implements DialogflowService<T
         //Indica el metodo de HTTP con el que el cliente va a realizar la solicitud al endpoint
         requestPost.setMethod("POST");
         //Se realiza la solicitud al endpoint de dialogflow
-        execute(requestPost, response);
+        T entity = execute(requestPost, response);
+        response.setLongMessage(entity.toString());
         return response;
     }
 
@@ -170,7 +171,8 @@ public abstract class DialogflowServiceImpl<T, R> implements DialogflowService<T
         //Indica el metodo de HTTP con el que el cliente va a realizar la solicitud al endpoint
         requestPut.setMethod("PATCH");
         //Se realiza la solicitud al endpoint de dialogflow
-        execute(requestPut, response);
+        T entity = execute(requestPut, response);
+        response.setLongMessage(entity.toString());
         return response;
     }
 
