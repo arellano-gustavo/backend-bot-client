@@ -1,7 +1,9 @@
 package mx.gob.impi.chatbot.persistence.api.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.util.*;
 
@@ -99,5 +101,25 @@ public class HealthServiceImpl implements HealthService {
         info.put("loginUrlFrontendPort", loginUrlFrontendPort);
         
         return info;
+    }
+
+    @Override
+    public List<String> getLog() {
+    	List<String> lista = new ArrayList<>();
+        InputStream stream =
+        		HealthServiceImpl
+                .class
+                .getClassLoader()
+                .getResourceAsStream("/chat/log/GooseTimeBasedlogFile.log");
+        BufferedReader r = new BufferedReader(new InputStreamReader(stream));
+        String line;
+        try {
+	        while ((line=r.readLine()) != null) {
+	            lista.add(line);
+	        }
+        } catch(Exception e) {
+        	logger.error(e.getMessage());
+        }
+    	return lista;
     }
 }
