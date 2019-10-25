@@ -106,14 +106,14 @@ public class HealthServiceImpl implements HealthService {
     @Override
     public List<String> getLog() {
     	List<String> lista = new ArrayList<>();
-        InputStream stream =
-        		HealthServiceImpl
-                .class
-                .getClassLoader()
-                .getResourceAsStream("/log/GooseTimeBasedlogFile.log");
-        BufferedReader r = new BufferedReader(new InputStreamReader(stream));
-        String line;
         try {
+	        InputStream stream =
+	        		HealthServiceImpl
+	                .class
+	                .getClassLoader()
+	                .getResourceAsStream("/log/GooseTimeBasedlogFile.log");
+	        BufferedReader r = new BufferedReader(new InputStreamReader(stream));
+	        String line;
 	        while ((line=r.readLine()) != null) {
 	            lista.add(line);
 	        }
