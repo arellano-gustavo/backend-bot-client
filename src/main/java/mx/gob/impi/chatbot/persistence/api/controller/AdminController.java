@@ -511,4 +511,15 @@ public class AdminController {
         public Map<String, String> health(@RequestParam  String data) throws Exception {
             return healthService.getInfo(data);
         }
+    
+    @ApiOperation(
+            value = "AdminController::getLog",
+            notes = "Imprime el log actual")
+        @RequestMapping(
+            value = "/get-log.json",
+            method = GET,
+            produces = "application/json; charset=utf-8")
+        public List<String> getLog()  {
+            return healthService.getLog();
+        }
 }

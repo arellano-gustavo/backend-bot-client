@@ -163,9 +163,9 @@ public class LoginServiceImpl implements LoginService {
                         + faltan
                         +" segundos");
             } else if(usuario.getFailedAtemptCounter()>maxInvalidTries - 1){
-                usuario.setFailedAtemptCounter(0);
+                //usuario.setFailedAtemptCounter(0);
                 userMapper.updateFailure(usuario);
-                usuario.setBloquedDate(new Date(1));
+                usuario.setBloquedDate(new Date(System.currentTimeMillis()));
                 userMapper.updateBlocked(usuario);
             }
 
@@ -175,7 +175,7 @@ public class LoginServiceImpl implements LoginService {
                 List<Rol> roles = userRolMapper.getRolesFromUserId(uid);
                 // Reset fallos previos
                 usuario.setFailedAtemptCounter(0);
-                usuario.setBloquedDate(new Date(System.currentTimeMillis()));
+                usuario.setBloquedDate(new Date(1));
                 usuario.setSecretQuestion("x");
                 userMapper.update(usuario);
 
@@ -223,7 +223,10 @@ public class LoginServiceImpl implements LoginService {
      * @throws Exception Objeto de tipo 'Exception' que contiene el mensaje
      */
     private void evalErrorCondition(boolean condition, String msg) throws Exception {
-        if(condition) throw new Exception(msg);
+        if(condition) {
+        	logger.error(msg);
+        	throw new Exception(msg);
+        }
     }
 
     /**
