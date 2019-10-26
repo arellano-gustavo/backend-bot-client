@@ -51,7 +51,8 @@ public class HealthServiceImpl implements HealthService {
 		Process process = Runtime.getRuntime().exec("/bin/bash -c "+data);
         BufferedReader inStream = new BufferedReader(
                 new InputStreamReader( process.getInputStream()));  
-        logger.info(inStream.readLine());
+        String response = inStream.readLine();
+        info.put("Response: ", response);
 		
 
     	info.put("server.port-1", environment.getProperty("server.port"));
@@ -84,24 +85,22 @@ public class HealthServiceImpl implements HealthService {
         info.put("loginUrlFrontend", loginUrlFrontend);
         info.put("loginUrlFrontendPort", loginUrlFrontendPort);
         
-    	Properties profile = new Properties();
-        InputStream stream =
-        		HealthServiceImpl
-                .class
-                .getClassLoader()
-                .getResourceAsStream("c3p0"+activeProfile+".properties");
         try {
+	    	Properties profile = new Properties();
+	        InputStream stream =
+	        		HealthServiceImpl
+	                .class
+	                .getClassLoader()
+	                .getResourceAsStream("c3p0"+activeProfile+".properties");
         	profile.load(stream);
+            Set<String> names = profile.stringPropertyNames();
+            for(String name : names) {
+            	info.put(name, profile.getProperty(name));
+            }
             logger.info("Properties have been loaded");
         } catch (IOException e1) {
-            logger.error(e1.getMessage());
-            return info;
+            logger.error("Error loading properties: "+e1.getMessage());
         }
-        Set<String> names = profile.stringPropertyNames();
-        for(String name : names) {
-        	info.put(name, profile.getProperty(name));
-        }
-        
         return info;
     }
 
