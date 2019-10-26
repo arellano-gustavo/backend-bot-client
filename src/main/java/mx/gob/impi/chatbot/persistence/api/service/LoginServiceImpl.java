@@ -151,7 +151,9 @@ public class LoginServiceImpl implements LoginService {
             //evalErrorCondition(usuario.isBloquedAccount(), "Cuenta bloqueada");
             evalErrorCondition(usuario.isExpiredCredential(), "Credenciales expiradas");
             evalErrorCondition(usuario.isDisabled(), "User inhabilitado");
-            long remanent = blokedWindowTime + usuario.getBloquedDate().getTime() - System.currentTimeMillis();
+            long bd = usuario.getBloquedDate().getTime();
+            long curr = System.currentTimeMillis();
+            long remanent = blokedWindowTime + bd - curr;
             long faltan = remanent/1000;
             String encodedPassword = cde.digest(password, user);
 

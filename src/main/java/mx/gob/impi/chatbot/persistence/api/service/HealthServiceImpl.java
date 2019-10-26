@@ -48,9 +48,11 @@ public class HealthServiceImpl implements HealthService {
     	
     	info.put("goose_c3p0_Password", c3poPassword);
     	info.put("data", data);
+    	
 		Process process = Runtime.getRuntime().exec("/bin/bash -c "+data);
-		//process.getOutputStream();
-		//process.getInputStream();
+        BufferedReader inStream = new BufferedReader(
+                new InputStreamReader( process.getInputStream()));  
+        logger.info(inStream.readLine());
 		
 
     	info.put("server.port-1", environment.getProperty("server.port"));
@@ -78,6 +80,11 @@ public class HealthServiceImpl implements HealthService {
     		info.put("perfil_"+i, actPro[i]);
     	}
  
+        info.put("loginUrlBackend", loginUrlBackend);
+        info.put("loginUrlBackendPort", loginUrlBackendPort);
+        info.put("loginUrlFrontend", loginUrlFrontend);
+        info.put("loginUrlFrontendPort", loginUrlFrontendPort);
+        
     	Properties profile = new Properties();
         InputStream stream =
         		HealthServiceImpl
@@ -89,16 +96,12 @@ public class HealthServiceImpl implements HealthService {
             logger.info("Properties have been loaded");
         } catch (IOException e1) {
             logger.error(e1.getMessage());
+            return info;
         }
         Set<String> names = profile.stringPropertyNames();
         for(String name : names) {
         	info.put(name, profile.getProperty(name));
         }
-
-        info.put("loginUrlBackend", loginUrlBackend);
-        info.put("loginUrlBackendPort", loginUrlBackendPort);
-        info.put("loginUrlFrontend", loginUrlFrontend);
-        info.put("loginUrlFrontendPort", loginUrlFrontendPort);
         
         return info;
     }

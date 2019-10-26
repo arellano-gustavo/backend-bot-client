@@ -52,18 +52,18 @@ public interface UserMapper {
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Select("SELECT * FROM users order by ${sortColumn} asc")
@@ -78,18 +78,18 @@ public interface UserMapper {
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Select("SELECT * FROM users order by ${sortColumn} desc")
@@ -103,18 +103,18 @@ public interface UserMapper {
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Select("SELECT * FROM users WHERE usr = #{usr}")
@@ -128,18 +128,18 @@ public interface UserMapper {
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Select("SELECT * FROM users WHERE mail = #{mail}")
@@ -153,18 +153,18 @@ public interface UserMapper {
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Select("SELECT * FROM users WHERE id = #{id}")
@@ -178,18 +178,18 @@ public interface UserMapper {
      * @return el usuario encontrado con el criterio de búsqueda.
      */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Select("SELECT * FROM users WHERE security_token = #{securityToken}")
@@ -246,18 +246,18 @@ public interface UserMapper {
             +");";
     /** Procedimiento de inserción con mapeo FULL incluido */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Insert(full_insert_statement)
@@ -280,7 +280,7 @@ public interface UserMapper {
             +"#{creationDate}, #{fullName}"
             +")";
     @Results(value = {
-            @Result(property = "creationDate",  column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",  column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",      column = "full_name")
           })
     @Insert(short_insert_statement)
@@ -314,18 +314,18 @@ public interface UserMapper {
      * @param user el objeto ...
      */
     @Results(value = {
-            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "expiredAccount",         column = "expired_account"),
             @Result(property = "bloquedAccount",         column = "bloqued_account"),
             @Result(property = "expiredCredential",      column = "expired_credential"),
             @Result(property = "failedAtemptCounter",    column = "failed_atempt_counter"),
-            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",            column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "secretQuestion",         column = "secret_question"),
             @Result(property = "secretAnswer",           column = "secret_answer"),
             @Result(property = "securityToken",          column = "security_token"),
             @Result(property = "securityTokenWindow",    column = "security_token_window"),
-            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
-            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "lastAccessDate",         column = "last_access_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
+            @Result(property = "lastPasswordUpdateDate", column = "last_password_update_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "fullName",               column = "full_name")
           })
     @Update(update_statement)
@@ -354,7 +354,7 @@ public interface UserMapper {
      * @param usuario Objeto de ttipo 'User' al que se le va a modificar su estado de bloqueo.
      */
     @Results(value = {
-            @Result(property = "bloquedDate",    column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.DATE),
+            @Result(property = "bloquedDate",    column = "bloqued_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),
             @Result(property = "bloquedAccount", column = "bloqued_account")
           })
     @Update(updateLocked_statement)
