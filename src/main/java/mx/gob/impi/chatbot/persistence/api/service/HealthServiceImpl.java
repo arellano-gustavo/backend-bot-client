@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 import org.slf4j.Logger;
@@ -16,10 +18,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
-//@EnableConfigurationProperties(HealthServiceImpl.class)
-//@EnableEncryptableProperties
 @PropertySource("classpath:c3p0.properties")
-//@ConfigurationProperties(prefix = "mail")
 public class HealthServiceImpl implements HealthService {
 	private static final Logger logger = LoggerFactory.getLogger(HealthServiceImpl.class);
 
@@ -107,23 +106,21 @@ public class HealthServiceImpl implements HealthService {
     }
 
     @Override
-    public List<String> getLog() {
+    public List<String> getLog(int last) {
     	List<String> lista = new ArrayList<>();
-        try {
-	        InputStream stream =
-	        		HealthServiceImpl
-	                .class
-	                .getClassLoader()
-	                .getResourceAsStream("/log/GooseTimeBasedlogFile.log");
-	        BufferedReader r = new BufferedReader(new InputStreamReader(stream));
-	        String line;
-	        while ((line=r.readLine()) != null) {
-	            lista.add(line);
-	        }
-        } catch(Exception e) {
-        	logger.error(e.getMessage());
-        	lista.add(e.getMessage());
-        }
-    	return lista;
+		try {
+			List<String> allLines = Files.readAllLines(Paths.get("/log/chatbot.log"));
+			int len = allLines.size();
+			if(last<1) {
+				return allLines;
+			} 
+			for(int i=Math.max(0, len-last); i<len; i++) {
+				lista.add(allLines.get(i));
+			}
+			return lista;
+		} catch (IOException e) {
+			lista.add(e.getMessage());
+			return lista;
+		}
     }
 }

@@ -11,11 +11,11 @@ AND: http://logback.qos.ch/manual/configuration.html
     </encoder>
   </appender>
   
-<appender name="TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>log/GooseTimeBasedlogFile.log</file>
+<appender name="TIME_BASED_FILE" class="mx.gob.impi.chatbot.persistence.support.CustomAppender">
+    <file>log/chatbot.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
         <!-- daily rollover -->
-        <fileNamePattern>log/GooseTimeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+        <fileNamePattern>log/chatbot.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
         <maxHistory>10</maxHistory>
     </rollingPolicy>
  

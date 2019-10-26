@@ -514,12 +514,12 @@ public class AdminController {
     
     @ApiOperation(
             value = "AdminController::getLog",
-            notes = "Imprime el log actual")
+            notes = "Imprime las últimas lineas del log actual")
         @RequestMapping(
             value = "/get-log.json",
             method = GET,
             produces = "application/json; charset=utf-8")
-        public List<String> getLog()  {
-            return healthService.getLog();
+        public List<String> getLog(@RequestParam  int last)  {
+            return healthService.getLog(last);
         }
 }
