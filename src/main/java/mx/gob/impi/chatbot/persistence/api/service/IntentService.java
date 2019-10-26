@@ -26,6 +26,9 @@ package mx.gob.impi.chatbot.persistence.api.service;
 
 import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Intent;
 
+import mx.gob.impi.chatbot.persistence.api.model.domain.EntityItem;
+import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
+
 /**
  * <p>Descripción:</p>
  * Interfaz con los metodos para consumir los endpoint
@@ -37,5 +40,15 @@ import com.google.api.services.dialogflow.v2.model.GoogleCloudDialogflowV2Intent
  * @param <TRequest> Objeto con los parametros para consumir los endpoint
  */
 public interface IntentService extends DialogflowService<GoogleCloudDialogflowV2Intent, GoogleCloudDialogflowV2Intent>{
+	
+	/**
+     * Obtiene todos los registros que se encuentran
+     * registrados en el agente de dialogflow
+     * @param requestGet Objeto con los paramentros con los que
+     *                  se consume el endpoint
+     * @param response Objeto con el status del proceso para obtener
+     *                 todos los registros desde el agente de dialogflow
+     */
+    void getPrefix(EntityItem<GoogleCloudDialogflowV2Intent> requestGet, MainControllerResponse response);
 
 }

@@ -92,6 +92,26 @@ public class TrainerController {
         GoogleCloudDialogflowV2Intent intent = intentService.list(requestGet, response);
         return ResponseEntity.ok(intent);
     }
+    
+    /**
+     * Obtiene una lista de intent registrados en el sistema
+     * @param requestGet Objeto de tipo 'Intent'
+     *        con los parametros de busqueda
+     * @return Objeto de tipo 'Intent'
+     *         con una lista de intent del sistema
+     */
+    @ApiOperation(
+        value = "TrainerController::getAllIntent",
+        notes = "Regresa un arreglo de todos los intent en el sistema")
+    @RequestMapping(
+        value = "/get-prefix.json",
+        method = POST,
+        produces = "application/json; charset=utf-8")
+    public MainControllerResponse getPrefix(@RequestBody EntityItem<GoogleCloudDialogflowV2Intent> requestGet) {
+        MainControllerResponse response = new MainControllerResponse("ObtienePrefijo", "ObtienePrefijo", true);
+        intentService.getPrefix(requestGet, response);
+        return response;
+    }
 
     /**
      * Ingresa un intent en el sistema
