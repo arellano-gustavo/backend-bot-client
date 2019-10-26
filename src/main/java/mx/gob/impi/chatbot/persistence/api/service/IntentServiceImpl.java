@@ -64,11 +64,15 @@ implements IntentService
         //Se realiza la solicitud al endpoint de dialogflow
         return execute(requestEnity, responseEntity, response);
     }
+    
+    public void getPrefix(EntityItem<GoogleCloudDialogflowV2Intent> requestList, MainControllerResponse response) {
+        response.setLongMessage("projects/" + this.getProjectId(requestList.getAreaId()));
+    }
 
     @Override
     public GoogleCloudDialogflowV2Intent list(EntityItem<GoogleCloudDialogflowV2Intent> requestList, MainControllerResponse response) {
         //Establece la URI del endpoint para recuperar todos los registros de la entidad
-        requestList.setUriTemplate(version + this.getProjectId(requestList.getAreaId()) + "/agent/intents?intentView=INTENT_VIEW_FULL");
+        requestList.setUriTemplate(version + this.getProjectId(requestList.getAreaId()) + "/agent/intents");//?intentView=INTENT_VIEW_FULL");
         return super.list(requestList, response);
     }
 
