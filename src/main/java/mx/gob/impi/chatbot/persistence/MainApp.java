@@ -31,10 +31,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
@@ -57,32 +55,14 @@ public class MainApp {
    *
    * @param args an array of {@link java.lang.String} objects.
    */
-  public static void main(String[] args) {
-    // Calculando el ambiente que hemos enviado en nuestra linea de arranque:
-    logger.info(">>>>>> Calculando ambiente para runtime....");
-    String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
-    
-    if(actPro!=null && actPro.length>0 && actPro[0]!=null && actPro[0].trim().length()>0) {
-    	logger.info("Active profile: [" + actPro[0] + "] <------- Current profile !!!!");
-    	System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, actPro[0]);
-    } else {
-    	logger.error("Using Profile by default !!!!");
-    }
-    
-    //System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "impi");
-    
+  public static void main(String[] args) {    
     logger.info("Inicializando applicacion Spring Boot ********************************************");
     SpringApplication.run(MainApp.class, args);
     logger.info("Concluye Inicialización de applicacion Spring Boot *******************************");
     logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json ***************");
     logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ****************************");
-
-    //SpringApplication application = new SpringApplication(MainApp.class);
-    /* Setting Boot banner off default value is true */
-    //application.setBannerMode(Banner.Mode.OFF);
-    //application.run(args);
   }
-  /* */
+  
   @Bean
   public WebMvcConfigurer corsConfigurer() {
       // check this out: https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
@@ -90,9 +70,12 @@ public class MainApp {
       return new WebMvcConfigurer() {
           @Override
           public void addCorsMappings(CorsRegistry registry) {
-              registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
+              registry
+              .addMapping("/**")
+              .allowedOrigins("*")
+              .allowedMethods("GET", "POST","PUT", "DELETE");
           }
       };
   }
-  /**/
+  
 }
