@@ -28,13 +28,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 /**
  * <p>MainApp class...</p>
@@ -42,8 +39,6 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
  * @author garellano
  * @version $Id: $Id
  */
-@EnableConfigurationProperties
-@EnableEncryptableProperties
 @SpringBootApplication
 @ComponentScan("mx.gob.impi.chatbot.persistence")
 @MapperScan("mx.gob.impi.chatbot.persistence.api.db")
@@ -56,11 +51,11 @@ public class MainApp {
    * @param args an array of {@link java.lang.String} objects.
    */
   public static void main(String[] args) {    
-    logger.info("Inicializando applicacion Spring Boot ********************************************");
+    logger.info("Inicializando applicacion Spring Boot");
     SpringApplication.run(MainApp.class, args);
-    logger.info("Concluye Inicialización de applicacion Spring Boot *******************************");
-    logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json ***************");
-    logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ****************************");
+    logger.info("Concluye Inicialización de applicacion Spring Boot");
+    logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json");
+    logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ***");
   }
   
   @Bean
