@@ -83,7 +83,7 @@ public class DataConfig {
      */
     @Bean
     public DataSource dataSource(){
-    	String pass = unEncrypt(ph.getProp("c3p0.password")); // gustavo
+    	String pass = ph.getProp("c3p0.password"); // gustavo
     	logger.info("Password: "+pass); 
         try {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
@@ -122,7 +122,9 @@ public class DataConfig {
         sessionFactory.setTypeAliasesPackage("mx.gob.impi.chatbot.persistence.api.db2");
         return sessionFactory;
     }
-    private String unEncrypt(String encriptedData) {
+    
+    
+    public String unEncrypt2(String encriptedData) {
     	if(encriptedData.startsWith("ENC(")) {
     		BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
 	        String pureData = encriptedData.substring(4, encriptedData.length()-1);
