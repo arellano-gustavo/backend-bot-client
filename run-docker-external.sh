@@ -14,7 +14,7 @@ docker run -it \
 gustavoarellano/jdk18 \
 java -jar \
 -Dmaven.test.skip=true \
--Dspring-boot.run.profiles=impi \
+-Dspring-boot.run.profiles=home \
 -Dspring.config.location="file:/configuration/" \
 -Doracle.jdbc.timezoneAsRegion=false \
 /chat/chatbot-persistence-layer-1.0.war
