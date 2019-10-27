@@ -93,7 +93,9 @@ public class HealthServiceImpl implements HealthService {
         info.put("loginUrlFrontendPort", loginUrlFrontendPort);
 
         try {
-            Properties profile = PropHelper.getInstance().getAllProps();
+        	String configLocation = System.getProperty("spring.config.location","");
+        	PropHelper ph = new PropHelper(configLocation, "c3p0");
+            Properties profile = ph.getAllProps();
             Set<String> names = profile.stringPropertyNames();
             for(String name : names) {
                 info.put(name, profile.getProperty(name));
