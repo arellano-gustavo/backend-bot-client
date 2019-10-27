@@ -16,6 +16,7 @@ public class PropHelper {
     private static final Logger logger = LoggerFactory.getLogger(PropHelper.class);
     
     private Properties properties = new Properties();
+    private BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
     
     private static PropHelper instance = null;
 
@@ -88,16 +89,15 @@ public class PropHelper {
      */
     public String getProp(String name) {
         String data = properties.get(name).toString();
-        return unEncrypt(name, data);
+        return unEncrypt(data);
     }
     
-    private String unEncrypt(String name, String data) {
-    	if(data.startsWith("ENC(")) {
-	        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-	        textEncryptor.setPassword(name);
-	        String pass = data.substring(4, data.length()-1);
-	        return textEncryptor.decrypt(pass);
+    private String unEncrypt(String encriptedData) {
+    	if(encriptedData.startsWith("ENC(")) {
+	        String pureData = encriptedData.substring(4, encriptedData.length()-1);
+	        textEncryptor.setPassword("gustavo");
+	        return textEncryptor.decrypt(pureData);
     	}
-    	return data;
+    	return encriptedData;
     }
 }
