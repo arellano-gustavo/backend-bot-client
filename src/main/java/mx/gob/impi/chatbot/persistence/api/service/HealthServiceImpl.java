@@ -16,10 +16,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+
 import mx.gob.impi.chatbot.persistence.support.PropHelper;
 
 @Service
 @PropertySource("classpath:c3p0.properties")
+@EnableEncryptableProperties
 public class HealthServiceImpl implements HealthService {
     private static final Logger logger = LoggerFactory.getLogger(HealthServiceImpl.class);
 
