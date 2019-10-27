@@ -10,14 +10,14 @@ docker run -it \
 --restart unless-stopped \
 -v $RUTA/target:/chat \
 -v $RUTA/log:/log \
+-v /Users/garellano/Desktop/springboot-conf-dir:/configuration \
 gustavoarellano/jdk18 \
 java -jar \
 -Dmaven.test.skip=true \
--Dspring-boot.run.profiles=home \
+-Dspring-boot.run.profiles=impi \
+-Dspring.config.location="file:/configuration/" \
 -Doracle.jdbc.timezoneAsRegion=false \
 /chat/chatbot-persistence-layer-1.0.war
-
-
 
 # Las siguientes lineas se DEBEN poner como volumenes cuando se este en el IMPI:
 
