@@ -25,6 +25,12 @@ public class PropHelper {
         }
         return instance;
     }
+    public static PropHelper getInstance() throws IOException {
+        if(instance==null) {
+            throw new IOException("Use the getInstance(String, String) first");
+        }
+        return instance;
+    }
     
     public String getCurrentFirstProfile() {
         String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
