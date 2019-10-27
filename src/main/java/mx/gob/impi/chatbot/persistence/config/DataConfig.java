@@ -32,11 +32,14 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import mx.gob.impi.chatbot.persistence.support.PropHelper;
 
@@ -48,13 +51,20 @@ import mx.gob.impi.chatbot.persistence.support.PropHelper;
  * @version 1.0-SNAPSHOT
  */
 @Configuration
+@PropertySource("classpath:c3p0.properties")
+@PropertySource(value = "file:${spring.config.location}/c3p0.properties", ignoreResourceNotFound = true)
+@EnableEncryptableProperties
 public class DataConfig {
+	// https://stackoverflow.com/questions/30079255/propertysource-in-a-jar-for-an-external-file-on-the-classpath
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // https://www.baeldung.com/spring-value-annotation
     // https://www.baeldung.com/configuration-properties-in-spring-boot
     
     private PropHelper ph = null;
+    
+    @Value("${c3p0.password}")
+    private String c3p0Password;
 
     /**
      * Constructor default de la clase.
@@ -62,15 +72,11 @@ public class DataConfig {
     public DataConfig() {
         logger.info("Calculando ambiente para C3P0 ....");
         
-        // I COULDN´T GET THE REAL ONE :(
-        String configLocation = "/configuration/";
-        configLocation="";
-        
-        configLocation = System.getProperty("spring.config.location","");
+        String configLocation = System.getProperty("spring.config.location","");
         logger.info("Config location: --->" + configLocation + "<---"); 
         
         try {
-            ph = PropHelper.getInstance(configLocation, "c3p0");
+            ph = new PropHelper(configLocation, "c3p0");
         } catch (IOException e) {
             logger.error("Error fatal al cargar las propiedades de c3p0: " + e.getMessage());
             System.exit(1);
@@ -84,7 +90,8 @@ public class DataConfig {
     @Bean
     public DataSource dataSource(){
     	String pass = ph.getProp("c3p0.password"); // gustavo
-    	logger.info("Password: "+pass); 
+    	logger.info("Plain Password: ->"+pass+"<-"); 
+    	logger.info("Encripted Password: ->"+c3p0Password+"<-");
         try {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
             cpds.setDriverClass(ph.getProp("c3p0.driverClass"));
