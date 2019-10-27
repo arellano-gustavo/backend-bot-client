@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import javax.sql.DataSource;
 
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,7 @@ import mx.gob.impi.chatbot.persistence.support.PropHelper;
  */
 @Configuration
 public class DataConfig {
-    private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // https://www.baeldung.com/spring-value-annotation
     // https://www.baeldung.com/configuration-properties-in-spring-boot
@@ -66,8 +67,7 @@ public class DataConfig {
         configLocation="";
         
         configLocation = System.getProperty("spring.config.location","");
-        logger.info("Config location: ------------>" + configLocation + "<-----------------------"); 
-
+        logger.info("Config location: --->" + configLocation + "<---"); 
         
         try {
             ph = PropHelper.getInstance(configLocation, "c3p0");
@@ -83,12 +83,14 @@ public class DataConfig {
      */
     @Bean
     public DataSource dataSource(){
+    	String pass = unEncrypt(ph.getProp("c3p0.password")); // gustavo
+    	logger.info("Password: "+pass); 
         try {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
             cpds.setDriverClass(ph.getProp("c3p0.driverClass"));
             cpds.setJdbcUrl(    ph.getProp("c3p0.jdbcUrl"));
             cpds.setUser(       ph.getProp("c3p0.user"));
-            cpds.setPassword(   "gustavo");
+            cpds.setPassword(   pass);
             return cpds;
         } catch(Exception e) {
             logger.info("No fué posible crear un datasource con C3P0: " + e.getMessage());
@@ -120,5 +122,16 @@ public class DataConfig {
         sessionFactory.setTypeAliasesPackage("mx.gob.impi.chatbot.persistence.api.db2");
         return sessionFactory;
     }
-
+    private String unEncrypt(String encriptedData) {
+    	if(encriptedData.startsWith("ENC(")) {
+    		BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+	        String pureData = encriptedData.substring(4, encriptedData.length()-1);
+    		logger.info("encrypted data received: " + pureData);
+	        textEncryptor.setPassword("gustavo");
+	        String descrypted = textEncryptor.decrypt(pureData);
+	        logger.info("decrypted data: "+descrypted);
+	        return descrypted;
+    	}
+    	return encriptedData;
+    }
 }
