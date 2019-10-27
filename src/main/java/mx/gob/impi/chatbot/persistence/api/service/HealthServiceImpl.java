@@ -36,7 +36,7 @@ public class HealthServiceImpl implements HealthService {
     private String loginUrlFrontendPort;
     
     @Value("${c3p0.password}")
-    private String c3poPassword;
+    private String c3p0Password;
     
     @Value("${chatbot.profile.external}")
     private String chatbotProfileExternal;
@@ -49,7 +49,7 @@ public class HealthServiceImpl implements HealthService {
         Map<String, String> info = new HashMap<>();
         info.put("info data", "execute");
         
-        info.put("goose_c3p0_Password", c3poPassword);
+        info.put("goose_c3p0_Password", c3p0Password);
         info.put("data", data);
         info.put("chatbot.profile.external", chatbotProfileExternal);
         
