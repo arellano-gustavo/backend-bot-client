@@ -1,33 +1,39 @@
-<configuration>
-<!-- 
-FROM: https://examples.javacodegeeks.com/enterprise-java/logback/logback-rollingfileappender-example/
-AND: http://logback.qos.ch/manual/configuration.html
- -->
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <!-- encoders are assigned the type
-         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
-    <encoder>
-        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} ---|--- %msg%n</pattern>
-    </encoder>
-  </appender>
-  
-<appender name="TIME_BASED_FILE" class="mx.gob.impi.chatbot.persistence.support.CustomAppender">
-    <file>log/chatbot.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
-        <!-- daily rollover -->
-        <fileNamePattern>log/chatbot.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
-        <maxHistory>10</maxHistory>
-    </rollingPolicy>
- 
-    <encoder>
-        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} ------ %msg%n</pattern>
-    </encoder>
-</appender> 
+<?xml version="1.0" encoding="UTF-8"?>
 
-  <root level="INFO">
-    <appender-ref ref="STDOUT" />
-    <appender-ref ref="TIME_BASED_FILE" />
-  </root>
-  
-  
+<configuration>
+    <!-- 
+        FROM: https://examples.javacodegeeks.com/enterprise-java/logback/logback-rollingfileappender-example/
+        AND: http://logback.qos.ch/manual/configuration.html
+    -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} ---|--- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="TIME_BASED_FILE" class="mx.gob.impi.chatbot.persistence.support.CustomAppender">
+        <file>log/chatbot.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
+            <!-- daily rollover -->
+            <fileNamePattern>log/chatbot.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+     
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} ------ %msg%n</pattern>
+        </encoder>
+    </appender> 
+
+    <logger name="org.*" level="OFF"/>
+    <logger name="com.*" level="OFF"/>
+    
+    <logger name="mx.gob.impi.chatbot" level="INFO" >
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="TIME_BASED_FILE" />
+    </logger>
+    
+    <root level="OFF">
+    </root>
+
 </configuration>
