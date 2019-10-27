@@ -88,12 +88,16 @@ public class PropHelper {
      */
     public String getProp(String name) {
         String data = properties.get(name).toString();
-        if("password".equals(name) && data.startsWith("ENC(")) {
-            BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-            textEncryptor.setPassword(name);
-            String pass = data.substring(4, data.length()-1);
-            return textEncryptor.decrypt(pass);
-        }
-        return data;
+        return unEncrypt(name, data);
+    }
+    
+    private String unEncrypt(String name, String data) {
+    	if(data.startsWith("ENC(")) {
+	        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+	        textEncryptor.setPassword(name);
+	        String pass = data.substring(4, data.length()-1);
+	        return textEncryptor.decrypt(pass);
+    	}
+    	return data;
     }
 }
