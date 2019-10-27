@@ -24,12 +24,13 @@
  */
 package mx.gob.impi.chatbot.persistence.support;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.jasypt.util.text.BasicTextEncryptor;
-import org.slf4j.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -51,7 +52,7 @@ public class JasyptTest {
 
     @Test
     public void encryptorTest(){
-        logger.info("-------------------------------------------->"+welcome+"<---------------------");
+        logger.info("WELCOME: -------------------------------------------->"+welcome+"<---------------------");
         assertTrue("No coincide el password", "Password@1".equals(welcome));
     }
 

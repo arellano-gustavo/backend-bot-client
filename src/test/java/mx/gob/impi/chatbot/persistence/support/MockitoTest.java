@@ -30,8 +30,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import mx.gob.impi.chatbot.persistence.api.model.domain.User;
 import mx.gob.impi.chatbot.persistence.api.service.UserService;
@@ -43,20 +51,25 @@ import mx.gob.impi.chatbot.persistence.api.service.UserService;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class MockitoTest {
+	private static final Logger logger = LoggerFactory.getLogger(MockitoTest.class);
+	
     @MockBean
     private UserService userService;
 
     @Before
     public void setUp() {
+    	logger.info("Before the test");
         User gus = new User("goose", "xyz", "gus@hotmail.com");
         Mockito.when(userService.findUserByName("goose"))
           .thenReturn(gus);
     }
 
-    @Test
+    //@Test
     public void whenFindByName_thenReturnEmployee() {
+    	logger.info("Actual test");
         // given
         User user = userService.findUserByName("goose");
         // and

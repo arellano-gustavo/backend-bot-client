@@ -30,7 +30,13 @@ import java.util.*;
 
 
 import org.slf4j.*;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import mx.gob.impi.chatbot.persistence.support.MailValidator;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * <p>Descripción:</p>
@@ -42,6 +48,8 @@ import org.junit.Test;
  */
 // Include my Ref, please:
 // https://howtodoinjava.com/regex/java-regex-validate-email-address/
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class MailStructureTest {
     private static final Logger logger = LoggerFactory.getLogger(MailStructureTest.class);
 
@@ -53,7 +61,7 @@ public class MailStructureTest {
      */
     @Test
     public void pba(){
-        logger.info("Running my test");
+        logger.info("Running my test for Mail Structure ******************");
         List<String> emails = new ArrayList<>();
         emails.add("user@domain.com");
         emails.add("user@domain.co.in");

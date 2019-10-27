@@ -1,12 +1,17 @@
 package mx.gob.impi.chatbot.persistence.support;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PaginatorTest {
-    
+	private static final Logger logger = LoggerFactory.getLogger(PaginatorTest.class);
     @Test
     public void paginator() {
+    	logger.info("Tests de paginación");
+    	
     	int[] result = null;
     	// First test:
     	result = getPage(createArray(236), 20, 4);

@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import org.slf4j.*;
+
+import mx.gob.impi.chatbot.persistence.support.Calculator;
+
 import org.junit.Test;
 
 public class CalculatorTest {

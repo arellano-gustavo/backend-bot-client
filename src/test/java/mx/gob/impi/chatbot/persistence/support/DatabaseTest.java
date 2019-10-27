@@ -31,8 +31,11 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 /**
  * <p>Descripción:</p>
@@ -41,8 +44,9 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+//@EnableEncryptableProperties
 public class DatabaseTest {
     private final static Logger logger = LoggerFactory.getLogger(DatabaseTest.class);
 
@@ -55,26 +59,30 @@ public class DatabaseTest {
     @Value("${db.url}")
     private String url;
 
-    @Value("${db.driver}")
+    //@Value("${db.driver}")
     private String driver;
 
     /**
      * Prueba la conexion a la base de datos
      */
-    @Test
+    //@Test
     public void connect() {
        Connection conn = null;
        try {
           Class.forName(this.driver).newInstance();
           conn = DriverManager.getConnection(this.url, this.username, this.password);
           if (conn != null) {
-             logger.info("Conexión a base de datos "+url+" ... Ok");
+             logger.info("Conexión a base de datos "+url+" ... Ok !!!!!!!!!!!!!!!!!!!!!!!");
              conn.close();
              assert(true);
           }
        } catch(Exception ex) {
-          System.out.println(ex);
-          assert(false);
+           logger.error("user:"+this.username);
+           logger.error("url:"+this.url);
+           logger.error("password:"+this.password);
+           logger.error("driver:"+this.driver);
+           logger.error("error:"+ex.getMessage());
+           assert(false);
        }
     }
 }
