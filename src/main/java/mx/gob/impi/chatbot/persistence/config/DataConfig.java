@@ -88,7 +88,7 @@ public class DataConfig {
             cpds.setDriverClass(ph.getProp("c3p0.driverClass"));
             cpds.setJdbcUrl(    ph.getProp("c3p0.jdbcUrl"));
             cpds.setUser(       ph.getProp("c3p0.user"));
-            cpds.setPassword(   ph.getProp("c3p0.password"));
+            cpds.setPassword(   "gustavo");
             return cpds;
         } catch(Exception e) {
             logger.info("No fué posible crear un datasource con C3P0: " + e.getMessage());
