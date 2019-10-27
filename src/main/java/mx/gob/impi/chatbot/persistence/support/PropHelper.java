@@ -14,21 +14,6 @@ public class PropHelper {
     
     private Properties properties = new Properties();
     
-    private static PropHelper instance = null;
-
-    public static PropHelper getInstance(String configLocation, String basePropertiesName) throws IOException {
-        if(instance==null) {
-            instance = new PropHelper(configLocation, basePropertiesName);
-        }
-        return instance;
-    }
-    public static PropHelper getInstance() throws IOException {
-        if(instance==null) {
-            throw new IOException("Use the getInstance(String, String) first");
-        }
-        return instance;
-    }
-    
     public String getCurrentFirstProfile() {
         String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
         String activeProfile = "";
@@ -45,32 +30,46 @@ public class PropHelper {
         return activeProfile; // Lleva un "-" al principio
     }
     
-    private PropHelper(String configLocation, String basePropertiesName) throws IOException {
+    public PropHelper(String configLocation, String basePropertiesName) throws IOException {
         // calculate paths
         String activeProfile = this.getCurrentFirstProfile();
         String fullProfileName = basePropertiesName+activeProfile+".properties";
-        logger.info("fullProfileName: "+fullProfileName);
-        logger.info("configLocation: "+configLocation);
+        logger.info("fullProfileName: --->"+fullProfileName+"<---");
+        logger.info("configLocation: --->"+configLocation+"<---");
         
         
         // load from classpath or file
         if(configLocation.trim().length()<1) {
-            logger.info("Loading properties form classpath");
-            InputStream stream =
-                DataConfig
-                .class
-                .getClassLoader()
-                .getResourceAsStream(fullProfileName);
-            properties.load(stream);
-            logger.info("Properties have been loaded from the classpath");
+        	logger.warn("No config directory was especified. Using internal classpath config files");
+        	loadPropsFromClasspath(fullProfileName);
         } else {
-            logger.info("Loading properties form filesystem");
-            configLocation = configLocation.substring(5);
-            File fr = new File(configLocation+fullProfileName);
-            InputStream fis = new FileInputStream(fr);
-            properties.load(fis);
-            logger.info("Properties ("+basePropertiesName+activeProfile+") have been loaded from the config directory: " + configLocation);
+        	try {
+        		logger.info("Using a config directory that was declared: " + configLocation);
+        		loadPropsFromFileSystem(configLocation, fullProfileName, basePropertiesName, activeProfile);
+        	} catch (IOException ioe) {
+        		logger.error("Unable to load configuration fron provided conf dir. Falling back to local configuration, same profile.");
+        		loadPropsFromClasspath(fullProfileName);
+        	}
         }
+    }
+    private void loadPropsFromFileSystem(String configLocation, String fullProfileName, String basePropertiesName, String activeProfile) throws IOException {
+        logger.info("Loading properties form filesystem");
+        configLocation = configLocation.substring(5);
+        File fr = new File(configLocation+fullProfileName);
+        InputStream fis = new FileInputStream(fr);
+        properties.load(fis);
+        logger.info("Properties ("+basePropertiesName+activeProfile+") have been loaded from the config directory: " + configLocation);
+    }
+    
+    private void loadPropsFromClasspath(String fullProfileName) throws IOException {
+        logger.info("Loading properties form classpath");
+        InputStream stream =
+            DataConfig
+            .class
+            .getClassLoader()
+            .getResourceAsStream(fullProfileName);
+        properties.load(stream);
+        logger.info("Properties have been loaded from the classpath");
     }
     
     public Properties getAllProps() {
