@@ -25,24 +25,19 @@
 package mx.gob.impi.chatbot.persistence.config;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.jasypt.util.text.BasicTextEncryptor;
-import org.mybatis.spring.SqlSessionFactoryBean;
-
-import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import mx.gob.impi.chatbot.persistence.support.PropHelper;
 
 /**
  * <p>Descripción:</p>
@@ -51,77 +46,35 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-//@EnableConfigurationProperties(DataConfig.class)
-//@EnableEncryptableProperties
 @Configuration
-//@PropertySource("classpath:application.properties")
-//@ConfigurationProperties(prefix = "mail")
 public class DataConfig {
     private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
 
     // https://www.baeldung.com/spring-value-annotation
     // https://www.baeldung.com/configuration-properties-in-spring-boot
     
-    @Value("${login.url-backend}")
-    private String template;
-    private String user;
-    private String password;
-    private String jdbcUrl;
-    private String driverClass;
-
-    private Properties properties = new Properties();
+    private PropHelper ph = null;
 
     /**
      * Constructor default de la clase.
      */
     public DataConfig() {
-        super();
-        logger.info("This is the url for our application dot properties: " + this.template + "<-----------");
         logger.info("Calculando ambiente para C3P0 ....");
-        String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
-        String activeProfile = "";
         
-        if(actPro[0]!=null && actPro[0].trim().length()>0) {
-        	activeProfile = "-"+actPro[0];
-        	logger.info("Active profile: [" + actPro[0] + "] <------- Current profile !!!!");
-        	logger.info("Usung prefix for C3P0 !!!");
-        } else {
-        	logger.error("Couldn't use any profile... Using Profile by default !!!!");
-        }
+        // I COULDN´T GET THE REAL ONE :(
+        String configLocation = "/configuration/";
+        configLocation="";
         
-        //activeProfile="-impi";
+        configLocation = System.getProperty("spring.config.location","");
+        logger.info("Config location: ------------>" + configLocation + "<-----------------------"); 
 
-        InputStream stream =
-                DataConfig
-                .class
-                .getClassLoader()
-                .getResourceAsStream("c3p0"+activeProfile+".properties");
+        
         try {
-            properties.load(stream);
-            logger.info("Properties have been loaded");
-        } catch (IOException e1) {
-            logger.error(e1.getMessage());
+            ph = PropHelper.getInstance(configLocation, "c3p0");
+        } catch (IOException e) {
+            logger.error("Error fatal al cargar las propiedades de c3p0: " + e.getMessage());
+            System.exit(1);
         }
-    }
-
-    /**
-     * Regresa la propiedad solicitada
-     * @param name Cadena con el nombre de la propiedad
-     *             que se quiere recuperar
-     * @return Cadena con la propiedad recuperada
-     */
-    private String getProp(String name) {
-        String data = properties.get("c3p0."+name).toString();
-        if("password".equals(name)) {
-        	if(data.startsWith("ENC(")) {
-        		BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-        		textEncryptor.setPassword(name);
-        		String pass = data.substring(4, data.length()-1);
-        		return textEncryptor.decrypt(pass);
-        	}
-        	return data;
-        }
-        return data;
     }
 
     /**
@@ -132,10 +85,10 @@ public class DataConfig {
     public DataSource dataSource(){
         try {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
-            cpds.setDriverClass(getProp("driverClass"));
-            cpds.setJdbcUrl(getProp("jdbcUrl"));
-            cpds.setUser(getProp("user"));
-            cpds.setPassword(getProp("password"));
+            cpds.setDriverClass(ph.getProp("c3p0.driverClass"));
+            cpds.setJdbcUrl(    ph.getProp("c3p0.jdbcUrl"));
+            cpds.setUser(       ph.getProp("c3p0.user"));
+            cpds.setPassword(   ph.getProp("c3p0.password"));
             return cpds;
         } catch(Exception e) {
             logger.info("No fué posible crear un datasource con C3P0: " + e.getMessage());
@@ -161,52 +114,11 @@ public class DataConfig {
      *                   crear la sesion de base de datos
      */
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
+    public SqlSessionFactoryBean sqlSessionFactory() {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setTypeAliasesPackage("mx.gob.impi.chatbot.persistence.api.db2");
         return sessionFactory;
     }
-  //To resolve ${} in @Value
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-    
-    
-    
-    
-    
-    
-	public String getUser() {
-		return user;
-	}
 
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getJdbcUrl() {
-		return jdbcUrl;
-	}
-
-	public void setJdbcUrl(String jdbcUrl) {
-		this.jdbcUrl = jdbcUrl;
-	}
-
-	public String getDriverClass() {
-		return driverClass;
-	}
-
-	public void setDriverClass(String driverClass) {
-		this.driverClass = driverClass;
-	}
 }
