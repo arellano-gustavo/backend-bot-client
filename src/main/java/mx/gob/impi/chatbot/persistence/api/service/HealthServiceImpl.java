@@ -57,8 +57,7 @@ public class HealthServiceImpl implements HealthService {
         info.put("chatbot.profile.external", chatbotProfileExternal);
         
         Process process = Runtime.getRuntime().exec("/bin/bash -c "+data);
-        BufferedReader inStream = new BufferedReader(
-                new InputStreamReader( process.getInputStream()));  
+        BufferedReader inStream = new BufferedReader(new InputStreamReader( process.getInputStream()));  
         String response = inStream.readLine();
         info.put("Response: ", response);
 
