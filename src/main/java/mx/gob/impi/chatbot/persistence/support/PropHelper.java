@@ -5,18 +5,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import org.jasypt.util.text.BasicTextEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import mx.gob.impi.chatbot.persistence.config.DataConfig;
 
 public class PropHelper {
     private static final Logger logger = LoggerFactory.getLogger(PropHelper.class);
     
     private Properties properties = new Properties();
-    private BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
     
     private static PropHelper instance = null;
 
@@ -88,16 +84,7 @@ public class PropHelper {
      * @return Cadena con la propiedad recuperada
      */
     public String getProp(String name) {
-        String data = properties.get(name).toString();
-        return unEncrypt(data);
+        return properties.get(name).toString();
     }
     
-    private String unEncrypt(String encriptedData) {
-    	if(encriptedData.startsWith("ENC(")) {
-	        String pureData = encriptedData.substring(4, encriptedData.length()-1);
-	        textEncryptor.setPassword("gustavo");
-	        return textEncryptor.decrypt(pureData);
-    	}
-    	return encriptedData;
-    }
 }
