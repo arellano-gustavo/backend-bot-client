@@ -7,10 +7,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
@@ -22,22 +19,18 @@ import mx.gob.impi.chatbot.persistence.api.service.CustomDigestEncoderService;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//@EnableAutoConfiguration
-//@ContextConfiguration(classes = TestConfig.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CustomDigestEncoderTest {
     private static final Logger logger = LoggerFactory.getLogger(CustomDigestEncoderTest.class);
 
-    // Load the 'real' bean, instead a mock (we need to combine 2 annotations)
-    //@InjectMocks
     @Autowired
     private CustomDigestEncoderService customDigestEncoderService;
 
     /**
      * Prueba los metodos de creacion del hash de una cadena
      */
-    //@Test
+    @Test
     public void testDigest() {
         String message = getHashedSaltedPassword("algo", "tavo");
         logger.info(message);

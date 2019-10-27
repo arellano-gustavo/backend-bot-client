@@ -31,11 +31,8 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 /**
  * <p>Descripción:</p>
@@ -44,9 +41,8 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//@EnableEncryptableProperties
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class DatabaseTest {
     private final static Logger logger = LoggerFactory.getLogger(DatabaseTest.class);
 
@@ -59,13 +55,13 @@ public class DatabaseTest {
     @Value("${db.url}")
     private String url;
 
-    //@Value("${db.driver}")
+    @Value("${db.driver}")
     private String driver;
 
     /**
      * Prueba la conexion a la base de datos
      */
-    //@Test
+    @Test
     public void connect() {
        Connection conn = null;
        try {

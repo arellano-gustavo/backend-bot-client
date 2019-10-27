@@ -24,19 +24,14 @@
  */
 package mx.gob.impi.chatbot.persistence.support;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
-
-
-import org.slf4j.*;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import mx.gob.impi.chatbot.persistence.support.MailValidator;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Descripción:</p>
@@ -48,8 +43,6 @@ import org.junit.runner.RunWith;
  */
 // Include my Ref, please:
 // https://howtodoinjava.com/regex/java-regex-validate-email-address/
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
 public class MailStructureTest {
     private static final Logger logger = LoggerFactory.getLogger(MailStructureTest.class);
 

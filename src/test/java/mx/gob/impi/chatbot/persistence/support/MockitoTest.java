@@ -51,8 +51,8 @@ import mx.gob.impi.chatbot.persistence.api.service.UserService;
  * @author Gustavo A. Arellano (GAA)
  * @version 1.0-SNAPSHOT
  */
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class MockitoTest {
 	private static final Logger logger = LoggerFactory.getLogger(MockitoTest.class);
 	
@@ -67,7 +67,7 @@ public class MockitoTest {
           .thenReturn(gus);
     }
 
-    //@Test
+    @Test
     public void whenFindByName_thenReturnEmployee() {
     	logger.info("Actual test");
         // given
