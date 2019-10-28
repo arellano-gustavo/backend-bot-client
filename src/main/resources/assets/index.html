@@ -1,55 +1,55 @@
-<!doctype html>
-
-<html>
+<html lang="es">
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <title>Chat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/estilosbotchar.css" type="text/css" media="all">
+    <title>ChatbothImpi</title>
 </head>
 
 <body>
-  <h1>Kebblar Count Fact Num Service 999..</h1>
-  
-  <div id="draggable">
-    <input type="text" id="txt_input"/>
-    <button type="submit" onclick="callChat()">Enviar Consulta</button>
-    <div id="entrada" class="scrollable_uno"></div>
-    <div id="salida" class="scrollable_dos"></div>
-  </div>
-  
-  <h2>Usage:</h2>
-  <table>
-  	<tr>
-  		<td>Unique Endpoint</td>
-  		<td>https://factorial-13-52-29-104.nip.io/api/calc?num=100</td>
-  	</tr>
-  	<tr>
-  		<td>Method</td>
-  		<td>GET</td>
-  	</tr>
-  	<tr>
-  		<td>Param 1: number (mandatory)</td>
-  		<td>String(12|13)</td>
-  	</tr>
-  	<tr>
-  		<td>Example</td>
-  		<td><a href="https://ambientes.ci.gustavo-arellano.com/api/calc?num=100">https://ambientes.ci.gustavo-arellano.com/api/calc?num=100</a></td>
-  	</tr>
-  	<tr>
-  		<td>Current average calc duration <br/> num>1,000,000 and num<10,000,000</td>
-  		<td> 0.92751 milliseconds (almost 1 millisec)</td>
-  	</tr>
-  	<tr>
-  		<td>Done !!!</td>
-  		<td>Happy Fact num counting...</td>
-  	</tr>
-  </table>
+    <div class="modal" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">
+                        <img src="img/impi.jpg" class="rounded-circle imgIMPI" alt="IMPI">
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div id="inchat">
+                        <div class="card">
+                            <div class="card-head">
+                                <p class="card-text">
+                                    <div class="text-left">
+                                        <img src="img/impi.jpg" class="rounded-circle imgIMPI" alt="IMPI"> Hey!, soy el agente virtual del IMPI ¿Cuál es tu nombre?.
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-inline">
+                        <div class="form-group mb-12">
+                            <input type="text" class="form-control rounded txt" id="txtcomment" placeholder="Escribe...">
+                            <button type="submit" class="btn btn-primary" id="enviar">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="draggable">
+        <img src="img/impi.jpg" class="imgIMPI cssboth" onMouseOver="this.className='resizeUp'" onMouseOut="this.className='cssboth'" data-toggle="modal" data-target="#exampleModalScrollable">
+    </div>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="script.js"></script>
 </body>
-
-<script src="functions.js"></script>
 
 </html>

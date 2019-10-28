@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 public class TextClientSrvAdminImpl implements TextClientSrvAdmin{
     private final static Logger logger = Logger.getLogger(TextClientSrvImpl.class);
     
-    @Override
     public String response(LogInRequest challenge) {
         logger.info("LLama Servicio...");
         logger.info("Información recibida del usuario: "+ challenge.getEmail());

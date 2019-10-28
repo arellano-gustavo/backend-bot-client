@@ -9,7 +9,6 @@ import mx.gob.impi.chatbot.engine.model.ChatbotRequest;
 public class TextClientSrvImpl implements TextClientSrv {
     private final static Logger logger = Logger.getLogger(TextClientSrvImpl.class);
     
-    @Override
     public String response(String areaNumber, String challenge, String idUsuario) {
         logger.info("Calling Agent instance...");
         logger.info("Información recibida del usuario: "+ idUsuario);
@@ -18,7 +17,6 @@ public class TextClientSrvImpl implements TextClientSrv {
         return worker.response(challenge);
     }
 
-    @Override
     public String response(ChatbotRequest challenge) {
         logger.info("Calling Agent instance...");
         logger.info("Información recibida del usuario: "+ challenge.getUid());

@@ -26,7 +26,7 @@ public class TestTextClientSrvImpl {
     public void pba1() {
         TextClientSrv tcs = new TextClientSrvImpl();
         ChatbotRequest objReq = new ChatbotRequest();
-        objReq.setArea("2");
+        objReq.setArea("1");
         objReq.setChallenge("Hola");
         objReq.setUid("1");
         String response = tcs.response(objReq);
