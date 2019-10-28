@@ -46,48 +46,23 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry
-        .addResourceHandler("")
-        .addResourceLocations("classpath:/static/");
-
-    registry
-        .addResourceHandler("/")
-        .addResourceLocations("classpath:/static/");
-
-    registry
-        .addResourceHandler("#")
-        .addResourceLocations("classpath:/static/");
-
-    registry
-        .addResourceHandler("/#/")
-        .addResourceLocations("classpath:/static/");
-
-    registry
-        .addResourceHandler("index.html")
-        .addResourceLocations("classpath:/static/");
-
-    registry
-        .addResourceHandler("#")
-        .addResourceLocations("classpath:/static/");
-
-    registry
         .addResourceHandler("swagger-ui.html")
         .addResourceLocations("classpath:/META-INF/resources/");
-
     registry
         .addResourceHandler("/webjars/**")
         .addResourceLocations("classpath:/META-INF/resources/webjars/");
-
     registry
-        .addResourceHandler("/css/**")
-        .addResourceLocations("classpath:/static/css/");
-
+        .addResourceHandler("index.html")
+        .addResourceLocations("classpath:/assets/");
     registry
-        .addResourceHandler("/js/**")
-        .addResourceLocations("classpath:/static/js/");
-
+        .addResourceHandler("/static/**")
+        .addResourceLocations("classpath:/assets/static/");
     registry
-        .addResourceHandler("/img/**")
-        .addResourceLocations("classpath:/static/img/");
+        .addResourceHandler("/web-resources/**")
+        .addResourceLocations("classpath:/content/static/");
+    registry
+        .addResourceHandler("/404/**")
+        .addResourceLocations("classpath:/clouds-404/");
   }
-  
+
 }
