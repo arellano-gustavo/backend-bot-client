@@ -62,7 +62,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         .addResourceLocations("classpath:/content/static/");
     registry
         .addResourceHandler("/404/**")
-        .addResourceLocations("classpath:/clouds-404/");
+        .addResourceLocations("classpath:/templates/error/clouds-404/");
   }
 
 }
