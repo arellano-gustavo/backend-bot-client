@@ -46,14 +46,14 @@ public interface UserAreaMapper {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idArea", column = "id_area")
           })
-    @Insert("INSERT INTO user_area(id_user, id_area) VALUES(#{0}, #{1}) ")
+    @Insert("INSERT INTO user_area(id_user, id_area) VALUES(#{0}, #{1})")
     void insert(int idUser, int idArea);
 
     @Results(value = {
             @Result(property = "idUser", column = "id_user"),
             @Result(property = "idArea", column = "id_area")
           })
-    @Delete("DELETE FROM user_area WHERE id_user=#{0} and id_area=#{1} ")
+    @Delete("DELETE FROM user_area WHERE id_user=#{0} and id_area=#{1}")
     void delete(int idUser, int idArea);
 
     @Results(value = {

@@ -20,3 +20,6 @@ public class StaticController {
 	              .build();
 	}
 }
+// https://github.com/jonashackt/spring-boot-vuejs
+
+// https://stackoverflow.com/questions/27868569/execute-shell-script-in-java-and-read-output

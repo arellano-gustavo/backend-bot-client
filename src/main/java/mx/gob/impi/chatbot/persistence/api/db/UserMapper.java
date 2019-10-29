@@ -243,7 +243,7 @@ public interface UserMapper {
             +"#{lastAccessDate}, "
             +"#{lastPasswordUpdateDate}, "
             +"#{fullName}"
-            +");";
+            +")";
     /** Procedimiento de inserción con mapeo FULL incluido */
     @Results(value = {
             @Result(property = "creationDate",           column = "creation_date", javaType = java.util.Date.class, jdbcType = JdbcType.TIMESTAMP),

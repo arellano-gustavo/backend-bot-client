@@ -41,10 +41,10 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.Area;
  */
 public interface AreaMapper {
 
-    @Insert("INSERT INTO areas(name, description, active) VALUES(#{name}, #{description}, #{active});")
+    @Insert("INSERT INTO areas(name, description, active) VALUES(#{name}, #{description}, #{active})")
     void insert(Area area);
 
-    @Update("UPDATE areas SET name=#{name}, description=#{description}, active=#{active} WHERE id=#{id};")
+    @Update("UPDATE areas SET name=#{name}, description=#{description}, active=#{active} WHERE id=#{id}")
     void update(Area area);
 
     @Select("SELECT * FROM areas WHERE id = #{id}")

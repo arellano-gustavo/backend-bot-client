@@ -41,10 +41,10 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.Rol;
  */
 public interface RolMapper {
 
-    @Insert("INSERT INTO roles(name, description, active) VALUES(#{name}, #{description}, #{active});")
+    @Insert("INSERT INTO roles(name, description, active) VALUES(#{name}, #{description}, #{active})")
     void insert(Rol rol);
 
-    @Update("UPDATE roles SET name=#{name}, description=#{description}, active=#{active} WHERE id=#{id};")
+    @Update("UPDATE roles SET name=#{name}, description=#{description}, active=#{active} WHERE id=#{id}")
     void update(Rol rol);
 
     @Select("SELECT * FROM roles WHERE id = #{id}")
