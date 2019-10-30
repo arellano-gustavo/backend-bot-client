@@ -39,19 +39,19 @@ import java.sql.Statement;
 public class PlaneDatabaseTest {
 
     public static void main(String...argv) {
-    	
+
         String username="sa";
         String password="gustavo";
         String url="jdbc:h2:tcp://api.kebblar.capital:1521/h2-data";
         String driver="org.h2.Driver";
-    	
+
         /* * /
         username = "chatbot";
         password = "chatbot00";
         url = "jdbc:oracle:thin:@192.168.10.146:1521/impic";
         driver = "oracle.jdbc.driver.OracleDriver";
         /**/
-    	
+
        Connection conn = null;
        try {
           Class.forName(driver).newInstance();
@@ -61,8 +61,8 @@ public class PlaneDatabaseTest {
              Statement stmt = conn.createStatement();
              ResultSet result = stmt.executeQuery("select * from users");
              while(result.next()) {
-            	 String mail = result.getString("mail");
-            	 System.out.println(mail);
+                 String mail = result.getString("mail");
+                 System.out.println(mail);
              }
              result.close();
              stmt.close();

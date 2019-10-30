@@ -54,10 +54,10 @@ public interface ChatbotMailSenderService {
 
     /**
      * Este método usa un pool de executors para hacer su trabajo de manera asíncrona.
-     * 
+     *
      * @param to
      * @param subject
      * @param body
      */
-	void sendASynchronousHtmlMail(String to, String subject, String body);
+    void sendASynchronousHtmlMail(String to, String subject, String body);
 }

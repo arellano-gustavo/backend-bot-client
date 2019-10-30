@@ -53,7 +53,7 @@ implements QueryService
     public DialogflowRequest<GoogleCloudDialogflowV2DetectIntentResponse> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2DetectIntentRequest requestEntity,
             Class<GoogleCloudDialogflowV2DetectIntentResponse> responseClass) {
         // Crear el cliente de la entidad del endpoint
-    	return new DetectIntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
+        return new DetectIntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
     }
     /*
     @Override

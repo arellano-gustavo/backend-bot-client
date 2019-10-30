@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/")
 public class StaticController {
-	//@GetMapping(value = "{_:^(?!index\\.html|swagger-ui\\.html|api).$}")
-	@GetMapping(value = "/")
-	public ResponseEntity<Void> redirectApi() {
-	      return ResponseEntity
-	    		  .status(HttpStatus.FOUND)
-	              .location(URI.create("/index.html"))
-	              .build();
-	}
+    //@GetMapping(value = "{_:^(?!index\\.html|swagger-ui\\.html|api).$}")
+    @GetMapping(value = "/")
+    public ResponseEntity<Void> redirectApi() {
+          return ResponseEntity
+                  .status(HttpStatus.FOUND)
+                  .location(URI.create("/index.html"))
+                  .build();
+    }
 }
 // https://github.com/jonashackt/spring-boot-vuejs
 

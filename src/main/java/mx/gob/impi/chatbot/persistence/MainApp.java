@@ -50,14 +50,14 @@ public class MainApp {
    *
    * @param args an array of {@link java.lang.String} objects.
    */
-  public static void main(String[] args) {    
+  public static void main(String[] args) {
     logger.info("Inicializando applicacion Spring Boot");
     SpringApplication.run(MainApp.class, args);
     logger.info("Concluye Inicialización de applicacion Spring Boot");
     logger.info("Contexto levantado Exitosamente");
     logger.info("If ENABLED, find Swagger API at: http://url/swagger-ui.html (enable.swagger.interface=true)");
   }
-  
+
   @Bean
   public WebMvcConfigurer corsConfigurer() {
       // check this out: https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
@@ -72,5 +72,5 @@ public class MainApp {
           }
       };
   }
-  
+
 }

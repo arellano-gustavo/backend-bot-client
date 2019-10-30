@@ -40,7 +40,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  * @param <TRequest> Objeto con los parametros para consumir los endpoint
  */
 public interface ContextService extends DialogflowService<GoogleCloudDialogflowV2Context, GoogleCloudDialogflowV2Context>{
-	
-	String listAll(EntityItem<GoogleCloudDialogflowV2Context> requestList, MainControllerResponse response);
+
+    String listAll(EntityItem<GoogleCloudDialogflowV2Context> requestList, MainControllerResponse response);
 
 }

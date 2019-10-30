@@ -48,13 +48,13 @@ public class SessionEntityTypeServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2SessionEntityType, GoogleCloudDialogflowV2SessionEntityType>
 implements SessionEntityTypeService
 {
-	static String entidad = "/agent/sessionEntityTypes/";
+    static String entidad = "/agent/sessionEntityTypes/";
 
     @Override
     public DialogflowRequest<GoogleCloudDialogflowV2SessionEntityType> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2SessionEntityType requestEntity,
             Class<GoogleCloudDialogflowV2SessionEntityType> responseClass) {
         // Crear el cliente de la entidad del endpoint
-    	return new SessionEntityTypeRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
+        return new SessionEntityTypeRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
     }
 
     @Override

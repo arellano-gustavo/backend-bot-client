@@ -55,14 +55,14 @@ import mx.gob.impi.chatbot.persistence.support.PropHelper;
 @PropertySource(value = "file:${spring.config.location}/c3p0.properties", ignoreResourceNotFound = true)
 @EnableEncryptableProperties
 public class DataConfig {
-	// https://stackoverflow.com/questions/30079255/propertysource-in-a-jar-for-an-external-file-on-the-classpath
+    // https://stackoverflow.com/questions/30079255/propertysource-in-a-jar-for-an-external-file-on-the-classpath
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // https://www.baeldung.com/spring-value-annotation
     // https://www.baeldung.com/configuration-properties-in-spring-boot
-    
+
     private PropHelper ph = null;
-    
+
     @Value("${c3p0.password}")
     private String c3p0Password;
 
@@ -71,10 +71,10 @@ public class DataConfig {
      */
     public DataConfig() {
         logger.info("Calculando ambiente para C3P0 ....");
-        
+
         String configLocation = System.getProperty("spring.config.location","");
-        logger.info("Config location: --->" + configLocation + "<---"); 
-        
+        logger.info("Config location: --->" + configLocation + "<---");
+
         try {
             ph = new PropHelper(configLocation, "c3p0");
         } catch (IOException e) {
@@ -89,9 +89,9 @@ public class DataConfig {
      */
     @Bean
     public DataSource dataSource(){
-    	String pass = ph.getProp("c3p0.password"); // gustavo
-    	logger.info("Plain Password: ->"+pass+"<-"); 
-    	logger.info("Encripted Password: ->"+c3p0Password+"<-");
+        String pass = ph.getProp("c3p0.password"); // gustavo
+        logger.info("Plain Password: ->"+pass+"<-");
+        logger.info("Encripted Password: ->"+c3p0Password+"<-");
         try {
             ComboPooledDataSource cpds = new ComboPooledDataSource();
             cpds.setDriverClass(ph.getProp("c3p0.driverClass"));
@@ -129,18 +129,18 @@ public class DataConfig {
         sessionFactory.setTypeAliasesPackage("mx.gob.impi.chatbot.persistence.api.db2");
         return sessionFactory;
     }
-    
-    
+
+
     public String unEncrypt2(String encriptedData) {
-    	if(encriptedData.startsWith("ENC(")) {
-    		BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-	        String pureData = encriptedData.substring(4, encriptedData.length()-1);
-    		logger.info("encrypted data received: " + pureData);
-	        textEncryptor.setPassword("gustavo");
-	        String descrypted = textEncryptor.decrypt(pureData);
-	        logger.info("decrypted data: "+descrypted);
-	        return descrypted;
-    	}
-    	return encriptedData;
+        if(encriptedData.startsWith("ENC(")) {
+            BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+            String pureData = encriptedData.substring(4, encriptedData.length()-1);
+            logger.info("encrypted data received: " + pureData);
+            textEncryptor.setPassword("gustavo");
+            String descrypted = textEncryptor.decrypt(pureData);
+            logger.info("decrypted data: "+descrypted);
+            return descrypted;
+        }
+        return encriptedData;
     }
 }

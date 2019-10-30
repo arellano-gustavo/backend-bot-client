@@ -40,8 +40,8 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  * @param <TRequest> Objeto con los parametros para consumir los endpoint
  */
 public interface IntentService extends DialogflowService<GoogleCloudDialogflowV2Intent, GoogleCloudDialogflowV2Intent>{
-	
-	/**
+
+    /**
      * Obtiene todos los registros que se encuentran
      * registrados en el agente de dialogflow
      * @param requestGet Objeto con los paramentros con los que

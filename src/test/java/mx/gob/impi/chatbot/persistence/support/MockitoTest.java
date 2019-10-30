@@ -54,14 +54,14 @@ import mx.gob.impi.chatbot.persistence.api.service.UserService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MockitoTest {
-	private static final Logger logger = LoggerFactory.getLogger(MockitoTest.class);
-	
+    private static final Logger logger = LoggerFactory.getLogger(MockitoTest.class);
+
     @MockBean
     private UserService userService;
 
     @Before
     public void setUp() {
-    	logger.info("Before the test");
+        logger.info("Before the test");
         User gus = new User("goose", "xyz", "gus@hotmail.com");
         Mockito.when(userService.findUserByName("goose"))
           .thenReturn(gus);
@@ -69,7 +69,7 @@ public class MockitoTest {
 
     @Test
     public void whenFindByName_thenReturnEmployee() {
-    	logger.info("Actual test");
+        logger.info("Actual test");
         // given
         User user = userService.findUserByName("goose");
         // and

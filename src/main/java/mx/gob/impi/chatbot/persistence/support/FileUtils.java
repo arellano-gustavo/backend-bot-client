@@ -101,22 +101,22 @@ public final class FileUtils {
             }
         }
     }
-    
+
     public static String cleanString(String msg) {
-    	msg = msg.replace('"', '_');
-    	msg = msg.replace(':', '_');
-    	msg = msg.replace(';', '_');
-    	msg = msg.replace(',', '_');
-    	msg = msg.replace('(', '_');
-    	msg = msg.replace(')', '_');
-    	msg = msg.replace('[', '_');
-    	msg = msg.replace(']', '_');
-    	msg = msg.replace('-', '_');
-    	msg = msg.replace(' ', '_');
-    	msg = msg.replace('.', '_');
-    	msg = msg.replace('?', '@');
-    	msg = msg.replace('\n', '_');
-    	return msg;
+        msg = msg.replace('"', '_');
+        msg = msg.replace(':', '_');
+        msg = msg.replace(';', '_');
+        msg = msg.replace(',', '_');
+        msg = msg.replace('(', '_');
+        msg = msg.replace(')', '_');
+        msg = msg.replace('[', '_');
+        msg = msg.replace(']', '_');
+        msg = msg.replace('-', '_');
+        msg = msg.replace(' ', '_');
+        msg = msg.replace('.', '_');
+        msg = msg.replace('?', '@');
+        msg = msg.replace('\n', '_');
+        return msg;
     }
 
 }

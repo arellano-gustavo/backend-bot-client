@@ -45,7 +45,7 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
 @Service
 public class UserRolServiceImpl implements UserRolService {
     private static final Logger logger = LoggerFactory.getLogger(UserRolServiceImpl.class);
-    
+
     @Autowired
     private UserRolMapper userRolMapper;
 
@@ -60,7 +60,7 @@ public class UserRolServiceImpl implements UserRolService {
             userRolMapper.insert(idUser, idRol);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idRol, "Object UserRol inserted on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error in UserRolService.save", msg, false);
         }
@@ -68,11 +68,11 @@ public class UserRolServiceImpl implements UserRolService {
 
     @Override
     public MainControllerResponse delete(int idUser, int idRol) {
-    	try {
-    		userRolMapper.delete(idUser, idRol);
+        try {
+            userRolMapper.delete(idUser, idRol);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idRol, "Object UserRol deleted on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error in UserRolService.delete", msg, false);
         }

@@ -48,7 +48,7 @@ public abstract class DialogflowServiceImpl<T, R> implements DialogflowService<T
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     DialogflowCredentials credentials;
-    
+
     static String version = "v2/projects/";
 
     /**

@@ -56,7 +56,7 @@ import mx.gob.impi.chatbot.persistence.api.service.IntentService;
 @RestController
 @Api(value = "trainer")
 @RequestMapping(value = "/api/chatbot/trainer")
-public class TrainerController { 
+public class TrainerController {
     private IntentService intentService;
     private EntityTypeService entityTypeService;
     private ContextService contextService;
@@ -92,7 +92,7 @@ public class TrainerController {
         GoogleCloudDialogflowV2Intent intent = intentService.list(requestGet, response);
         return ResponseEntity.ok(intent);
     }
-    
+
     /**
      * Obtiene una lista de intent registrados en el sistema
      * @param requestGet Objeto de tipo 'Intent'

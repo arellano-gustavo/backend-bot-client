@@ -69,7 +69,7 @@ public interface UserMapper {
     @Select("SELECT * FROM users order by ${sortColumn} asc")
     List<User> getAll(PageBoundaries pb);
 
-    
+
     /**
      * Obtiene un usuario realizando la búsqueda con el nombre de pila.
      *
@@ -94,7 +94,7 @@ public interface UserMapper {
           })
     @Select("SELECT * FROM users order by ${sortColumn} desc")
     List<User> getAllDesc(PageBoundaries pb);
-    
+
     /**
      * Obtiene un usuario realizando la búsqueda con el nombre de pila.
      *
@@ -310,7 +310,7 @@ public interface UserMapper {
     //TODO Checar si este mapeo es necesario. Pienso que sólo se requiere lo de las fechas
     /**
      * Update completo ...
-     * 
+     *
      * @param user el objeto ...
      */
     @Results(value = {
@@ -350,7 +350,7 @@ public interface UserMapper {
             +"id = #{id}";
     /**
      * Actualiza el estado de 'bloqueado' para un usuario dado.
-     * 
+     *
      * @param usuario Objeto de ttipo 'User' al que se le va a modificar su estado de bloqueo.
      */
     @Results(value = {

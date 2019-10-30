@@ -110,9 +110,9 @@ public interface DialogflowService<T, R> {
       * @return Objeto de tipo MainControllerResponse con el status del
       *         proceso de buscar una entidad en el agente de dialogflow
       */
-     
+
      T get(EntityItem<R> requestGet, MainControllerResponse response);
-     
+
      /**
       * Actualiza un registro en el agente de dialogflow
       * @param requestPut Objeto con los parametros para actualizar

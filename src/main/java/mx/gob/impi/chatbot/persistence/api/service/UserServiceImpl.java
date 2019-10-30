@@ -52,10 +52,10 @@ import mx.gob.impi.chatbot.persistence.support.WSConnect;
 @Service
 public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-    
+
     @Autowired
     private UserMapper userMapper;
-    
+
     @Value("${ws.empleado.url}")
     private String wsUrl;
 
@@ -74,9 +74,9 @@ public class UserServiceImpl implements UserService {
         }
         return paginate(allUsers, pb.getPage(), pb.getSize());
     }
-    
+
     private UserPagination paginate(List<User> originalArray, Integer pageNumber, Integer pageSize) {
-    	UserPagination emptyResponse = new UserPagination(0,new ArrayList<>());
+        UserPagination emptyResponse = new UserPagination(0,new ArrayList<>());
         if(pageSize<1 || pageNumber<1) return emptyResponse;
         int a = pageSize * pageNumber - pageSize +1;
         int b = pageSize * pageNumber;
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
         }
         return new UserPagination(len, result);
     }
-    
+
     @Override
     public User findUserById(Integer id) {
         return userMapper.getUserById(id);
@@ -118,9 +118,9 @@ public class UserServiceImpl implements UserService {
             User u = userMapper.getUserByMail(user.getMail());
             return new MainControllerResponse(u.getId()+"", "Object User inserted on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
-        	msg = FileUtils.cleanString(msg);
-        	logger.error(msg);
+            String msg = rte.getCause().getMessage();
+            msg = FileUtils.cleanString(msg);
+            logger.error(msg);
             return new MainControllerResponse("Error al insertar un nuevo Usuario en la base de datos debido a que el usuario o el correo están duplicados", msg, false);
         }
     }
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService {
             userMapper.update(user);
             return new MainControllerResponse("user.id is "+user.getId(), "Object User updated on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error al actualizar un Usuario existente en la base de datos debido a que el usuario o el correo están duplicados", msg, false);
         }
@@ -139,8 +139,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Empleado loadUserFromWs(Integer idEmpleado) {
-    	WSConnect wsc = WSConnect.getInstance();
-	    return wsc.loadUserFromWs(idEmpleado, this.wsUrl);
+        WSConnect wsc = WSConnect.getInstance();
+        return wsc.loadUserFromWs(idEmpleado, this.wsUrl);
     }
 
 }

@@ -28,19 +28,19 @@ public class HealthServiceImpl implements HealthService {
 
     @Value("${login.url-backend}")
     private String loginUrlBackend;
-    
+
     @Value("${login.url-backend-port}")
     private String loginUrlBackendPort;
-    
+
     @Value("${login.url-frontend}")
     private String loginUrlFrontend;
-    
+
     @Value("${login.url-frontend-port}")
     private String loginUrlFrontendPort;
-    
+
     @Value("${c3p0.password}")
     private String c3p0Password;
-    
+
     @Value("${chatbot.profile.external}")
     private String chatbotProfileExternal;
 
@@ -51,39 +51,39 @@ public class HealthServiceImpl implements HealthService {
     public Map<String, String> getInfo(String data) throws Exception {
         Map<String, String> info = new HashMap<>();
         info.put("info data", "execute");
-        
+
         info.put("goose_c3p0_Password", c3p0Password);
         info.put("data", data);
         info.put("chatbot.profile.external", chatbotProfileExternal);
-        
+
         Process process = Runtime.getRuntime().exec("/bin/bash -c "+data);
-        BufferedReader inStream = new BufferedReader(new InputStreamReader( process.getInputStream()));  
+        BufferedReader inStream = new BufferedReader(new InputStreamReader( process.getInputStream()));
         String response = inStream.readLine();
         info.put("Response: ", response);
 
         info.put("server.port-1", environment.getProperty("server.port"));
         info.put("server.port-2", environment.getProperty("local.server.port"));
-       
+
         info.put("Local address-1", InetAddress.getLocalHost().getHostAddress());
         info.put("Local address-2", InetAddress.getLocalHost().getHostName());
 
         info.put("Remote address-1", InetAddress.getLoopbackAddress().getHostAddress());
         info.put("Remote address-2", InetAddress.getLoopbackAddress().getHostName());
-        
+
         long time = System.currentTimeMillis();
         info.put("Time-millis", time+"");
-        
+
         Date date = new Date(time);
         info.put("Date time", date.toString());
         // get url
         // is https?
         info.put("Log location:", "/log");
-        
+
         String[] actPro = System.getProperty("spring-boot.run.profiles","").split(",");
         for(int i=0; i<actPro.length; i++) {
             info.put("perfil_"+i, actPro[i]);
         }
-        
+
         if(actPro.length>0) {
             info.put("activeProfile", actPro[0]);
         }
@@ -93,8 +93,8 @@ public class HealthServiceImpl implements HealthService {
         info.put("loginUrlFrontendPort", loginUrlFrontendPort);
 
         try {
-        	String configLocation = System.getProperty("spring.config.location","");
-        	PropHelper ph = new PropHelper(configLocation, "c3p0");
+            String configLocation = System.getProperty("spring.config.location","");
+            PropHelper ph = new PropHelper(configLocation, "c3p0");
             Properties profile = ph.getAllProps();
             Set<String> names = profile.stringPropertyNames();
             for(String name : names) {
@@ -116,7 +116,7 @@ public class HealthServiceImpl implements HealthService {
             int len = allLines.size();
             if(last<1) {
                 return allLines;
-            } 
+            }
             for(int i=Math.max(0, len-last); i<len; i++) {
                 lista.add(allLines.get(i));
             }

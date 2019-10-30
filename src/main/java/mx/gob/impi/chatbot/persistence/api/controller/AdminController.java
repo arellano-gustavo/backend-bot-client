@@ -59,19 +59,19 @@ import mx.gob.impi.chatbot.persistence.api.service.*;
 public class AdminController {
     @Autowired
     private UserService usuarioService;
-    
+
     @Autowired
     private RolService rolService;
-    
+
     @Autowired
     private AreaService areaService;
-    
+
     @Autowired
     private UserAreaService userAreaService;
-    
+
     @Autowired
     private UserRolService userRolService;
-    
+
     @Autowired
     private HealthService healthService;
 
@@ -85,41 +85,41 @@ public class AdminController {
     */
 
     /**
-     * Regresa una lista de todos los usuarios en el sistema 
-     * debidamente paginados con base en el payload de 
-     * request que determina el tamaño de la página, la 
-     * longitud de la página, el campo por el que se va a 
+     * Regresa una lista de todos los usuarios en el sistema
+     * debidamente paginados con base en el payload de
+     * request que determina el tamaño de la página, la
+     * longitud de la página, el campo por el que se va a
      * ordenar y si el orden es ascendente o descendente.
      * <br/><br/>
-     * En caso de que los parámetros proporcionados <b><i><label style='color:red;'>excedan</label><i></b> las 
-     * dimensiones de la lista real de datos, este método es 
-     * capaz de ajustar lo necesario para que la lista resultante 
+     * En caso de que los parámetros proporcionados <b><i><label style='color:red;'>excedan</label><i></b> las
+     * dimensiones de la lista real de datos, este método es
+     * capaz de ajustar lo necesario para que la lista resultante
      * sea suceptible de ser manipulada adecuadamente.
-     * 
+     *
      * @param paginationParams Parámetros de paginación
-     * 
+     *
      * @return Lista paginada de usuarios acorde a los parámetros de paginación dados.
      */
     @ApiOperation(
             value = "AdminController::getAllUsers",
             notes = "Regresa una lista de todos los usuarios en el sistema "
-            		+ "debidamente paginados con base en el payload de "
-            		+ "request que determina el tamaño de la página, la "
-            		+ "longitud de la página, el campo por el que se va a "
-            		+ "ordenar y si el orden es ascendente o descendente."
-            		+ "<br/><br/>"
-            		+ "En el caso de que los parámetros proporcionados "
-            		+ "<b><i><label style='color:blue;'>excedan</label><i></b> las "
-            		+ "dimensiones de la lista real de datos, este método es "
-            		+ "capaz de ajustar lo necesario para que la lista resultante "
-            		+ "sea suceptible de ser manipulada adecuadamente.")
-    @PostMapping( 
+                    + "debidamente paginados con base en el payload de "
+                    + "request que determina el tamaño de la página, la "
+                    + "longitud de la página, el campo por el que se va a "
+                    + "ordenar y si el orden es ascendente o descendente."
+                    + "<br/><br/>"
+                    + "En el caso de que los parámetros proporcionados "
+                    + "<b><i><label style='color:blue;'>excedan</label><i></b> las "
+                    + "dimensiones de la lista real de datos, este método es "
+                    + "capaz de ajustar lo necesario para que la lista resultante "
+                    + "sea suceptible de ser manipulada adecuadamente.")
+    @PostMapping(
         value = "/all-users.json",
         produces = "application/json; charset=utf-8")
     public UserPagination getAllUsers(@RequestBody PageBoundaries paginationParams) {
         return usuarioService.getAllUsers(paginationParams);
     }
-    
+
     /**
      * Obtiene una lista de roles registrados en el sistema
      * @return Lista de tipo 'List<Rol>' con los roles del sistema
@@ -249,7 +249,7 @@ public class AdminController {
 //insert
     /**
      * Ingresa un nuevo usuario en el sistema.
-     * 
+     *
      * @param user Objeto de tipo 'User' a registrar
      * @return Objeto de tipo 'MainControllerResponse'
      *         con el resultado de la insercion
@@ -441,20 +441,20 @@ public class AdminController {
     public Empleado loadUserFromWs(@RequestParam  int id) {
         Empleado u = usuarioService.loadUserFromWs(id);
         if (u!=null) {
-        	return u;
+            return u;
         }
         return new Empleado();
     }
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
     @ApiOperation(
             value = "AdminController::getUserRolByIdUser2",
             notes = "Regresa un Objeto de tipo UserRol con base en su ID de Empleado")
@@ -476,8 +476,8 @@ public class AdminController {
             return userRolService.getUserRolByIdRol(id);
         }
 
-    
-    
+
+
     @ApiOperation(
             value = "AdminController::getUserAreaByIdUser",
             notes = "Regresa un Objeto de tipo UserArea con base en su ID de Empleado")
@@ -489,7 +489,7 @@ public class AdminController {
             return userAreaService.getUserAreaByIdUser(id);
         }
 
-    
+
     @ApiOperation(
             value = "AdminController::getUserAreaByIdArea",
             notes = "Regresa un Objeto de tipo UserArea con base en su ID de Area")
@@ -500,7 +500,7 @@ public class AdminController {
         public List<UserArea> getUserAreaByIdArea(@RequestParam  int id) {
             return userAreaService.getUserAreaByIdArea(id);
         }
-    
+
     @ApiOperation(
             value = "AdminController::health",
             notes = "Entrega un informe a cerca de las variables del sistema")
@@ -511,7 +511,7 @@ public class AdminController {
         public Map<String, String> health(@RequestParam  String data) throws Exception {
             return healthService.getInfo(data);
         }
-    
+
     @ApiOperation(
             value = "AdminController::getLog",
             notes = "Imprime las últimas lineas del log actual")

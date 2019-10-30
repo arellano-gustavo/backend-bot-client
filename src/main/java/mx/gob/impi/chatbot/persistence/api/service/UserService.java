@@ -45,8 +45,8 @@ public interface UserService {
      * @return Objeto de tipo 'List' con la totalidad de User registrados.
      */
     List<User> getAllUsers();
-    
-    UserPagination getAllUsers(PageBoundaries pb); 
+
+    UserPagination getAllUsers(PageBoundaries pb);
 
     /**
      * Proporciona un objeto de tipo 'User' cuyo id es proporcionado.

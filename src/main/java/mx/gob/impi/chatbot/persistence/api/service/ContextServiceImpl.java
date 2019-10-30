@@ -53,13 +53,13 @@ public class ContextServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2Context, GoogleCloudDialogflowV2Context>
 implements ContextService
 {
-	static String entidad = "/agent/contexts/";
+    static String entidad = "/agent/contexts/";
 
     @Override
     public DialogflowRequest<GoogleCloudDialogflowV2Context> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2Context requestEntity,
             Class<GoogleCloudDialogflowV2Context> responseClass) {
         // Crear el cliente de la entidad del endpoint
-    	return new ContextRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);        
+        return new ContextRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
     }
 
     @Override
@@ -69,34 +69,34 @@ implements ContextService
         //Se realiza la solicitud al endpoint de dialogflow
         return execute(requestEnity, responseEntity, response);
     }
-    
-    
-    public String listAll(EntityItem<GoogleCloudDialogflowV2Context> requestList, MainControllerResponse response) {
-        
-    	String respuesta = "";
-    	
-    	OkHttpClient client = new OkHttpClient();
-				
-		String url = "https://dialogflow.googleapis.com/" + version + this.getProjectId(requestList.getAreaId()) + "/agent/sessions/-/contexts";
-		
-		String token = getToken(requestList.getAreaId());
 
-	    Request request = new Request.Builder()
-	    	.addHeader("Authorization", "Bearer "+token)
-	        .addHeader("Content-Type", "application/json; charset=UTF-8")
-	    	.url(url)
-	        .build();
-	    try {
-	        Response responseOk = client.newCall(request).execute() ;
-	    	respuesta = responseOk.body().string();
-	    	responseOk.close();
-	    } catch (IOException ioe) {
-	    	String msg = ioe.toString();
-            logger.error(msg);    	    
-		}
-    	
-        
-        return respuesta;    
+
+    public String listAll(EntityItem<GoogleCloudDialogflowV2Context> requestList, MainControllerResponse response) {
+
+        String respuesta = "";
+
+        OkHttpClient client = new OkHttpClient();
+
+        String url = "https://dialogflow.googleapis.com/" + version + this.getProjectId(requestList.getAreaId()) + "/agent/sessions/-/contexts";
+
+        String token = getToken(requestList.getAreaId());
+
+        Request request = new Request.Builder()
+            .addHeader("Authorization", "Bearer "+token)
+            .addHeader("Content-Type", "application/json; charset=UTF-8")
+            .url(url)
+            .build();
+        try {
+            Response responseOk = client.newCall(request).execute() ;
+            respuesta = responseOk.body().string();
+            responseOk.close();
+        } catch (IOException ioe) {
+            String msg = ioe.toString();
+            logger.error(msg);
+        }
+
+
+        return respuesta;
     }
 
     @Override

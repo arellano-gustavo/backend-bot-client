@@ -44,8 +44,8 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  */
 @Service
 public class UserAreaServiceImpl implements UserAreaService {
-	private static final Logger logger = LoggerFactory.getLogger(UserAreaServiceImpl.class);
-	
+    private static final Logger logger = LoggerFactory.getLogger(UserAreaServiceImpl.class);
+
     @Autowired
     private UserAreaMapper userAreaMapper;
 
@@ -57,10 +57,10 @@ public class UserAreaServiceImpl implements UserAreaService {
     @Override
     public MainControllerResponse save(int idUser, int idArea) {
         try {
-        	userAreaMapper.insert(idUser, idArea);
+            userAreaMapper.insert(idUser, idArea);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea inserted on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error in UserRolService.save", msg, false);
         }
@@ -69,10 +69,10 @@ public class UserAreaServiceImpl implements UserAreaService {
     @Override
     public MainControllerResponse delete(int idUser, int idArea) {
         try {
-        	userAreaMapper.delete(idUser, idArea);
+            userAreaMapper.delete(idUser, idArea);
             return new MainControllerResponse("user.id is "+idUser + " and rol.id is " + idArea, "Object UserArea Deleted on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error in UserRolService.save", msg, false);
         }

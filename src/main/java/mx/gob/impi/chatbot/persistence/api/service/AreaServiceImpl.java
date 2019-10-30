@@ -44,8 +44,8 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  */
 @Service
 public class AreaServiceImpl implements AreaService {
-	private static final Logger logger = LoggerFactory.getLogger(AreaServiceImpl.class);
-	
+    private static final Logger logger = LoggerFactory.getLogger(AreaServiceImpl.class);
+
     @Autowired
     private AreaMapper areaMapper;
 
@@ -62,10 +62,10 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public MainControllerResponse save(Area area) {
         try {
-        	areaMapper.insert(area);
-        	return new MainControllerResponse("area.id is "+area.getId(), "Object Area inserted on DB", true);
+            areaMapper.insert(area);
+            return new MainControllerResponse("area.id is "+area.getId(), "Object Area inserted on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error al insertar una nueva Area en la base de datos", msg, false);
         }
@@ -74,10 +74,10 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public MainControllerResponse update(Area area) {
         try {
-        	areaMapper.update(area);
-        	return new MainControllerResponse("area.id is "+area.getId(), "Object Area updated on DB", true);
+            areaMapper.update(area);
+            return new MainControllerResponse("area.id is "+area.getId(), "Object Area updated on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error al actualizar una Area existente en la base de datos", msg, false);
         }

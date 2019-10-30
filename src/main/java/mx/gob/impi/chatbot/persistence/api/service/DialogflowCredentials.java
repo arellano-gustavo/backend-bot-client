@@ -109,18 +109,18 @@ public class DialogflowCredentials {
                     .getResourceAsStream(path);
 
             credentials = GoogleCredentials.fromStream(stream);//Administrador de la API de Dialogflow
-            
+
             if (credentials.createScopedRequired()) {
                 credentials = credentials.createScoped(Collections.singletonList("https://www.googleapis.com/auth/dialogflow"));
             }
             projectId = ((ServiceAccountCredentials)credentials).getProjectId();
-            
+
         } catch (FileNotFoundException e) {
             logger.error("No se encuentran las credenciales del {}", area + e.toString());
         } catch (IOException e) {
             logger.error("Error  al abrir las credenciales del {}", area + e.toString());
         }
-        
+
         //Inicia la creacion de parametros del cliente
         JacksonFactory jacksonFactory = JacksonFactory.getDefaultInstance();
 

@@ -48,13 +48,13 @@ public class IntentServiceImpl
 extends DialogflowServiceImpl<GoogleCloudDialogflowV2Intent, GoogleCloudDialogflowV2Intent>
 implements IntentService
 {
-	static String entidad = "/agent/intents/";
+    static String entidad = "/agent/intents/";
 
     @Override
     public DialogflowRequest<GoogleCloudDialogflowV2Intent> getRequestPost(String area, String method, String uriTemplate, GoogleCloudDialogflowV2Intent requestEntity,
             Class<GoogleCloudDialogflowV2Intent> responseClass) {
         // Crear el cliente de la entidad del endpoint
-    	return new IntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
+        return new IntentRepository(credentials.getBagClients().get(area), method, uriTemplate, requestEntity, responseClass);
     }
 
     @Override
@@ -64,7 +64,7 @@ implements IntentService
         //Se realiza la solicitud al endpoint de dialogflow
         return execute(requestEnity, responseEntity, response);
     }
-    
+
     public void getPrefix(EntityItem<GoogleCloudDialogflowV2Intent> requestList, MainControllerResponse response) {
         response.setLongMessage("projects/" + this.getProjectId(requestList.getAreaId()));
     }

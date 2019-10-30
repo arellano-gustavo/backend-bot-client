@@ -44,8 +44,8 @@ import mx.gob.impi.chatbot.persistence.api.model.domain.MainControllerResponse;
  */
 @Service
 public class RolServiceImpl implements RolService {
-	private static final Logger logger = LoggerFactory.getLogger(RolServiceImpl.class);
-	
+    private static final Logger logger = LoggerFactory.getLogger(RolServiceImpl.class);
+
     @Autowired
     private RolMapper rolMapper;
 
@@ -62,10 +62,10 @@ public class RolServiceImpl implements RolService {
     @Override
     public MainControllerResponse save(Rol rol) {
         try {
-        	rolMapper.insert(rol);
-        	return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol inserted on DB", true);
+            rolMapper.insert(rol);
+            return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol inserted on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error al insertar un nuevo Rol en la base de datos", msg, false);
         }
@@ -74,10 +74,10 @@ public class RolServiceImpl implements RolService {
     @Override
     public MainControllerResponse update(Rol rol) {
         try {
-        	rolMapper.update(rol);
-        	return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol updated on DB", true);
+            rolMapper.update(rol);
+            return new MainControllerResponse("rol.id is "+rol.getId(), "Object Rol updated on DB", true);
         } catch(RuntimeException  rte) {
-        	String msg = rte.getCause().getMessage();
+            String msg = rte.getCause().getMessage();
             logger.error(msg);
             return new MainControllerResponse("Error al actualizar un Rol existente en la base de datos", msg, false);
         }

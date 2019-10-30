@@ -43,39 +43,39 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(WebMvcConfig.class);
-    
+
     @Value("${enable.swagger.interface}")
     private boolean enableSwaggerInterface;
 
-	  /**
-	   * {@inheritDoc}
-	   */
-	  @Override
-	  public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	    if(enableSwaggerInterface) {
-	        logger.info("Se habilita lainterfaz de swagger");
-	    registry
-	        .addResourceHandler("swagger-ui.html")
-	        .addResourceLocations("classpath:/META-INF/resources/");
-	    registry
-	        .addResourceHandler("/webjars/**")
-	        .addResourceLocations("classpath:/META-INF/resources/webjars/");
-	} else {
-	    logger.info("Interfaz de swagger Inhabilitada (enable.swagger.interface=false)");
-	}
-	logger.info("Setting up handlers for VueJS Locations");
-	registry
-	    .addResourceHandler("index.html")
-	    .addResourceLocations("classpath:/assets/");
-	registry
-	    .addResourceHandler("/static/**")
-	    .addResourceLocations("classpath:/assets/static/");
-	registry
-	    .addResourceHandler("/web-resources/**")
-	    .addResourceLocations("classpath:/content/static/");
-	logger.info("Setting 404 error page resources");
-	registry
-	    .addResourceHandler("/404/**")
-	    .addResourceLocations("classpath:/templates/error/clouds-404/");
-	}
+      /**
+       * {@inheritDoc}
+       */
+      @Override
+      public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        if(enableSwaggerInterface) {
+            logger.info("Se habilita lainterfaz de swagger");
+        registry
+            .addResourceHandler("swagger-ui.html")
+            .addResourceLocations("classpath:/META-INF/resources/");
+        registry
+            .addResourceHandler("/webjars/**")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    } else {
+        logger.info("Interfaz de swagger Inhabilitada (enable.swagger.interface=false)");
+    }
+    logger.info("Setting up handlers for VueJS Locations");
+    registry
+        .addResourceHandler("index.html")
+        .addResourceLocations("classpath:/assets/");
+    registry
+        .addResourceHandler("/static/**")
+        .addResourceLocations("classpath:/assets/static/");
+    registry
+        .addResourceHandler("/web-resources/**")
+        .addResourceLocations("classpath:/content/static/");
+    logger.info("Setting 404 error page resources");
+    registry
+        .addResourceHandler("/404/**")
+        .addResourceLocations("classpath:/templates/error/clouds-404/");
+    }
 }
