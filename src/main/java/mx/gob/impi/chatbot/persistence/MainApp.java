@@ -54,8 +54,8 @@ public class MainApp {
     logger.info("Inicializando applicacion Spring Boot");
     SpringApplication.run(MainApp.class, args);
     logger.info("Concluye Inicialización de applicacion Spring Boot");
-    logger.info("Contexto levantado en: http://localhost:8080/api/personas/all.json");
-    logger.info("Swagger API en: http://localhost:8080/swagger-ui.html ***");
+    logger.info("Contexto levantado Exitosamente");
+    logger.info("If ENABLED, find Swagger API at: http://url/swagger-ui.html (enable.swagger.interface=true)");
   }
   
   @Bean
