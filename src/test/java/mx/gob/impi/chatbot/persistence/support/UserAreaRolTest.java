@@ -85,6 +85,7 @@ public class UserAreaRolTest {
     public void TestAdmin() {
 ///////////////////////////////////USER///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
+    	/*
 		int idUser = 0;
 		
 		List<User> allUser = userService.getAllUsers();
@@ -343,7 +344,7 @@ public class UserAreaRolTest {
     	
     	MainControllerResponse responseDeleteUserRol = userRolService.delete(idUser, idRol);
     	assertTrue("Borra userRol", responseDeleteUserRol.isSucceed());
-    	
+    */	
     }
 
 }
