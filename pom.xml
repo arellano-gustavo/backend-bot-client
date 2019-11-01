@@ -10,36 +10,14 @@
         <project.java.version>1.8</project.java.version>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-<!-- 
-    <repositories>
-        <repository>
-            <id>nexus.ci.gustavo-arellano.com</id>
-            <url>http://nexus.ci.gustavo-arellano.com/repository/all/</url>
-            <name>Kebblar Repository</name>
-        </repository>
-    </repositories>
-	    
-	<distributionManagement>
-		<repository>
-            <id>nexus.ci.gustavo-arellano.com</id>
-			<url>https://nexus.ci.gustavo-arellano.com/repository/maven-releases/</url>
-			<uniqueVersion>true</uniqueVersion>
-		</repository>
-        <snapshotRepository>
-            <id>nexus.ci.gustavo-arellano.com</id>
-            <url>https://nexus.ci.gustavo-arellano.com/repository/maven-snapshots/</url>
-            <uniqueVersion>true</uniqueVersion>
-        </snapshotRepository>
-	</distributionManagement>
-	 -->
     <groupId>mx.gob.impi.chatbot</groupId>
     <artifactId>engine</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>Backend Chatbot Service</name>
-    <description>Proyecto "Backend Chatbot Service" v 0.0.1 SNAPSHOT !</description>
-    <url>http://impi.gob.mx</url>
+    <description>Proyecto "Backend Chatbot Service" v 0.0.2 SNAPSHOT !</description>
+    <url>http://chatbot.impi.gob.mx</url>
     <inceptionYear>2019</inceptionYear>
     
     <dependencies>

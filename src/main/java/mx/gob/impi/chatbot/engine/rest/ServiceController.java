@@ -4,11 +4,13 @@ import org.apache.log4j.Logger;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import mx.gob.impi.chatbot.engine.model.ChatbotRequest;
 import mx.gob.impi.chatbot.engine.model.login.LogInRequest;
@@ -33,6 +35,17 @@ public class ServiceController extends AbstractVerticle {
         logger.info("Iniciando vertical");
         
         Router router = Router.router(vertx);
+        router.route("/*").handler(CorsHandler.create("*")  
+        		.allowedMethod(HttpMethod.GET)
+        		.allowedMethod(HttpMethod.PUT)
+        		.allowedMethod(HttpMethod.DELETE)
+        		.allowedMethod(HttpMethod.POST)
+        		.allowedMethod(HttpMethod.OPTIONS)
+        		.allowCredentials(true)
+        		.allowedHeader("Access-Control-Allow-Method")
+        		.allowedHeader("Access-Control-Allow-Origin")
+        		.allowedHeader("Access-Control-Allow-Credentials")
+        		.allowedHeader("Content-Type"));
         router.route("/*").handler(StaticHandler.create("assets")); 
         
         router.route().handler(BodyHandler.create());
