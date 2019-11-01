@@ -9,28 +9,20 @@ function limpiar() {
     $("#txtcomment").focus();
 }
 
-function guardaPregunta() {
-    var pregunta = $("#txtcomment").val();
-    agregarPregunta(pregunta);
-    setTimeout(function() {
-        callChat(pregunta);
-    }, 3500);
-    scrolleer();
-    limpiar();
-}
+
 
 function agregarPregunta(pregunta) {
     $("#inchat").html($("#inchat").html() + '<div class="card"><div class="card-body"><p class="card-text"><div class="text-justify"><img src="img/icon1.png" class="rounded-circle imgIMPI pull-right" alt="IMPI">' + pregunta + '</p></div></div></div>');
 }
 
-function callChat(pregunta) {
+function callChat(pregunta,idarea) {
     //var datos = '{"texto":"' + pregunta + '"}';
-	var datos1 = {"challenge":pregunta, "area":"1", "uid":"123"};
+	var datos1 = {"challenge":pregunta, "area":idarea, "uid":"123"};
       var datos = JSON.stringify(datos1);
     $.ajax({
         dataType: 'json',
         crossDomain: true,
-        url: "http://localhost:8080/api/chatbot",
+        url: "http://chatbot.impi.gob.mx/api/chatbot",
         header: {
             'Content-Type': 'application/json',
             "cache-control": "no-cache"

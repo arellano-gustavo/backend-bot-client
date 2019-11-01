@@ -56,7 +56,7 @@ public class ServiceController extends AbstractVerticle {
         // Create the HTTP server and pass the "accept" method to the request handler.
         vertx.createHttpServer().requestHandler(router::accept).listen(
                 // Retrieve the port from the configuration. Default port is 8080.
-                config().getInteger("http.port", 8080), result -> {
+                config().getInteger("http.port", 9797), result -> {
                     if (result.succeeded()) {
                         fut.complete();
                     } else {
