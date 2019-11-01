@@ -86,6 +86,9 @@ public class DialogflowCredentials {
 
         //Crea las credenciales del area de PATENTES del agente de dialogflow
         create("area3", "Patentes.json");
+        
+      //Crea las credenciales del area de Pruebas del agente de dialogflow
+        create("area4", "Pruebas.json");
     }
 
     /**
